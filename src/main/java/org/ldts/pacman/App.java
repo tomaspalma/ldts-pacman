@@ -1,4 +1,4 @@
-package org.example;
+package org.ldts.pacman;
 
 public class App {
     public static void main(String[] args) {
