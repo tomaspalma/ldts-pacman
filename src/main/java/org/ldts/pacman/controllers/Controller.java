@@ -4,7 +4,7 @@ package org.ldts.pacman.controllers;
 public abstract class Controller<T> {
     private final T model;
 
-    protected Controller(T model) {
+    public Controller(T model) {
         this.model = model;
     }
 
