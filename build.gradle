@@ -2,13 +2,18 @@ plugins {
     id 'java'
     id 'groovy'
     id 'info.solidsoft.pitest' version '1.6.0'
+    id 'application'
 }
 
-group 'org.example'
+group 'org.ldts.pacman'
 version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+}
+
+application {
+    mainClass.set("org.ldts.pacman.App")
 }
 
 dependencies {
