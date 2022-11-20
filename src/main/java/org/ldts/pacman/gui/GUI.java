@@ -1,5 +1,8 @@
 package org.ldts.pacman.gui;
 
+import com.googlecode.lanterna.TextColor;
+import org.ldts.pacman.models.Position;
+
 import java.io.IOException;
 
 // Abstração entre o resto dos elementos do programa e possíveis librarias de GUI que quisermos utilizar
@@ -15,7 +18,10 @@ public interface GUI {
 
     void gracefulExit() throws IOException;
 
+    // Cursor manipulation
     void hideCursor();
     void showCursor();
 
+    // Draw entities functions
+    void drawEntity(Position position, TextColor.ANSI color, String drawSymbol);
 }

@@ -8,6 +8,7 @@ import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
+import org.ldts.pacman.models.Position;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -73,6 +74,12 @@ public class GUIForLanterna implements GUI {
 
     }
 
+
+    @Override
+    public void drawEntity(Position position, TextColor.ANSI color, String drawSymbol) {
+        this.drawElement(position, color, drawSymbol);
+    }
+
     private Terminal createTerminalScreen(int width, int height) throws IOException {
         TerminalSize terminalSize = new TerminalSize(width, height);
         DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(terminalSize);
@@ -83,6 +90,11 @@ public class GUIForLanterna implements GUI {
         Screen resultScreen = new TerminalScreen(terminal);
         resultScreen.startScreen();
         return resultScreen;
+    }
+
+    private void drawElement(Position position, TextColor.ANSI color, String drawSymbol) {
+        this.graphics.setForegroundColor(color);
+        this.graphics.putString(position.getX(), position.getY(), drawSymbol);
     }
 
 }
