@@ -1,19 +1,19 @@
 package org.ldts.pacman.models;
 
 public class Arena {
-    private final Float height;
-    private final Float width;
+    private final int height;
+    private final int width;
 
-    public Arena(Float width, Float height){
+    public Arena(int width, int height){
         this.width = width;
         this.height = height;
     }
 
-    public Float getHeight() {
+    public int getHeight() {
         return height;
     }
 
-    public Float getWidth() {
+    public int getWidth() {
         return width;
     }
 }
