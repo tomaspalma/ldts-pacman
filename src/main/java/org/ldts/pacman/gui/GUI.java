@@ -22,8 +22,6 @@ public interface GUI {
     void hideCursor();
     void showCursor();
 
-    void setFont(String fontNameWithExtension);
-
     GameActions.ControlActions getNextUserInput() throws IOException;
 
 

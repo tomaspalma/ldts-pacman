@@ -8,16 +8,24 @@ import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
+import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
+
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 import org.ldts.pacman.models.GameActions;
 import org.ldts.pacman.models.Position;
-
-import java.io.IOException;
 
 public class GUIForLanterna implements GUI {
     private final Screen screen;
     private final Terminal terminal;
     private final TextGraphics graphics;
+    private final AWTTerminalFontConfiguration font;
 
     /*
     public GUIForLanterna(Screen screen) {
@@ -25,11 +33,15 @@ public class GUIForLanterna implements GUI {
     }*/
 
     // O código de criar terminal só deve ser corrido uma vez por objeto de GUI
-    public GUIForLanterna(int width, int height) throws IOException {
-        this.terminal = this.createTerminalScreen(width, height);
+    public GUIForLanterna(int width, int height) throws IOException, URISyntaxException, FontFormatException {
+        this.font = setFont("");
+        this.terminal = this.createTerminalScreen(width, height, font);
 
         this.screen = createScreen(terminal);
         this.screen.startScreen();
+
+        hideCursor();
+
         this.graphics = this.screen.newTextGraphics();
     }
 
@@ -62,16 +74,11 @@ public class GUIForLanterna implements GUI {
 
     @Override
     public void hideCursor() {
-
+        this.screen.setCursorPosition(null);
     }
 
     @Override
     public void showCursor() {
-
-    }
-
-    @Override
-    public void setFont(String fontNameWithExtension) {
 
     }
 
@@ -106,16 +113,36 @@ public class GUIForLanterna implements GUI {
         this.drawElement(position, color, drawSymbol);
     }
 
-    private Terminal createTerminalScreen(int width, int height) throws IOException {
+    private Terminal createTerminalScreen(int width, int height, AWTTerminalFontConfiguration font) throws IOException {
         TerminalSize terminalSize = new TerminalSize(width, height);
         DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(terminalSize);
+        
+        terminalFactory.setForceAWTOverSwing(true);
+        terminalFactory.setTerminalEmulatorFontConfiguration(font);
+
         return terminalFactory.createTerminal();
     }
 
     private Screen createScreen(Terminal terminal) throws IOException {
         Screen resultScreen = new TerminalScreen(terminal);
         resultScreen.startScreen();
+        
         return resultScreen;
+    }
+
+    private AWTTerminalFontConfiguration setFont(String fontNameWithExtension) throws URISyntaxException, FontFormatException, IOException {
+        URL resource = getClass().getClassLoader().getResource(fontNameWithExtension);  
+        
+        // Criar identificador da localização do recurso
+        File fontFile = new File(resource.toURI());
+        Font newFont = Font.createFont(Font.TRUETYPE_FONT, fontFile);
+
+        GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        graphicsEnvironment.registerFont(newFont);
+
+        Font loadedFont = newFont.deriveFont(Font.PLAIN, 25);
+
+        return AWTTerminalFontConfiguration.newInstance(loadedFont);
     }
 
     private void drawElement(Position position, TextColor.ANSI color, String drawSymbol) {
