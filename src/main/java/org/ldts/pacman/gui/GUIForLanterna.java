@@ -34,7 +34,7 @@ public class GUIForLanterna implements GUI {
 
     // O código de criar terminal só deve ser corrido uma vez por objeto de GUI
     public GUIForLanterna(int width, int height) throws IOException, URISyntaxException, FontFormatException {
-        this.font = setFont("");
+        this.font = setFont("fonts/square.ttf");
         this.terminal = this.createTerminalScreen(width, height, font);
 
         this.screen = createScreen(terminal);
@@ -46,7 +46,7 @@ public class GUIForLanterna implements GUI {
     }
 
     public TerminalSize getTerminalSize() throws IOException {
-        return terminal.getTerminalSize();
+        return this.screen.getTerminalSize();
     }
 
     public Terminal getTerminal() {
@@ -131,7 +131,7 @@ public class GUIForLanterna implements GUI {
     }
 
     private AWTTerminalFontConfiguration setFont(String fontNameWithExtension) throws URISyntaxException, FontFormatException, IOException {
-        URL resource = getClass().getClassLoader().getResource(fontNameWithExtension);  
+        URL resource = getClass().getClassLoader().getResource(fontNameWithExtension);
         
         // Criar identificador da localização do recurso
         File fontFile = new File(resource.toURI());
