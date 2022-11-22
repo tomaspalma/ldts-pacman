@@ -13,7 +13,7 @@ repositories {
 }
 
 application {
-    mainClass.set("org.ldts.pacman.App")
+    mainClass.set("org.ldts.pacman.Game")
 }
 
 dependencies {
