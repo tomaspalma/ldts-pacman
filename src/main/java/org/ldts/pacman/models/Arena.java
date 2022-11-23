@@ -15,7 +15,7 @@ public class Arena {
         this.height = height;
         this.entitiesToDraw = new ArrayList<>();
         entitiesToDraw.add(new Pacman(new Position(20, 20)));
-        entitiesToDraw.add(new Wall(new Position(21, 21)));
+        entitiesToDraw.add(new Wall(new Position(0, 0)));
         this.loader = new ArenaLoader(mapToLoad);
         loader.load(entitiesToDraw);
     }

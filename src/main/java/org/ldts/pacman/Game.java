@@ -17,8 +17,8 @@ public class Game {
     private State currentState;
 
     public Game() throws IOException, URISyntaxException, FontFormatException {
-        this.gui = new GUIForLanterna(200, 200);
-        currentState = new ArenaState(new Arena(200, 200, "maps/easy.txt"));
+        this.gui = new GUIForLanterna(40, 40);
+        currentState = new ArenaState(new Arena(40, 40, "maps/easy.txt"));
     }
 
     private void run() throws IOException, InterruptedException {
