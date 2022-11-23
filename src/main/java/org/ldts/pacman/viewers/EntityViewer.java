@@ -13,4 +13,6 @@ public class EntityViewer extends Viewer<Entity> {
     protected void drawEntities(GUI gui) {
         gui.drawEntity(this.getModel().getPosition(), this.getModel().getColor(), this.getModel().getDrawSymbol());
     }
+
+    
 }

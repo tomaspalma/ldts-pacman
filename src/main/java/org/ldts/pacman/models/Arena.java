@@ -1,19 +1,42 @@
 package org.ldts.pacman.models;
 
-public class Arena {
-    private final Float height;
-    private final Float width;
+import java.util.ArrayList;
+import java.util.List;
 
-    public Arena(Float width, Float height){
+public class Arena {
+    private final int height;
+    private final int width;
+    private List<Entity> entitiesToDraw;
+    private ArenaLoader loader;
+    private int score;
+
+    public Arena(int width, int height, String mapToLoad){
         this.width = width;
         this.height = height;
+        this.entitiesToDraw = new ArrayList<>();
+        entitiesToDraw.add(new Pacman(new Position(20, 20)));
+        entitiesToDraw.add(new Wall(new Position(21, 21)));
+        this.loader = new ArenaLoader(mapToLoad);
+        loader.load(entitiesToDraw);
     }
 
-    public Float getHeight() {
+    public List<Entity> getEntitiesToDraw() {
+        return entitiesToDraw;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+       this.score = score;
+    }
+
+    public int getHeight() {
         return height;
     }
 
-    public Float getWidth() {
+    public int getWidth() {
         return width;
     }
 }
