@@ -1,5 +1,6 @@
 import com.googlecode.lanterna.TerminalSize
 import com.googlecode.lanterna.TextColor
+import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.bundle.LanternaThemes
 import org.ldts.pacman.gui.GUI
 import org.ldts.pacman.gui.GUIForLanterna
@@ -21,10 +22,12 @@ class GUIForLanternaTest extends Specification {
     }
 
     def "We should be able to close our screen"() {
+        given:
+            def screen = Mock(Screen)
         when:
-            lanternaGUI.close()
+            lanternaGUI.close(screen)
         then:
-            1 * lanternaGUI.getScreen().close()
+            1 * screen.close()
     }
 
     def "We should be able to get the correct lanterna terminal size"() {
@@ -43,8 +46,16 @@ class GUIForLanternaTest extends Specification {
             1 * lanternaGUI.drawElement(position, textColor, drawSymbol)
     }
 
-    def "Pressing a keystroke should yield respective response"() {
-
+    def "writeToScreenMethod should execute all its methods"() {
+        given:
+            def position = GroovyMock(Position)
+            def text = GroovyMock(String)
+            def color = GroovyMock(TextColor.ANSI)
+            def screen = GroovyMock(Screen)
+        when:
+            lanternaGUI.writeToScreen(position, text, color);
+        then:
+            1 * screen.newTextGraphics()
     }
 
 }

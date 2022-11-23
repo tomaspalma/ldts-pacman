@@ -73,6 +73,10 @@ public class GUIForLanterna implements GUI {
         this.screen.close();
     }
 
+    public void close(Screen screen) throws IOException {
+        screen.close();
+    }
+
     @Override
     public void hideCursor() {
         this.screen.setCursorPosition(null);
