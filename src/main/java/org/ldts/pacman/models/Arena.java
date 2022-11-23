@@ -17,7 +17,11 @@ public class Arena {
         this.loader = new ArenaLoader(mapToLoad);
         loader.load(entitiesToDraw);
     }
-    
+
+    public List<Entity> getEntitiesToDraw() {
+        return entitiesToDraw;
+    }
+
     public int getScore() {
         return score;
     }

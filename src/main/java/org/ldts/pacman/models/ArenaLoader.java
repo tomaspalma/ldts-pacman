@@ -9,7 +9,7 @@ public class ArenaLoader {
        this.mapToLoad = mapToLoad;
     }
 
-    // Ler o mapa de um fichieor e carregar as entidades corretas para a lista
+    // Ler o mapa de um fichiero e carregar as entidades corretas para a lista
     public void load(List<Entity> entitiesToLoad) {
 
     }
