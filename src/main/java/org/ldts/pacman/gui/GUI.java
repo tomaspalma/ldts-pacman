@@ -4,6 +4,7 @@ import com.googlecode.lanterna.TextColor;
 
 import org.ldts.pacman.models.GameActions;
 import org.ldts.pacman.models.Position;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 
@@ -24,6 +25,7 @@ public interface GUI {
 
     GameActions.ControlActions getNextUserInput() throws IOException;
 
+    void writeToScreen(Position position, String text, TextColor.ANSI color);
 
     // Draw entities functions
     void drawEntity(Position position, TextColor.ANSI color, String drawSymbol);

@@ -1,5 +1,6 @@
 package org.ldts.pacman.gui;
 
+import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -113,6 +114,14 @@ public class GUIForLanterna implements GUI {
         this.drawElement(position, color, drawSymbol);
     }
 
+    @Override
+    public void writeToScreen(Position position, String text, TextColor.ANSI color) {
+        // Temos de criar um TextGraphics para cada  customização de texto que queiramos escrever
+        TextGraphics currentGraphics = this.screen.newTextGraphics();
+        currentGraphics.setForegroundColor(color);
+        currentGraphics.putString(new TerminalPosition(position.getX(), position.getY()), text);
+    }
+
     private Terminal createTerminalScreen(int width, int height, AWTTerminalFontConfiguration font) throws IOException {
         TerminalSize terminalSize = new TerminalSize(width, height);
         DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(terminalSize);
@@ -149,5 +158,6 @@ public class GUIForLanterna implements GUI {
         this.graphics.setForegroundColor(color);
         this.graphics.putString(position.getX(), position.getY(), drawSymbol);
     }
+
 
 }
