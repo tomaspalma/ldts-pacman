@@ -1,6 +1,8 @@
 package org.ldts.pacman.gui;
 
 import com.googlecode.lanterna.TextColor;
+
+import org.ldts.pacman.models.GameActions;
 import org.ldts.pacman.models.Position;
 
 import java.io.IOException;
@@ -16,11 +18,12 @@ public interface GUI {
 
     void close() throws IOException;
 
-    void gracefulExit() throws IOException;
-
     // Cursor manipulation
     void hideCursor();
     void showCursor();
+
+    GameActions.ControlActions getNextUserInput() throws IOException;
+
 
     // Draw entities functions
     void drawEntity(Position position, TextColor.ANSI color, String drawSymbol);

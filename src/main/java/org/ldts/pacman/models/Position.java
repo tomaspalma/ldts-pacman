@@ -21,19 +21,20 @@ public class Position {
         return y;
     }
 
-    public Position getLeft() {
-        return new Position(x - 1, y);
+    public Position getPositionToTheLeft() {
+       return new Position(this.x - 1, this.y);
     }
 
-    public Position getRight() {
-        return  new Position(x + 1, y);
+    public Position getPositionToTheRight() {
+        return new Position(this.x + 1, this.y);
     }
 
-    public Position getUp() {
-        return new Position(x, y - 1);
+    public Position getPositionAbove() {
+        return new Position(this.x, this.y - 1);
     }
-    public Position getDown() {
-        return new Position(x, y + 1);
+
+    public Position getPositionBelow() {
+        return new Position(this.x, this.y + 1);
     }
 
     @Override
