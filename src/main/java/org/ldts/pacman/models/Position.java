@@ -21,6 +21,22 @@ public class Position {
         return y;
     }
 
+    public Position getPositionToTheLeft() {
+       return new Position(this.x - 1, this.y);
+    }
+
+    public Position getPositionToTheRight() {
+        return new Position(this.x + 1, this.y);
+    }
+
+    public Position getPositionAbove() {
+        return new Position(this.x, this.y - 1);
+    }
+
+    public Position getPositionBelow() {
+        return new Position(this.x, this.y + 1);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
