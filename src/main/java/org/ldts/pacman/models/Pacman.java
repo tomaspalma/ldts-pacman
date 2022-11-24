@@ -3,7 +3,7 @@ package org.ldts.pacman.models;
 import java.util.HashMap;
 
 public class Pacman extends MovableEntity {
-    private HashMap<String, Integer> orientationIndexCorrespondence;
+    private HashMap<String, Integer> orientationIndexCorrespondence = new HashMap<>();
     private static final String[] drawSymbols = {"A", "B", "C", "D"};
 
     public Pacman(Position position) {
