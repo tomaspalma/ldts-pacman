@@ -43,6 +43,8 @@ public class Game {
                 Thread.sleep(potentialTimeForProcessToSleep);
             }
         }
+
+        gui.close();
     }
 
     public static void main(String[] args) {
