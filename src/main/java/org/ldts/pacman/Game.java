@@ -28,7 +28,7 @@ public class Game {
     }
 
     private void run() throws IOException, InterruptedException {
-        int FPSLimit = 60;
+        int FPSLimit = 10;
         int frameTime = 1000 / FPSLimit;
 
         while(this.currentState != null) {
