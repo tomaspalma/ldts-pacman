@@ -70,8 +70,11 @@ public class Arena {
         this.ghosts = ghosts;
     }
 
-    // TODO
     public boolean isWall(Position position) {
+        for (Wall wall : walls) {
+            if (wall.getPosition() == position)
+                return true;
+        }
         return false;
     }
 
