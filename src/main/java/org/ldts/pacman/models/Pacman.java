@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 public class Pacman extends MovableEntity {
     private HashMap<String, Integer> orientationIndexCorrespondence = new HashMap<>();
-    private static final String[] drawSymbols = {"A", "B", "C", "D"};
+    private static final String[] drawSymbols = {"D", "C", "A", "B"};
 
     public Pacman(Position position) {
         super(position);

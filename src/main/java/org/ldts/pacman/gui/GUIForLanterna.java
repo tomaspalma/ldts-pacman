@@ -96,11 +96,11 @@ public class GUIForLanterna implements GUI {
         switch(pressedKey.getKeyType()) {
             case Character:
                 if(Character.toLowerCase(pressedKey.getCharacter().charValue()) == 'q') return GameActions.ControlActions.EXIT;
-                return GameActions.ControlActions.NONE;
+                return GameActions.ControlActions.EXIT;
             case ArrowUp:
                 return GameActions.ControlActions.MOVE_UP;
             case ArrowDown:
-                return GameActions.ControlActions.MOVE_UP;
+                return GameActions.ControlActions.MOVE_DOWN;
             case ArrowLeft:
                 return GameActions.ControlActions.MOVE_LEFT;
             case ArrowRight:
@@ -110,7 +110,7 @@ public class GUIForLanterna implements GUI {
         }
 
         // Se chegar aqui é por que não leu nenhuma tecla interessante
-        return GameActions.ControlActions.MOVE_DOWN;
+        return GameActions.ControlActions.NONE;
     }
 
     @Override
