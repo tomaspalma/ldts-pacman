@@ -15,10 +15,40 @@ public class PacmanController extends Controller<Arena> {
     @Override
     public void step(Game game, GameActions.ControlActions action, long time) throws IOException {
         switch (action) {
-            case MOVE_LEFT -> movePacmanLeft();
-            case MOVE_RIGHT -> movePacmanRight();
-            case MOVE_UP -> movePacmanUp();
-            case MOVE_DOWN -> movePacmanDown();
+            case MOVE_LEFT:
+                getModel().getPacman().changeOrientation("LEFT");
+                break;
+            case MOVE_DOWN:
+                getModel().getPacman().changeOrientation("DOWN");
+                break;
+            case MOVE_RIGHT:
+                getModel().getPacman().changeOrientation("RIGHT");
+                break;
+            case MOVE_UP:
+                getModel().getPacman().changeOrientation("UP");
+                break;
+            default:
+                break;
+        }
+        movePacman();
+    }
+
+    public void movePacman() {
+        switch (getModel().getPacman().getDrawSymbol()) {
+            case "D":
+                movePacmanUp();
+                break;
+            case "C":
+                movePacmanDown();
+                break;
+            case "A":
+                movePacmanLeft();
+                break;
+            case "B":
+                movePacmanRight();
+                break;
+            default:
+                break;
         }
     }
 
