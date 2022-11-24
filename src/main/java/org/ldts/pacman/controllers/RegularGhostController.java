@@ -13,6 +13,5 @@ public class RegularGhostController extends Controller<Arena> {
 
     @Override
     public void step(Game game, GameActions.ControlActions action, long time) throws IOException {
-
     }
 }

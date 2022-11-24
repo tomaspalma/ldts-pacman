@@ -12,31 +12,40 @@ import java.net.URISyntaxException;
 
 public class Game {
     private GUI gui;
-    private State state;
-
-    public Game() {
-        state = new ArenaState(new Arena(50, 100));
-    }
-
-    private void run() throws IOException {
-       try {
-           gui = new GUIForLanterna(50, 100);
-       } catch(IOException | URISyntaxException | FontFormatException e) {
-           e.printStackTrace();
-       }
-
-       while (this.state != null) {
-           // state.step()
-       }
-
-       gui.close();
-    }
+    private State currentState;
 
     public void setState(State state) {
-        this.state = state;
+        this.currentState = state;
     }
 
-    public static void main(String[] args) throws IOException {
-        new Game().run();
+    public Game() throws IOException, URISyntaxException, FontFormatException {
+        this.gui = new GUIForLanterna(40, 40);
+        currentState = new ArenaState(new Arena(40, 40, "maps/easy.txt"));
+    }
+
+    private void run() throws IOException, InterruptedException {
+        int FPSLimit = 60;
+        int frameTime = 1000 / FPSLimit;
+
+        while(this.currentState != null) {
+            long startTime = System.currentTimeMillis();
+
+            currentState.step(this, gui, startTime);
+
+            long elaspedTime = System.currentTimeMillis() - startTime;
+            long potentialTimeForProcessToSleep = frameTime - elaspedTime;
+
+            if(potentialTimeForProcessToSleep > 0) {
+                Thread.sleep(potentialTimeForProcessToSleep);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        try {
+            new Game().run();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 }

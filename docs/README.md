@@ -1,70 +1,158 @@
-## LDTS - 1LEIC01-01 - Pacman
+# LDTS - 1LEIC01-01 - Pacman
 
-> Include here one or two paragraphs explaining the main idea of the project, followed by a sentence identifying who the authors are.
+## Essence & Authors
 
-**Example**:
+### What is it?
 
-In this exciting platform game you can help KangarooBoy save the world, by collecting all the coins throughout ten different levels in which you will […].
+Our group chose pacman as a game to work on. Pacman is a game created in the 1980s. The game consists of a player controlling pacman (which is a round figure with a mouth).
+He's locked in a maze where he must eat power-pellets and pac-dots without being reached by the ghosts. Upon eating a power-pellet, he can also eat the ghosts that are after him.
+It is also possible to eat cherries to score more points. If the ghost touches us and the pacman hasn't eaten a power pellet, the player loses a life and the game restarts.
+In the beginning, players have 3 lives. When this number reaches zero, the game ends.
+When the player eats all pac-dots on screen, he moves on to the next level.
 
-This project was developed by *John Doe* (*john.doe*@fe.up.pt) and *Jane Doe* (*jane.doe*@fe.up.pt) for LPOO 2018⁄19.
+### Authors
+- *Diogo Martins* (*up202108883*@fe.up.pt)
+- *Rodrigo Martins* (*up202008868*@fe.up.pt)
+- *Tomás Palma* (*up202108880*@fe.up.pt)
 
 ### IMPLEMENTED FEATURES
 
-> This section should contain a list of implemented features and their descriptions. In the end of the section, include two or three screenshots that illustrate the most important features.
+As this is an intermediate delivery, most of the features are yet to be implemented as a lot of the time spent until now
+was targeted more on how we would structure our game following good design patterns as this is the main goal of this project
+and this course.
 
-**Examples**:
+The basic features already implemented are:
 
-- **Jumping** - The game character will jump when the space bar key is pressed.
-- **Getting hidden coins** - When the game character hits a platform from below (by jumping beneath it) it will smash that segment of the platform and will get any coins that may exist hidden there.
+- **Drawing on the screen** - The contents of the arena are drawn on the screen
 
 ### PLANNED FEATURES
 
-> This section is similar to the previous one but should list the features that are not yet implemented. Instead of screenshots you should include GUI mock-ups for the planned features.
+- **Pacman movement** - Pacman should be able to move in four directions restricted by the walls of the maze.
+- **Ghost strategies** - Different coloured ghosts should have different approaches on how to follow pacman.
+- **Dead-house** - When killed by pacman, ghosts should be sent to a place on the map from which they will later get back
+get out and rejoin the game.
+- **Read the map of the arena from a file** - The game should be able to have an arena whose structure is designated by
+what's written in a file.
+
+### MOCK-UPs
+
+**Mock-up of Main Menu**
+![Main Menu Mock](https://cdn.discordapp.com/attachments/1039541372723662868/1045290904942039040/Sem_Titulo-1.jpg)
+
+**Mock-up of game action**
+![GameAction](https://cdn.discordapp.com/attachments/1039541372723662868/1045290844585984020/image.png)
 
 ### DESIGN
 
-> This section should be organized in different subsections, each describing a different design problem that you had to solve during the project. Each subsection should be organized in four different parts:
+#### Strucuture Paradigm
 
-- **Problem in Context.** The description of the design context and the concrete problem that motivated the instantiation of the pattern. Someone else other than the original developer should be able to read and understand all the motivations for the decisions made. When refering to the implementation before the pattern was applied, don’t forget to [link to the relevant lines of code](https://help.github.com/en/articles/creating-a-permanent-link-to-a-code-snippet) in the appropriate version.
-- **The Pattern.** Identify the design pattern to be applied, why it was selected and how it is a good fit considering the existing design context and the problem at hand.
-- **Implementation.** Show how the pattern roles, operations and associations were mapped to the concrete design classes. Illustrate it with a UML class diagram, and refer to the corresponding source code with links to the relevant lines (these should be [relative links](https://help.github.com/en/articles/about-readmes#relative-links-and-image-paths-in-readme-files). When doing this, always point to the latest version of the code.
-- **Consequences.** Benefits and liabilities of the design after the pattern instantiation, eventually comparing these consequences with those of alternative solutions.
+We chose to develop our pacman game using an MVC approach given in the theoretical classes. 
 
-**Example of one of such subsections**:
+- **Model**: Contains the structure of the elements that are part of our game and the definition of attributes or functions that will be used by the other two components from the MVC approach. In addition, the model will only contain information about a certain element and other functions that can be called by one or both of the other counterparts of the MVC structure.
 
-------
+- **Viewers**: Contains the logic to render the elements of our game and only that. In other words, the only purpose of the view is to draw the entities we want to draw on the screen for the user to see and update the rendered images based on changes to the model.
 
-#### THE JUMP ACTION OF THE KANGAROOBOY SHOULD BEHAVE DIFFERENTLY DEPENDING ON ITS STATE
+- **Controllers**: Contains the logic to allow the user to interact with pacman element via keyboard input and also logic to control the way the ghosts move, as well as the way collisions between pacman and other elements occur and, for example, what is the behaviour of the edibles in the game when a certain action occurs, such as pacman eating them.
+
+Although there are many viewers, models and controllers there is one major concrete implementation of them which is in the Arena.
+
+The arena viewer, controller and model are the main classes of each of its MVC components. The arena viewer calls the draw functions of the viewers of the other classes, the arena controller calls the step functions of the controllers of the other classes and the arena model has information about all the other entities.
+
+![UML Of MVC](https://cdn.discordapp.com/attachments/1039541372723662868/1045296094948630558/DIAGRAM.drawio.png)
+
+### Implement different strategies for each ghost
 
 **Problem in Context**
 
-There was a lot of scattered conditional logic when deciding how the KangarooBoy should behave when jumping, as the jumps should be different depending on the items that came to his possession during the game (an helix will alow him to fly, driking a potion will allow him to jump double the height, etc.). This is a violation of the **Single Responsability Principle**. We could concentrate all the conditional logic in the same method to circumscribe the issue to that one method but the **Single Responsability Principle** would still be violated.
+Ghosts should behave differently according to their colour and the game's circumstances (for instance, pacman having just eaten a power-pellet).
 
 **The Pattern**
 
-We have applied the **State** pattern. This pattern allows you to represent different states with different subclasses. We can switch to a different state of the application by switching to another implementation (i.e., another subclass). This pattern allowed to address the identified problems because […].
+Self-evidently, the pattern to be applied in this situation is the **Strategy** pattern.
+Different strategies are implemented separately in different classes that implement the GhostStrategy interface, and these
+strategies are then stored as a dynamically-mutating attribute of the ghosts themselves.
 
 **Implementation**
 
-The following figure shows how the pattern’s roles were mapped to the application classes.
+![](https://cdn.discordapp.com/attachments/1039541372723662868/1045297534781898822/image.png)
 
-![img](https://www.fe.up.pt/~arestivo/page/img/examples/lpoo/state.svg)
-
-These classes can be found in the following files:
-
-- [Character](https://web.fe.up.pt/~arestivo/page/courses/2021/lpoo/template/src/main/java/Character.java)
-- [JumpAbilityState](https://web.fe.up.pt/~arestivo/page/courses/2021/lpoo/template/src/main/java/JumpAbilityState.java)
-- [DoubleJumpState](https://web.fe.up.pt/~arestivo/page/courses/2021/lpoo/template/src/main/java/DoubleJumpState.java)
-- [HelicopterState](https://web.fe.up.pt/~arestivo/page/courses/2021/lpoo/template/src/main/java/HelicopterState.java)
-- [IncreasedGravityState](https://web.fe.up.pt/~arestivo/page/courses/2021/lpoo/template/src/main/java/IncreasedGravityState.java)
+Later on, more strategies will be created because would like each color to have its own strategy. However, despite the fact tha the  name
+of the strategy classes will probably change, the structure will remain akin.
 
 **Consequences**
 
-The use of the State Pattern in the current design allows the following benefits:
+- Increased scalability and ease of development, despite raising the number of classes.
 
-- The several states that represent the character’s hability to jump become explicit in the code, instead of relying on a series of flags.
-- We don’t need to have a long set of conditional if or switch statements associated with the various states; instead, polimorphism is used to activate the right behavior.
-- There are now more classes and instances to manage, but still in a reasonable number.
+### Isolate the ability of using a gui from a specific implementation of one
+
+**Problem in Context**
+
+In order to be able to render text into the screen we are using a fairly large API called *Lanterna* which contains
+a lot of functionality and methods that we are not going to use. In addition, due to the fact that a library can
+change or be discontinued, it is important that we design our relation with this dependency in such a way
+that in the future if we wanted to change our *GUI* library we would be able to as seamlessly as possible.
+
+**The Pattern**
+
+In order to isolate the concrete implementation of the *Lanterna* Library we followed the Facade pattern in order to create
+a buffer between the complex implementation of the Lanterna library and our game which will not use all the functionality
+of Lanterna.
+
+This also goes along with the *SOLID* principles of dependency inversion.
+
+**The implementation**
+
+![](https://cdn.discordapp.com/attachments/1039541372723662868/1045298116083064893/image.png)
+
+- [Abstract general gui]()
+- [Concrete lanterna implementation]()
+
+**Consequences**
+
+- As it was already said in the section of the *Problem in Context*, this pattern allows us to isolate us
+from the complex implementation of Lanterna, as well as it allows us to switch gui libraries more easily
+as the code in our game uses an object that implements a GUI, which can be any. We would just have to change
+the place of the creation of the concrete object in our main Game class.
+
+#### Our game should be able to switch between different states
+
+**The problem in context**
+
+We did not want our game to have just the game and arena part where the user could play. 
+We wanted the user to also interact with a menu designed to provide the user with more choice
+about the game. However, it would not be wise to have a bunch of *if* or *switch* statements
+inside our main class Game in order to choose in which state the game would be and the different
+behaviours that it would have in a particular state
+
+**The Pattern**
+
+The pattern we decided to follow was the State pattern, in order to provide our application
+the ability to switch from different behaviours that depend on the current state (e.g. if
+we are in the menu or if we are in the gaming part itself)
+
+**The implementation**
+
+![](https://cdn.discordapp.com/attachments/1039541372723662868/1045298322056953896/image.png)
+
+More states like the MenuState will be added later on.
+
+- [GameState]()
+
+We currently only have one state because of this being an intermediate delivery. However, we decided to already follow with this pattern
+as it provides more scalability and we  are eventually going to add a menu state to the picture.
+
+**Consequences**
+
+- Instead of having a lot of conditionals in the code of the Game class in order to alter the behaviour
+depending on the current state we want our game to be.
+
+- As it is with other patterns, one of the downsides is the increase in the number of files created. However, the text of the code itself
+stays more well organized
+
+**Additional Notes**
+
+We currently only have one state because of this being an intermediate delivery. However, we decided to already follow with this pattern
+as it provides more scalability and we  are eventually going to add a menu state to the picture.
 
 #### KNOWN CODE SMELLS AND REFACTORING SUGGESTIONS
 
