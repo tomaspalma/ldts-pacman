@@ -13,7 +13,7 @@ class GhostStrategies extends Specification {
          def vulnerableResult = vulnerableStrat.collisionWithPacman()
          def aliveResult = aliveStrat.collisionWithPacman()
       then:
-         vulnerableResult == GameActions.ghostCollisionWithPacman.KILL_GHOST
-         aliveResult == GameActions.ghostCollisionWithPacman.KILL_PACMAN
+         vulnerableResult == GameActions.GhostCollisionWithPacman.KILL_GHOST
+         aliveResult == GameActions.GhostCollisionWithPacman.KILL_PACMAN
    }
 }
