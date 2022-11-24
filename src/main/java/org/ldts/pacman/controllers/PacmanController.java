@@ -8,6 +8,8 @@ import org.ldts.pacman.models.Position;
 import java.io.IOException;
 
 public class PacmanController extends Controller<Arena> {
+    private GameActions.ControlActions lastAction;
+
     public PacmanController(Arena model) {
         super(model);
     }
@@ -16,16 +18,20 @@ public class PacmanController extends Controller<Arena> {
     public void step(Game game, GameActions.ControlActions action, long time) throws IOException {
         switch (action) {
             case MOVE_LEFT:
-                getModel().getPacman().changeOrientation("LEFT");
+                if (!getModel().isWall(getModel().getPacman().getPosition().getPositionToTheLeft()))
+                    getModel().getPacman().changeOrientation("LEFT");
                 break;
             case MOVE_DOWN:
-                getModel().getPacman().changeOrientation("DOWN");
+                if (!getModel().isWall(getModel().getPacman().getPosition().getPositionBelow()))
+                    getModel().getPacman().changeOrientation("DOWN");
                 break;
             case MOVE_RIGHT:
-                getModel().getPacman().changeOrientation("RIGHT");
+                if (!getModel().isWall(getModel().getPacman().getPosition().getPositionToTheRight()))
+                    getModel().getPacman().changeOrientation("RIGHT");
                 break;
             case MOVE_UP:
-                getModel().getPacman().changeOrientation("UP");
+                if (!getModel().isWall(getModel().getPacman().getPosition().getPositionAbove()))
+                    getModel().getPacman().changeOrientation("UP");
                 break;
             default:
                 break;
