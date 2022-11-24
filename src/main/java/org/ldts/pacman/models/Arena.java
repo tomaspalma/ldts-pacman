@@ -18,7 +18,7 @@ public class Arena {
     public Arena(int width, int height, String mapToLoad) throws IOException {
         this.width = width;
         this.height = height;
-        this.loader = new ArenaLoader(this, mapToLoad);
+        this.loader = new FileArenaLoader(this, mapToLoad);
         loader.load();
     }
 

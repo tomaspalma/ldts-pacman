@@ -19,6 +19,7 @@ public class PacmanController extends Controller<Arena> {
             case MOVE_RIGHT -> movePacmanRight();
             case MOVE_UP -> movePacmanUp();
             case MOVE_DOWN -> movePacmanDown();
+            case EXIT -> game.setState(null);
         }
     }
 
