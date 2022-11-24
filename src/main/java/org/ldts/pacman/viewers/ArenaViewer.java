@@ -29,8 +29,6 @@ public class ArenaViewer extends Viewer<Arena> {
         }
 
         new EntityViewer(getModel().getPacman()).drawEntities(gui);
-
-        gui.writeToScreen(new Position(5, 5), "hello world", TextColor.ANSI.WHITE);
     }
 
     private void delegateToViewer(GUI gui, Entity model, EntityViewer viewer) throws IOException {

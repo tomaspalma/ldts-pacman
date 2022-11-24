@@ -11,7 +11,7 @@ class GUIForLanternaTest extends Specification {
     private def lanternaGUI
 
     def setup() {
-        lanternaGUI = new GUIForLanterna(200, 200)
+        lanternaGUI = new GUIForLanterna(20, 20)
     }
 
     def "Should be able to hide cursor of gui"() {
@@ -32,7 +32,7 @@ class GUIForLanternaTest extends Specification {
 
     def "We should be able to get the correct lanterna terminal size"() {
         expect:
-            lanternaGUI.getTerminalSize() == new TerminalSize(200, 200)
+            lanternaGUI.getTerminalSize() == new TerminalSize(20, 20)
     }
 
     def "We should execute the specific draw for our element"() {

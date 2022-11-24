@@ -18,9 +18,8 @@ public class Arena {
     public Arena(int width, int height, String mapToLoad) throws IOException {
         this.width = width;
         this.height = height;
-        this.loader = new ArenaLoader(mapToLoad);
-        this.pacman = new Pacman(new Position(10, 10));
-        loader.loadTo(pacman, walls, ghosts, fixedEdibles);
+        this.loader = new ArenaLoader(this, mapToLoad);
+        loader.load();
     }
 
     public List<Wall> getWalls() {
@@ -33,6 +32,16 @@ public class Arena {
 
     public List<FixedEdible> getFixedEdibles() {
         return fixedEdibles;
+    }
+
+    public void addWall(Wall wall) {
+        this.walls.add(wall);
+    }
+    public void addGhost(Ghost ghost) {
+        this.ghosts.add(ghost);
+    }
+    public void addFixedEdible(FixedEdible edible) {
+        this.fixedEdibles.add(edible);
     }
 
     public ArenaLoader getLoader() {
