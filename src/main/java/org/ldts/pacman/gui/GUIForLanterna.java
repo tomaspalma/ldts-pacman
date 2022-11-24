@@ -34,7 +34,7 @@ public class GUIForLanterna implements GUI {
 
     // O código de criar terminal só deve ser corrido uma vez por objeto de GUI
     public GUIForLanterna(int width, int height) throws IOException, URISyntaxException, FontFormatException {
-        this.font = setFont("fonts/square.ttf");
+        this.font = setFont("fonts/pacman.ttf");
         this.terminal = this.createTerminalScreen(width, height, font);
 
         this.screen = createScreen(terminal);
