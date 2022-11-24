@@ -96,7 +96,7 @@ public class GUIForLanterna implements GUI {
         switch(pressedKey.getKeyType()) {
             case Character:
                 if(Character.toLowerCase(pressedKey.getCharacter().charValue()) == 'q') return GameActions.ControlActions.EXIT;
-                return GameActions.ControlActions.EXIT;
+                break;
             case ArrowUp:
                 return GameActions.ControlActions.MOVE_UP;
             case ArrowDown:
