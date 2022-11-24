@@ -73,7 +73,7 @@ public class Arena {
 
     public boolean isWall(Position position) {
         for (Wall wall : walls) {
-            if (wall.getPosition() == position)
+            if (wall.getPosition().equals(position))
                 return true;
         }
         return false;
