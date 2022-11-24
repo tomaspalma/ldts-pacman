@@ -1,8 +1,8 @@
 package org.ldts.pacman.controllers;
 
-import org.ldts.pacman.App;
-import org.ldts.pacman.gui.GUI;
+import org.ldts.pacman.Game;
 import org.ldts.pacman.models.Arena;
+import org.ldts.pacman.models.GameActions;
 import org.ldts.pacman.models.Position;
 
 import java.io.IOException;
@@ -12,32 +12,30 @@ public class PacmanController extends Controller<Arena> {
         super(model);
     }
 
-    /*
     @Override
-    public void step(App game, GUI.ACTION action, long time) throws IOException {
+    public void step(Game game, GameActions.ControlActions action, long time) throws IOException {
         switch (action) {
-            case GUI.ACTION.LEFT -> movePacmanLeft();
-            case GUI.ACTION.RIGHT -> movePacmanRight();
-            case GUI.ACTION.UP -> movePacmanUp();
-            case GUI.ACTION.DOWN -> movePacmanDown();
+            case MOVE_LEFT -> movePacmanLeft();
+            case MOVE_RIGHT -> movePacmanRight();
+            case MOVE_UP -> movePacmanUp();
+            case MOVE_DOWN -> movePacmanDown();
         }
     }
-     */
 
     public void movePacmanLeft() {
-        movePacman(getModel().getPacman().getPosition().getLeft());
+        movePacman(getModel().getPacman().getPosition().getPositionToTheLeft());
     }
 
     public void movePacmanRight() {
-        movePacman(getModel().getPacman().getPosition().getRight());
+        movePacman(getModel().getPacman().getPosition().getPositionToTheRight());
     }
 
     public void movePacmanUp() {
-        movePacman(getModel().getPacman().getPosition().getUp());
+        movePacman(getModel().getPacman().getPosition().getPositionAbove());
     }
 
     public void movePacmanDown() {
-        movePacman(getModel().getPacman().getPosition().getDown());
+        movePacman(getModel().getPacman().getPosition().getPositionBelow());
     }
 
     private void movePacman(Position position) {

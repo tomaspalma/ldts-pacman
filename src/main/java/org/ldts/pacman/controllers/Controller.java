@@ -1,7 +1,7 @@
 package org.ldts.pacman.controllers;
 
-import org.ldts.pacman.App;
-import org.ldts.pacman.gui.GUI;
+import org.ldts.pacman.Game;
+import org.ldts.pacman.models.GameActions;
 
 import java.io.IOException;
 
@@ -9,7 +9,7 @@ import java.io.IOException;
 public abstract class Controller<T> {
     private final T model;
 
-    public Controller(T model) {
+    protected Controller(T model) {
         this.model = model;
     }
 
@@ -17,5 +17,5 @@ public abstract class Controller<T> {
         return model;
     }
 
-    // public abstract void step(App game, GUI.ACTION action, long time) throws IOException;
+    public abstract void step(Game game, GameActions.ControlActions action, long time) throws IOException;
 }
