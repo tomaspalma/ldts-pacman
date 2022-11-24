@@ -1,5 +1,6 @@
 package org.ldts.pacman.models;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,11 +15,11 @@ public class Arena {
     private ArenaLoader loader;
     private int score;
 
-    public Arena(int width, int height, String mapToLoad){
+    public Arena(int width, int height, String mapToLoad) throws IOException {
         this.width = width;
         this.height = height;
         this.loader = new ArenaLoader(mapToLoad);
-        pacman = new Pacman(new Position(5, 5));
+        this.pacman = new Pacman(new Position(10, 10));
         loader.loadTo(pacman, walls, ghosts, fixedEdibles);
     }
 

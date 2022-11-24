@@ -1,8 +1,10 @@
 package org.ldts.pacman.viewers;
 
+import com.googlecode.lanterna.TextColor;
 import org.ldts.pacman.gui.GUI;
 import org.ldts.pacman.models.Arena;
 import org.ldts.pacman.models.Entity;
+import org.ldts.pacman.models.Position;
 
 import java.io.IOException;
 import java.util.List;
@@ -27,6 +29,8 @@ public class ArenaViewer extends Viewer<Arena> {
         }
 
         new EntityViewer(getModel().getPacman()).drawEntities(gui);
+
+        gui.writeToScreen(new Position(5, 5), "hello world", TextColor.ANSI.WHITE);
     }
 
     private void delegateToViewer(GUI gui, Entity model, EntityViewer viewer) throws IOException {
