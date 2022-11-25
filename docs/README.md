@@ -117,8 +117,8 @@ This also goes along with the *SOLID* principles of dependency inversion.
 
 ![](https://cdn.discordapp.com/attachments/1039541372723662868/1045298116083064893/image.png)
 
-- [Abstract general gui]()
-- [Concrete lanterna implementation]()
+- [Abstract general gui](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/intermediate-delivery/src/main/java/org/ldts/pacman/gui/GUI.java)
+- [Concrete lanterna implementation](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/intermediate-delivery/src/main/java/org/ldts/pacman/gui/GUIForLanterna.java)
 
 **Consequences**
 
@@ -147,7 +147,9 @@ we are in the menu or if we are in the gaming part itself)
 
 ![](https://cdn.discordapp.com/attachments/1019715937009672223/1045674367209713664/image.png)
 
-- [GameState]()
+- [ArenaState](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/intermediate-delivery/src/main/java/org/ldts/pacman/states/ArenaState.java)
+- [MenuState](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/intermediate-delivery/src/main/java/org/ldts/pacman/states/MenuState.java)
+- [State](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/intermediate-delivery/src/main/java/org/ldts/pacman/states/State.java)
 
 We currently only have one state because of this being an intermediate delivery. However, we decided to already follow with this pattern
 as it provides more scalability and we  are eventually going to add a menu state to the picture.
