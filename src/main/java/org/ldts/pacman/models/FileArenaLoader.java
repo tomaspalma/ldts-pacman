@@ -44,7 +44,7 @@ public class FileArenaLoader extends ArenaLoader {
         String currentRow;
 
         int x = 0;
-        int y = 0;
+        int y = 1;
 
         while((currentRow = this.mapFileReader.readLine()) != null) {
             //if(currentRow.length() >= width - 1) return;

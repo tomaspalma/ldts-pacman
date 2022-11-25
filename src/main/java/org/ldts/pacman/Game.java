@@ -21,8 +21,8 @@ public class Game {
     }
 
     public Game() throws IOException, URISyntaxException, FontFormatException {
-        this.width = 20;
-        this.height = 20;
+        this.width = 21;
+        this.height = 21;
         this.gui = new GUIForLanterna(width, height);
         currentState = new ArenaState(new Arena(width, height, "maps/easy.txt"));
     }

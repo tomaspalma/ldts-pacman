@@ -50,7 +50,7 @@ what's written in a file.
 
 ### Current state of gameplay
 
-![](https://cdn.discordapp.com/attachments/1019715937009672223/1045756575735889950/image.png)
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1045798022086410340/image.png)
 
 ### DESIGN
 
