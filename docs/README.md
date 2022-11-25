@@ -26,14 +26,15 @@ and this course.
 The basic features already implemented are:
 
 - **Drawing on the screen** - The contents of the arena are drawn on the screen
-
+- **Pacman movement** - Pacman should be able to move in four directions restricted by the walls of the maze.
+- **Read the map of the arena from a file** - The game should be able to have an arena whose structure is designated by
+- 
 ### PLANNED FEATURES
 
-- **Pacman movement** - Pacman should be able to move in four directions restricted by the walls of the maze.
-- **Ghost strategies** - Different coloured ghosts should have different approaches on how to follow pacman.
+- **Ghost strategies** - Different coloured ghosts should have different approaches on how to follow pacman. Although the structure
+and the classes for each ghost and strategy are created, there are no monsters drawn yet.
 - **Dead-house** - When killed by pacman, ghosts should be sent to a place on the map from which they will later get back
 get out and rejoin the game.
-- **Read the map of the arena from a file** - The game should be able to have an arena whose structure is designated by
 what's written in a file.
 
 ### MOCK-UPs
