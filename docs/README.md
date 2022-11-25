@@ -28,11 +28,14 @@ The basic features already implemented are:
 - **Drawing on the screen** - The contents of the arena are drawn on the screen
 - **Pacman movement** - Pacman should be able to move in four directions restricted by the walls of the maze.
 - **Read the map of the arena from a file** - The game should be able to have an arena whose structure is designated by
-- 
+
+We also have some tests both simple and using mocks 
+(such as [this one in EntityViewer](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/intermediate-delivery/src/test/groovy/org/ldts/pacman/viewers/EntityViewerTest.groovy)
+
 ### PLANNED FEATURES
 
 - **Ghost strategies** - Different coloured ghosts should have different approaches on how to follow pacman. Although the structure
-and the classes for each ghost and strategy are created, there are no monsters drawn yet.
+and the classes for each ghost and strategy are created, there are no ghosts being drawn yet.
 - **Dead-house** - When killed by pacman, ghosts should be sent to a place on the map from which they will later get back
 get out and rejoin the game.
 what's written in a file.
@@ -111,8 +114,6 @@ In order to isolate the concrete implementation of the *Lanterna* Library we fol
 a buffer between the complex implementation of the Lanterna library and our game which will not use all the functionality
 of Lanterna.
 
-This also goes along with the *SOLID* principles of dependency inversion.
-
 **The implementation**
 
 ![](https://cdn.discordapp.com/attachments/1039541372723662868/1045298116083064893/image.png)
@@ -172,13 +173,20 @@ and enter the frightening stage.
 
 **The Pattern**
 
-We are thinking of implementing an observer pattern.
+We are thinking of implementing an observer pattern where the ghosts are the observers and the power pellets are
+publishers that notify the ghosts when they are eaten.
 
 **The implementation**
 
+There is no concrete implementation yet
+
 **Consequences**
 
-- It improves scalability as it 
+- - It improves scalability and ease of development as it removes the need to add specific code to the ghost controller to
+periodically use information from the arena to check if one was removed every time the game loop runs which would be
+undesirable in terms of efficiency. So, by having the power pellet notify the ghosts only when it is eaten, then
+we don't need the ghosts to always be checking if the power pellet was eaten, executing the respective change of state only
+when the power pellet notifies them.
 
 #### KNOWN CODE SMELLS AND REFACTORING SUGGESTIONS
 
