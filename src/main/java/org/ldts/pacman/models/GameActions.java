@@ -1,6 +1,7 @@
 package org.ldts.pacman.models;
 
 public class GameActions {
+
     public enum GhostCollisionWithPacman {
        KILL_PACMAN,
        KILL_GHOST,

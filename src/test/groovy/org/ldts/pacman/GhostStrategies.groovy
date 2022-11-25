@@ -1,6 +1,6 @@
 import org.ldts.pacman.models.AliveStrategy
 import org.ldts.pacman.models.GameActions
-import org.ldts.pacman.models.GhostStrategy
+
 import org.ldts.pacman.models.VulnerableStrategy
 import spock.lang.Specification
 

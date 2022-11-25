@@ -1,8 +1,6 @@
 package org.ldts.pacman.models;
 import com.googlecode.lanterna.TextColor;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.HashMap;
 
 public class Pacman extends MovableEntity {
