@@ -15,6 +15,8 @@ When the player eats all pac-dots on screen, he moves on to the next level.
 - *Rodrigo Martins* (*up202008868*@fe.up.pt)
 - *Tomás Palma* (*up202108880*@fe.up.pt)
 
+**Note:** This report was done during a live intellij session, despite the single author commit 
+
 ### IMPLEMENTED FEATURES
 
 As this is an intermediate delivery, most of the features are yet to be implemented as a lot of the time spent until now
@@ -156,6 +158,20 @@ stays more well organized
 #### We have to tell to more than one entity that one specific common event occured (e.g. when a cherry is picked)
 
 **The problem in context**
+
+When a cherry is picked, a certain number of ghosts need to be notified of that event. So we need to  have a central publisher
+that informs all the ghosts that need to be notified that a cherry was picked up and that they need to change its state
+and enter the frightening stage.
+
+**The Pattern**
+
+We are thinking of implementing an observer pattern.
+
+**The implementation**
+
+**Consequences**
+
+- It improves scalability as it 
 
 #### KNOWN CODE SMELLS AND REFACTORING SUGGESTIONS
 
