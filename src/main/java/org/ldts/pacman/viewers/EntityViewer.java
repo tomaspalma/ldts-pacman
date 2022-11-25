@@ -1,7 +1,9 @@
 package org.ldts.pacman.viewers;
 
+import com.googlecode.lanterna.TextColor;
 import org.ldts.pacman.gui.GUI;
 import org.ldts.pacman.models.Entity;
+import org.ldts.pacman.models.Position;
 
 public class EntityViewer extends Viewer<Entity> {
 
@@ -14,5 +16,7 @@ public class EntityViewer extends Viewer<Entity> {
         gui.drawEntity(this.getModel().getPosition(), this.getModel().getColor(), this.getModel().getDrawSymbol());
     }
 
-    
+    protected void drawEntities(GUI gui, Position position, TextColor.ANSI color, String drawSymbol) {
+        gui.drawEntity(this.getModel().getPosition(), this.getModel().getColor(), this.getModel().getDrawSymbol());
+    }
 }

@@ -1,6 +1,7 @@
 package org.ldts.pacman.controllers
 
 import org.ldts.pacman.models.Arena
+import org.ldts.pacman.models.GameActions
 import org.ldts.pacman.models.Pacman
 import org.ldts.pacman.models.Position
 import spock.lang.Specification
@@ -17,35 +18,7 @@ class PacmanControllerTest extends Specification {
         pacmanController = new PacmanController(arena)
     }
 
-    def "moveLeft"() {
-        when:
-        pacmanController.movePacmanLeft()
-
-        then:
-        arena.getPacman().getPosition() == new Position(4, 5)
+    def "We should be able to change the direction of pacman"() {
     }
 
-    def "moveRight"() {
-        when:
-        pacmanController.movePacmanRight()
-
-        then:
-        arena.getPacman().getPosition() == new Position(6, 5)
-    }
-
-    def "moveUp"() {
-        when:
-        pacmanController.movePacmanUp()
-
-        then:
-        arena.getPacman().getPosition() == new Position(5, 4)
-    }
-
-    def "moveDown"() {
-        when:
-        pacmanController.movePacmanDown()
-
-        then:
-        arena.getPacman().getPosition() == new Position(5, 6)
-    }
 }

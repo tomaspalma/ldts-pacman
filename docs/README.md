@@ -45,6 +45,10 @@ what's written in a file.
 **Mock-up of game action**
 ![GameAction](https://cdn.discordapp.com/attachments/1039541372723662868/1045290844585984020/image.png)
 
+### Current state of gameplay
+
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1045756575735889950/image.png)
+
 ### DESIGN
 
 #### Strucuture Paradigm
