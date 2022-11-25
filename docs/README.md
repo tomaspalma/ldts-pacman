@@ -58,7 +58,7 @@ Although there are many viewers, models and controllers there is one major concr
 
 The arena viewer, controller and model are the main classes of each of its MVC components. The arena viewer calls the draw functions of the viewers of the other classes, the arena controller calls the step functions of the controllers of the other classes and the arena model has information about all the other entities.
 
-![UML Of MVC](https://cdn.discordapp.com/attachments/1039541372723662868/1045296094948630558/DIAGRAM.drawio.png)
+![UML Of MVC](https://cdn.discordapp.com/attachments/1019715937009672223/1045676212871254088/main1.drawio1.png)
 
 ### Implement different strategies for each ghost
 
@@ -69,19 +69,25 @@ Ghosts should behave differently according to their colour and the game's circum
 **The Pattern**
 
 Self-evidently, the pattern to be applied in this situation is the **Strategy** pattern.
-Different strategies are implemented separately in different classes that implement the GhostStrategy interface, and these
+Different strategies are implemented separately in different classes that implement their respective interface depending on the type
+(Chase strategy to tell how the ghosts will behave in the chase stage of the game, as well as the scatter and frightened stragies that
+are to tell the ghosts what to do in those situations), and these
 strategies are then stored as a dynamically-mutating attribute of the ghosts themselves.
+
+The strategies are going to be different depending on the ghost and the type of ghost
 
 **Implementation**
 
-![](https://cdn.discordapp.com/attachments/1039541372723662868/1045297534781898822/image.png)
-
-Later on, more strategies will be created because would like each color to have its own strategy. However, despite the fact tha the  name
-of the strategy classes will probably change, the structure will remain akin.
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1045672757498757130/image.png)
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1045673929169186887/image.png)
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1045674997911400509/image.png)
 
 **Consequences**
 
-- Increased scalability and ease of development, despite raising the number of classes.
+- Despite raising the number of classes, it brings increased scalability and ease of development,
+because we will have less code in just one place, making it easier to maintain. Also,
+it is way easier to make changes to an existing stratregy if more than one concrete class is following it, because
+we would just need to change it in one place, instead of going to each class that had that strategy in order to change it.
 
 ### Isolate the ability of using a gui from a specific implementation of one
 
@@ -132,9 +138,7 @@ we are in the menu or if we are in the gaming part itself)
 
 **The implementation**
 
-![](https://cdn.discordapp.com/attachments/1039541372723662868/1045298322056953896/image.png)
-
-More states like the MenuState will be added later on.
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1045674367209713664/image.png)
 
 - [GameState]()
 
@@ -149,10 +153,9 @@ depending on the current state we want our game to be.
 - As it is with other patterns, one of the downsides is the increase in the number of files created. However, the text of the code itself
 stays more well organized
 
-**Additional Notes**
+#### We have to tell to more than one entity that one specific common event occured (e.g. when a cherry is picked)
 
-We currently only have one state because of this being an intermediate delivery. However, we decided to already follow with this pattern
-as it provides more scalability and we  are eventually going to add a menu state to the picture.
+**The problem in context**
 
 #### KNOWN CODE SMELLS AND REFACTORING SUGGESTIONS
 
@@ -172,12 +175,3 @@ A way to improve the code would be to move the `isPlatformSegmentSolid()` method
 
 - Screenshot of coverage report.
 - Link to mutation testing report.
-
-### SELF-EVALUATION
-
-> In this section describe how the work regarding the project was divided between the students. In the event that members of the group do not agree on a work distribution, the group should send an email to the teacher explaining the disagreement.
-
-**Example**:
-
-- John Doe: 40%
-- Jane Doe: 60%
