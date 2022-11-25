@@ -15,7 +15,7 @@ public abstract class ArenaLoader {
 
     protected abstract void loadPacmanAt(Position position);
 
-    protected abstract void loadRegularGhostAt(Position position);
+    protected abstract void loadGhost(Ghost ghost);
 
     protected abstract void loadCherryAt(Position position);
 
