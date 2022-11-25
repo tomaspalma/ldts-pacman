@@ -128,7 +128,7 @@ from the complex implementation of Lanterna, as well as it allows us to switch g
 as the code in our game uses an object that implements a GUI, which can be any. We would just have to change
 the place of the creation of the concrete object in our main Game class.
 
-#### Our game should be able to switch between different states
+### Our game should be able to switch between different states
 
 **The problem in context**
 
@@ -163,7 +163,7 @@ depending on the current state we want our game to be.
 - As it is with other patterns, one of the downsides is the increase in the number of files created. However, the text of the code itself
 stays more well organized
 
-#### We have to tell to more than one entity that one specific common event occured (e.g. when a cherry is picked)
+### We have to tell to more than one entity that one specific common event occured (e.g. when a cherry is picked)
 
 **The problem in context**
 
