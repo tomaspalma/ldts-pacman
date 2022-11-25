@@ -89,12 +89,12 @@ public class Arena {
         return false;
     }
 
-    public boolean isFixedEdibleAt(Position position) {
-        for(FixedEdible fixedEdible: fixedEdibles) {
-            if(fixedEdible.getPosition().equals(position)) return true;
+    public int getFixedEdibleAt(Position position) {
+        for(int i = 0; i < fixedEdibles.size(); i++) {
+            if(fixedEdibles.get(i).getPosition().equals(position)) return i;
         }
 
-        return false;
+        return -1;
     }
 
     // TODO
