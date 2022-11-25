@@ -18,19 +18,19 @@ public class PacmanController extends Controller<Arena> {
     public void step(Game game, GameActions.ControlActions action, long time) throws IOException {
         switch (action) {
             case MOVE_LEFT:
-                if (!getModel().isWall(getModel().getPacman().getPosition().getPositionToTheLeft()))
+                if (!getModel().isWallAt(getModel().getPacman().getPosition().getPositionToTheLeft()))
                     getModel().getPacman().changeOrientation("LEFT");
                 break;
             case MOVE_DOWN:
-                if (!getModel().isWall(getModel().getPacman().getPosition().getPositionBelow()))
+                if (!getModel().isWallAt(getModel().getPacman().getPosition().getPositionBelow()))
                     getModel().getPacman().changeOrientation("DOWN");
                 break;
             case MOVE_RIGHT:
-                if (!getModel().isWall(getModel().getPacman().getPosition().getPositionToTheRight()))
+                if (!getModel().isWallAt(getModel().getPacman().getPosition().getPositionToTheRight()))
                     getModel().getPacman().changeOrientation("RIGHT");
                 break;
             case MOVE_UP:
-                if (!getModel().isWall(getModel().getPacman().getPosition().getPositionAbove()))
+                if (!getModel().isWallAt(getModel().getPacman().getPosition().getPositionAbove()))
                     getModel().getPacman().changeOrientation("UP");
                 break;
             default:
@@ -75,9 +75,9 @@ public class PacmanController extends Controller<Arena> {
     }
 
     private void movePacman(Position position) {
-        if (!getModel().isWall(position)) {
+        if (!getModel().isWallAt(position)) {
             getModel().getPacman().setPosition(position);
-            if (getModel().isGhost(position)) {
+            if (getModel().isGhostAt(position)) {
                 // pacman dies, restart the game
             }
         }

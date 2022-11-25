@@ -80,16 +80,25 @@ public class Arena {
         this.ghosts = ghosts;
     }
 
-    public boolean isWall(Position position) {
+    public boolean isWallAt(Position position) {
         for (Wall wall : walls) {
             if (wall.getPosition().equals(position))
                 return true;
         }
+
+        return false;
+    }
+
+    public boolean isFixedEdibleAt(Position position) {
+        for(FixedEdible fixedEdible: fixedEdibles) {
+            if(fixedEdible.getPosition().equals(position)) return true;
+        }
+
         return false;
     }
 
     // TODO
-    public boolean isGhost(Position position) {
+    public boolean isGhostAt(Position position) {
         return false;
     }
 }

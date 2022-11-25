@@ -19,7 +19,7 @@ public class ArenaController extends Controller<Arena> {
 
     @Override
     public void step(Game game, GameActions.ControlActions action, long time) throws IOException {
-        if (action == GameActions.ControlActions.EXIT) // missing kill_pacman
+        if (action == GameActions.ControlActions.EXIT) 
             game.setState(null);
         else {
             pacmanController.step(game, action, time);
