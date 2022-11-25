@@ -9,7 +9,7 @@ import org.ldts.pacman.models.Position;
 import java.io.IOException;
 
 public class PacmanController extends Controller<Arena> {
-    private GameActions.ControlActions lastAction;
+    private GameActions.ControlActions lastAction = GameActions.ControlActions.MOVE_LEFT;
     private Pacman pacman;
 
     public PacmanController(Arena model) {
@@ -19,27 +19,36 @@ public class PacmanController extends Controller<Arena> {
 
     @Override
     public void step(Game game, GameActions.ControlActions action, long time) throws IOException {
+        changeOrientation(action);
+        movePacman();
+    }
+
+    public void changeOrientation(GameActions.ControlActions action) {
         switch (action) {
             case MOVE_LEFT:
                 if (!getModel().isWallAt(pacman.getPosition().getPositionToTheLeft()))
                     getModel().getPacman().changeOrientation("LEFT");
+                lastAction = action;
                 break;
             case MOVE_DOWN:
                 if (!getModel().isWallAt(pacman.getPosition().getPositionBelow()))
                     getModel().getPacman().changeOrientation("DOWN");
+                lastAction = action;
                 break;
             case MOVE_RIGHT:
                 if (!getModel().isWallAt(pacman.getPosition().getPositionToTheRight()))
                     getModel().getPacman().changeOrientation("RIGHT");
+                lastAction = action;
                 break;
             case MOVE_UP:
                 if (!getModel().isWallAt(pacman.getPosition().getPositionAbove()))
                     getModel().getPacman().changeOrientation("UP");
+                lastAction = action;
                 break;
             default:
+                changeOrientation(lastAction);
                 break;
         }
-        movePacman();
     }
 
     public void movePacman() {

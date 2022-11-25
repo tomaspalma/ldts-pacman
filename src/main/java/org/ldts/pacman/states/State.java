@@ -30,7 +30,7 @@ public abstract class State<T> {
     // Função que acaba
     public void step(Game game, GUI gui, long time) throws IOException  {
         GameActions.ControlActions userControlAction = gui.getNextUserInput();
-        getController().step(game, userControlAction, time);
+        controller.step(game, userControlAction, time);
         viewer.draw(gui);
     }
 }
