@@ -24,31 +24,32 @@ public class PacmanController extends Controller<Arena> {
     }
 
     public void changeOrientation(GameActions.ControlActions action) {
+        boolean userPressedMovementKey = true;
+
         switch (action) {
             case MOVE_LEFT:
                 if (!getModel().isWallAt(pacman.getPosition().getPositionToTheLeft()))
                     getModel().getPacman().changeOrientation("LEFT");
-                lastAction = action;
                 break;
             case MOVE_DOWN:
                 if (!getModel().isWallAt(pacman.getPosition().getPositionBelow()))
                     getModel().getPacman().changeOrientation("DOWN");
-                lastAction = action;
                 break;
             case MOVE_RIGHT:
                 if (!getModel().isWallAt(pacman.getPosition().getPositionToTheRight()))
                     getModel().getPacman().changeOrientation("RIGHT");
-                lastAction = action;
                 break;
             case MOVE_UP:
                 if (!getModel().isWallAt(pacman.getPosition().getPositionAbove()))
                     getModel().getPacman().changeOrientation("UP");
-                lastAction = action;
                 break;
             default:
                 changeOrientation(lastAction);
+                userPressedMovementKey = false;
                 break;
         }
+
+        if(userPressedMovementKey) lastAction = action;
     }
 
     public void movePacman() {
@@ -94,8 +95,8 @@ public class PacmanController extends Controller<Arena> {
             pacman.setPosition(position);
 
             pacmanX = pacman.getPosition().getX();
-            if(pacmanX < 0) pacman.setPosition(new Position(getModel().getWidth() - 1, pacman.getPosition().getY()));
-            else if(pacmanX >= getModel().getWidth()) pacman.setPosition(new Position(0, pacman.getPosition().getY()));
+            if(pacmanX < 0) pacman.setPosition(new Position(getModel().getWidth(), pacman.getPosition().getY()));
+            else if(pacmanX >= getModel().getWidth()) pacman.setPosition(new Position(-1, pacman.getPosition().getY()));
 
             if((theoreticalEdibleIndex = getModel().getFixedEdibleAt(position)) != -1) {
                 getModel().getFixedEdibles().remove(theoreticalEdibleIndex);
