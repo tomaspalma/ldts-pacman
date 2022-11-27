@@ -1,6 +1,6 @@
 package org.ldts.pacman.models;
 
-public abstract class RegularGhost extends Ghost {
+public abstract class RegularGhost extends Ghost implements GameObserver {
     protected RegularGhost(Position position) {
         super(position);
         this.drawSymbol = "I";
@@ -13,5 +13,10 @@ public abstract class RegularGhost extends Ghost {
         if(this.currentState == State.FRIGHTENED_PHASE) return GameActions.GhostCollisionWithPacman.KILL_GHOST;
 
         return GameActions.GhostCollisionWithPacman.KILL_PACMAN;
+    }
+
+    @Override
+    public void changeBasedOnObservable() {
+
     }
 }
