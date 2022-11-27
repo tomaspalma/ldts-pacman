@@ -1,4 +1,4 @@
-package org.ldts.pacman
+package org.ldts.pacman.models
 
 import org.ldts.pacman.models.Position
 import spock.lang.Specification
