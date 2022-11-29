@@ -106,7 +106,7 @@ public class GUIForLanterna implements GUI {
             case ArrowRight:
                 return GameActions.ControlActions.MOVE_RIGHT;
             case Escape:
-                break;
+                return GameActions.ControlActions.SWITCH_TO_PAUSE_MENU;
         }
 
         // Se chegar aqui é por que não leu nenhuma tecla interessante

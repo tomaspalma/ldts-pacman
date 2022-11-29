@@ -10,10 +10,10 @@ public class Arena {
 
     private Pacman pacman;
     private List<Wall> walls = new ArrayList<>();
-    private List<Ghost> ghosts = new ArrayList<>();
-    private List<FixedEdible> fixedEdibles = new ArrayList<>();
+    private final List<RegularGhost> regularGhosts = new ArrayList<>();
+    private final List<FixedEdible> fixedEdibles = new ArrayList<>();
     private ArenaLoader loader;
-    private int score;
+    private int score = 0;
 
     public Arena(int width, int height, String mapToLoad) throws IOException {
         this.width = width;
@@ -26,8 +26,8 @@ public class Arena {
         return walls;
     }
 
-    public List<Ghost> getGhosts() {
-        return ghosts;
+    public List<RegularGhost> getRegularGhosts() {
+        return regularGhosts;
     }
 
     public List<FixedEdible> getFixedEdibles() {
@@ -37,8 +37,8 @@ public class Arena {
     public void addWall(Wall wall) {
         this.walls.add(wall);
     }
-    public void addGhost(Ghost ghost) {
-        this.ghosts.add(ghost);
+    public void addRegularGhost(RegularGhost ghost) {
+        this.regularGhosts.add(ghost);
     }
     public void addFixedEdible(FixedEdible edible) {
         this.fixedEdibles.add(edible);
@@ -50,6 +50,10 @@ public class Arena {
 
     public int getScore() {
         return score;
+    }
+
+    public void sumScoreWith(int increment) {
+        this.score += increment;
     }
 
     public void setScore(int score) {
@@ -76,9 +80,9 @@ public class Arena {
         this.walls = walls;
     }
 
-    public void setGhosts(List<Ghost> ghosts) {
-        this.ghosts = ghosts;
-    }
+    /*public void setRegularGhosts(List<RegularGhost> ghosts) {
+        this.regularGhosts = ghosts;
+    } */
 
     public boolean isWallAt(Position position) {
         for (Wall wall : walls) {

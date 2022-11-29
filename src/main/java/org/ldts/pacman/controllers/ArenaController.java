@@ -19,11 +19,17 @@ public class ArenaController extends Controller<Arena> {
 
     @Override
     public void step(Game game, GameActions.ControlActions action, long time) throws IOException {
-        if (action == GameActions.ControlActions.EXIT) 
-            game.setState(null);
-        else {
-            pacmanController.step(game, action, time);
-            regularGhostController.step(game, action, time);
+        if(getModel().getFixedEdibles().isEmpty()) game.setState(null); // TODO set state para um menu a dizer que venceu
+
+        switch(action) {
+            case EXIT: game.setState(null); break;
+            // case SWITCH_TO_PAUSE_MENU: game.setState(new PauseMenu()); break;
+            default: stepChildControllers(game, action, time); break;
         }
+    }
+
+    private void stepChildControllers(Game game, GameActions.ControlActions action, long time) throws IOException {
+        pacmanController.step(game, action, time);
+        regularGhostController.step(game, action, time);
     }
 }

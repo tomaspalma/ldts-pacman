@@ -66,10 +66,10 @@ public class FileArenaLoader extends ArenaLoader {
             case 'P': loadPacmanAt(currentPosition); break;
             case 'o': loadPacdotAt(currentPosition); break;
             case 'O': loadPowerPelletAt(currentPosition); break;
-            case 'p': loadGhost(new Pinky(currentPosition)); break;
-            case 'c': loadGhost(new Clyde(currentPosition)); break;
-            case 'i': loadGhost(new Inky(currentPosition)); break;
-            case 'b': loadGhost(new Blinky(currentPosition)); break;
+            case 'p': loadRegularGhost(new Pinky(currentPosition)); break;
+            case 'c': loadRegularGhost(new Clyde(currentPosition)); break;
+            case 'i': loadRegularGhost(new Inky(currentPosition)); break;
+            case 'b': loadRegularGhost(new Blinky(currentPosition)); break;
             case 'C': loadCherryAt(currentPosition); break;
             default: break;
         }
@@ -86,8 +86,8 @@ public class FileArenaLoader extends ArenaLoader {
     }
 
     @Override
-    protected void loadGhost(Ghost ghost) {
-        this.arena.addGhost(ghost);
+    protected void loadRegularGhost(RegularGhost ghost) {
+        this.arena.addRegularGhost(ghost);
     }
 
     @Override

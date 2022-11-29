@@ -1,10 +1,7 @@
 package org.ldts.pacman.controllers;
 
 import org.ldts.pacman.Game;
-import org.ldts.pacman.models.Arena;
-import org.ldts.pacman.models.GameActions;
-import org.ldts.pacman.models.Pacman;
-import org.ldts.pacman.models.Position;
+import org.ldts.pacman.models.*;
 
 import java.io.IOException;
 
@@ -99,10 +96,16 @@ public class PacmanController extends Controller<Arena> {
             else if(pacmanX >= getModel().getWidth()) pacman.setPosition(new Position(-1, pacman.getPosition().getY()));
 
             if((theoreticalEdibleIndex = getModel().getFixedEdibleAt(position)) != -1) {
-                getModel().getFixedEdibles().remove(theoreticalEdibleIndex);
+                eatEdible(theoreticalEdibleIndex);
             } else if (getModel().isGhostAt(position)) {
                 // pacman dies, restart the game
             }
         }
+    }
+
+    private void eatEdible(int i) {
+        // TODO Substituir depois pelo score do edible em específico quando isso ficar feito
+        getModel().sumScoreWith(1);
+        getModel().getFixedEdibles().remove(i);
     }
 }
