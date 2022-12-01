@@ -7,5 +7,11 @@ public class PatrolChaseStrategy implements ChaseStrategy {
         // TODO Auto-generated method stub
         
     }
+
+    @Override
+    public Position getNextPosition() {
+        // TODO Auto-generated method stub
+        return null;
+    }
     
 }

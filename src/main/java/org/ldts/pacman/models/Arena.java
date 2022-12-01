@@ -9,39 +9,52 @@ public class Arena {
     private final int width;
 
     private Pacman pacman;
-    private List<Wall> walls = new ArrayList<>();
-    private final List<RegularGhost> regularGhosts = new ArrayList<>();
-    private final List<FixedEdible> fixedEdibles = new ArrayList<>();
+    private List<Obstacle> obstaclesList = new ArrayList<>();
+
+
+    private Position startPacmanPosition;
+    
+    private final List<RegularGhost> regularGhostsList = new ArrayList<>();
+
+    private final List<FixedEdible> generalFixedEdibleList = new ArrayList<>();
+
     private ArenaLoader loader;
+
     private int score = 0;
 
     public Arena(int width, int height, String mapToLoad) throws IOException {
         this.width = width;
         this.height = height;
         this.loader = new FileArenaLoader(this, mapToLoad);
+
         loader.load();
     }
 
-    public List<Wall> getWalls() {
-        return walls;
+    public Position getStartPacmanPosition() {
+        return startPacmanPosition;
+    }
+    public List<Obstacle> getObstaclesList() {
+        return this.obstaclesList;
     }
 
-    public List<RegularGhost> getRegularGhosts() {
-        return regularGhosts;
+    public List<FixedEdible> getGeneralFixedEdibleList() {
+        return generalFixedEdibleList;
     }
 
-    public List<FixedEdible> getFixedEdibles() {
-        return fixedEdibles;
+    public List<RegularGhost> getRegularGhostsList() {
+        return this.regularGhostsList;
     }
 
-    public void addWall(Wall wall) {
-        this.walls.add(wall);
+    public void addObstacle(Obstacle obstacle) {
+        this.obstaclesList.add(obstacle);
     }
+
     public void addRegularGhost(RegularGhost ghost) {
-        this.regularGhosts.add(ghost);
+        this.regularGhostsList.add(ghost);
     }
-    public void addFixedEdible(FixedEdible edible) {
-        this.fixedEdibles.add(edible);
+
+    private void addToGeneralFixedEdibleList(FixedEdible fixedEdible) {
+        this.generalFixedEdibleList.add(fixedEdible);
     }
 
     public ArenaLoader getLoader() {
@@ -76,17 +89,17 @@ public class Arena {
         this.pacman = pacman;
     }
 
-    public void setWalls(List<Wall> walls) {
-        this.walls = walls;
+    public void setObstacles(List<Obstacle> newObstaclesList) {
+        this.obstaclesList = newObstaclesList;
     }
 
-    /*public void setRegularGhosts(List<RegularGhost> ghosts) {
-        this.regularGhosts = ghosts;
-    } */
+    public void setStartPacmanPosition(Position startPacmanPosition) {
+        this.startPacmanPosition = startPacmanPosition;
+    }
 
-    public boolean isWallAt(Position position) {
-        for (Wall wall : walls) {
-            if (wall.getPosition().equals(position))
+    public boolean isObstacleAt(Position position) {
+        for (Obstacle obstacle: obstaclesList) {
+            if (obstacle.getPosition().equals(position))
                 return true;
         }
 
@@ -94,15 +107,18 @@ public class Arena {
     }
 
     public int getFixedEdibleAt(Position position) {
-        for(int i = 0; i < fixedEdibles.size(); i++) {
-            if(fixedEdibles.get(i).getPosition().equals(position)) return i;
+        for(int i = 0; i < generalFixedEdibleList.size(); i++) {
+            if(generalFixedEdibleList.get(i).getPosition().equals(position)) return i;
         }
 
         return -1;
     }
 
-    // TODO
-    public boolean isGhostAt(Position position) {
-        return false;
+    public Ghost getGhostAt(Position position) {
+       for(Ghost ghost: this.getRegularGhostsList()) {
+           if(ghost.getPosition().equals(position)) return ghost;
+       }
+
+       return null;
     }
 }

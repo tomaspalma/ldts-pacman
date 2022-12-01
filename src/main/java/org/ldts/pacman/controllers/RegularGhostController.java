@@ -1,35 +1,52 @@
 package org.ldts.pacman.controllers;
 
 import org.ldts.pacman.Game;
-import org.ldts.pacman.models.Arena;
-import org.ldts.pacman.models.GameActions;
-import org.ldts.pacman.models.Ghost;
-import org.ldts.pacman.models.RegularGhost;
+import org.ldts.pacman.models.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class RegularGhostController extends Controller<Arena> {
     private List<RegularGhost> regularGhostsToControl;
-    public RegularGhostController(Arena model) {
+    private ArenaController parentController;
+    public RegularGhostController(ArenaController parentController, Arena model) {
         super(model);
-
-        this.regularGhostsToControl = getModel().getRegularGhosts();
+        this.parentController = parentController;
+        this.regularGhostsToControl = getModel().getRegularGhostsList();
     }
 
     @Override
     public void step(Game game, GameActions.ControlActions action, long time) throws IOException {
         for(RegularGhost regularGhost: regularGhostsToControl) {
-            executeRegularGhostAction(regularGhost);
+            if(stateChangedIn(regularGhost)) regularGhost.getCurrentState().applyChangesToGhost();
+
+            moveGhost(regularGhost, regularGhost.getCurrentState().getNextPosition());
         }
     }
 
-    private void executeRegularGhostAction(RegularGhost regularGhost) {
-        switch(regularGhost.getState()) {
-            case FRIGHTENED_PHASE -> regularGhost.getFrightenedStrategy().execute();
-            case SCATTERING_PHASE -> regularGhost.getScatterStrategy().execute();
-            case CHASING_PHASE -> regularGhost.getChaseStrategy().execute(regularGhost);
-        }
+    private boolean stateChangedIn(Ghost ghost) {
+        return !ghost.getCurrentState().getClass().equals(ghost.getPreviousState().getClass());
+    }
+
+    public void killGhost(Ghost ghost) {
+        ghost.die();
+    }
+
+    private void moveGhost(Ghost ghost, Position newPosition) {
+       //ghost.setPosition(newPosition);
+    }
+
+    public void actionBasedOnCollisionResult(GameActions.GhostCollisionWithPacman result) {
+    }
+
+    public void executeFrightenedBehaviour(RegularGhost regularGhost) {
+    }
+
+    public void executeChaseBehaviour(RegularGhost regularGhost) {
+        
+    }
+
+    public void executeScatterBehaviour(RegularGhost regularGhost) {
+
     }
 }

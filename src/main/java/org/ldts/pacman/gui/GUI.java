@@ -4,7 +4,6 @@ import com.googlecode.lanterna.TextColor;
 
 import org.ldts.pacman.models.GameActions;
 import org.ldts.pacman.models.Position;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 

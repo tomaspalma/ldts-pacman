@@ -5,6 +5,13 @@ public abstract class Ghost extends MovableEntity {
     protected FrightenedStrategy frightenedStrategy;
     protected ScatterStrategy scatterStrategy;
 
+    protected GhostState previousState;
+    protected GhostState currentState;
+
+    public GhostState getPreviousState() {
+        return previousState;
+    }
+
     public ChaseStrategy getChaseStrategy() {
         return chaseStrategy;
     }
@@ -17,16 +24,20 @@ public abstract class Ghost extends MovableEntity {
         return scatterStrategy;
     }
 
+    public void setPreviousState(GhostState state) {
+       this.previousState = state;
+    }
+
+    public void setCurrentState(GhostState state) {
+        this.currentState = state;
+    }
+
     public GhostState getCurrentState() {
         return currentState;
     }
 
-    protected GhostState currentState;
-
-    public enum GhostState {
-        CHASING_PHASE,
-        SCATTERING_PHASE,
-        FRIGHTENED_PHASE,
+    public void die() {
+        this.currentState.transitionToState(new DeadState(this));
     }
 
     public abstract GameActions.GhostCollisionWithPacman getCollisionWithPacmanResult();

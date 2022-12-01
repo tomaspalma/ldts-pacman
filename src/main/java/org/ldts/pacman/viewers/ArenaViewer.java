@@ -14,25 +14,25 @@ public class ArenaViewer extends Viewer<Arena> {
 
     @Override
     protected void drawEntities(GUI gui) {
-        for(Wall wall: getModel().getWalls()) {
-            new EntityViewer(wall).drawEntities(gui);
+        for(Obstacle obstacle: getModel().getObstaclesList()) {
+            new EntityViewer(obstacle).drawEntities(gui);
         }
 
-        for(RegularGhost ghost: getModel().getRegularGhosts()) {
+        for(RegularGhost ghost: getModel().getRegularGhostsList()) {
             new EntityViewer(ghost).drawEntities(gui);
         }
 
-        for(FixedEdible fixedEdible: getModel().getFixedEdibles()) {
+        for(FixedEdible fixedEdible: getModel().getGeneralFixedEdibleList()) {
             new EntityViewer(fixedEdible).drawEntities(gui);
         }
 
         new EntityViewer(getModel().getPacman()).drawEntities(gui);
 
         gui.writeToScreen(new Position(0, 0), "Score: " + getModel().getScore(), TextColor.ANSI.WHITE);
-        gui.writeToScreen(new Position(getModel().getWidth() - 10, 0), "Lives: ", TextColor.ANSI.WHITE);
+        gui.writeToScreen(new Position(getModel().getWidth() - 10, 0), "Lives: " + getModel().getPacman().getRemainingLives(), TextColor.ANSI.WHITE);
     }
 
-    private void delegateToViewer(GUI gui, EntityViewer viewer) throws IOException {
+    public void delegateToViewer(GUI gui, EntityViewer viewer) throws IOException {
         viewer.draw(gui);
     }
 }

@@ -8,6 +8,7 @@ import java.io.IOException;
 // O controller vai processar e efetuar mudanças num modelo
 public abstract class Controller<T> {
     private final T model;
+    private int numberOfSteps;
 
     protected Controller(T model) {
         this.model = model;

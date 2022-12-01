@@ -22,4 +22,8 @@ public abstract class Entity {
     public TextColor.ANSI getColor() {
         return this.color;
     }
+
+    public void setColor(TextColor.ANSI newColor) {
+        this.color = newColor;
+    }
 }

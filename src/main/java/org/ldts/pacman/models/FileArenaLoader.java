@@ -58,31 +58,53 @@ public class FileArenaLoader extends ArenaLoader {
             y += 1;
             x = 0;
         }
+
+        addDependenciesToEntities();
+    }
+
+    private void addDependenciesToEntities() {
+        addRegularGhostsObserversToPowerPellet();
+    }
+
+    private void addRegularGhostsObserversToPowerPellet() {
+        for(FixedEdible fixedEdible: this.arena.getGeneralFixedEdibleList()) {                
+            if(fixedEdible instanceof PowerPellet)
+                for(RegularGhost regularGhost: this.arena.getRegularGhostsList()) {
+                    ((PowerPellet) fixedEdible).addObserver(regularGhost);
+                }
+        }
     }
 
     private void addRespectiveElementOf(Character character, Position currentPosition) {
         switch(character) {
-            case 'W': loadWallAt(currentPosition); break;
+            case 'W': loadObstacle(new Wall(currentPosition)); break;
             case 'P': loadPacmanAt(currentPosition); break;
-            case 'o': loadPacdotAt(currentPosition); break;
-            case 'O': loadPowerPelletAt(currentPosition); break;
+            case 'o': loadFixedEdible(new Pacdot(currentPosition)); break;
+            case 'O': loadFixedEdible(new PowerPellet(currentPosition)); break;
+            case 'C': loadFixedEdible(new Cherry(currentPosition)); break;
             case 'p': loadRegularGhost(new Pinky(currentPosition)); break;
             case 'c': loadRegularGhost(new Clyde(currentPosition)); break;
             case 'i': loadRegularGhost(new Inky(currentPosition)); break;
             case 'b': loadRegularGhost(new Blinky(currentPosition)); break;
-            case 'C': loadCherryAt(currentPosition); break;
             default: break;
         }
     }
 
     @Override
-    protected void loadWallAt(Position position) {
-        this.arena.addWall(new Wall(position));
+    protected void loadObstacle(Obstacle obstacle) {
+        this.arena.addObstacle(obstacle);
     }
 
     @Override
     protected void loadPacmanAt(Position position) {
-        if(this.arena.getPacman() == null) this.arena.setPacman(new Pacman(position));
+        this.arena.setPacman(new Pacman(position));
+
+        setPacmanStartPosition(position);
+    }
+
+    @Override
+    protected void setPacmanStartPosition(Position position) {
+        this.arena.setStartPacmanPosition(position);
     }
 
     @Override
@@ -91,18 +113,7 @@ public class FileArenaLoader extends ArenaLoader {
     }
 
     @Override
-    protected void loadCherryAt(Position position) {
-        this.arena.addFixedEdible(new Cherry(position));
+    protected void loadFixedEdible(FixedEdible fixedEdible) {
+        this.arena.getGeneralFixedEdibleList().add(fixedEdible);
     }
-
-    @Override
-    protected void loadPacdotAt(Position position) {
-        this.arena.addFixedEdible(new Pacdot(position));
-    }
-
-    @Override
-    protected void loadPowerPelletAt(Position position) {
-        this.arena.addFixedEdible(new PowerPellet(position));
-    }
-
 }

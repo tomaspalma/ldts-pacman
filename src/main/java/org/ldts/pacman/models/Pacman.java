@@ -6,6 +6,7 @@ import java.util.HashMap;
 public class Pacman extends MovableEntity {
     private HashMap<String, Integer> orientationIndexCorrespondence = new HashMap<>();
     private static final String[] drawSymbols = {"D", "C", "A", "B"};
+    private int lives = 3;
 
     public Pacman(Position position) {
         super(position);
@@ -17,6 +18,19 @@ public class Pacman extends MovableEntity {
         orientationIndexCorrespondence.put("DOWN", 1);
         orientationIndexCorrespondence.put("LEFT", 2);
         orientationIndexCorrespondence.put("RIGHT", 3);
+    }
+
+    public void die(Position rebornPosition) {
+        this.position = rebornPosition;
+        lives--;
+    }
+
+    public int getRemainingLives() {
+        return lives;
+    }
+
+    public void setLivesTo(int newLives) {
+        this.lives = newLives;
     }
 
     // Este método vai ser chamado pelo respetivo controller

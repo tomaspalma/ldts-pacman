@@ -10,16 +10,24 @@ public class ArenaController extends Controller<Arena> {
     private final PacmanController pacmanController;
     private final RegularGhostController regularGhostController;
 
+    public PacmanController getPacmanController() {
+        return pacmanController;
+    }
+
+    public RegularGhostController getRegularGhostController() {
+        return regularGhostController;
+    }
+
     public ArenaController(Arena model) {
         super(model);
 
-        this.pacmanController = new PacmanController(model);
-        this.regularGhostController = new RegularGhostController(model);
+        this.pacmanController = new PacmanController(this, model);
+        this.regularGhostController = new RegularGhostController(this, model);
     }
 
     @Override
     public void step(Game game, GameActions.ControlActions action, long time) throws IOException {
-        if(getModel().getFixedEdibles().isEmpty()) game.setState(null); // TODO set state para um menu a dizer que venceu
+        if(getModel().getGeneralFixedEdibleList().isEmpty()) game.setState(null); // TODO set state para um menu a dizer que venceu
 
         switch(action) {
             case EXIT: game.setState(null); break;

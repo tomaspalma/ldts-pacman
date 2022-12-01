@@ -1,5 +1,5 @@
 package org.ldts.pacman.models;
 
-public interface FrightenedStrategy {
-    public void execute();
+public interface FrightenedStrategy extends GhostStrategy {
+    public void execute(Ghost ghost);
 }

@@ -1,6 +1,6 @@
 package org.ldts.pacman.models;
 
-public interface ScatterStrategy {
-    public void execute();
+public interface ScatterStrategy extends GhostStrategy {
+    public void execute(Ghost ghost);
 }
 

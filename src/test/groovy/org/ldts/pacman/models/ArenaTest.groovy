@@ -1,12 +1,6 @@
 package org.ldts.pacman.models
 
-import org.ldts.pacman.models.Arena
-import org.ldts.pacman.models.Cherry
-import org.ldts.pacman.models.FixedEdible
-import org.ldts.pacman.models.GameActions
-import org.ldts.pacman.models.Pacman
-import org.ldts.pacman.models.Position
-import org.ldts.pacman.models.Wall
+
 import spock.lang.Specification
 
 class ArenaTest extends Specification {

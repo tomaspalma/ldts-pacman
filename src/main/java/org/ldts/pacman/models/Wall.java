@@ -2,7 +2,7 @@ package org.ldts.pacman.models;
 
 import com.googlecode.lanterna.TextColor;
 
-public class Wall extends FixedEntity {
+public class Wall extends Obstacle {
     public Wall(Position position) {
         super(position);
         this.drawSymbol = "#";

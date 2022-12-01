@@ -1,0 +1,23 @@
+package org.ldts.pacman.models;
+
+public class ChasingState extends GhostState {
+
+    public ChasingState(Ghost ghost) {
+        super(ghost);
+    }
+
+    @Override
+    public GameActions.GhostCollisionWithPacman collideWithPacmanResult() {
+        return GameActions.GhostCollisionWithPacman.KILL_PACMAN;
+    }
+
+    @Override
+    public void applyChangesToGhost() {
+
+    }
+
+    @Override
+    public Position getNextPosition() {
+        return this.affectedGhost.getChaseStrategy().getNextPosition();
+    }
+}
