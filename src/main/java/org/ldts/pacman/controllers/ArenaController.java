@@ -5,6 +5,7 @@ import org.ldts.pacman.models.Arena;
 import org.ldts.pacman.models.GameActions;
 import org.ldts.pacman.models.menus.PauseMenu;
 import org.ldts.pacman.states.ArenaState;
+import org.ldts.pacman.states.menus.PauseMenuState;
 
 import java.io.IOException;
 
@@ -25,7 +26,7 @@ public class ArenaController extends Controller<Arena> {
 
         switch(action) {
             case EXIT: game.setState(null); break;
-            //case SWITCH_TO_PAUSE_MENU: game.setState(new PauseMenuState(new PauseMenu((ArenaState) game.getArenaState()))); break;
+            case SWITCH_TO_PAUSE_MENU: game.setState(new PauseMenuState(new PauseMenu((ArenaState) game.getArenaState()))); break;
             default: stepChildControllers(game, action, time); break;
         }
     }

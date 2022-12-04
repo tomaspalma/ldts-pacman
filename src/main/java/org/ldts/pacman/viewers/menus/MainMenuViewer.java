@@ -8,8 +8,8 @@ import org.ldts.pacman.models.Position;
 import org.ldts.pacman.viewers.Viewer;
 
 public class MainMenuViewer extends Viewer<MainMenu> {
-    public MainMenuViewer(MainMenu menu) {
-        super(menu);
+    public MainMenuViewer(MainMenu model) {
+        super(model);
     }
 
     @Override
