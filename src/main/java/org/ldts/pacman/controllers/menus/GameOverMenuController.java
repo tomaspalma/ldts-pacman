@@ -4,13 +4,15 @@ import org.ldts.pacman.Game;
 import org.ldts.pacman.controllers.Controller;
 import org.ldts.pacman.models.Arena;
 import org.ldts.pacman.models.GameActions;
+import org.ldts.pacman.models.menus.GameOverMenu;
 import org.ldts.pacman.models.menus.MainMenu;
 import org.ldts.pacman.states.ArenaState;
+import org.ldts.pacman.states.menus.MainMenuState;
 
 import java.io.IOException;
 
-public class MainMenuController extends Controller<MainMenu> {
-    public MainMenuController(MainMenu model) {
+public class GameOverMenuController extends Controller<GameOverMenu> {
+    public GameOverMenuController(GameOverMenu model) {
         super(model);
     }
 
@@ -32,6 +34,8 @@ public class MainMenuController extends Controller<MainMenu> {
                         game.setState(new ArenaState(new Arena(21, 21, "maps/easy.txt")));
                         break;
                     case 1:
+                        game.setState(new MainMenuState(new MainMenu()));
+                    case 2:
                         game.setState(null);
                         break;
                 }

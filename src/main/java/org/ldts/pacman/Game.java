@@ -29,7 +29,6 @@ public class Game {
         this.height = 21;
         this.gui = new GUIForLanterna(width, height);
         currentState = new MainMenuState(new MainMenu());
-        //currentState = new ArenaState(new Arena(width, height, "maps/easy.txt"));
     }
 
     private void run() throws IOException, InterruptedException {
