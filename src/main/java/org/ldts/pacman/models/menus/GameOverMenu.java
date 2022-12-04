@@ -3,20 +3,20 @@ package org.ldts.pacman.models.menus;
 import java.util.Arrays;
 
 public class GameOverMenu extends Menu {
-    private String condition;
+    private String message;
 
     public GameOverMenu(String gameOver) {
         if (gameOver.equals("win")) {
-            this.condition = "You Win";
+            this.message = "You Win";
             this.options = Arrays.asList("Play Again", "Main Menu", "Exit");
         }
         else if (gameOver.equals("loss")) {
-            this.condition = "You Lose";
+            this.message = "You Lose";
             this.options = Arrays.asList("Try Again", "Main Menu", "Exit");
         }
     }
 
-    public String getCondition() {
-        return condition;
+    public String getMessage() {
+        return message;
     }
 }
