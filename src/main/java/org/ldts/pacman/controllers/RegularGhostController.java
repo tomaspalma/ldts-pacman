@@ -9,6 +9,7 @@ import java.util.List;
 public class RegularGhostController extends Controller<Arena> {
     private List<RegularGhost> regularGhostsToControl;
     private ArenaController parentController;
+    private int numberOfSteps = 0;
     public RegularGhostController(ArenaController parentController, Arena model) {
         super(model);
         this.parentController = parentController;
@@ -19,8 +20,14 @@ public class RegularGhostController extends Controller<Arena> {
     public void step(Game game, GameActions.ControlActions action, long time) throws IOException {
         for(RegularGhost regularGhost: regularGhostsToControl) {
             if(stateChangedIn(regularGhost)) regularGhost.getCurrentState().applyChangesToGhost();
-
-            moveGhost(regularGhost, regularGhost.getCurrentState().getNextPosition(getModel().getPacman().getPosition(), getModel().getGameGrid()));
+            
+            if(numberOfSteps > 3) {
+                moveGhost(regularGhost, regularGhost.getCurrentState().getNextPosition());
+                numberOfSteps = 0;
+            } else {
+                numberOfSteps++;
+            } 
+            
         }
     }
 
@@ -33,23 +40,23 @@ public class RegularGhostController extends Controller<Arena> {
     }
 
     private void moveGhost(Ghost ghost, Position newPosition) {
-       if(ghost.getCurrentState() instanceof FrightenedState) {
-           ghost.setCurrentDirectionTo(ghost.getCurrentDirection().generateNextDirectionAfterChangeTo(newPosition));
-           ghost.setPosition(newPosition);
-       }
+        try {
+            System.out.println(newPosition.getX() + "," + newPosition.getY());
+        } catch(Exception e) {
+            System.out.println("WE ARE FUCKING FUCKED NIGGAS");
+        }
+        int ghostX = ghost.getPosition().getX();
+        int ghostY = ghost.getPosition().getY();
+        
+        if(ghost.getCurrentState() instanceof FrightenedState) {
+            getModel().getGameGrid().get(ghostY - 1).get(ghostX).removeChild(ghost);            
+            getModel().getGameGrid().get(newPosition.getY() - 1).get(newPosition.getX()).addChild(ghost);
+
+            ghost.setCurrentDirectionTo(ghost.getCurrentDirection().generateNextDirectionAfterChangeTo(newPosition));
+            ghost.setPosition(newPosition);
+        }
     }
 
     public void actionBasedOnCollisionResult(GameActions.GhostCollisionWithPacman result) {
-    }
-
-    public void executeFrightenedBehaviour(RegularGhost regularGhost) {
-    }
-
-    public void executeChaseBehaviour(RegularGhost regularGhost) {
-        
-    }
-
-    public void executeScatterBehaviour(RegularGhost regularGhost) {
-
     }
 }

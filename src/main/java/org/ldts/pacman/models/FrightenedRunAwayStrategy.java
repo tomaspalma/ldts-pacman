@@ -12,11 +12,16 @@ public class FrightenedRunAwayStrategy implements FrightenedStrategy {
     }
 
     @Override
-    public Position getNextPosition(Ghost ghost, Position pacmanPosition, List<List<Entity>> gameGrid) {
-        List<Position> possiblePositions = ghost.getCurrentDirection().getPossiblePositionsToMove(gameGrid);
-        possiblePositions.removeIf(Objects::isNull);
+    public Position getNextPosition(Ghost ghost) {
+        List<Position> possiblePositions = ghost.getCurrentDirection().getPossiblePositionsToMove();
 
-        int chosenPositionIndex = (int)Math.floor(Math.random()*(possiblePositions.size() - 1 - 0 + 1) + 0);
+        if(possiblePositions.isEmpty()) return ghost.getPosition();
+
+        int chosenPositionIndex = (int)Math.floor(Math.random() * (possiblePositions.size() - 1 - 0 + 1) + 0);
+
+        if(possiblePositions.get(chosenPositionIndex) == null) {
+            System.out.println("fsdfhjuskdfhsjkh");
+        }
 
         return possiblePositions.get(chosenPositionIndex);
     }

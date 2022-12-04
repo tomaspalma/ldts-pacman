@@ -53,7 +53,7 @@ public class FileArenaLoader extends ArenaLoader {
             this.arena.getGameGrid().add(new ArrayList<>());
 
             for(Character c: currentCharRow.toCharArray()) {
-                addRespectiveElementOf(c, new Position(x, y));
+                addRespectiveElementOf(c, new Position(x, y, this.arena));
                 x += 1;
             }
 
@@ -70,10 +70,11 @@ public class FileArenaLoader extends ArenaLoader {
 
     private void addRegularGhostsObserversToPowerPellet() {
         for(FixedEdible fixedEdible: this.arena.getGeneralFixedEdibleList()) {                
-            if(fixedEdible instanceof PowerPellet)
+            if(fixedEdible instanceof PowerPellet) {
                 for(RegularGhost regularGhost: this.arena.getRegularGhostsList()) {
                     ((PowerPellet) fixedEdible).addObserver(regularGhost);
                 }
+            }
         }
     }
 
@@ -127,7 +128,9 @@ public class FileArenaLoader extends ArenaLoader {
     }
 
     private void addToGrid(Entity entity) {
-        this.arena.getGameGrid().get(entity.getPosition().getY() - 1).add(entity);
+        this.arena.gameGrid.get(entity.getPosition().getY() - 1).add(new Tile(entity.getPosition()));
+        this.arena.gameGrid.get(entity.getPosition().getY() - 1).get(entity.getPosition().getX())
+            .addChild(entity);
     }
 
     private void loadEmptySpace(EmptySpace emptySpace) {

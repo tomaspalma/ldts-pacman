@@ -8,14 +8,16 @@ public abstract class RegularGhost extends Ghost implements GameObserver {
 
     private Position startPosition;
     private final AtomicInteger noOfTimesConsequentlyEaten = new AtomicInteger(0);
+
     protected RegularGhost(Position position) {
         super(position);
-        this.startPosition = new Position(position.getX(), position.getY());
+        this.startPosition = new Position(position.getX(), position.getY(), this.position.getArena());
         this.drawSymbol = "I";
         this.frightenedStrategy = new FrightenedRunAwayStrategy();
         this.previousState = new FrightenedState(this);
         this.currentState = new GhostHouseState(this);
     }
+
 
     // Regular ghosts will always behave this way
     @Override

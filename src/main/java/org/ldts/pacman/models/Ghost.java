@@ -48,6 +48,10 @@ public abstract class Ghost extends MovableEntity {
     public void die() {
         this.currentState.transitionToState(new DeadState(this));
     }
+    
+    public boolean isOnGhostHouseState() {
+        return this.currentState instanceof GhostHouseState;
+    }
 
     public abstract GameActions.GhostCollisionWithPacman getCollisionWithPacmanResult();
     

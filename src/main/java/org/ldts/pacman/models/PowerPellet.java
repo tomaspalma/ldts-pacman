@@ -4,7 +4,6 @@ import com.googlecode.lanterna.TextColor;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observer;
 
 public class PowerPellet extends FixedEdible implements GameObservable {
     private final List<GameObserver> observers = new ArrayList<>();

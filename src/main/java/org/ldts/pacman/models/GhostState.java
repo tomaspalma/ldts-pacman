@@ -1,7 +1,5 @@
 package org.ldts.pacman.models;
 
-import java.util.List;
-
 public abstract class GhostState {
     Ghost affectedGhost;
 
@@ -12,7 +10,7 @@ public abstract class GhostState {
 
     public abstract void applyChangesToGhost();
 
-    public abstract Position getNextPosition(Position pacmanPosition, List<List<Entity>> gameGrid);
+    public abstract Position getNextPosition();
 
     public void transitionToState(GhostState newGhostState) {
         this.affectedGhost.setCurrentStateTo(newGhostState);

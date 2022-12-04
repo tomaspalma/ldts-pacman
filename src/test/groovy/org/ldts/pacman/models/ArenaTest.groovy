@@ -70,5 +70,9 @@ class ArenaTest extends Specification {
             arena.getGameGrid().get(0).size() == arena.getWidth()
     }
 
+    def cleanup() {
+        Arena.gameGrid.clear()
+    }
+
 }
 

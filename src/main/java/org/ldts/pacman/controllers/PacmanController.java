@@ -98,46 +98,62 @@ public class PacmanController extends Controller<Arena> {
         movePacman(pacman.getPosition().getPositionBelow());
     }
 
-    private void movePacman(Position position) {
-        int theoreticalEdibleIndex;
-        Ghost possibleCollidedGhost;
+    private void switchTile(Position position) {
+        int pacmanX = getModel().getPacman().getPosition().getX();
+        int pacmanY = getModel().getPacman().getPosition().getY();
+        
+        getModel().getGameGrid().get(pacmanY - 1).get(pacmanX).removeChild(pacman);
+        getModel().getGameGrid().get(position.getY() - 1).get(position.getX()).addChild(pacman);
+    }
 
-        if (!(getModel().isObstacleAt(position))) {
+    private void movePacman(Position position) {
+
+        if (!position.isOnSomeObstaclePosition()) {
+            this.switchTile(position);
+
             pacman.setPosition(position);
 
-            controlPacmanNotOutOfBounds();
+            controlNotOutOfBounds(position);
 
-            if((theoreticalEdibleIndex = getModel().getFixedEdibleAt(position)) != -1) {
-                eatEdible(theoreticalEdibleIndex);
-            } else if ((possibleCollidedGhost = getModel().getGhostAt(position)) != null) {
-                processCollisionWithGhost(possibleCollidedGhost);
+            if(position.isOnFixedEdiblePosition()) {
+                eatEdibleAt(position);
+            } else if (position.isOnSomeGhostPosition()) {
+                processCollisionWithGhostAt(position);
             }
         }
     }
 
-    // ALTERAR DEPOIS AQUI EM VEZ DE SER REGULAR GHOSTS TERMOS ALGO A INDICAR SE PODE SER MORTA PELO PACMAN OU NÃO
-    private void processCollisionWithGhost(Ghost ghost) {
+    private void processCollisionWithGhostAt(Position position) {
+        Tile currentTile = getModel().getGameGrid().get(position.getY() - 1).get(position.getX());
+        Ghost ghost = currentTile.getGhost();
+        assert(ghost != null);
+        
         switch(ghost.getCollisionWithPacmanResult()) {
             case KILL_GHOST: parentController.getRegularGhostController().killGhost(ghost); break;
             case KILL_PACMAN: parentController.processPacmanLoseLife(); break;
         }
     }
 
-    private void controlPacmanNotOutOfBounds() {
-        int pacmanX = pacman.getPosition().getX();
-        int pacmanY = pacman.getPosition().getY();
+    private void controlNotOutOfBounds(Position position) {
+        int x = position.getY();
+        int y = position.getY();
         
-        if(pacmanX < 0) pacman.setPosition(new Position(getModel().getWidth(), pacman.getPosition().getY()));
-        else if(pacmanX >= getModel().getWidth()) pacman.setPosition(new Position(-1, pacman.getPosition().getY()));
+        if(x < 0) pacman.setPosition(new Position(getModel().getWidth() - 1, y, getModel()));
+        else if(x > getModel().getWidth()) pacman.setPosition(new Position(3, y, getModel()));
     }
 
-    private void eatEdible(int i) {
-        if(getModel().getGeneralFixedEdibleList().get(i) instanceof GameObservable) {
-            ((GameObservable) getModel().getGeneralFixedEdibleList().get(i)).notifyObservers();
+    private void eatEdibleAt(Position position) {
+        Tile currentTile = getModel().getGameGrid().get(position.getY() - 1).get(position.getX());
+        FixedEdible currentEdible = currentTile.getFixedEdible();
+        assert(currentEdible != null);
+
+        if(currentEdible instanceof GameObservable) {
+            ((GameObservable) currentEdible).notifyObservers();
         }
 
         getModel().sumScoreWith(1);
-        getModel().getGeneralFixedEdibleList().remove(i);
+        getModel().removeFromGameGridAt(position, currentEdible);
+        getModel().getGeneralFixedEdibleList().remove(currentEdible);
     }
 
     private void changeLife(int i) {

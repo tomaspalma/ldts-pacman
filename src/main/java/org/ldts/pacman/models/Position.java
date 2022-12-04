@@ -7,10 +7,12 @@ public class Position {
     // Para os comparar utilizar um epsilon. Exemplo:
     private final int x;
     private final int y;
+    private Arena arena;
 
-    public Position(int x, int y) {
+    public Position(int x, int y, Arena arena) {
         this.x = x;
         this.y = y;
+        this.arena = arena;
     }
 
     public int getX() {
@@ -21,24 +23,66 @@ public class Position {
         return y;
     }
 
+    public Arena getArena() {
+        return this.arena;
+    }
+
     public Position getPositionToTheLeft() {
-       return new Position(this.x - 1, this.y);
+       return new Position(this.x - 1, this.y, this.arena);
     }
 
     public Position getPositionToTheRight() {
-        return new Position(this.x + 1, this.y);
+        return new Position(this.x + 1, this.y, this.arena);
     }
 
     public Position getPositionAbove() {
-        return new Position(this.x, this.y - 1);
+        return new Position(this.x, this.y - 1, this.arena);
     }
 
     public Position getPositionBelow() {
-        return new Position(this.x, this.y + 1);
+        return new Position(this.x, this.y + 1, this.arena);
     }
 
     public double getDistanceTo(Position position) {
         return Math.sqrt(Math.pow(this.x - (double)position.getX(), 2) + Math.pow(this.y - (double)position.getY(), 2));
+    }
+
+    public boolean isOutOfBounds() {
+        boolean isOutOfBoundsHorizontally = this.x < 0 || this.x >= this.arena.getGameGrid().get(0).size();
+        boolean isOutOfBoundsVertically = this.y < 1 || this.y >= this.arena.getGameGrid().size();
+
+        return isOutOfBoundsHorizontally || isOutOfBoundsVertically;
+    }
+
+    public boolean isOnSomeGhostPosition() {
+        return this.arena.getGameGrid().get(this.y - 1).get(this.x)
+            .containsGhost();
+    }
+
+    public boolean isOnSomeObstaclePosition() {
+        return this.arena.getGameGrid().get(this.y - 1).get(this.x)
+            .containsObstacle();
+    }
+
+    public boolean isOnGatePosition() {
+        return this.arena.getGameGrid().get(this.y - 1).get(this.x)
+            .containsGate();
+    }
+
+    public boolean isOnPacmanPosition() {
+        return this.arena.getGameGrid().get(this.y - 1).get(this.x)
+            .containsPacman();
+    }
+
+    public boolean isOnFixedEdiblePosition() {
+        return this.arena.getGameGrid().get(this.y - 1).get(this.x)
+            .containsFixedEdible();
+    }
+
+    public boolean isInvalidOnTheContextOf(Ghost ghost) {
+        return this.isOutOfBounds() || this.isOnPacmanPosition() 
+            || this.isOnSomeObstaclePosition()
+            || (!ghost.isOnGhostHouseState() && this.isOnGatePosition());
     }
 
     @Override

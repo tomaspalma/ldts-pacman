@@ -11,7 +11,7 @@ public class Arena {
 
     private Pacman pacman;
     private List<Obstacle> obstaclesList = new ArrayList<>();
-    private final List<List<Entity>> gameGrid = new ArrayList<>();
+    public final List<List<Tile>> gameGrid = new ArrayList<>();
 
     private Position startPacmanPosition;
     
@@ -39,7 +39,7 @@ public class Arena {
         return this.ghostHouseSize;
     }
 
-    public List<List<Entity>> getGameGrid() {
+    public List<List<Tile>> getGameGrid() {
         return gameGrid;
     }
 
@@ -108,6 +108,14 @@ public class Arena {
 
     public void setStartPacmanPosition(Position startPacmanPosition) {
         this.startPacmanPosition = startPacmanPosition;
+    }
+
+    public void removeFromGameGridAt(Position position, Entity entity) {
+        gameGrid.get(position.getY() - 1).get(position.getX()).removeChild(entity);
+    }
+
+    public void addToGridAt(Position position) {
+
     }
 
     public boolean isObstacleAt(Position position) {

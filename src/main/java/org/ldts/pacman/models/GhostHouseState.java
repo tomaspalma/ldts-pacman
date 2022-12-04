@@ -18,7 +18,7 @@ public class GhostHouseState extends GhostState {
     }
 
     @Override
-    public Position getNextPosition(Position pacmanPosition, List<List<Entity>> gameGrid) {
-        return new Position(0, 0);
+    public Position getNextPosition() {
+        return new Position(0, 0, this.affectedGhost.getPosition().getArena());
     }
 }

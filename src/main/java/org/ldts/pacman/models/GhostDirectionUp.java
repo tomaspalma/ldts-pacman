@@ -10,13 +10,21 @@ public class GhostDirectionUp extends GhostDirection {
     }
 
     @Override
-    public List<Position> getPossiblePositionsToMove(List<List<Entity>> gameGrid) {
-        Position leftPosition = new Position(this.ghost.getPosition().getX() - 1, this.ghost.getPosition().getY());
-        Position rightPosition = new Position(this.ghost.getPosition().getX() + 1, this.ghost.getPosition().getY());
-        Position upPosition = new Position(this.ghost.getPosition().getX(), this.ghost.getPosition().getY() - 1);
+    public List<Position> getPossiblePositionsToMove() {
+        int ghostX = this.ghost.getPosition().getX();
+        int ghostY = this.ghost.getPosition().getY();
+        Arena ghostArena = this.ghost.getPosition().getArena();
+        
+        Position leftPosition = new Position(ghostX - 1, ghostY, ghostArena);
+        Position rightPosition = new Position(ghostX + 1, ghostY, ghostArena);
+        Position upPosition = new Position(ghostX, ghostY - 1, ghostArena);
         List<Position> result = new ArrayList<>(Arrays.asList(leftPosition, rightPosition, upPosition));
 
-        result.removeIf(position -> isPositionInvalid(position, gameGrid));
+        result.removeIf(position -> position.isInvalidOnTheContextOf(ghost));
+
+        if(result == null) {
+            System.out.println("cummy whammy");
+        }
 
         return result;
     }

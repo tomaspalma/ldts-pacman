@@ -1,7 +1,5 @@
 package org.ldts.pacman.models;
 
-import java.util.List;
-
 public class AmbushChaseStrategy implements ChaseStrategy {
 
     @Override
@@ -11,9 +9,9 @@ public class AmbushChaseStrategy implements ChaseStrategy {
     }
 
     @Override
-    public Position getNextPosition(Ghost ghost, Position pacmanPosition, List<List<Entity>> gameGrid) {
+    public Position getNextPosition(Ghost ghost) {
         // TODO Auto-generated method stub
-        return null;
+        return new Position(0, 0, ghost.getPosition().getArena());
     }
     
 }

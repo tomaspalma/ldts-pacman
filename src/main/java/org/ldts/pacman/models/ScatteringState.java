@@ -1,7 +1,5 @@
 package org.ldts.pacman.models;
 
-import java.util.List;
-
 public class ScatteringState extends GhostState {
     public ScatteringState(Ghost ghost) {
         super(ghost);
@@ -18,7 +16,7 @@ public class ScatteringState extends GhostState {
     }
 
     @Override
-    public Position getNextPosition(Position pacmanPosition, List<List<Entity>> gameGrid) {
-        return this.affectedGhost.getScatterStrategy().getNextPosition(this.affectedGhost, pacmanPosition, gameGrid);
+    public Position getNextPosition() {
+        return this.affectedGhost.getScatterStrategy().getNextPosition(this.affectedGhost);
     }
 }

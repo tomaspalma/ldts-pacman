@@ -5,6 +5,7 @@ public class GameActions {
     public enum GhostCollisionWithPacman {
        KILL_PACMAN,
        KILL_GHOST,
+       NONE,
     }
 
     public enum ControlActions {
