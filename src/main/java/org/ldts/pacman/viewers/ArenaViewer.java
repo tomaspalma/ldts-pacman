@@ -14,16 +14,18 @@ public class ArenaViewer extends Viewer<Arena> {
 
     @Override
     protected void drawEntities(GUI gui) {
+
         for(Obstacle obstacle: getModel().getObstaclesList()) {
             new EntityViewer(obstacle).drawEntities(gui);
         }
 
-        for(RegularGhost ghost: getModel().getRegularGhostsList()) {
-            new EntityViewer(ghost).drawEntities(gui);
-        }
 
         for(FixedEdible fixedEdible: getModel().getGeneralFixedEdibleList()) {
             new EntityViewer(fixedEdible).drawEntities(gui);
+        }
+
+        for(RegularGhost ghost: getModel().getRegularGhostsList()) {
+            new EntityViewer(ghost).drawEntities(gui);
         }
 
         new EntityViewer(getModel().getPacman()).drawEntities(gui);

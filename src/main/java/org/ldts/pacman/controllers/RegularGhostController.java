@@ -20,7 +20,7 @@ public class RegularGhostController extends Controller<Arena> {
         for(RegularGhost regularGhost: regularGhostsToControl) {
             if(stateChangedIn(regularGhost)) regularGhost.getCurrentState().applyChangesToGhost();
 
-            moveGhost(regularGhost, regularGhost.getCurrentState().getNextPosition());
+            moveGhost(regularGhost, regularGhost.getCurrentState().getNextPosition(getModel().getPacman().getPosition(), getModel().getGameGrid()));
         }
     }
 
@@ -33,7 +33,10 @@ public class RegularGhostController extends Controller<Arena> {
     }
 
     private void moveGhost(Ghost ghost, Position newPosition) {
-       //ghost.setPosition(newPosition);
+       if(ghost.getCurrentState() instanceof FrightenedState) {
+           ghost.setCurrentDirectionTo(ghost.getCurrentDirection().generateNextDirectionAfterChangeTo(newPosition));
+           ghost.setPosition(newPosition);
+       }
     }
 
     public void actionBasedOnCollisionResult(GameActions.GhostCollisionWithPacman result) {

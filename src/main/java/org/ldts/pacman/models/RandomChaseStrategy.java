@@ -1,5 +1,7 @@
 package org.ldts.pacman.models;
 
+import java.util.List;
+
 public class RandomChaseStrategy implements ChaseStrategy {
 
     @Override
@@ -9,7 +11,7 @@ public class RandomChaseStrategy implements ChaseStrategy {
     }
 
     @Override
-    public Position getNextPosition() {
+    public Position getNextPosition(Ghost ghost, Position pacmanPosition, List<List<Entity>> gameGrid) {
         // TODO Auto-generated method stub
         return null;
     }

@@ -35,7 +35,7 @@ class GUIForLanternaTest extends Specification {
             lanternaGUI.getTerminalSize() == new TerminalSize(20, 20)
     }
 
-    def "We should execute the specific draw for our element"() {
+    /*def "We should execute the specific draw for our element"() {
         given:
             Position position = GroovyMock(Position)
             TextColor.ANSI textColor = GroovyMock(TextColor.ANSI)
@@ -44,9 +44,9 @@ class GUIForLanternaTest extends Specification {
             lanternaGUI.drawEntity(position, textColor, drawSymbol)
         then:
             1 * lanternaGUI.drawElement(position, textColor, drawSymbol)
-    }
+    }*/
 
-    def "writeToScreenMethod should execute all its methods"() {
+    /*def "writeToScreenMethod should execute all its methods"() {
         given:
             def position = GroovyMock(Position)
             def text = GroovyMock(String)
@@ -56,6 +56,6 @@ class GUIForLanternaTest extends Specification {
             lanternaGUI.writeToScreen(position, text, color);
         then:
             1 * screen.newTextGraphics()
-    }
+    }*/
 
 }

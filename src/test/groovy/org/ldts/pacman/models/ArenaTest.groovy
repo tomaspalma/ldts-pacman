@@ -7,27 +7,67 @@ class ArenaTest extends Specification {
     private def arena
 
     def setup() {
-        arena = new Arena(20, 20, "maps/easy.txt")
+        arena = new Arena(20, 21, "maps/easy.txt")
     }
 
-    def "Arena should be able to detect if wall is at a certain position"() {
+    def "Arena should be able to detect if obstacle is at a certain position"() {
         given:
             def pacman = new Pacman(new Position(5, 5))
             arena.setPacman(pacman)
-            def wall = new Wall(new Position(5, 5))
+            def obstacle = new Obstacle(new Position(5, 5))
         when:
-            arena.addWall(wall)
+            arena.addObstacle(obstacle)
         then:
-            arena.isWallAt(new Position(5, 5)) == true
+            arena.isObstacleAt(new Position(5, 5)) == true
     }
 
     def "Arena should be able to return valid index if fixed edible is at a certain position"() {
         given:
             def fixedEdible = new Cherry(new Position(5, 5))
         when:
-            arena.addFixedEdible(fixedEdible)
+            arena.addToGeneralFixedEdibleList(fixedEdible)
         then:
             arena.getFixedEdibleAt(new Position(5, 5)) != -1
+    }
+
+    def "Amount of grid elements must be equal to the total amount of elements in the other separate lists"() {
+        given:
+            def noOfGridElements = 0;
+            def totalEntities = 1 + arena.getObstaclesList().size() + arena.getGeneralFixedEdibleList().size() + arena.getRegularGhostsList().size() + arena.getGhostHouseSize();
+        when:
+            for(list in arena.getGameGrid()) {
+                for(element in list) {
+                   noOfGridElements += 1;
+                }
+            }
+        then:
+            noOfGridElements == totalEntities
+    }
+
+    def "Size of each row must be equal to each other"() {
+        given:
+            def expectedSizeOfEachRow = arena.getGameGrid().get(0).size()
+            def expectedResult = true
+        when:
+            def sum = 0
+            for(list in arena.getGameGrid()) {
+                for(element in list) {
+                    sum += 1;
+                }
+                if(sum != expectedSizeOfEachRow) {
+                    expectedResult = false
+                    break;
+                }
+                sum = 0;
+            }
+        then:
+            expectedResult == true
+    }
+
+    def "Assert limits of grid size"() {
+        expect:
+            arena.getGameGrid().size() == arena.getHeight() - 1
+            arena.getGameGrid().get(0).size() == arena.getWidth()
     }
 
 }

@@ -1,5 +1,7 @@
 package org.ldts.pacman.models;
 
+import java.util.List;
+
 public class ScatterToTopRight implements ScatterStrategy {
 
     @Override
@@ -9,7 +11,7 @@ public class ScatterToTopRight implements ScatterStrategy {
     }
 
     @Override
-    public Position getNextPosition() {
+    public Position getNextPosition(Ghost ghost, Position pacmanPosition, List<List<Entity>> gameGrid) {
         // TODO Auto-generated method stub
         return null;
     }

@@ -3,6 +3,8 @@ import com.googlecode.lanterna.TextColor;
 
 import java.util.HashMap;
 
+import static java.lang.Thread.sleep;
+
 public class Pacman extends MovableEntity {
     private HashMap<String, Integer> orientationIndexCorrespondence = new HashMap<>();
     private static final String[] drawSymbols = {"D", "C", "A", "B"};
@@ -35,6 +37,7 @@ public class Pacman extends MovableEntity {
 
     // Este método vai ser chamado pelo respetivo controller
     public void changeOrientation(String newOrientation) {
+        this.orientation = newOrientation;
         this.drawSymbol = drawSymbols[orientationIndexCorrespondence.get(newOrientation)];
     }
 }

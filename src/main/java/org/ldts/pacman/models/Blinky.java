@@ -8,5 +8,6 @@ public class Blinky extends RegularGhost {
         this.color = TextColor.ANSI.RED;
         this.chaseStrategy = new AgressiveChaseStrategy();
         this.scatterStrategy = new ScatterToTopLeft();
+        this.currentDirection = new GhostDirectionLeft(this);
     }
 }

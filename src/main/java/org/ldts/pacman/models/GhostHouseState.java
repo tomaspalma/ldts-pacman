@@ -1,5 +1,7 @@
 package org.ldts.pacman.models;
 
+import java.util.List;
+
 public class GhostHouseState extends GhostState {
     public GhostHouseState(Ghost ghost) {
         super(ghost);
@@ -16,7 +18,7 @@ public class GhostHouseState extends GhostState {
     }
 
     @Override
-    public Position getNextPosition() {
+    public Position getNextPosition(Position pacmanPosition, List<List<Entity>> gameGrid) {
         return new Position(0, 0);
     }
 }

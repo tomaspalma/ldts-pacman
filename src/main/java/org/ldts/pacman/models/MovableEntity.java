@@ -1,6 +1,7 @@
 package org.ldts.pacman.models;
 
 public abstract class MovableEntity extends Entity {
+    protected String orientation;
     protected MovableEntity(Position position) {
         super(position);
     }

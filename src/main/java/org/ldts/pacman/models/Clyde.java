@@ -8,5 +8,6 @@ public class Clyde extends RegularGhost {
         this.color = TextColor.ANSI.YELLOW;
         this.chaseStrategy = new AgressiveChaseStrategy();
         this.scatterStrategy = new ScatterToBottomLeft();
+        this.currentDirection = new GhostDirectionUp(this);
     }
 }

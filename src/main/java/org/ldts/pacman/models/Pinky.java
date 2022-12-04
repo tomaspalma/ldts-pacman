@@ -8,5 +8,6 @@ public class Pinky extends RegularGhost {
         this.color = TextColor.ANSI.WHITE; 
         this.chaseStrategy = new AmbushChaseStrategy();
         this.scatterStrategy = new ScatterToTopLeft();
+        this.currentDirection = new GhostDirectionUp(this);
     }
 }

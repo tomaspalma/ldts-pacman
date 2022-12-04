@@ -2,6 +2,8 @@ package org.ldts.pacman.models;
 
 import com.googlecode.lanterna.TextColor;
 
+import java.util.List;
+
 public class DeadState extends GhostState {
     public DeadState(Ghost ghost) {
         super(ghost);
@@ -18,7 +20,7 @@ public class DeadState extends GhostState {
     }
 
     @Override
-    public Position getNextPosition() {
+    public Position getNextPosition(Position pacmanPosition, List<List<Entity>> gameGrid) {
         return new Position(0, 0);
     }
 }

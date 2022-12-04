@@ -7,9 +7,18 @@ public abstract class Ghost extends MovableEntity {
 
     protected GhostState previousState;
     protected GhostState currentState;
+    protected GhostDirection currentDirection;
 
     public GhostState getPreviousState() {
         return previousState;
+    }
+
+    public GhostDirection getCurrentDirection() {
+        return currentDirection;
+    }
+
+    public void setCurrentDirectionTo(GhostDirection direction) {
+        this.currentDirection = direction;
     }
 
     public ChaseStrategy getChaseStrategy() {
@@ -24,11 +33,11 @@ public abstract class Ghost extends MovableEntity {
         return scatterStrategy;
     }
 
-    public void setPreviousState(GhostState state) {
+    public void setPreviousStateTo(GhostState state) {
        this.previousState = state;
     }
 
-    public void setCurrentState(GhostState state) {
+    public void setCurrentStateTo(GhostState state) {
         this.currentState = state;
     }
 
@@ -45,4 +54,5 @@ public abstract class Ghost extends MovableEntity {
     protected Ghost(Position position) {
         super(position);
     }
+
 }

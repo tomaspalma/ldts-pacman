@@ -36,8 +36,13 @@ public class ArenaController extends Controller<Arena> {
         }
     }
 
+    public void processPacmanLoseLife() {
+        getModel().getPacman().die(getModel().getStartPacmanPosition());
+    }
+
     private void stepChildControllers(Game game, GameActions.ControlActions action, long time) throws IOException {
         pacmanController.step(game, action, time);
         regularGhostController.step(game, action, time);
+        System.out.println(getModel().getRegularGhostsList().get(0).getCurrentDirection().getClass());
     }
 }

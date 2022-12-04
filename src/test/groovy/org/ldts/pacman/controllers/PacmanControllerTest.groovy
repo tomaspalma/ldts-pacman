@@ -14,7 +14,7 @@ class PacmanControllerTest extends Specification {
 
     def setup() {
         arena = new Arena(20, 20, "maps/easy.txt")
-        pacmanController = new PacmanController(arena)
+        pacmanController = new PacmanController(new ArenaController(arena), arena);
     }
 
     def "Arena should be able to detect if wall is at a certain position"() {
@@ -23,16 +23,16 @@ class PacmanControllerTest extends Specification {
             arena.setPacman(pacman)
             def wall = new Wall(new Position(5, 5))
         when:
-            arena.addWall(wall)
+            arena.addObstacle(wall)
         then:
-            arena.isWallAt(new Position(5, 5)) == true
+            arena.isObstacleAt(new Position(5, 5)) == true
     }
 
     def "Arena should be able to return valid index if fixed edible is at a certain position"() {
         given:
             def fixedEdible = new Cherry(new Position(5, 5))
         when:
-            arena.addFixedEdible(fixedEdible)
+            arena.addToGeneralFixedEdibleList(fixedEdible)
         then:
             arena.getFixedEdibleAt(new Position(5, 5)) != -1
     }

@@ -7,10 +7,11 @@ import java.util.List;
 public class Arena {
     private final int height;
     private final int width;
+    private int ghostHouseSize = 0;
 
     private Pacman pacman;
     private List<Obstacle> obstaclesList = new ArrayList<>();
-
+    private final List<List<Entity>> gameGrid = new ArrayList<>();
 
     private Position startPacmanPosition;
     
@@ -18,7 +19,7 @@ public class Arena {
 
     private final List<FixedEdible> generalFixedEdibleList = new ArrayList<>();
 
-    private ArenaLoader loader;
+    private final ArenaLoader loader;
 
     private int score = 0;
 
@@ -28,6 +29,18 @@ public class Arena {
         this.loader = new FileArenaLoader(this, mapToLoad);
 
         loader.load();
+    }
+
+    public void incrementGhostHouseSize() {
+        this.ghostHouseSize += 1;
+    }
+
+    public int getGhostHouseSize() {
+        return this.ghostHouseSize;
+    }
+
+    public List<List<Entity>> getGameGrid() {
+        return gameGrid;
     }
 
     public Position getStartPacmanPosition() {

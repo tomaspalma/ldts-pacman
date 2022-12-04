@@ -110,8 +110,6 @@ public class PacmanController extends Controller<Arena> {
             if((theoreticalEdibleIndex = getModel().getFixedEdibleAt(position)) != -1) {
                 eatEdible(theoreticalEdibleIndex);
             } else if ((possibleCollidedGhost = getModel().getGhostAt(position)) != null) {
-                // Ver se substituo aqui por getGhostAt ou algo do género
-                // Até se calhar uma função que faça os dois
                 processCollisionWithGhost(possibleCollidedGhost);
             }
         }
@@ -121,7 +119,7 @@ public class PacmanController extends Controller<Arena> {
     private void processCollisionWithGhost(Ghost ghost) {
         switch(ghost.getCollisionWithPacmanResult()) {
             case KILL_GHOST: parentController.getRegularGhostController().killGhost(ghost); break;
-            case KILL_PACMAN: pacman.die(getModel().getStartPacmanPosition()); break;
+            case KILL_PACMAN: parentController.processPacmanLoseLife(); break;
         }
     }
 

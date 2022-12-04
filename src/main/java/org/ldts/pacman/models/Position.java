@@ -37,6 +37,10 @@ public class Position {
         return new Position(this.x, this.y + 1);
     }
 
+    public double getDistanceTo(Position position) {
+        return Math.sqrt(Math.pow(this.x - (double)position.getX(), 2) + Math.pow(this.y - (double)position.getY(), 2));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

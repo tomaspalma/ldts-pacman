@@ -24,11 +24,11 @@ public class Game {
         this.width = 21;
         this.height = 21;
         this.gui = new GUIForLanterna(width, height);
-        currentState = new ArenaState(new Arena(width, height, "maps/easy.txt"));
+        currentState = new ArenaState(new Arena(width - 1, height, "maps/easy.txt"));
     }
 
     private void run() throws IOException, InterruptedException {
-        int FPSLimit = 10;
+        int FPSLimit = 6;
         int frameTime = 1000 / FPSLimit;
 
         while(this.currentState != null) {

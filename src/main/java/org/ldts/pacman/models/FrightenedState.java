@@ -2,6 +2,8 @@ package org.ldts.pacman.models;
 
 import com.googlecode.lanterna.TextColor;
 
+import java.util.List;
+
 public class FrightenedState extends GhostState {
     public FrightenedState(Ghost ghost) {
         super(ghost);
@@ -18,7 +20,7 @@ public class FrightenedState extends GhostState {
     }
 
     @Override
-    public Position getNextPosition() {
-        return this.affectedGhost.getFrightenedStrategy().getNextPosition();
+    public Position getNextPosition(Position pacmanPosition, List<List<Entity>> gameGrid) {
+        return this.affectedGhost.getFrightenedStrategy().getNextPosition(this.affectedGhost, pacmanPosition, gameGrid);
     }
 }

@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -41,17 +42,18 @@ public class FileArenaLoader extends ArenaLoader {
     @Override
     // Ler o mapa de um fichiero e carregar as entidades corretas para a lista
     public void load() throws IOException {
-        String currentRow;
-
+        String currentCharRow;
+        Position currentPosition;
         int x = 0;
         int y = 1;
 
-        while((currentRow = this.mapFileReader.readLine()) != null) {
-            //if(currentRow.length() >= width - 1) return;
+        while((currentCharRow = this.mapFileReader.readLine()) != null) {
+            //if(currentCharRow.length() >= width - 1) return;
 
-            for(Character c: currentRow.toCharArray()) {
+            this.arena.getGameGrid().add(new ArrayList<>());
+
+            for(Character c: currentCharRow.toCharArray()) {
                 addRespectiveElementOf(c, new Position(x, y));
-
                 x += 1;
             }
 
@@ -86,6 +88,7 @@ public class FileArenaLoader extends ArenaLoader {
             case 'c': loadRegularGhost(new Clyde(currentPosition)); break;
             case 'i': loadRegularGhost(new Inky(currentPosition)); break;
             case 'b': loadRegularGhost(new Blinky(currentPosition)); break;
+            case ' ': loadEmptySpace(new EmptySpace(currentPosition)); break;
             default: break;
         }
     }
@@ -93,13 +96,17 @@ public class FileArenaLoader extends ArenaLoader {
     @Override
     protected void loadObstacle(Obstacle obstacle) {
         this.arena.addObstacle(obstacle);
+        this.addToGrid(obstacle);
     }
 
     @Override
     protected void loadPacmanAt(Position position) {
-        this.arena.setPacman(new Pacman(position));
+        Pacman pacman = new Pacman(position);
+        this.arena.setPacman(pacman);
 
-        setPacmanStartPosition(position);
+        this.addToGrid(pacman);
+
+        this.setPacmanStartPosition(position);
     }
 
     @Override
@@ -110,10 +117,21 @@ public class FileArenaLoader extends ArenaLoader {
     @Override
     protected void loadRegularGhost(RegularGhost ghost) {
         this.arena.addRegularGhost(ghost);
+        this.addToGrid(ghost);
     }
 
     @Override
     protected void loadFixedEdible(FixedEdible fixedEdible) {
         this.arena.getGeneralFixedEdibleList().add(fixedEdible);
+        this.addToGrid(fixedEdible);
+    }
+
+    private void addToGrid(Entity entity) {
+        this.arena.getGameGrid().get(entity.getPosition().getY() - 1).add(entity);
+    }
+
+    private void loadEmptySpace(EmptySpace emptySpace) {
+        this.addToGrid(emptySpace);
+        this.arena.incrementGhostHouseSize();
     }
 }
