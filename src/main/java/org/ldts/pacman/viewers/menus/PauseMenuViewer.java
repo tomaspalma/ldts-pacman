@@ -17,7 +17,7 @@ public class PauseMenuViewer extends Viewer<PauseMenu> {
 
         for (int i = 0; i < getModel().getNumberOptions(); i++) {
             if (i == getModel().getCurrentOption())
-                gui.writeToScreen(new Position(5, 9 + i), getModel().getOption(i), TextColor.ANSI.YELLOW);
+                gui.writeToScreen(new Position(5, 9 + i), getModel().getOption(i), TextColor.ANSI.GREEN_BRIGHT);
             else
                 gui.writeToScreen(new Position(5, 9 + i), getModel().getOption(i), TextColor.ANSI.WHITE);
         }
