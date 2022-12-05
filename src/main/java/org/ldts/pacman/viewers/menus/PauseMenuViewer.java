@@ -13,13 +13,13 @@ public class PauseMenuViewer extends Viewer<PauseMenu> {
 
     @Override
     public void drawEntities(GUI gui) {
-        gui.writeToScreen(new Position(5, 5), "Pause", TextColor.ANSI.WHITE);
+        gui.writeToScreen(new Position(8, 5), "Pause", TextColor.ANSI.WHITE);
 
         for (int i = 0; i < getModel().getNumberOptions(); i++) {
             if (i == getModel().getCurrentOption())
-                gui.writeToScreen(new Position(5, 7 + i), getModel().getOption(i), TextColor.ANSI.YELLOW);
+                gui.writeToScreen(new Position(5, 9 + i), getModel().getOption(i), TextColor.ANSI.YELLOW);
             else
-                gui.writeToScreen(new Position(5, 7 + i), getModel().getOption(i), TextColor.ANSI.WHITE);
+                gui.writeToScreen(new Position(5, 9 + i), getModel().getOption(i), TextColor.ANSI.WHITE);
         }
     }
 }
