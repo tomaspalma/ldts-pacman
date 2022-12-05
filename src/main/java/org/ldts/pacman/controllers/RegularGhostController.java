@@ -27,9 +27,15 @@ public class RegularGhostController extends Controller<Arena> {
 
     private void executeRegularGhostAction(RegularGhost regularGhost) {
         switch(regularGhost.getState()) {
-            case FRIGHTENED_PHASE -> regularGhost.getFrightenedStrategy().execute();
-            case SCATTERING_PHASE -> regularGhost.getScatterStrategy().execute();
-            case CHASING_PHASE -> regularGhost.getChaseStrategy().execute(regularGhost);
+            case FRIGHTENED_PHASE:
+                regularGhost.getFrightenedStrategy().execute();
+                break;
+            case SCATTERING_PHASE:
+                regularGhost.getScatterStrategy().execute();
+                break;
+            case CHASING_PHASE:
+                regularGhost.getChaseStrategy().execute(regularGhost);
+                break;
         }
     }
 }
