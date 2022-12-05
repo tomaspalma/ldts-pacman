@@ -14,11 +14,11 @@ public class MainMenuViewer extends Viewer<MainMenu> {
 
     @Override
     public void drawEntities(GUI gui) {
-        gui.writeToScreen(new Position(5, 5), "P A C M A N", TextColor.ANSI.WHITE);
+        gui.writeToScreen(new Position(5, 5), "P A C M A N", TextColor.ANSI.YELLOW_BRIGHT);
 
         for (int i = 0; i < getModel().getNumberOptions(); i++) {
             if (i == getModel().getCurrentOption())
-                gui.writeToScreen(new Position(8, 9+ i), getModel().getOption(i), TextColor.ANSI.YELLOW);
+                gui.writeToScreen(new Position(8, 9+ i), getModel().getOption(i), TextColor.ANSI.GREEN_BRIGHT);
             else
                 gui.writeToScreen(new Position(8, 9 + i), getModel().getOption(i), TextColor.ANSI.WHITE);
         }
