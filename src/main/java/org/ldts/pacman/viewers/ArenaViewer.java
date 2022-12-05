@@ -5,7 +5,6 @@ import org.ldts.pacman.gui.GUI;
 import org.ldts.pacman.models.*;
 
 import java.io.IOException;
-import java.util.List;
 
 public class ArenaViewer extends Viewer<Arena> {
     public ArenaViewer(Arena arena) {

@@ -22,9 +22,6 @@ public class GhostDirectionRight extends GhostDirection {
 
         result.removeIf(position -> position.isInvalidOnTheContextOf(ghost));
 
-        if(result == null) {
-            System.out.println("cummy whammy");
-        }
         return result;
     }
 

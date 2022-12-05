@@ -11,10 +11,10 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class Game {
-    private GUI gui;
+    private final GUI gui;
     private State currentState;
-    private int width;
-    private int height;
+    private final int width;
+    private final int height;
 
     public void setState(State state) {
         this.currentState = state;

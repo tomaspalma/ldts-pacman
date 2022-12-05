@@ -3,7 +3,7 @@ package org.ldts.pacman.models;
 import java.util.List;
 
 public abstract class GhostDirection {
-    protected Ghost ghost;
+    protected final Ghost ghost;
 
     public GhostDirection(Ghost ghost) {
         this.ghost = ghost;

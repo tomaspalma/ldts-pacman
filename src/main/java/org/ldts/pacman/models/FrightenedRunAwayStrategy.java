@@ -1,7 +1,6 @@
 package org.ldts.pacman.models;
 
 import java.util.List;
-import java.util.Objects;
 
 public class FrightenedRunAwayStrategy implements FrightenedStrategy {
 

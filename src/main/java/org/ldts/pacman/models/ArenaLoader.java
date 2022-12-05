@@ -3,7 +3,7 @@ package org.ldts.pacman.models;
 import java.io.IOException;
 
 public abstract class ArenaLoader {
-    protected Arena arena;
+    protected final Arena arena;
 
     protected ArenaLoader(Arena arena) {
         this.arena = arena;

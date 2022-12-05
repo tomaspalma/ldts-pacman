@@ -1,7 +1,7 @@
 package org.ldts.pacman.models;
 
 public abstract class GhostState {
-    Ghost affectedGhost;
+    final Ghost affectedGhost;
 
     public GhostState(Ghost ghost) {
        this.affectedGhost = ghost;

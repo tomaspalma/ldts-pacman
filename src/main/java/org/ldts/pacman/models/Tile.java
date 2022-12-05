@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Tile {
-    private List<Entity> childrenEntities;
-    private Position position;
+    private final List<Entity> childrenEntities;
+    private final Position position;
 
     public Tile(Position position) {
         this.childrenEntities = new ArrayList<>();

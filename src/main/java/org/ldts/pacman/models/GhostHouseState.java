@@ -1,7 +1,5 @@
 package org.ldts.pacman.models;
 
-import java.util.List;
-
 public class GhostHouseState extends GhostState {
     public GhostHouseState(Ghost ghost) {
         super(ghost);

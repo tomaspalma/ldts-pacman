@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.util.List;
 
 public class RegularGhostController extends Controller<Arena> {
-    private List<RegularGhost> regularGhostsToControl;
-    private ArenaController parentController;
+    private final List<RegularGhost> regularGhostsToControl;
+    private final ArenaController parentController;
     private int numberOfSteps = 0;
     public RegularGhostController(ArenaController parentController, Arena model) {
         super(model);

@@ -1,26 +1,19 @@
 package org.ldts.pacman.models;
 
-import com.googlecode.lanterna.TextColor;
-import com.googlecode.lanterna.TextColor.ANSI;
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 // Ler o mapa e carregar as entidades respetivas para a lista da arena
 public class FileArenaLoader extends ArenaLoader {
     private final String mapToLoad;
-    private int width;
-    private int height;
-    private URL mapResource;
-    private BufferedReader mapFileReader;
+    private final int width;
+    private final int height;
+    private final URL mapResource;
+    private final BufferedReader mapFileReader;
 
     public FileArenaLoader(Arena arena, String mapToLoad) throws FileNotFoundException {
         super(arena);
@@ -28,6 +21,8 @@ public class FileArenaLoader extends ArenaLoader {
         this.width = 20;
         this.height = 20;
         this.mapResource = getClass().getClassLoader().getResource(mapToLoad);
+        assert mapResource != null;
+        assert mapResource != null;
         this.mapFileReader = new BufferedReader(new FileReader(mapResource.getFile()));
     }
 

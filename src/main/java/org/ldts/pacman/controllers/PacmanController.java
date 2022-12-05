@@ -4,14 +4,12 @@ import org.ldts.pacman.Game;
 import org.ldts.pacman.models.*;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 public class PacmanController extends Controller<Arena> {
-    private GameActions.ControlActions lastAction = GameActions.ControlActions.MOVE_LEFT;
     private String wantedOrientation = "LEFT";
     // Provavelmente também poderemos adicionar uma nova classe chamada SubController para o pacman e o regular ghost
-    private ArenaController parentController;
-    private Pacman pacman;
+    private final ArenaController parentController;
+    private final Pacman pacman;
 
     public PacmanController(ArenaController parentController, Arena model) {
         super(model);

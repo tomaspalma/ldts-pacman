@@ -7,7 +7,7 @@ public class Position {
     // Para os comparar utilizar um epsilon. Exemplo:
     private final int x;
     private final int y;
-    private Arena arena;
+    private final Arena arena;
 
     public Position(int x, int y, Arena arena) {
         this.x = x;
