@@ -40,11 +40,6 @@ public class RegularGhostController extends Controller<Arena> {
     }
 
     private void moveGhost(Ghost ghost, Position newPosition) {
-        try {
-            System.out.println(newPosition.getX() + "," + newPosition.getY());
-        } catch(Exception e) {
-            System.out.println("WE ARE FUCKING FUCKED NIGGAS");
-        }
         int ghostX = ghost.getPosition().getX();
         int ghostY = ghost.getPosition().getY();
         

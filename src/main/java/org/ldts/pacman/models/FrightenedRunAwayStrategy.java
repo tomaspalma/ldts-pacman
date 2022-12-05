@@ -18,10 +18,6 @@ public class FrightenedRunAwayStrategy implements FrightenedStrategy {
 
         int chosenPositionIndex = (int)Math.floor(Math.random() * (possiblePositions.size() - 1 - 0 + 1) + 0);
 
-        if(possiblePositions.get(chosenPositionIndex) == null) {
-            System.out.println("fsdfhjuskdfhsjkh");
-        }
-
         return possiblePositions.get(chosenPositionIndex);
     }
 }

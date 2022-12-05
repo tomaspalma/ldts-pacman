@@ -129,6 +129,7 @@ public class PacmanController extends Controller<Arena> {
         switch(ghost.getCollisionWithPacmanResult()) {
             case KILL_GHOST: parentController.getRegularGhostController().killGhost(ghost); break;
             case KILL_PACMAN: parentController.processPacmanLoseLife(); break;
+            default: break;
         }
     }
 
