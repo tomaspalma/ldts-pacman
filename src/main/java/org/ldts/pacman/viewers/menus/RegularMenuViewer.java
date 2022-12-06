@@ -17,9 +17,9 @@ public class RegularMenuViewer extends Viewer<Menu> {
 
         for (int i = 0; i < getModel().getNumberOptions(); i++) {
             if (i == getModel().getCurrentNumber())
-                gui.writeToScreen(new Position(5, 9 + i), getModel().getOption(i).getMessage(), TextColor.ANSI.GREEN_BRIGHT);
+                gui.writeToScreen(new Position(8, 9+  i), getModel().getOption(i).getMessage(), TextColor.ANSI.GREEN_BRIGHT);
             else
-                gui.writeToScreen(new Position(5, 9 + i), getModel().getOption(i).getMessage(), TextColor.ANSI.WHITE);
+                gui.writeToScreen(new Position(8, 9+  i), getModel().getOption(i).getMessage(), TextColor.ANSI.WHITE);
         }
     }
 }

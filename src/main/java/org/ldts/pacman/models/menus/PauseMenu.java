@@ -12,8 +12,8 @@ public class PauseMenu extends Menu {
     private final ArenaState currentArenaState;
 
     public PauseMenu(ArenaState currentArenaState) {
-        this.title = "Pause";
-        this.color = TextColor.ANSI.WHITE;
+        this.title = "P a u s e";
+        this.color = TextColor.ANSI.YELLOW_BRIGHT;
         this.options = Arrays.asList(new ResumeOption("Resume"), new GoToMainMenuOption("Main Menu"), new ExitOption("Exit"));
         this.currentArenaState = currentArenaState;
     }
