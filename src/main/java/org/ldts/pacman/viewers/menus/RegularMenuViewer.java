@@ -3,17 +3,17 @@ package org.ldts.pacman.viewers.menus;
 import com.googlecode.lanterna.TextColor;
 import org.ldts.pacman.gui.GUI;
 import org.ldts.pacman.models.Position;
-import org.ldts.pacman.models.menus.GameOverMenu;
+import org.ldts.pacman.models.menus.Menu;
 import org.ldts.pacman.viewers.Viewer;
 
-public class GameOverMenuViewer extends Viewer<GameOverMenu> {
-    public GameOverMenuViewer(GameOverMenu model) {
+public class RegularMenuViewer extends Viewer<Menu> {
+    public RegularMenuViewer(Menu model) {
         super(model);
     }
 
     @Override
-    public void drawEntities(GUI gui) {
-        gui.writeToScreen(new Position(5, 5), getModel().getMessage(), TextColor.ANSI.WHITE);
+    protected void drawEntities(GUI gui) {
+        gui.writeToScreen(new Position(5, 5), getModel().getTitle(), getModel().getColor());
 
         for (int i = 0; i < getModel().getNumberOptions(); i++) {
             if (i == getModel().getCurrentNumber())

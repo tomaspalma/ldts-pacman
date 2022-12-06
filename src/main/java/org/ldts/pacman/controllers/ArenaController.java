@@ -6,8 +6,8 @@ import org.ldts.pacman.models.GameActions;
 import org.ldts.pacman.models.menus.GameOverMenu;
 import org.ldts.pacman.models.menus.PauseMenu;
 import org.ldts.pacman.states.ArenaState;
-import org.ldts.pacman.states.menus.GameOverState;
 import org.ldts.pacman.states.menus.PauseMenuState;
+import org.ldts.pacman.states.menus.RegularMenuState;
 
 import java.io.IOException;
 
@@ -24,7 +24,7 @@ public class ArenaController extends Controller<Arena> {
 
     @Override
     public void step(Game game, GameActions.ControlActions action, long time) throws IOException {
-        if(getModel().getFixedEdibles().isEmpty()) game.setState(new GameOverState(new GameOverMenu("win")));
+        if(getModel().getFixedEdibles().isEmpty()) game.setState(new RegularMenuState(new GameOverMenu("win")));
 
         switch(action) {
             case EXIT: game.setState(null); break;

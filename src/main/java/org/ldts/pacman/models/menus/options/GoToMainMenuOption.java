@@ -3,9 +3,7 @@ package org.ldts.pacman.models.menus.options;
 import org.ldts.pacman.Game;
 import org.ldts.pacman.models.menus.MainMenu;
 import org.ldts.pacman.states.State;
-import org.ldts.pacman.states.menus.MainMenuState;
-
-import java.io.IOException;
+import org.ldts.pacman.states.menus.RegularMenuState;
 
 public class GoToMainMenuOption extends Option {
     public GoToMainMenuOption(String message) {
@@ -14,6 +12,6 @@ public class GoToMainMenuOption extends Option {
 
     @Override
     public void select(Game game, State state) {
-        game.setState(new MainMenuState(new MainMenu()));
+        game.setState(new RegularMenuState(new MainMenu()));
     }
 }

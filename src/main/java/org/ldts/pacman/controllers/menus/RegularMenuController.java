@@ -2,17 +2,13 @@ package org.ldts.pacman.controllers.menus;
 
 import org.ldts.pacman.Game;
 import org.ldts.pacman.controllers.Controller;
-import org.ldts.pacman.models.Arena;
 import org.ldts.pacman.models.GameActions;
-import org.ldts.pacman.models.menus.GameOverMenu;
-import org.ldts.pacman.models.menus.MainMenu;
-import org.ldts.pacman.states.ArenaState;
-import org.ldts.pacman.states.menus.MainMenuState;
+import org.ldts.pacman.models.menus.Menu;
 
 import java.io.IOException;
 
-public class GameOverMenuController extends Controller<GameOverMenu> {
-    public GameOverMenuController(GameOverMenu model) {
+public class RegularMenuController extends Controller<Menu> {
+    public RegularMenuController(Menu model) {
         super(model);
     }
 
