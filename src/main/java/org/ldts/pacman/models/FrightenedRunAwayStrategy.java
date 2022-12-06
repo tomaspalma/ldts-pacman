@@ -16,7 +16,7 @@ public class FrightenedRunAwayStrategy implements FrightenedStrategy {
 
         if(possiblePositions.isEmpty()) return ghost.getPosition();
 
-        int chosenPositionIndex = (int)Math.floor(Math.random() * (possiblePositions.size() - 1 - 0 + 1) + 0);
+        int chosenPositionIndex = (int)Math.floor(Math.random() * (possiblePositions.size() - 1 + 1) + 0);
 
         return possiblePositions.get(chosenPositionIndex);
     }

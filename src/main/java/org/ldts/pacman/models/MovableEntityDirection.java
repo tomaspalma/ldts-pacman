@@ -1,16 +1,36 @@
 package org.ldts.pacman.models;
 
+import java.util.List;
+
 public abstract class MovableEntityDirection {
     protected final MovableEntity movableEntity;
-    protected final int movableEntityX;
-    protected final int movableEntityY;
     protected final Arena movableEntityArena;
 
     public MovableEntityDirection(MovableEntity movableEntity) {
         this.movableEntity = movableEntity;
-        movableEntityX = movableEntity.getPosition().getX();
-        movableEntityY = movableEntity.getPosition().getY();
         movableEntityArena = movableEntity.getArena();
+    }
+    public abstract List<Position> getPossiblePositionsToMove();
+
+    public MovableEntityDirection generateNextDirectionAfterChangeTo(Position nextPosition) {
+        boolean movedToLeft = this.movableEntity.position.getX() > nextPosition.getX();
+        boolean movedToRight = this.movableEntity.position.getX() < nextPosition.getX();
+        boolean movedUp = this.movableEntity.position.getY() > nextPosition.getY();
+        boolean movedDown = this.movableEntity.position.getY() < nextPosition.getY();
+
+        boolean notAlreadyInLeft = !(this.movableEntity.getCurrentDirection() instanceof GhostDirectionLeft);
+        boolean notAlreadyInRight = !(this.movableEntity.getCurrentDirection() instanceof GhostDirectionRight);
+        boolean notAlreadyUp = !(this.movableEntity.getCurrentDirection() instanceof GhostDirectionUp);
+        boolean notAlreadyDown = !(this.movableEntity.getCurrentDirection() instanceof GhostDirectionDown);
+
+        if (movedToLeft && notAlreadyInLeft) return new GhostDirectionLeft((Ghost) this.movableEntity);
+        if (movedToRight && notAlreadyInRight) return new GhostDirectionRight((Ghost) this.movableEntity);
+        if (movedUp && notAlreadyUp) return new GhostDirectionUp((Ghost) this.movableEntity);
+        if (movedDown && notAlreadyDown) {
+            return new GhostDirectionDown((Ghost) this.movableEntity);
+        }
+
+        return this.movableEntity.getCurrentDirection();
     }
 
     /*
@@ -19,18 +39,18 @@ public abstract class MovableEntityDirection {
         Position downPosition = new Position(ghostX, ghostY + 1, ghostArena);*/
 
     public Position getPossiblePositionToMoveLeft() {
-        return new Position(movableEntityX - 1, movableEntityY, movableEntity.getArena());
+        return new Position(movableEntity.getPosition().getX() - 1, movableEntity.getPosition().getY(), movableEntity.getArena());
     }
 
     public Position getPossiblePositionToMoveRight() {
-        return new Position(movableEntityX + 1, movableEntityY, movableEntity.getArena());
+        return new Position(movableEntity.getPosition().getX() + 1, movableEntity.getPosition().getY(), movableEntity.getArena());
     }
 
     public Position getPossiblePositionToMoveUp() {
-        return new Position(movableEntityX, movableEntityY - 1, movableEntity.getArena());
+        return new Position(movableEntity.getPosition().getX(), movableEntity.getPosition().getY() - 1, movableEntity.getArena());
     }
 
     public Position getPossiblePositionToMoveDown() {
-        return new Position(movableEntityX, movableEntityY + 1, movableEntity.getArena());
+        return new Position(movableEntity.getPosition().getX(), movableEntity.getPosition().getY() + 1, movableEntity.getArena());
     }
 }

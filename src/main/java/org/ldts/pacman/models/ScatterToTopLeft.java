@@ -11,7 +11,7 @@ public class ScatterToTopLeft implements ScatterStrategy {
     @Override
     public Position getNextPosition(Ghost ghost) {
         // TODO Auto-generated method stub
-        return null;
+        return new Position(4, 4, ghost.getArena());
     }
     
 }

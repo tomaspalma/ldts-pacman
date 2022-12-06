@@ -11,7 +11,7 @@ public class RandomChaseStrategy implements ChaseStrategy {
     @Override
     public Position getNextPosition(Ghost ghost) {
         // TODO Auto-generated method stub
-        return null;
+        return new Position(5, 5, ghost.getArena());
     }
     
 }

@@ -48,6 +48,7 @@ public class PacmanController extends Controller<Arena> {
         if(!getModel().isObstacleAt(newPacmanPosition)) {
             getModel().getPacman().changeOrientation(newPacmanOrientation);
         }
+
         wantedOrientation = newPacmanOrientation;
     }
 

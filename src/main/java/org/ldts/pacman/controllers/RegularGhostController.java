@@ -43,13 +43,13 @@ public class RegularGhostController extends Controller<Arena> {
         int ghostX = ghost.getPosition().getX();
         int ghostY = ghost.getPosition().getY();
 
-        System.out.println(ghost.getCurrentState().getClass());
-        
         getModel().getGameGrid().get(ghostY - 1).get(ghostX).removeChild(ghost);
         getModel().getGameGrid().get(newPosition.getY() - 1).get(newPosition.getX()).addChild(ghost);
 
         ghost.setCurrentDirectionTo(ghost.getCurrentDirection().generateNextDirectionAfterChangeTo(newPosition));
         ghost.setPosition(newPosition);
+
+        if(ghost.getPosition() == getModel().getPacman().getPosition()) parentController.processPacmanLoseLife();
     }
 
     public void actionBasedOnCollisionResult(GameActions.GhostCollisionWithPacman result) {

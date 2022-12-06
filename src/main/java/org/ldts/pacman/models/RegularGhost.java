@@ -14,7 +14,7 @@ public abstract class RegularGhost extends Ghost implements GameObserver {
         this.startPosition = new Position(position.getX(), position.getY(), this.position.getArena());
         this.drawSymbol = "I";
         this.frightenedStrategy = new FrightenedRunAwayStrategy();
-        this.previousState = new FrightenedState(this);
+        this.previousState = new ChasingState(this);
         this.currentState = new ChasingState(this);
     }
 

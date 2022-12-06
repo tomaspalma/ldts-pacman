@@ -79,10 +79,10 @@ public class Position {
             .containsFixedEdible();
     }
 
-    public boolean isInvalidOnTheContextOf(Ghost ghost) {
-        return this.isOutOfBounds() || this.isOnPacmanPosition() 
-            || this.isOnSomeObstaclePosition()
-            || (!ghost.isOnGhostHouseState() && this.isOnGatePosition());
+    public boolean isInvalidTo(MovableEntity movableEntity) {
+        boolean isAliveGhostAndOnHouseGate = movableEntity instanceof Ghost && this.isOnGatePosition();
+
+        return this.isOutOfBounds() || this.isOnSomeObstaclePosition() || isAliveGhostAndOnHouseGate;
     }
 
     @Override

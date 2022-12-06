@@ -7,18 +7,9 @@ public abstract class Ghost extends MovableEntity {
 
     protected GhostState previousState;
     protected GhostState currentState;
-    protected MovableEntityDirection currentDirection;
 
     public GhostState getPreviousState() {
         return previousState;
-    }
-
-    public GhostDirection getCurrentDirection() {
-        return (GhostDirection) currentDirection;
-    }
-
-    public void setCurrentDirectionTo(GhostDirection direction) {
-        this.currentDirection = direction;
     }
 
     public ChaseStrategy getChaseStrategy() {

@@ -19,6 +19,6 @@ public class DeadState extends GhostState {
 
     @Override
     public Position getNextPosition() {
-        return new Position(0, 0, this.affectedGhost.getPosition().getArena());
+        return new Position(3, 3, this.affectedGhost.getPosition().getArena());
     }
 }
