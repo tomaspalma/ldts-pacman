@@ -100,19 +100,20 @@ public class PacmanController extends Controller<Arena> {
     private void switchTile(Position position) {
         int pacmanX = getModel().getPacman().getPosition().getX();
         int pacmanY = getModel().getPacman().getPosition().getY();
+
+        Tile currentTile = getModel().getGameGrid().get(pacmanY - 1).get(pacmanX);
+        Tile nextTile = getModel().getGameGrid().get(position.getY() - 1).get(position.getX());
         
-        getModel().getGameGrid().get(pacmanY - 1).get(pacmanX).removeChild(pacman);
-        getModel().getGameGrid().get(position.getY() - 1).get(position.getX()).addChild(pacman);
+        currentTile.removeChild(pacman);
+        nextTile.put(pacman);
     }
 
     private void movePacman(Position position) {
 
         if (!position.isOnSomeObstaclePosition()) {
-            this.switchTile(position);
-
             pacman.setPosition(position);
 
-            controlNotOutOfBounds(position);
+            this.switchTile(position);
 
             if(position.isOnFixedEdiblePosition()) {
                 eatEdibleAt(position);
@@ -132,14 +133,6 @@ public class PacmanController extends Controller<Arena> {
             case KILL_PACMAN: parentController.processPacmanLoseLife(); break;
             default: break;
         }
-    }
-
-    private void controlNotOutOfBounds(Position position) {
-        int x = position.getY();
-        int y = position.getY();
-        
-        if(x < 0) pacman.setPosition(new Position(getModel().getWidth() - 1, y, getModel()));
-        else if(x > getModel().getWidth()) pacman.setPosition(new Position(3, y, getModel()));
     }
 
     private void eatEdibleAt(Position position) {

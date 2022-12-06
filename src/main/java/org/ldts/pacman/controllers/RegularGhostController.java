@@ -44,7 +44,7 @@ public class RegularGhostController extends Controller<Arena> {
         int ghostY = ghost.getPosition().getY();
 
         getModel().getGameGrid().get(ghostY - 1).get(ghostX).removeChild(ghost);
-        getModel().getGameGrid().get(newPosition.getY() - 1).get(newPosition.getX()).addChild(ghost);
+        getModel().getGameGrid().get(newPosition.getY() - 1).get(newPosition.getX()).put(ghost);
 
         ghost.setCurrentDirectionTo(ghost.getCurrentDirection().generateNextDirectionAfterChangeTo(newPosition));
         ghost.setPosition(newPosition);

@@ -1,11 +1,13 @@
 package org.ldts.pacman.models;
 
+import javax.swing.plaf.metal.MetalIconFactory;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 // Ler o mapa e carregar as entidades respetivas para a lista da arena
 public class FileArenaLoader extends ArenaLoader {
@@ -14,6 +16,7 @@ public class FileArenaLoader extends ArenaLoader {
     private final int height;
     private final URL mapResource;
     private final BufferedReader mapFileReader;
+    private final HashMap<Character, TeletransporterTile> possibleLetterToCorrespondence = new HashMap<>();
 
     public FileArenaLoader(Arena arena, String mapToLoad) throws FileNotFoundException {
         super(arena);
@@ -21,7 +24,6 @@ public class FileArenaLoader extends ArenaLoader {
         this.width = 20;
         this.height = 20;
         this.mapResource = getClass().getClassLoader().getResource(mapToLoad);
-        assert mapResource != null;
         assert mapResource != null;
         this.mapFileReader = new BufferedReader(new FileReader(mapResource.getFile()));
     }
@@ -86,14 +88,34 @@ public class FileArenaLoader extends ArenaLoader {
             case 'b': loadRegularGhost(new Blinky(currentPosition, this.arena)); break;
             case 'G': loadGate(new GhostHouseGate(currentPosition, this.arena)); break;
             case ' ': loadEmptySpace(new EmptySpace(currentPosition, this.arena)); break;
-            default: break;
+            default: addTeletransporterToMap(character, currentPosition); break;
+        }
+    }
+
+    private void addTeletransporterToMap(Character character, Position positionToAddTo) {
+        boolean notYetFoundTeletransporterPair = !(possibleLetterToCorrespondence.containsKey(character));
+
+        if(notYetFoundTeletransporterPair) {
+            TeletransporterTile firstElementOfPair = new TeletransporterTile(positionToAddTo, this.arena);
+            possibleLetterToCorrespondence.put(character, firstElementOfPair);
+            this.arena.getGameGrid().get(positionToAddTo.getY() - 1).add(firstElementOfPair);
+        } else {
+            TeletransporterTile firstElementOfPair = possibleLetterToCorrespondence.get(character);
+            TeletransporterTile secondElementOfPair = new TeletransporterTile(positionToAddTo, this.arena);
+
+            firstElementOfPair.setExitTile(secondElementOfPair);
+            secondElementOfPair.setExitTile(firstElementOfPair);
+
+            this.arena.getGameGrid().get(positionToAddTo.getY() - 1).add(secondElementOfPair);
+
+            possibleLetterToCorrespondence.remove(character);
         }
     }
 
     @Override
     protected void loadObstacle(Obstacle obstacle) {
         this.arena.addObstacle(obstacle);
-        this.addToGrid(obstacle);
+        this.addEntityToGrid(obstacle);
     }
 
     @Override
@@ -101,7 +123,7 @@ public class FileArenaLoader extends ArenaLoader {
         Pacman pacman = new Pacman(position, this.arena);
         this.arena.setPacman(pacman);
 
-        this.addToGrid(pacman);
+        this.addEntityToGrid(pacman);
 
         this.setPacmanStartPosition(position);
     }
@@ -114,27 +136,27 @@ public class FileArenaLoader extends ArenaLoader {
     @Override
     protected void loadRegularGhost(RegularGhost ghost) {
         this.arena.addRegularGhost(ghost);
-        this.addToGrid(ghost);
+        this.addEntityToGrid(ghost);
     }
 
     @Override
     protected void loadFixedEdible(FixedEdible fixedEdible) {
         this.arena.getGeneralFixedEdibleList().add(fixedEdible);
-        this.addToGrid(fixedEdible);
+        this.addEntityToGrid(fixedEdible);
     }
 
-    private void addToGrid(Entity entity) {
-        this.arena.gameGrid.get(entity.getPosition().getY() - 1).add(new Tile(entity.getPosition(), this.arena));
+    private void addEntityToGrid(Entity entity) {
+        this.arena.gameGrid.get(entity.getPosition().getY() - 1).add(new RegularTile(entity.getPosition(), this.arena));
         this.arena.gameGrid.get(entity.getPosition().getY() - 1).get(entity.getPosition().getX())
-            .addChild(entity);
+            .put(entity);
     }
 
     private void loadEmptySpace(EmptySpace emptySpace) {
-        this.addToGrid(emptySpace);
+        this.addEntityToGrid(emptySpace);
         this.arena.incrementGhostHouseSize();
     }
 
     private void loadGate(GhostHouseGate gate) {
-        this.addToGrid(gate);
+        this.addEntityToGrid(gate);
     }
 }

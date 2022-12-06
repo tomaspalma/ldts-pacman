@@ -111,7 +111,9 @@ public class Arena {
     }
 
     public void removeFromGameGridAt(Position position, Entity entity) {
-        gameGrid.get(position.getY() - 1).get(position.getX()).removeChild(entity);
+        RegularTile regularTile = (RegularTile) gameGrid.get(position.getY() - 1).get(position.getX());
+
+        regularTile.removeChild(entity);
     }
 
     public void addToGridAt(Position position) {

@@ -3,28 +3,27 @@ package org.ldts.pacman.models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tile {
-    private final List<Entity> childrenEntities;
-    private final Arena arena;
-    private final Position position;
+public abstract class Tile {
+    protected final Arena arena;
+    protected final Position position;
+    protected final List<Entity> childrenEntities;
 
     public Tile(Position position, Arena arena) {
-        this.childrenEntities = new ArrayList<>();
         this.position = position;
         this.arena = arena;
+        this.childrenEntities = new ArrayList<>();
     }
 
-    public List<Entity> getChildrenEntities() {
-        return this.childrenEntities;
+    public Position getPosition() {
+        return this.position;
     }
 
-    public void addChild(Entity child) {
-        this.childrenEntities.add(child);
+    public Arena getArena() {
+        return arena;
     }
 
     public void removeChild(Entity child) {
         childrenEntities.remove(child);
-        
         if(childrenEntities.isEmpty()) childrenEntities.add(new EmptySpace(position, arena));
     }
 
@@ -91,4 +90,6 @@ public class Tile {
 
         return null;
     }
+
+    public abstract void put(Entity child);
 }

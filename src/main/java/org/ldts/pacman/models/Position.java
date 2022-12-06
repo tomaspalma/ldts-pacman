@@ -5,8 +5,8 @@ import java.util.Objects;
 public class Position {
     // Atenção a comparar os valores de uma posição com outra por causa de serem números *floating point*
     // Para os comparar utilizar um epsilon. Exemplo:
-    private final int x;
-    private final int y;
+    private int x;
+    private int y;
     private final Arena arena;
 
     public Position(int x, int y, Arena arena) {
@@ -21,6 +21,14 @@ public class Position {
 
     public int getY() {
         return y;
+    }
+
+    public void setXTo(int x) {
+        this.x = x;
+    }
+
+    public void setYTo(int y) {
+        this.y = y;
     }
 
     public Arena getArena() {
@@ -55,28 +63,33 @@ public class Position {
     }
 
     public boolean isOnSomeGhostPosition() {
-        return this.arena.getGameGrid().get(this.y - 1).get(this.x)
-            .containsGhost();
+        Tile tile = this.arena.getGameGrid().get(this.y - 1).get(this.x);
+
+        return tile.containsGhost();
     }
 
     public boolean isOnSomeObstaclePosition() {
-        return this.arena.getGameGrid().get(this.y - 1).get(this.x)
-            .containsObstacle();
+        Tile tile = this.arena.getGameGrid().get(this.y - 1).get(this.x);
+
+        return tile.containsObstacle();
     }
 
     public boolean isOnGatePosition() {
-        return this.arena.getGameGrid().get(this.y - 1).get(this.x)
-            .containsGate();
+        Tile tile = this.arena.getGameGrid().get(this.y - 1).get(this.x);
+
+        return tile.containsGate();
     }
 
     public boolean isOnPacmanPosition() {
-        return this.arena.getGameGrid().get(this.y - 1).get(this.x)
-            .containsPacman();
+        Tile tile = this.arena.getGameGrid().get(this.y - 1).get(this.x);
+
+        return tile.containsPacman();
     }
 
     public boolean isOnFixedEdiblePosition() {
-        return this.arena.getGameGrid().get(this.y - 1).get(this.x)
-            .containsFixedEdible();
+        Tile tile = this.arena.getGameGrid().get(this.y - 1).get(this.x);
+
+        return tile.containsFixedEdible();
     }
 
     public boolean isInvalidTo(MovableEntity movableEntity) {
