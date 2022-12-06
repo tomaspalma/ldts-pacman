@@ -16,10 +16,10 @@ public class GameOverMenuViewer extends Viewer<GameOverMenu> {
         gui.writeToScreen(new Position(5, 5), getModel().getMessage(), TextColor.ANSI.WHITE);
 
         for (int i = 0; i < getModel().getNumberOptions(); i++) {
-            if (i == getModel().getCurrentOption())
-                gui.writeToScreen(new Position(5, 7 + i), getModel().getOption(i), TextColor.ANSI.YELLOW);
+            if (i == getModel().getCurrentNumber())
+                gui.writeToScreen(new Position(5, 9 + i), getModel().getOption(i).getMessage(), TextColor.ANSI.YELLOW);
             else
-                gui.writeToScreen(new Position(5, 7 + i), getModel().getOption(i), TextColor.ANSI.WHITE);
+                gui.writeToScreen(new Position(5, 9 + i), getModel().getOption(i).getMessage(), TextColor.ANSI.WHITE);
         }
     }
 }

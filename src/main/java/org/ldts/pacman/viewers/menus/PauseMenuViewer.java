@@ -16,10 +16,10 @@ public class PauseMenuViewer extends Viewer<PauseMenu> {
         gui.writeToScreen(new Position(8, 5), "Pause", TextColor.ANSI.WHITE);
 
         for (int i = 0; i < getModel().getNumberOptions(); i++) {
-            if (i == getModel().getCurrentOption())
-                gui.writeToScreen(new Position(5, 9 + i), getModel().getOption(i), TextColor.ANSI.GREEN_BRIGHT);
+            if (i == getModel().getCurrentNumber())
+                gui.writeToScreen(new Position(5, 9 + i), getModel().getOption(i).getMessage(), TextColor.ANSI.GREEN_BRIGHT);
             else
-                gui.writeToScreen(new Position(5, 9 + i), getModel().getOption(i), TextColor.ANSI.WHITE);
+                gui.writeToScreen(new Position(5, 9 + i), getModel().getOption(i).getMessage(), TextColor.ANSI.WHITE);
         }
     }
 }

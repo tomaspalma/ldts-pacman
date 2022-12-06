@@ -1,12 +1,13 @@
 package org.ldts.pacman.models.menus;
 
+import org.ldts.pacman.models.menus.options.Option;
+
 import java.util.List;
-import java.util.spi.ToolProvider;
 
 import static java.lang.Math.abs;
 
 public abstract class Menu {
-    protected List<String> options;
+    protected List<Option> options;
     protected int currentOption;
 
     protected Menu() {
@@ -25,11 +26,15 @@ public abstract class Menu {
         return options.size();
     }
 
-    public int getCurrentOption() {
+    public int getCurrentNumber() {
         return currentOption;
     }
 
-    public String getOption(int i) {
+    public Option getCurrentOption() {
+        return options.get(currentOption);
+    }
+
+    public Option getOption(int i) {
         return options.get(i);
     }
 }

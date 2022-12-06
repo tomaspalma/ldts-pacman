@@ -27,14 +27,7 @@ public class MainMenuController extends Controller<MainMenu> {
                 game.setState(null);
                 break;
             case SELECT:
-                switch (getModel().getCurrentOption()) {
-                    case 0:
-                        game.setState(new ArenaState(new Arena(21, 21, "maps/easy.txt")));
-                        break;
-                    case 1:
-                        game.setState(null);
-                        break;
-                }
+                getModel().getCurrentOption().select(game, null);
             default:
                 break;
         }
