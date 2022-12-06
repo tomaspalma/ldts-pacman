@@ -4,7 +4,6 @@ public class TeletransporterTile extends Tile {
     private Tile exitTile;
     public TeletransporterTile(Position position, Arena arena) {
         super(position, arena);
-        //TODO Auto-generated constructor stub
     }
 
     @Override
@@ -18,9 +17,7 @@ public class TeletransporterTile extends Tile {
     }
 
     private void teletransportToExitTile(MovableEntity child) {
-        System.out.println(child.getPosition().getX() + ", " + child.getPosition().getY());
         child.getPosition().setXTo(exitTile.getPosition().getX());
         child.getPosition().setYTo(exitTile.getPosition().getY());
-        System.out.println(child.getPosition().getX() + ", " + child.getPosition().getY());
     }
 }
