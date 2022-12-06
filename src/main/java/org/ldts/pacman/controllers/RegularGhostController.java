@@ -21,7 +21,7 @@ public class RegularGhostController extends Controller<Arena> {
         for(RegularGhost regularGhost: regularGhostsToControl) {
             if(stateChangedIn(regularGhost)) regularGhost.getCurrentState().applyChangesToGhost();
             
-            if(numberOfSteps > 3) {
+            if(numberOfSteps > 1) {
                 moveGhost(regularGhost, regularGhost.getCurrentState().getNextPosition());
                 numberOfSteps = 0;
             } else {
@@ -42,14 +42,14 @@ public class RegularGhostController extends Controller<Arena> {
     private void moveGhost(Ghost ghost, Position newPosition) {
         int ghostX = ghost.getPosition().getX();
         int ghostY = ghost.getPosition().getY();
-        
-        if(ghost.getCurrentState() instanceof FrightenedState) {
-            getModel().getGameGrid().get(ghostY - 1).get(ghostX).removeChild(ghost);            
-            getModel().getGameGrid().get(newPosition.getY() - 1).get(newPosition.getX()).addChild(ghost);
 
-            ghost.setCurrentDirectionTo(ghost.getCurrentDirection().generateNextDirectionAfterChangeTo(newPosition));
-            ghost.setPosition(newPosition);
-        }
+        System.out.println(ghost.getCurrentState().getClass());
+        
+        getModel().getGameGrid().get(ghostY - 1).get(ghostX).removeChild(ghost);
+        getModel().getGameGrid().get(newPosition.getY() - 1).get(newPosition.getX()).addChild(ghost);
+
+        ghost.setCurrentDirectionTo(ghost.getCurrentDirection().generateNextDirectionAfterChangeTo(newPosition));
+        ghost.setPosition(newPosition);
     }
 
     public void actionBasedOnCollisionResult(GameActions.GhostCollisionWithPacman result) {

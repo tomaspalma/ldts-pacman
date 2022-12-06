@@ -11,22 +11,18 @@ public class GhostDirectionUp extends GhostDirection {
 
     @Override
     public List<Position> getPossiblePositionsToMove() {
-        int ghostX = this.ghost.getPosition().getX();
-        int ghostY = this.ghost.getPosition().getY();
-        Arena ghostArena = this.ghost.getPosition().getArena();
-        
-        Position leftPosition = new Position(ghostX - 1, ghostY, ghostArena);
-        Position rightPosition = new Position(ghostX + 1, ghostY, ghostArena);
-        Position upPosition = new Position(ghostX, ghostY - 1, ghostArena);
+        Position leftPosition = new Position(movableEntityX - 1, movableEntityY, movableEntityArena);
+        Position rightPosition = new Position(movableEntityX + 1, movableEntityY, movableEntityArena);
+        Position upPosition = new Position(movableEntityX, movableEntityY - 1, movableEntityArena);
         List<Position> result = new ArrayList<>(Arrays.asList(leftPosition, rightPosition, upPosition));
 
-        result.removeIf(position -> position.isInvalidOnTheContextOf(ghost));
+        result.removeIf(position -> position.isInvalidOnTheContextOf((Ghost) movableEntity));
 
         return result;
     }
 
     @Override
     protected void turnAround() {
-        this.ghost.setCurrentDirectionTo(new GhostDirectionDown(this.ghost));
+        this.movableEntity.setCurrentDirectionTo(new GhostDirectionDown((Ghost) this.movableEntity));
     }
 }

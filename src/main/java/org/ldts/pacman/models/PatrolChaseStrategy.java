@@ -11,6 +11,6 @@ public class PatrolChaseStrategy implements ChaseStrategy {
     @Override
     public Position getNextPosition(Ghost ghost) {
         // TODO Auto-generated method stub
-        return new Position(0, 0, ghost.getPosition().getArena());
+        return new Position(5, 5, ghost.getPosition().getArena());
     }
 }

@@ -3,8 +3,8 @@ package org.ldts.pacman.models;
 import com.googlecode.lanterna.TextColor;
 
 public class Pinky extends RegularGhost {
-    protected Pinky(Position position) {
-        super(position);
+    protected Pinky(Position position, Arena arena) {
+        super(position, arena);
         this.color = TextColor.ANSI.WHITE; 
         this.chaseStrategy = new AmbushChaseStrategy();
         this.scatterStrategy = new ScatterToTopLeft();

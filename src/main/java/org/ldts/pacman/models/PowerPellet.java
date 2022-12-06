@@ -8,8 +8,8 @@ import java.util.List;
 public class PowerPellet extends FixedEdible implements GameObservable {
     private final List<GameObserver> observers = new ArrayList<>();
 
-    public PowerPellet(Position position) {
-        super(position);
+    public PowerPellet(Position position, Arena arena) {
+        super(position, arena);
         this.drawSymbol = "O";
         this.color = TextColor.ANSI.WHITE;
     }

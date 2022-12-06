@@ -75,16 +75,17 @@ public class FileArenaLoader extends ArenaLoader {
 
     private void addRespectiveElementOf(Character character, Position currentPosition) {
         switch(character) {
-            case 'W': loadObstacle(new Wall(currentPosition)); break;
+            case 'W': loadObstacle(new Wall(currentPosition, this.arena)); break;
             case 'P': loadPacmanAt(currentPosition); break;
-            case 'o': loadFixedEdible(new Pacdot(currentPosition)); break;
-            case 'O': loadFixedEdible(new PowerPellet(currentPosition)); break;
-            case 'C': loadFixedEdible(new Cherry(currentPosition)); break;
-            case 'p': loadRegularGhost(new Pinky(currentPosition)); break;
-            case 'c': loadRegularGhost(new Clyde(currentPosition)); break;
-            case 'i': loadRegularGhost(new Inky(currentPosition)); break;
-            case 'b': loadRegularGhost(new Blinky(currentPosition)); break;
-            case ' ': loadEmptySpace(new EmptySpace(currentPosition)); break;
+            case 'o': loadFixedEdible(new Pacdot(currentPosition, this.arena)); break;
+            case 'O': loadFixedEdible(new PowerPellet(currentPosition, this.arena)); break;
+            case 'C': loadFixedEdible(new Cherry(currentPosition, this.arena)); break;
+            case 'p': loadRegularGhost(new Pinky(currentPosition, this.arena)); break;
+            case 'c': loadRegularGhost(new Clyde(currentPosition, this.arena)); break;
+            case 'i': loadRegularGhost(new Inky(currentPosition, this.arena)); break;
+            case 'b': loadRegularGhost(new Blinky(currentPosition, this.arena)); break;
+            case 'G': loadGate(new GhostHouseGate(currentPosition, this.arena)); break;
+            case ' ': loadEmptySpace(new EmptySpace(currentPosition, this.arena)); break;
             default: break;
         }
     }
@@ -97,7 +98,7 @@ public class FileArenaLoader extends ArenaLoader {
 
     @Override
     protected void loadPacmanAt(Position position) {
-        Pacman pacman = new Pacman(position);
+        Pacman pacman = new Pacman(position, this.arena);
         this.arena.setPacman(pacman);
 
         this.addToGrid(pacman);
@@ -123,7 +124,7 @@ public class FileArenaLoader extends ArenaLoader {
     }
 
     private void addToGrid(Entity entity) {
-        this.arena.gameGrid.get(entity.getPosition().getY() - 1).add(new Tile(entity.getPosition()));
+        this.arena.gameGrid.get(entity.getPosition().getY() - 1).add(new Tile(entity.getPosition(), this.arena));
         this.arena.gameGrid.get(entity.getPosition().getY() - 1).get(entity.getPosition().getX())
             .addChild(entity);
     }
@@ -131,5 +132,9 @@ public class FileArenaLoader extends ArenaLoader {
     private void loadEmptySpace(EmptySpace emptySpace) {
         this.addToGrid(emptySpace);
         this.arena.incrementGhostHouseSize();
+    }
+
+    private void loadGate(GhostHouseGate gate) {
+        this.addToGrid(gate);
     }
 }

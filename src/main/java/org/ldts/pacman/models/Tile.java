@@ -5,11 +5,13 @@ import java.util.List;
 
 public class Tile {
     private final List<Entity> childrenEntities;
+    private final Arena arena;
     private final Position position;
 
-    public Tile(Position position) {
+    public Tile(Position position, Arena arena) {
         this.childrenEntities = new ArrayList<>();
         this.position = position;
+        this.arena = arena;
     }
 
     public List<Entity> getChildrenEntities() {
@@ -23,7 +25,7 @@ public class Tile {
     public void removeChild(Entity child) {
         childrenEntities.remove(child);
         
-        if(childrenEntities.isEmpty()) childrenEntities.add(new EmptySpace(position));
+        if(childrenEntities.isEmpty()) childrenEntities.add(new EmptySpace(position, arena));
     }
 
     public boolean containsFixedEdible() {

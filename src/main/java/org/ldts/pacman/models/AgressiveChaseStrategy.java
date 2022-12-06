@@ -1,5 +1,7 @@
 package org.ldts.pacman.models;
 
+import java.util.List;
+
 public class AgressiveChaseStrategy implements ChaseStrategy {
 
     @Override
@@ -10,8 +12,20 @@ public class AgressiveChaseStrategy implements ChaseStrategy {
 
     @Override
     public Position getNextPosition(Ghost ghost) {
-        // TODO Auto-generated method stub
-        return new Position(0, 0, ghost.getPosition().getArena());
+        Position pacmanPosition = ghost.getPosition().getArena().getPacman().getPosition();
+        List<Position> possibleGhostPositions = ghost.getCurrentDirection().getPossiblePositionsToMove();
+
+        double currentMinDirection = Double.MAX_VALUE;
+        Position closestPossiblePosition = null;
+
+        for(Position position: possibleGhostPositions) {
+            if(position.getDistanceTo(pacmanPosition) < currentMinDirection) {
+                currentMinDirection = position.getDistanceTo(pacmanPosition);
+                closestPossiblePosition = position;
+            }
+        }
+
+        return closestPossiblePosition;
     }
     
 }

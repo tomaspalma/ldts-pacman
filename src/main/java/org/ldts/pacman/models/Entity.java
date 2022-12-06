@@ -6,9 +6,11 @@ public abstract class Entity {
     protected String drawSymbol;
     protected TextColor.ANSI color;
     protected Position position;
+    protected final Arena arena;
 
-    protected Entity(Position position) {
+    protected Entity(Position position, Arena arena) {
         this.position = position;
+        this.arena = arena;
     }
 
     public Position getPosition() {
@@ -21,6 +23,10 @@ public abstract class Entity {
 
     public TextColor.ANSI getColor() {
         return this.color;
+    }
+
+    public Arena getArena() {
+        return this.arena;
     }
 
     public void setColor(TextColor.ANSI newColor) {

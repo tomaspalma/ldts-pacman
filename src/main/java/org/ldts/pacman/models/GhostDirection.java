@@ -2,11 +2,9 @@ package org.ldts.pacman.models;
 
 import java.util.List;
 
-public abstract class GhostDirection {
-    protected final Ghost ghost;
-
+public abstract class GhostDirection extends MovableEntityDirection {
     public GhostDirection(Ghost ghost) {
-        this.ghost = ghost;
+        super(ghost);
     }
 
     public abstract List<Position> getPossiblePositionsToMove();
@@ -14,21 +12,21 @@ public abstract class GhostDirection {
     protected abstract void turnAround();
 
     public GhostDirection generateNextDirectionAfterChangeTo(Position nextPosition) {
-        boolean movedToLeft = this.ghost.position.getX() > nextPosition.getX();
-        boolean movedToRight = this.ghost.position.getX() < nextPosition.getX();
-        boolean movedUp = this.ghost.position.getY() > nextPosition.getY();
-        boolean movedDown = this.ghost.position.getY() < nextPosition.getY();
+        boolean movedToLeft = this.movableEntity.position.getX() > nextPosition.getX();
+        boolean movedToRight = this.movableEntity.position.getX() < nextPosition.getX();
+        boolean movedUp = this.movableEntity.position.getY() > nextPosition.getY();
+        boolean movedDown = this.movableEntity.position.getY() < nextPosition.getY();
 
-        boolean notAlreadyInLeft = !(this.ghost.getCurrentDirection() instanceof GhostDirectionLeft);
-        boolean notAlreadyInRight = !(this.ghost.getCurrentDirection() instanceof GhostDirectionRight);
-        boolean notAlreadyUp = !(this.ghost.getCurrentDirection() instanceof GhostDirectionUp);
-        boolean notAlreadyDown = !(this.ghost.getCurrentDirection() instanceof GhostDirectionDown);
+        boolean notAlreadyInLeft = !(this.movableEntity.getCurrentDirection() instanceof GhostDirectionLeft);
+        boolean notAlreadyInRight = !(this.movableEntity.getCurrentDirection() instanceof GhostDirectionRight);
+        boolean notAlreadyUp = !(this.movableEntity.getCurrentDirection() instanceof GhostDirectionUp);
+        boolean notAlreadyDown = !(this.movableEntity.getCurrentDirection() instanceof GhostDirectionDown);
 
-        if (movedToLeft && notAlreadyInLeft) return new GhostDirectionLeft(this.ghost);
-        if (movedToRight && notAlreadyInRight) return new GhostDirectionRight(this.ghost);
-        if (movedUp && notAlreadyUp) return new GhostDirectionUp(this.ghost);
-        if (movedDown && notAlreadyDown) return new GhostDirectionDown(this.ghost);
+        if (movedToLeft && notAlreadyInLeft) return new GhostDirectionLeft((Ghost) this.movableEntity);
+        if (movedToRight && notAlreadyInRight) return new GhostDirectionRight((Ghost) this.movableEntity);
+        if (movedUp && notAlreadyUp) return new GhostDirectionUp((Ghost) this.movableEntity);
+        if (movedDown && notAlreadyDown) return new GhostDirectionDown((Ghost) this.movableEntity);
 
-        return this.ghost.getCurrentDirection();
+        return (GhostDirection) this.movableEntity.getCurrentDirection();
     }
 }

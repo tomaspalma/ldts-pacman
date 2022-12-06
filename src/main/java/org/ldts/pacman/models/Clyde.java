@@ -3,10 +3,10 @@ package org.ldts.pacman.models;
 import com.googlecode.lanterna.TextColor;
 
 public class Clyde extends RegularGhost {
-    protected Clyde(Position position) {
-        super(position);
+    protected Clyde(Position position, Arena arena) {
+        super(position, arena);
         this.color = TextColor.ANSI.YELLOW;
-        this.chaseStrategy = new AgressiveChaseStrategy();
+        this.chaseStrategy = new RandomChaseStrategy();
         this.scatterStrategy = new ScatterToBottomLeft();
         this.currentDirection = new GhostDirectionUp(this);
     }

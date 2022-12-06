@@ -7,14 +7,14 @@ public abstract class Ghost extends MovableEntity {
 
     protected GhostState previousState;
     protected GhostState currentState;
-    protected GhostDirection currentDirection;
+    protected MovableEntityDirection currentDirection;
 
     public GhostState getPreviousState() {
         return previousState;
     }
 
     public GhostDirection getCurrentDirection() {
-        return currentDirection;
+        return (GhostDirection) currentDirection;
     }
 
     public void setCurrentDirectionTo(GhostDirection direction) {
@@ -55,8 +55,8 @@ public abstract class Ghost extends MovableEntity {
 
     public abstract GameActions.GhostCollisionWithPacman getCollisionWithPacmanResult();
     
-    protected Ghost(Position position) {
-        super(position);
+    protected Ghost(Position position, Arena arena) {
+        super(position, arena);
     }
 
 }
