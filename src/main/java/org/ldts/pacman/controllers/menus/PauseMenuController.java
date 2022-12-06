@@ -24,6 +24,9 @@ public class PauseMenuController extends Controller<PauseMenu> {
             case EXIT:
                 game.setState(null);
                 break;
+            case SWITCH_TO_PAUSE_MENU:
+                game.setState(getModel().getArenaState());
+                break;
             case SELECT:
                 getModel().getCurrentOption().select(game, getModel().getArenaState());
                 break;
