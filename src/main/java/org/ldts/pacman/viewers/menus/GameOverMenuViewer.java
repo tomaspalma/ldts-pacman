@@ -17,7 +17,7 @@ public class GameOverMenuViewer extends Viewer<GameOverMenu> {
 
         for (int i = 0; i < getModel().getNumberOptions(); i++) {
             if (i == getModel().getCurrentNumber())
-                gui.writeToScreen(new Position(5, 9 + i), getModel().getOption(i).getMessage(), TextColor.ANSI.YELLOW);
+                gui.writeToScreen(new Position(5, 9 + i), getModel().getOption(i).getMessage(), TextColor.ANSI.GREEN_BRIGHT);
             else
                 gui.writeToScreen(new Position(5, 9 + i), getModel().getOption(i).getMessage(), TextColor.ANSI.WHITE);
         }
