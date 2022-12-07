@@ -10,8 +10,6 @@ public abstract class MovableEntityDirection {
         this.movableEntity = movableEntity;
         movableEntityArena = movableEntity.getArena();
     }
-    public abstract List<Position> getPossiblePositionsToMove();
-
     public MovableEntityDirection generateNextDirectionAfterChangeTo(Position nextPosition) {
         boolean movedToLeft = this.movableEntity.position.getX() > nextPosition.getX();
         boolean movedToRight = this.movableEntity.position.getX() < nextPosition.getX();
@@ -32,6 +30,8 @@ public abstract class MovableEntityDirection {
 
         return this.movableEntity.getCurrentDirection();
     }
+
+    public abstract String getDrawSymbol();
 
     /*
     * Position leftPosition = new Position(ghostX - 1, ghostY, ghostArena);

@@ -7,6 +7,13 @@ public abstract class GhostDirection extends MovableEntityDirection {
         super(ghost);
     }
 
+    @Override
+    public String getDrawSymbol() {
+       return this.movableEntity.getDrawSymbol();
+    }
+
+    public abstract  List<Position> getPossiblePositionsToMove();
+
     protected abstract void turnAround();
 
 }

@@ -6,7 +6,7 @@ import org.ldts.pacman.models.*;
 import java.io.IOException;
 
 public class PacmanController extends Controller<Arena> {
-    private String wantedOrientation = "LEFT";
+    private PacmanDirection wantedOrientation;
     // Provavelmente também poderemos adicionar uma nova classe chamada SubController para o pacman e o regular ghost
     private final ArenaController parentController;
     private final Pacman pacman;
@@ -15,86 +15,45 @@ public class PacmanController extends Controller<Arena> {
         super(model);
         this.parentController = parentController;
         pacman = getModel().getPacman();
+        this.wantedOrientation = (PacmanDirection) pacman.getCurrentDirection();
     }
 
     @Override
     public void step(Game game, GameActions.ControlActions action, long time) throws IOException {
         changeOrientation(action);
-        movePacman();
+        movePacmanMiddleware();
     }
 
     public void changeOrientation(GameActions.ControlActions action) {
+        // isto está a dar assign de novo à variável
         switch (action) {
-            case MOVE_LEFT:
-                tryToChangePacmanOrientationTo("LEFT");
-                break;
-            case MOVE_DOWN:
-                tryToChangePacmanOrientationTo("DOWN");
-                break;
-            case MOVE_RIGHT:
-                tryToChangePacmanOrientationTo("RIGHT");
-                break;
-            case MOVE_UP:
-                tryToChangePacmanOrientationTo("UP");
-                break;
-            default:
-                tryToChangePacmanOrientationTo(wantedOrientation);
-                break;
+            case MOVE_LEFT: wantedOrientation = new PacmanDirectionLeft(this.pacman); break;
+            case MOVE_DOWN: wantedOrientation = new PacmanDirectionDown(this.pacman); break;
+            case MOVE_RIGHT: wantedOrientation = new PacmanDirectionRight(this.pacman); break;
+            case MOVE_UP: wantedOrientation = new PacmanDirectionUp(this.pacman); break;
+            default: break;
         }
+
+        tryToChangePacmanOrientationTo(wantedOrientation);
     }
 
-    private void tryToChangePacmanOrientationTo(String newPacmanOrientation) {
-        Position newPacmanPosition = getNewPositionToMoveTo(newPacmanOrientation);
+    private void tryToChangePacmanOrientationTo(PacmanDirection newPacmanDirection) {
+        Position newPacmanPosition = newPacmanDirection.getNextPosition();
         if(!getModel().isObstacleAt(newPacmanPosition)) {
-            getModel().getPacman().changeOrientation(newPacmanOrientation);
+            getModel().getPacman().setCurrentDirectionTo(newPacmanDirection);
         }
 
-        wantedOrientation = newPacmanOrientation;
+        wantedOrientation = newPacmanDirection;
     }
 
-    private Position getNewPositionToMoveTo(String newPacmanOrientation) {
-        switch(newPacmanOrientation) {
-            case "UP": return pacman.getPosition().getPositionAbove();
-            case "DOWN": return pacman.getPosition().getPositionBelow();
-            case "LEFT": return pacman.getPosition().getPositionToTheLeft();
+    public void movePacmanMiddleware() {
+        PacmanDirection currentPacmanDirection = (PacmanDirection) this.pacman.getCurrentDirection();
+
+        if(pacman.getCurrentDirection() != null) {
+           pacman.setCurrentDirectionTo(currentPacmanDirection);
         }
 
-        return pacman.getPosition().getPositionToTheRight();
-    }
-
-    public void movePacman() {
-        switch (getModel().getPacman().getDrawSymbol()) {
-            case "D":
-                movePacmanUp();
-                break;
-            case "C":
-                movePacmanDown();
-                break;
-            case "A":
-                movePacmanLeft();
-                break;
-            case "B":
-                movePacmanRight();
-                break;
-            default:
-                break;
-        }
-    }
-
-    public void movePacmanLeft() {
-        movePacman(pacman.getPosition().getPositionToTheLeft());
-    }
-
-    public void movePacmanRight() {
-        movePacman(pacman.getPosition().getPositionToTheRight());
-    }
-
-    public void movePacmanUp() {
-        movePacman(pacman.getPosition().getPositionAbove());
-    }
-
-    public void movePacmanDown() {
-        movePacman(pacman.getPosition().getPositionBelow());
+        movePacman(currentPacmanDirection.getNextPosition());
     }
 
     private void switchTile(Position position) {
@@ -109,7 +68,6 @@ public class PacmanController extends Controller<Arena> {
     }
 
     private void movePacman(Position position) {
-
         if (!position.isOnSomeObstaclePosition()) {
             pacman.setPosition(position);
 

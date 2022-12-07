@@ -144,7 +144,7 @@ public class GUIForLanterna implements GUI {
     }
 
     private AWTTerminalFontConfiguration setFont() throws URISyntaxException, FontFormatException, IOException {
-        URL resource = getClass().getClassLoader().getResource("fonts/square.ttf");
+        URL resource = getClass().getClassLoader().getResource("fonts/pacman.otf");
         
         // Criar identificador da localização do recurso
         assert resource != null;

@@ -15,6 +15,7 @@ public abstract class MovableEntity extends Entity {
     }
 
     public void setCurrentDirectionTo(MovableEntityDirection currentDirection) {
+        this.drawSymbol = currentDirection.getDrawSymbol();
         this.currentDirection = currentDirection;
     }
 }

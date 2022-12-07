@@ -12,7 +12,8 @@ public class FrightenedRunAwayStrategy implements FrightenedStrategy {
 
     @Override
     public Position getNextPosition(Ghost ghost) {
-        List<Position> possiblePositions = ghost.getCurrentDirection().getPossiblePositionsToMove();
+        GhostDirection currentGhostDirection = (GhostDirection) ghost.getCurrentDirection();
+        List<Position> possiblePositions = currentGhostDirection.getPossiblePositionsToMove();
 
         if(possiblePositions.isEmpty()) return ghost.getPosition();
 

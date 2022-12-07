@@ -13,7 +13,9 @@ public class AgressiveChaseStrategy implements ChaseStrategy {
     @Override
     public Position getNextPosition(Ghost ghost) {
         Position pacmanPosition = ghost.getPosition().getArena().getPacman().getPosition();
-        List<Position> possibleGhostPositions = ghost.getCurrentDirection().getPossiblePositionsToMove();
+        GhostDirection currentGhostDirection = (GhostDirection) ghost.getCurrentDirection();
+
+        List<Position> possibleGhostPositions = currentGhostDirection.getPossiblePositionsToMove();
 
         double currentMinDirection = Double.MAX_VALUE;
         Position closestPossiblePosition = null;
