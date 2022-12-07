@@ -56,27 +56,16 @@ public class PacmanController extends Controller<Arena> {
         movePacman(currentPacmanDirection.getNextPosition());
     }
 
-    private void switchTile(Position position) {
-        int pacmanX = getModel().getPacman().getPosition().getX();
-        int pacmanY = getModel().getPacman().getPosition().getY();
+    private void movePacman(Position newPosition) {
+        if (!newPosition.isOnSomeObstaclePosition()) {
+            pacman.setPosition(newPosition);
 
-        Tile currentTile = getModel().getGameGrid().get(pacmanY - 1).get(pacmanX);
-        Tile nextTile = getModel().getGameGrid().get(position.getY() - 1).get(position.getX());
-        
-        currentTile.removeChild(pacman);
-        nextTile.put(pacman);
-    }
+            this.pacman.switchTile(newPosition);
 
-    private void movePacman(Position position) {
-        if (!position.isOnSomeObstaclePosition()) {
-            pacman.setPosition(position);
-
-            this.switchTile(position);
-
-            if(position.isOnFixedEdiblePosition()) {
-                eatEdibleAt(position);
-            } else if (position.isOnSomeGhostPosition()) {
-                processCollisionWithGhostAt(position);
+            if(newPosition.isOnFixedEdiblePosition()) {
+                eatEdibleAt(newPosition);
+            } else if (newPosition.isOnSomeGhostPosition()) {
+                processCollisionWithGhostAt(newPosition);
             }
         }
     }

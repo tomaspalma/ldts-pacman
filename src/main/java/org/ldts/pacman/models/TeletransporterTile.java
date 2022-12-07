@@ -15,7 +15,6 @@ public class TeletransporterTile extends Tile {
     public void setExitTile(Tile exitTile) {
         this.exitTile = exitTile;
     }
-
     private void teletransportToExitTile(MovableEntity child) {
         child.getPosition().setXTo(exitTile.getPosition().getX());
         child.getPosition().setYTo(exitTile.getPosition().getY());
