@@ -44,9 +44,16 @@ public class RegularGhostController extends Controller<Arena> {
         ghost.setCurrentDirectionTo(ghost.getCurrentDirection().generateNextDirectionAfterChangeTo(newPosition));
         ghost.setPosition(newPosition);
 
-        if(ghost.getPosition() == getModel().getPacman().getPosition()) parentController.processPacmanLoseLife();
+        checkCollisionWithPacman(ghost, newPosition);
     }
 
-    public void actionBasedOnCollisionResult(GameActions.GhostCollisionWithPacman result) {
+    private void checkCollisionWithPacman(Ghost ghost, Position newPosition) {
+        boolean onFrightenedState = ghost.getCurrentState() instanceof FrightenedState;
+        if(onFrightenedState) return;
+
+        if(newPosition.equals(getModel().getPacman().getPosition()))
+            parentController.processPacmanLoseLife();
+
+        if(ghost.getPosition() == getModel().getPacman().getPosition()) parentController.processPacmanLoseLife();
     }
 }

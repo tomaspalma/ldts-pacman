@@ -2,8 +2,8 @@ package org.ldts.pacman.models;
 
 public abstract class MovableEntity extends Entity {
     protected MovableEntityDirection currentDirection;
-    protected MovableEntity(Position position, Arena arena) {
-        super(position, arena);
+    protected MovableEntity(Position position) {
+        super(position);
     }
 
     public void setPosition(Position position) {
@@ -20,10 +20,10 @@ public abstract class MovableEntity extends Entity {
     }
 
     public void switchTile(Position position) {
-        int posX = this.getPosition().getX();
-        int posY = this.getPosition().getY();
+        int x = this.getPosition().getX();
+        int y = this.getPosition().getY();
 
-        Tile currentTile = this.arena.getGameGrid().get(posY - 1).get(posX);
+        Tile currentTile = this.arena.getGameGrid().get(y - 1).get(x);
         Tile nextTile = this.arena.getGameGrid().get(position.getY() - 1).get(position.getX());
 
         currentTile.removeChild(this);

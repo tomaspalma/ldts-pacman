@@ -31,6 +31,10 @@ public class Arena {
         loader.load();
     }
 
+    public void addToGeneralFixedEdibleList(FixedEdible fixedEdible) {
+        this.generalFixedEdibleList.add(fixedEdible);
+    }
+
     public void incrementGhostHouseSize() {
         this.ghostHouseSize += 1;
     }
@@ -64,10 +68,6 @@ public class Arena {
 
     public void addRegularGhost(RegularGhost ghost) {
         this.regularGhostsList.add(ghost);
-    }
-
-    private void addToGeneralFixedEdibleList(FixedEdible fixedEdible) {
-        this.generalFixedEdibleList.add(fixedEdible);
     }
 
     public ArenaLoader getLoader() {
@@ -114,10 +114,6 @@ public class Arena {
         RegularTile regularTile = (RegularTile) gameGrid.get(position.getY() - 1).get(position.getX());
 
         regularTile.removeChild(entity);
-    }
-
-    public void addToGridAt(Position position) {
-
     }
 
     public boolean isObstacleAt(Position position) {

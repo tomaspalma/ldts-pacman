@@ -1,10 +1,9 @@
 package org.ldts.pacman.models;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Position {
-    // Atenção a comparar os valores de uma posição com outra por causa de serem números *floating point*
-    // Para os comparar utilizar um epsilon. Exemplo:
     private int x;
     private int y;
     private final Arena arena;
@@ -55,6 +54,22 @@ public class Position {
         return Math.sqrt(Math.pow(this.x - (double)position.getX(), 2) + Math.pow(this.y - (double)position.getY(), 2));
     }
 
+    public Position getClosestPositionFrom(List<Position> possiblePositions) {
+        double currentMinDirection = Double.MAX_VALUE;
+        Position closestPossiblePosition = null;
+
+        if(possiblePositions.isEmpty()) return this;
+
+        for(Position position: possiblePositions) {
+            if(position.getDistanceTo(this) < currentMinDirection) {
+                currentMinDirection = position.getDistanceTo(this);
+                closestPossiblePosition = position;
+            }
+        }
+
+        return closestPossiblePosition;
+    }
+
     public boolean isOutOfBounds() {
         boolean isOutOfBoundsHorizontally = this.x < 0 || this.x >= this.arena.getGameGrid().get(0).size();
         boolean isOutOfBoundsVertically = this.y < 1 || this.y >= this.arena.getGameGrid().size();
@@ -83,6 +98,8 @@ public class Position {
     public boolean isOnPacmanPosition() {
         Tile tile = this.arena.getGameGrid().get(this.y - 1).get(this.x);
 
+        if(tile.containsPacman()) System.out.println(this.x + ", " + this.y);
+
         return tile.containsPacman();
     }
 
@@ -93,9 +110,18 @@ public class Position {
     }
 
     public boolean isInvalidTo(MovableEntity movableEntity) {
+        if(this.isOutOfBounds()) return true;
+
         boolean isAliveGhostAndOnHouseGate = movableEntity instanceof Ghost && this.isOnGatePosition();
 
-        return this.isOutOfBounds() || this.isOnSomeObstaclePosition() || isAliveGhostAndOnHouseGate;
+        return this.isOnSomeObstaclePosition() || isAliveGhostAndOnHouseGate;
+    }
+
+    public Vector getVectorTo(Position position1) {
+        int x1 = position1.getX();
+        int y1 = position1.getY();
+
+        return new Vector(x1 - this.x, y1 - this.y);
     }
 
     @Override

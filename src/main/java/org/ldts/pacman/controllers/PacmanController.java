@@ -25,7 +25,6 @@ public class PacmanController extends Controller<Arena> {
     }
 
     public void changeOrientation(GameActions.ControlActions action) {
-        // isto está a dar assign de novo à variável
         switch (action) {
             case MOVE_LEFT: wantedOrientation = new PacmanDirectionLeft(this.pacman); break;
             case MOVE_DOWN: wantedOrientation = new PacmanDirectionDown(this.pacman); break;
@@ -53,10 +52,10 @@ public class PacmanController extends Controller<Arena> {
            pacman.setCurrentDirectionTo(currentPacmanDirection);
         }
 
-        movePacman(currentPacmanDirection.getNextPosition());
+        movePacmanTo(currentPacmanDirection.getNextPosition());
     }
 
-    private void movePacman(Position newPosition) {
+    private void movePacmanTo(Position newPosition) {
         if (!newPosition.isOnSomeObstaclePosition()) {
             pacman.setPosition(newPosition);
 

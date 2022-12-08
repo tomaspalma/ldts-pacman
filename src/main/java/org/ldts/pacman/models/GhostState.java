@@ -14,7 +14,10 @@ public abstract class GhostState {
 
     public void transitionToState(GhostState newGhostState) {
         this.affectedGhost.setCurrentStateTo(newGhostState);
-        ((GhostDirection) this.affectedGhost.getCurrentDirection()).turnAround();
+
+        GhostDirection currentDirection = (GhostDirection) this.affectedGhost.getCurrentDirection();
+        currentDirection.turnAround();
+
         this.affectedGhost.setPreviousStateTo(this);
     }
 }

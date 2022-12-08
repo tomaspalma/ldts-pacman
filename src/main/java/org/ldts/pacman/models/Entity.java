@@ -8,9 +8,9 @@ public abstract class Entity {
     protected Position position;
     protected final Arena arena;
 
-    protected Entity(Position position, Arena arena) {
+    protected Entity(Position position) {
         this.position = position;
-        this.arena = arena;
+        this.arena = this.position.getArena();
     }
 
     public Position getPosition() {

@@ -1,16 +1,36 @@
 package org.ldts.pacman.models;
 
+import java.util.List;
+
 public class PatrolChaseStrategy implements ChaseStrategy {
-
-    @Override
-    public void execute(Ghost ghost) {
-        // TODO Auto-generated method stub
-        
-    }
-
     @Override
     public Position getNextPosition(Ghost ghost) {
-        // TODO Auto-generated method stub
-        return new Position(5, 5, ghost.getPosition().getArena());
+        Arena arena = ghost.getArena();
+        PacmanDirection pacmanDirection = (PacmanDirection) arena.getPacman().getCurrentDirection();
+
+        Position desiredPosition = pacmanDirection.getPositionToForwardLevel(2);
+        Position blinkyPosition = this.getBlinkyPositionIn(arena);
+        assert blinkyPosition != null;
+
+        Vector desiredPosToBlinkyPosVector = blinkyPosition.getVectorTo(desiredPosition);
+        desiredPosition = desiredPosToBlinkyPosVector.getPositionBasedOnSumWith(desiredPosition);
+
+        GhostDirection currentGhostDirection = (GhostDirection) ghost.getCurrentDirection();
+        List<Position> possibleGhostPositions = currentGhostDirection.getPossiblePositionsToMove();
+
+        return desiredPosition.getClosestPositionFrom(possibleGhostPositions);
+    }
+
+    private Position getBlinkyPositionIn(Arena arena) {
+        Position result = null;
+
+        for(RegularGhost ghost: arena.getRegularGhostsList()) {
+            if (ghost instanceof Blinky) {
+                result = ghost.getPosition();
+                break;
+            }
+        }
+
+        return result;
     }
 }

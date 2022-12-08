@@ -12,22 +12,22 @@ class ArenaTest extends Specification {
 
     def "Arena should be able to detect if obstacle is at a certain position"() {
         given:
-            def pacman = new Pacman(new Position(5, 5))
+            def pacman = new Pacman(new Position(5, 5, arena))
             arena.setPacman(pacman)
-            def obstacle = new Obstacle(new Position(5, 5))
+            def obstacle = new Obstacle(new Position(5, 5, arena))
         when:
             arena.addObstacle(obstacle)
         then:
-            arena.isObstacleAt(new Position(5, 5)) == true
+            arena.isObstacleAt(new Position(5, 5, arena))
     }
 
     def "Arena should be able to return valid index if fixed edible is at a certain position"() {
         given:
-            def fixedEdible = new Cherry(new Position(5, 5))
+            def fixedEdible = new Cherry(new Position(5, 5, arena))
         when:
             arena.addToGeneralFixedEdibleList(fixedEdible)
         then:
-            arena.getFixedEdibleAt(new Position(5, 5)) != -1
+            arena.getFixedEdibleAt(new Position(5, 5, arena)) != -1
     }
 
     def "Amount of grid elements must be equal to the total amount of elements in the other separate lists"() {
@@ -71,7 +71,7 @@ class ArenaTest extends Specification {
     }
 
     def cleanup() {
-        Arena.gameGrid.clear()
+        this.arena.getGameGrid().clear()
     }
 
 }

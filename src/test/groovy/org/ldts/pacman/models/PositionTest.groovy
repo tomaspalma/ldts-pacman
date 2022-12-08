@@ -9,40 +9,48 @@ class PositionTest extends Specification {
     private def pos
 
     def setup() {
-        arena = new Arena(20, 21, "maps/easy.txt");
-        pos = new Position(15, 15);
+        arena = new Arena(20, 21, "maps/testmap.txt");
+        pos = new Position(15, 15, arena);
     }
 
     def "We should be able to get relative positions from one"() {
         expect:
-            pos.getPositionToTheLeft() == new Position(14, 15)
-            pos.getPositionToTheRight() == new Position(16, 15)
-            pos.getPositionAbove() == new Position(15, 14)
-            pos.getPositionBelow() == new Position(15, 16)
+            pos.getPositionToTheLeft() == new Position(14, 15, arena)
+            pos.getPositionToTheRight() == new Position(16, 15, arena)
+            pos.getPositionAbove() == new Position(15, 14, arena)
+            pos.getPositionBelow() == new Position(15, 16, arena)
     }
 
     def "We should be able to correctly detect if a position is out of bounds"() {
         expect:
-            new Position(22, 22).isOutOfBounds() == true
-            new Position(19, 19).isOutOfBounds() == false
-            new Position(40, 10).isOutOfBounds() == true
-            new Position(10, 40).isOutOfBounds() == true
-            new Position(-1, 5).isOutOfBounds() == true
+            new Position(22, 22, arena).isOutOfBounds() == true
+            new Position(19, 19, arena).isOutOfBounds() == false
+            new Position(40, 10, arena).isOutOfBounds() == true
+            new Position(10, 40, arena).isOutOfBounds() == true
+            new Position(-1, 5, arena).isOutOfBounds() == true
     }
 
     def "We should be able to detect if we are on a ghost position"() {
         expect:
-            new Position(7, 5).isOnSomeGhostPosition() == true
-            new Position(8, 5).isOnSomeGhostPosition() == false
+            new Position(7, 5, arena).isOnSomeGhostPosition() == true
+            new Position(8, 5, arena).isOnSomeGhostPosition() == false
     }
 
     def "We should be able to detect if we are on an obstacle position"() {
         expect:
-            new Position(0, 1).isOnSomeObstaclePosition()
-            new Position(7, 18).isOnSomeObstaclePosition()
+            new Position(0, 1, arena).isOnSomeObstaclePosition()
+            new Position(7, 18, arena).isOnSomeObstaclePosition()
+    }
+
+    def "We should be able to get a vector between two points in the direction of point2 to point1"() {
+        given:
+            def position1 = new Position(4 , 4, arena)
+            def position2 = new Position(12, 19, arena)
+        expect:
+            position2.getVectorBetweenTwoPositionsFromThisToPos1(position1) == new Vector(8, 15);
     }
 
     def cleanup() {
-        Arena.gameGrid.clear()
+        arena.getGameGrid().clear()
     }
 }

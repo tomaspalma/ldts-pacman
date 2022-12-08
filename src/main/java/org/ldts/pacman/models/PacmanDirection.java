@@ -12,4 +12,7 @@ public abstract class PacmanDirection extends MovableEntityDirection {
     public String getDrawSymbol() {
         return this.drawSymbol;
     }
+
+    public abstract Position getPositionToForwardLevel(int forwardLevel);
+
 }
