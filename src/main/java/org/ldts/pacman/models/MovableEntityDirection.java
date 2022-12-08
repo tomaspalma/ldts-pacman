@@ -38,19 +38,4 @@ public abstract class MovableEntityDirection {
         Position rightPosition = new Position(ghostX + 1, ghostY, ghostArena);
         Position downPosition = new Position(ghostX, ghostY + 1, ghostArena);*/
 
-    public Position getPossiblePositionToMoveLeft() {
-        return new Position(movableEntity.getPosition().getX() - 1, movableEntity.getPosition().getY(), movableEntity.getArena());
-    }
-
-    public Position getPossiblePositionToMoveRight() {
-        return new Position(movableEntity.getPosition().getX() + 1, movableEntity.getPosition().getY(), movableEntity.getArena());
-    }
-
-    public Position getPossiblePositionToMoveUp() {
-        return new Position(movableEntity.getPosition().getX(), movableEntity.getPosition().getY() - 1, movableEntity.getArena());
-    }
-
-    public Position getPossiblePositionToMoveDown() {
-        return new Position(movableEntity.getPosition().getX(), movableEntity.getPosition().getY() + 1, movableEntity.getArena());
-    }
 }

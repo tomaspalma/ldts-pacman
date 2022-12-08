@@ -66,10 +66,6 @@ public class Arena {
         this.regularGhostsList.add(ghost);
     }
 
-    private void addToGeneralFixedEdibleList(FixedEdible fixedEdible) {
-        this.generalFixedEdibleList.add(fixedEdible);
-    }
-
     public ArenaLoader getLoader() {
         return loader;
     }
@@ -114,10 +110,6 @@ public class Arena {
         RegularTile regularTile = (RegularTile) gameGrid.get(position.getY() - 1).get(position.getX());
 
         regularTile.removeChild(entity);
-    }
-
-    public void addToGridAt(Position position) {
-
     }
 
     public boolean isObstacleAt(Position position) {

@@ -17,19 +17,8 @@ public class AgressiveChaseStrategy implements ChaseStrategy {
 
         List<Position> possibleGhostPositions = currentGhostDirection.getPossiblePositionsToMove();
 
-        double currentMinDirection = Double.MAX_VALUE;
-        Position closestPossiblePosition = null;
+        return pacmanPosition.getClosestPositionFrom(possibleGhostPositions);
 
-        if(possibleGhostPositions.isEmpty()) return ghost.getPosition();
-
-        for(Position position: possibleGhostPositions) {
-            if(position.getDistanceTo(pacmanPosition) < currentMinDirection) {
-                currentMinDirection = position.getDistanceTo(pacmanPosition);
-                closestPossiblePosition = position;
-            }
-        }
-
-        return closestPossiblePosition;
     }
     
 }

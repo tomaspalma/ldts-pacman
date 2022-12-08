@@ -1,6 +1,5 @@
 package org.ldts.pacman.models;
 
-import javax.swing.plaf.metal.MetalIconFactory;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -8,6 +7,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 // Ler o mapa e carregar as entidades respetivas para a lista da arena
 public class FileArenaLoader extends ArenaLoader {
@@ -77,17 +77,17 @@ public class FileArenaLoader extends ArenaLoader {
 
     private void addRespectiveElementOf(Character character, Position currentPosition) {
         switch(character) {
-            case 'W': loadObstacle(new Wall(currentPosition, this.arena)); break;
+            case 'W': loadObstacle(new Wall(currentPosition)); break;
             case 'P': loadPacmanAt(currentPosition); break;
-            case 'o': loadFixedEdible(new Pacdot(currentPosition, this.arena)); break;
-            case 'O': loadFixedEdible(new PowerPellet(currentPosition, this.arena)); break;
-            case 'C': loadFixedEdible(new Cherry(currentPosition, this.arena)); break;
-            case 'p': loadRegularGhost(new Pinky(currentPosition, this.arena)); break;
-            case 'c': loadRegularGhost(new Clyde(currentPosition, this.arena)); break;
-            case 'i': loadRegularGhost(new Inky(currentPosition, this.arena)); break;
-            case 'b': loadRegularGhost(new Blinky(currentPosition, this.arena)); break;
-            case 'G': loadGate(new GhostHouseGate(currentPosition, this.arena)); break;
-            case ' ': loadEmptySpace(new EmptySpace(currentPosition, this.arena)); break;
+            case 'o': loadFixedEdible(new Pacdot(currentPosition)); break;
+            case 'O': loadFixedEdible(new PowerPellet(currentPosition)); break;
+            case 'C': loadFixedEdible(new Cherry(currentPosition)); break;
+            case 'p': loadRegularGhost(new Pinky(currentPosition)); break;
+            case 'c': loadRegularGhost(new Clyde(currentPosition)); break;
+            case 'i': loadRegularGhost(new Inky(currentPosition)); break;
+            case 'b': loadRegularGhost(new Blinky(currentPosition)); break;
+            case 'G': loadGate(new GhostHouseGate(currentPosition)); break;
+            case ' ': loadEmptySpace(new EmptySpace(currentPosition)); break;
             default: addTeletransporterToMap(character, currentPosition); break;
         }
     }
@@ -120,7 +120,7 @@ public class FileArenaLoader extends ArenaLoader {
 
     @Override
     protected void loadPacmanAt(Position position) {
-        Pacman pacman = new Pacman(position, this.arena);
+        Pacman pacman = new Pacman(position);
         this.arena.setPacman(pacman);
 
         this.addEntityToGrid(pacman);
@@ -141,7 +141,9 @@ public class FileArenaLoader extends ArenaLoader {
 
     @Override
     protected void loadFixedEdible(FixedEdible fixedEdible) {
-        this.arena.getGeneralFixedEdibleList().add(fixedEdible);
+        List<FixedEdible> generalFixedEdibleList = this.arena.getGeneralFixedEdibleList();
+        generalFixedEdibleList.add(fixedEdible);
+
         this.addEntityToGrid(fixedEdible);
     }
 

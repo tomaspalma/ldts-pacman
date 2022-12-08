@@ -25,7 +25,6 @@ public class PacmanController extends Controller<Arena> {
     }
 
     public void changeOrientation(GameActions.ControlActions action) {
-        // isto está a dar assign de novo à variável
         switch (action) {
             case MOVE_LEFT: wantedOrientation = new PacmanDirectionLeft(this.pacman); break;
             case MOVE_DOWN: wantedOrientation = new PacmanDirectionDown(this.pacman); break;
@@ -56,22 +55,11 @@ public class PacmanController extends Controller<Arena> {
         movePacman(currentPacmanDirection.getNextPosition());
     }
 
-    private void switchTile(Position position) {
-        int pacmanX = getModel().getPacman().getPosition().getX();
-        int pacmanY = getModel().getPacman().getPosition().getY();
-
-        Tile currentTile = getModel().getGameGrid().get(pacmanY - 1).get(pacmanX);
-        Tile nextTile = getModel().getGameGrid().get(position.getY() - 1).get(position.getX());
-        
-        currentTile.removeChild(pacman);
-        nextTile.put(pacman);
-    }
-
     private void movePacman(Position position) {
         if (!position.isOnSomeObstaclePosition()) {
             pacman.setPosition(position);
 
-            this.switchTile(position);
+            this.pacman.switchTile(position);
 
             if(position.isOnFixedEdiblePosition()) {
                 eatEdibleAt(position);

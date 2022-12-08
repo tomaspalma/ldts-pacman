@@ -46,8 +46,8 @@ public abstract class Ghost extends MovableEntity {
 
     public abstract GameActions.GhostCollisionWithPacman getCollisionWithPacmanResult();
     
-    protected Ghost(Position position, Arena arena) {
-        super(position, arena);
+    protected Ghost(Position position) {
+        super(position);
     }
 
 }
