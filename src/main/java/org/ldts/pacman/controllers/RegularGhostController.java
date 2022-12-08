@@ -51,10 +51,9 @@ public class RegularGhostController extends Controller<Arena> {
         boolean onFrightenedState = ghost.getCurrentState() instanceof FrightenedState;
         if(onFrightenedState) return;
 
-        if(newPosition.isOnPacmanPosition())
+        if(newPosition.equals(getModel().getPacman().getPosition()))
             parentController.processPacmanLoseLife();
-    }
 
-    public void actionBasedOnCollisionResult(GameActions.GhostCollisionWithPacman result) {
+        if(ghost.getPosition() == getModel().getPacman().getPosition()) parentController.processPacmanLoseLife();
     }
 }

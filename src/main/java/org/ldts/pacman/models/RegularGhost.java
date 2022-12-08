@@ -2,13 +2,14 @@ package org.ldts.pacman.models;
 
 import com.googlecode.lanterna.TextColor;
 
+import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class RegularGhost extends Ghost implements GameObserver {
 
     private final Position startPosition;
     private final AtomicInteger noOfTimesConsequentlyEaten = new AtomicInteger(0);
-    protected String originalColor;
+    protected TextColor.ANSI originalColor;
 
     protected RegularGhost(Position position) {
         super(position);
