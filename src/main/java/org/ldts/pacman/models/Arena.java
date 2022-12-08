@@ -31,6 +31,10 @@ public class Arena {
         loader.load();
     }
 
+    public void addToGeneralFixedEdibleList(FixedEdible fixedEdible) {
+        this.generalFixedEdibleList.add(fixedEdible);
+    }
+
     public void incrementGhostHouseSize() {
         this.ghostHouseSize += 1;
     }
