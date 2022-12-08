@@ -3,13 +3,6 @@ package org.ldts.pacman.models;
 public class HybridIgnorantChaseStrategy implements ChaseStrategy {
 
     private ChaseStrategy currentChosenStrategy = null;
-
-    @Override
-    public void execute(Ghost ghost) {
-        // TODO Auto-generated method stub
-        
-    }
-
     public ChaseStrategy getCurrentChosenStrategy() {
         return this.currentChosenStrategy;
     }

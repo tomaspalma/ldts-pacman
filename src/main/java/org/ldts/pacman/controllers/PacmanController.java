@@ -52,19 +52,19 @@ public class PacmanController extends Controller<Arena> {
            pacman.setCurrentDirectionTo(currentPacmanDirection);
         }
 
-        movePacman(currentPacmanDirection.getNextPosition());
+        movePacmanTo(currentPacmanDirection.getNextPosition());
     }
 
-    private void movePacman(Position position) {
-        if (!position.isOnSomeObstaclePosition()) {
-            pacman.setPosition(position);
+    private void movePacmanTo(Position newPosition) {
+        if (!newPosition.isOnSomeObstaclePosition()) {
+            pacman.setPosition(newPosition);
 
-            this.pacman.switchTile(position);
+            this.pacman.switchTile(newPosition);
 
-            if(position.isOnFixedEdiblePosition()) {
-                eatEdibleAt(position);
-            } else if (position.isOnSomeGhostPosition()) {
-                processCollisionWithGhostAt(position);
+            if(newPosition.isOnFixedEdiblePosition()) {
+                eatEdibleAt(newPosition);
+            } else if (newPosition.isOnSomeGhostPosition()) {
+                processCollisionWithGhostAt(newPosition);
             }
         }
     }

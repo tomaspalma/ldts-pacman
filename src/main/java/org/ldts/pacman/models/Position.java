@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class Position {
-    // Atenção a comparar os valores de uma posição com outra por causa de serem números *floating point*
-    // Para os comparar utilizar um epsilon. Exemplo:
     private int x;
     private int y;
     private final Arena arena;
@@ -112,9 +110,11 @@ public class Position {
     }
 
     public boolean isInvalidTo(MovableEntity movableEntity) {
+        if(this.isOutOfBounds()) return true;
+
         boolean isAliveGhostAndOnHouseGate = movableEntity instanceof Ghost && this.isOnGatePosition();
 
-        return this.isOutOfBounds() || this.isOnSomeObstaclePosition() || isAliveGhostAndOnHouseGate;
+        return this.isOnSomeObstaclePosition() || isAliveGhostAndOnHouseGate;
     }
 
     public Vector getVectorTo(Position position1) {

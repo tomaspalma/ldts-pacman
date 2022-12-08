@@ -25,7 +25,7 @@ class GhostDirectionTest extends Specification {
             ghostDirection.generateNextDirectionAfterChangeTo(new Position(6, 5, arena)) instanceof GhostDirectionRight
     }
 
-    def "We should be able to detect if a theoretically created position is invalid "() {
+    def "BUG: Ghost direction is generating positions that are not valid to move to"() {
 
     }
 }

@@ -14,7 +14,7 @@ public abstract class RegularGhost extends Ghost implements GameObserver {
     protected RegularGhost(Position position) {
         super(position);
         this.startPosition = new Position(position.getX(), position.getY(), this.position.getArena());
-        this.drawSymbol = "I";
+        this.drawSymbol = "^";
         this.frightenedStrategy = new FrightenedRunAwayStrategy();
         this.previousState = new ChasingState(this);
         this.currentState = new ChasingState(this);
@@ -38,6 +38,7 @@ public abstract class RegularGhost extends Ghost implements GameObserver {
                     noOfTimesConsequentlyEaten.getAndDecrement();
                     if(noOfTimesConsequentlyEaten.intValue() == 0) this.currentState.transitionToState(new ChasingState(this));
                 }
+                this.color = this.originalColor;
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
