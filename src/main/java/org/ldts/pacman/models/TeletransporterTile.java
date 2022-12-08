@@ -1,7 +1,7 @@
 package org.ldts.pacman.models;
 
 public class TeletransporterTile extends Tile {
-    private Tile exitTile;
+    private TeletransporterTile exitTile;
     public TeletransporterTile(Position position, Arena arena) {
         super(position, arena);
     }
@@ -12,9 +12,14 @@ public class TeletransporterTile extends Tile {
         this.teletransportToExitTile((MovableEntity) child);
     }
 
-    public void setExitTile(Tile exitTile) {
+    public void setExitTile(TeletransporterTile exitTile) {
         this.exitTile = exitTile;
     }
+
+    public TeletransporterTile getExitTile() {
+        return exitTile;
+    }
+
     private void teletransportToExitTile(MovableEntity child) {
         child.getPosition().setXTo(exitTile.getPosition().getX());
         child.getPosition().setYTo(exitTile.getPosition().getY());

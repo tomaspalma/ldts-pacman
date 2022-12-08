@@ -1,5 +1,7 @@
 package org.ldts.pacman.models;
 
+import java.beans.JavaBean;
+
 public abstract class MovableEntity extends Entity {
     protected MovableEntityDirection currentDirection;
     protected MovableEntity(Position position) {
@@ -19,7 +21,7 @@ public abstract class MovableEntity extends Entity {
         this.currentDirection = currentDirection;
     }
 
-    public void switchTile(Position position) {
+    public Position switchTile(Position position) {
         int x = this.getPosition().getX();
         int y = this.getPosition().getY();
 
@@ -28,5 +30,10 @@ public abstract class MovableEntity extends Entity {
 
         currentTile.removeChild(this);
         nextTile.put(this);
+
+        if(nextTile instanceof TeletransporterTile teletransporterTile)
+            return teletransporterTile.getExitTile().getPosition();
+
+        return position;
     }
 }

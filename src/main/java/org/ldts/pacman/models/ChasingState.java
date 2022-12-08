@@ -15,7 +15,7 @@ public class ChasingState extends GhostState {
 
     @Override
     public void applyChangesToGhost() {
-        this.affectedGhost.setColor(TextColor.ANSI.WHITE);
+        this.affectedGhost.setColor(this.affectedGhost.getOriginalColor());
     }
 
     @Override

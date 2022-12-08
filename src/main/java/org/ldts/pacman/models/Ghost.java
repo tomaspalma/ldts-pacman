@@ -1,5 +1,7 @@
 package org.ldts.pacman.models;
 
+import com.googlecode.lanterna.TextColor;
+
 public abstract class Ghost extends MovableEntity {
     protected ChaseStrategy chaseStrategy;
     protected FrightenedStrategy frightenedStrategy;
@@ -7,6 +9,8 @@ public abstract class Ghost extends MovableEntity {
 
     protected GhostState previousState;
     protected GhostState currentState;
+
+    protected TextColor.ANSI originalColor;
 
     public GhostState getPreviousState() {
         return previousState;
@@ -48,6 +52,10 @@ public abstract class Ghost extends MovableEntity {
     
     protected Ghost(Position position) {
         super(position);
+    }
+
+    public TextColor.ANSI getOriginalColor() {
+        return this.originalColor;
     }
 
 }

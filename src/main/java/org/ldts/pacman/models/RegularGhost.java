@@ -9,7 +9,6 @@ public abstract class RegularGhost extends Ghost implements GameObserver {
 
     private final Position startPosition;
     private final AtomicInteger noOfTimesConsequentlyEaten = new AtomicInteger(0);
-    protected TextColor.ANSI originalColor;
 
     protected RegularGhost(Position position) {
         super(position);
@@ -54,4 +53,5 @@ public abstract class RegularGhost extends Ghost implements GameObserver {
     public GhostState getState() {
         return currentState;
     }
+
 }

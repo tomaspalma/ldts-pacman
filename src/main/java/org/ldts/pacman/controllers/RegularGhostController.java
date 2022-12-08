@@ -39,10 +39,10 @@ public class RegularGhostController extends Controller<Arena> {
     }
 
     private void moveGhost(Ghost ghost, Position newPosition) {
-        ghost.switchTile(newPosition);
+        Position realNewPosition = ghost.switchTile(newPosition);
 
-        ghost.setCurrentDirectionTo(ghost.getCurrentDirection().generateNextDirectionAfterChangeTo(newPosition));
-        ghost.setPosition(newPosition);
+        ghost.setCurrentDirectionTo(ghost.getCurrentDirection().generateNextDirectionAfterChangeTo(realNewPosition));
+        ghost.setPosition(realNewPosition);
 
         checkCollisionWithPacman(ghost, newPosition);
     }

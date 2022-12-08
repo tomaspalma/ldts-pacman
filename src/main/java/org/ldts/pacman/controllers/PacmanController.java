@@ -57,14 +57,14 @@ public class PacmanController extends Controller<Arena> {
 
     private void movePacmanTo(Position newPosition) {
         if (!newPosition.isOnSomeObstaclePosition()) {
-            pacman.setPosition(newPosition);
+            Position realNewPosition = pacman.switchTile(newPosition);
 
-            this.pacman.switchTile(newPosition);
+            pacman.setPosition(realNewPosition);
 
-            if(newPosition.isOnFixedEdiblePosition()) {
-                eatEdibleAt(newPosition);
-            } else if (newPosition.isOnSomeGhostPosition()) {
-                processCollisionWithGhostAt(newPosition);
+            if(realNewPosition.isOnFixedEdiblePosition()) {
+                eatEdibleAt(realNewPosition);
+            } else if (realNewPosition.isOnSomeGhostPosition()) {
+                processCollisionWithGhostAt(realNewPosition);
             }
         }
     }
