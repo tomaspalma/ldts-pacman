@@ -42,6 +42,14 @@ class PositionTest extends Specification {
             new Position(7, 18, arena).isOnSomeObstaclePosition()
     }
 
+    def "We should be able to get a vector between two points in the direction of point2 to point1"() {
+        given:
+            def position1 = new Position(4 , 4, arena)
+            def position2 = new Position(12, 19, arena)
+        expect:
+            position2.getVectorBetweenTwoPositionsFromThisToPos1(position1) == new Vector(8, 15);
+    }
+
     def cleanup() {
         arena.getGameGrid().clear()
     }

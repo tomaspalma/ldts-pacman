@@ -117,6 +117,13 @@ public class Position {
         return this.isOutOfBounds() || this.isOnSomeObstaclePosition() || isAliveGhostAndOnHouseGate;
     }
 
+    public Vector getVectorTo(Position position1) {
+        int x1 = position1.getX();
+        int y1 = position1.getY();
+
+        return new Vector(x1 - this.x, y1 - this.y);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
