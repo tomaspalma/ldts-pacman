@@ -15,6 +15,7 @@ public class PacmanController extends Controller<Arena> {
         this.parentController = parentController;
 
         pacman = getModel().getPacman();
+        this.pacman.addObserver((GameObserver) parentController);
         this.wantedDirection = (PacmanDirection) pacman.getCurrentDirection();
     }
 
@@ -58,8 +59,12 @@ public class PacmanController extends Controller<Arena> {
         boolean isAbleToMoveInWantedDirection = !newWantedPacPosition.isOnSomeObstaclePosition()
                 && !newWantedPacPosition.isOnGatePosition();
 
-        if(isAbleToMoveInWantedDirection)
+        if(isAbleToMoveInWantedDirection) {
             pacman.setCurrentDirectionTo(this.wantedDirection);
+
+            this.actIfCollisionWithSpecialEntitiesAt(newWantedPacPosition);
+        }
+
     }
 
     private void actIfCollisionWithSpecialEntitiesAt(Position newPacmanPosition) {
@@ -67,36 +72,14 @@ public class PacmanController extends Controller<Arena> {
         boolean collidedWithGhost = newPacmanPosition.isOnSomeGhostPosition();
 
         if(collidedWithEdible) {
-            eatEdibleAt(newPacmanPosition);
+            this.pacman.notifyObserversItAteFixedEdibleAt(newPacmanPosition);
         } else if (collidedWithGhost) {
-            processCollisionWithGhostAt(newPacmanPosition);
+            this.pacman.notifyObserversItCollidedWithGhostAt(newPacmanPosition);
         }
     }
 
-    private void processCollisionWithGhostAt(Position position) {
-        Tile currentTile = getModel().getGameGrid().get(position.getY() - 1).get(position.getX());
-        Ghost ghost = currentTile.getGhost();
-        assert(ghost != null);
-        
-        switch(ghost.getCollisionWithPacmanResult()) {
-            case KILL_GHOST: parentController.getRegularGhostController().killGhost(ghost); break;
-            case KILL_PACMAN: parentController.processPacmanLoseLife(); break;
-            default: break;
-        }
-    }
-
-    private void eatEdibleAt(Position position) {
-        Tile currentTile = getModel().getGameGrid().get(position.getY() - 1).get(position.getX());
-        FixedEdible currentEdible = currentTile.getFixedEdible();
-        assert(currentEdible != null);
-
-        if(currentEdible instanceof PowerPelletObservable) {
-            ((PowerPelletObservable) currentEdible).notifyObservers();
-        }
-
-        getModel().sumScoreWith(1);
-        getModel().removeFromGameGridAt(position, currentEdible);
-        getModel().getGeneralFixedEdibleList().remove(currentEdible);
+    public void killPacmanAt(Position position) {
+        this.pacman.die(position);
     }
 
     private void changeLife(int i) {
