@@ -13,6 +13,8 @@ public abstract class Ghost extends MovableEntity {
 
     protected TextColor.ANSI originalColor;
 
+    protected boolean alreadyPassedGhostHouseGateChasing;
+
     public GhostState getPreviousState() {
         return previousState;
     }

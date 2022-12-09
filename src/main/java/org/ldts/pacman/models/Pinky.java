@@ -10,6 +10,7 @@ public class Pinky extends RegularGhost {
         this.previousState = new GhostHouseState(this);
         this.currentState = this.previousState;
         this.color = TextColor.ANSI.WHITE;
+        this.alreadyPassedGhostHouseGateChasing = false;
         this.originalColor = color;
         this.chaseStrategy = new AmbushChaseStrategy();
         this.scatterStrategy = new ScatterToTopLeft();

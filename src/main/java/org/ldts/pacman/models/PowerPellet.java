@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PowerPellet extends FixedEdible implements GameObservable {
-    private final List<GameObserver> observers = new ArrayList<>();
+    private final List<EatenPowerPelletObserver> observers = new ArrayList<>();
 
     public PowerPellet(Position position) {
         super(position);
@@ -15,18 +15,18 @@ public class PowerPellet extends FixedEdible implements GameObservable {
     }
 
     @Override
-    public void addObserver(GameObserver observer) {
+    public void addObserver(EatenPowerPelletObserver observer) {
         observers.add(observer);
     }
 
     @Override
-    public void removeObserver(GameObserver observer) {
+    public void removeObserver(EatenPowerPelletObserver observer) {
         observers.remove(observer);
     }
 
     @Override
     public void notifyObservers() {
-        for(GameObserver observer: observers) {
+        for(EatenPowerPelletObserver observer: observers) {
             observer.changeBasedOnObservable();
         }
     }

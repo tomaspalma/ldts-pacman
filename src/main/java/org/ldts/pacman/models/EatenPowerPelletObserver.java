@@ -1,5 +1,5 @@
 package org.ldts.pacman.models;
 
-public interface GameObserver {
+public interface EatenPowerPelletObserver {
     void changeBasedOnObservable();
 }

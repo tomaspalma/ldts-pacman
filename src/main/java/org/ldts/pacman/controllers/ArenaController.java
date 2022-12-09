@@ -3,6 +3,7 @@ package org.ldts.pacman.controllers;
 import org.ldts.pacman.Game;
 import org.ldts.pacman.models.Arena;
 import org.ldts.pacman.models.GameActions;
+import org.ldts.pacman.models.EatenPowerPelletObserver;
 
 import java.io.IOException;
 

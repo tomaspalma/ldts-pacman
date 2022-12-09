@@ -56,7 +56,10 @@ public class PacmanController extends Controller<Arena> {
     }
 
     private void movePacmanTo(Position newPosition) {
-        if (!newPosition.isOnSomeObstaclePosition()) {
+        boolean isAbleToMoveToNewPosition = !newPosition.isOnSomeObstaclePosition()
+                && !newPosition.isOnGatePosition();
+
+        if (isAbleToMoveToNewPosition) {
             Position realNewPosition = pacman.switchTile(newPosition);
 
             pacman.setPosition(realNewPosition);
