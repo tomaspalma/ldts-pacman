@@ -4,6 +4,7 @@ import org.ldts.pacman.Game;
 import org.ldts.pacman.models.Arena;
 import org.ldts.pacman.models.GameActions;
 import org.ldts.pacman.models.EatenPowerPelletObserver;
+import org.ldts.pacman.models.Ghost;
 
 import java.io.IOException;
 
@@ -39,6 +40,7 @@ public class ArenaController extends Controller<Arena> {
 
     public void processPacmanLoseLife() {
         getModel().getPacman().die(getModel().getStartPacmanPosition());
+        getModel().restart();
     }
 
     private void stepChildControllers(Game game, GameActions.ControlActions action, long time) throws IOException {

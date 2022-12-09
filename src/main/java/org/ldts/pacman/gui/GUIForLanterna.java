@@ -154,7 +154,7 @@ public class GUIForLanterna implements GUI {
         GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
         graphicsEnvironment.registerFont(newFont);
 
-        Font loadedFont = newFont.deriveFont(Font.PLAIN, 25);
+        Font loadedFont = newFont.deriveFont(Font.PLAIN, 40);
 
         return AWTTerminalFontConfiguration.newInstance(loadedFont);
     }

@@ -66,7 +66,9 @@ public class PacmanController extends Controller<Arena> {
 
             if(realNewPosition.isOnFixedEdiblePosition()) {
                 eatEdibleAt(realNewPosition);
-            } else if (realNewPosition.isOnSomeGhostPosition()) {
+            }
+
+            if(realNewPosition.isOnSomeGhostPosition()) {
                 processCollisionWithGhostAt(realNewPosition);
             }
         }
