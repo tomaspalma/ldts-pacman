@@ -9,6 +9,10 @@ public class Clock {
         elapsedMilliseconds = 0;
     }
 
+    public long getElapsed() {
+        return elapsedMilliseconds;
+    }
+
     public void step() {
         long currentTime = System.currentTimeMillis();
         elapsedMilliseconds += (currentTime - previousTime);
