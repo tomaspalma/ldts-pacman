@@ -45,7 +45,7 @@ public class RegularGhostController extends Controller<Arena> {
         ghost.setCurrentDirectionTo(ghost.getCurrentDirection().generateNextDirectionAfterChangeTo(realNewPosition));
         ghost.setPosition(realNewPosition);
 
-        checkCollisionWithPacman(ghost, newPosition);
+        checkCollisionWithPacman(ghost, realNewPosition);
     }
 
     private void checkCollisionWithPacman(Ghost ghost, Position newPosition) {

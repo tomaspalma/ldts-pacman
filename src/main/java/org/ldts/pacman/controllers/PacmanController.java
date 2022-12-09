@@ -7,7 +7,6 @@ import java.io.IOException;
 
 public class PacmanController extends Controller<Arena> {
     private PacmanDirection wantedDirection;
-    // Provavelmente também poderemos adicionar uma nova classe chamada SubController para o pacman e o regular ghost
     private final ArenaController parentController;
     private final Pacman pacman;
 
@@ -47,7 +46,7 @@ public class PacmanController extends Controller<Arena> {
 
         if(isAbleToMoveInNextPosition) {
             Position tileTrimmedPacmanPosition = pacman.switchTile(currentDirectionNextPosition);
-            pacman.setPosition( tileTrimmedPacmanPosition);
+            pacman.setPosition(tileTrimmedPacmanPosition);
 
             actIfCollisionWithSpecialEntitiesAt(tileTrimmedPacmanPosition);
         }
