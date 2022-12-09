@@ -23,7 +23,9 @@ public class ArenaViewer extends Viewer<Arena> {
 
         for(RegularGhost ghost: getModel().getRegularGhostsList()) {
             new EntityViewer(ghost).drawEntities(gui);
-        } 
+        }
+
+        new EntityViewer(getModel().getGhostHouse().getGhostHouseGate()).drawEntities(gui);
 
         new EntityViewer(getModel().getPacman()).drawEntities(gui);
 

@@ -8,10 +8,11 @@ public class Arena {
     private final int height;
     private final int width;
     private int ghostHouseSize = 0;
+    private GhostHouse ghostHouse;
 
     private Pacman pacman;
     private List<Obstacle> obstaclesList = new ArrayList<>();
-    public final List<List<Tile>> gameGrid = new ArrayList<>();
+    private final List<List<Tile>> gameGrid = new ArrayList<>();
 
     private Position startPacmanPosition;
     
@@ -29,6 +30,14 @@ public class Arena {
         this.loader = new FileArenaLoader(this, mapToLoad);
 
         loader.load();
+    }
+
+    public void createGhostHouse(Position position, int width, int height) {
+       this.ghostHouse = new GhostHouse(position, width, height);
+    }
+
+    public GhostHouse getGhostHouse() {
+        return this.ghostHouse;
     }
 
     public void addToGeneralFixedEdibleList(FixedEdible fixedEdible) {

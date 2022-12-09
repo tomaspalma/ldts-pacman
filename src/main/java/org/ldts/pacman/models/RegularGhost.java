@@ -2,7 +2,6 @@ package org.ldts.pacman.models;
 
 import com.googlecode.lanterna.TextColor;
 
-import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class RegularGhost extends Ghost implements GameObserver {
@@ -15,10 +14,8 @@ public abstract class RegularGhost extends Ghost implements GameObserver {
         this.startPosition = new Position(position.getX(), position.getY(), this.position.getArena());
         this.drawSymbol = "^";
         this.frightenedStrategy = new FrightenedRunAwayStrategy();
-        this.previousState = new ChasingState(this);
-        this.currentState = new ChasingState(this);
+        this.dyingStrategy = new GhostHouseDyingStrategy();
     }
-
 
     // Regular ghosts will always behave this way
     @Override
