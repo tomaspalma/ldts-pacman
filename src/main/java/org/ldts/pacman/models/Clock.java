@@ -13,8 +13,12 @@ public class Clock {
         return elapsedMilliseconds;
     }
 
+    public long getCurrentSystemTime() {
+        return System.currentTimeMillis();
+    }
+
     public void step() {
-        long currentTime = System.currentTimeMillis();
+        long currentTime = this.getCurrentSystemTime();
         elapsedMilliseconds += (currentTime - previousTime);
         previousTime = currentTime;
     }
