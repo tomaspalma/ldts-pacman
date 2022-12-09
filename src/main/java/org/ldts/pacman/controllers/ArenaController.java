@@ -45,6 +45,7 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
     private void stepChildControllers(Game game, GameActions.ControlActions action, long time) throws IOException {
         pacmanController.step(game, action, time);
         regularGhostController.step(game, action, time);
+        getModel().getClock().step();
     }
 
     @Override
