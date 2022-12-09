@@ -1,10 +1,15 @@
 package org.ldts.pacman.models;
 
+import java.util.List;
+
 public class ScatterToTopLeft implements ScatterStrategy {
     @Override
     public Position getNextPosition(Ghost ghost) {
-        // TODO Auto-generated method stub
-        return new Position(4, 4, ghost.getArena());
+        Position topLeft = new Position(0, 0, ghost.getArena());
+        GhostDirection currentGhostDirection = (GhostDirection) ghost.getCurrentDirection();
+        List<Position> possibleGhostPositions = currentGhostDirection.getPossiblePositionsToMove();
+
+        return topLeft.getClosestPositionFrom(possibleGhostPositions);
     }
     
 }

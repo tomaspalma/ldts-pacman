@@ -11,7 +11,7 @@ public class Blinky extends RegularGhost {
         this.alreadyPassedGhostHouseGateChasing = true;
         this.originalColor = color;
         this.chaseStrategy = new AgressiveChaseStrategy();
-        this.scatterStrategy = new ScatterToTopLeft();
+        this.scatterStrategy = new ScatterToTopRight();
         this.currentDirection = new GhostDirectionLeft(this);
     }
 }
