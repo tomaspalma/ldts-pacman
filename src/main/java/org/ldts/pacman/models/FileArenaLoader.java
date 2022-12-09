@@ -44,9 +44,9 @@ public class FileArenaLoader extends ArenaLoader {
         int x = 0;
         int y = 1;
 
-        while((currentCharRow = this.mapFileReader.readLine()) != null) {
-            //if(currentCharRow.length() >= width - 1) return;
+        createGhostHouse();
 
+        while((currentCharRow = this.mapFileReader.readLine()) != null) {
             this.arena.getGameGrid().add(new ArrayList<>());
 
             for(Character c: currentCharRow.toCharArray()) {
@@ -59,6 +59,23 @@ public class FileArenaLoader extends ArenaLoader {
         }
 
         addDependenciesToEntities();
+    }
+
+    private void createGhostHouse() throws IOException {
+        String[] specialLimitParemeters = new String[2];
+        String positionCoordinates = this.mapFileReader.readLine();
+
+        specialLimitParemeters = positionCoordinates.split("x");
+        int ghostHouseX = Integer.parseInt(specialLimitParemeters[0]);
+        int ghostHouseY = Integer.parseInt(specialLimitParemeters[1]);
+        Position ghostHousePosition = new Position(ghostHouseX, ghostHouseY, this.arena);
+
+        String widthParameters = this.mapFileReader.readLine();
+        specialLimitParemeters = widthParameters.split("x");
+        int ghostHouseWidth = Integer.parseInt(specialLimitParemeters[0]);
+        int ghostHouseHeight = Integer.parseInt(specialLimitParemeters[1]);
+
+        this.arena.createGhostHouse(ghostHousePosition, ghostHouseWidth, ghostHouseHeight);
     }
 
     private void addDependenciesToEntities() {
@@ -121,6 +138,7 @@ public class FileArenaLoader extends ArenaLoader {
     @Override
     protected void loadPacmanAt(Position position) {
         Pacman pacman = new Pacman(position);
+
         this.arena.setPacman(pacman);
 
         this.addEntityToGrid(pacman);
@@ -148,8 +166,8 @@ public class FileArenaLoader extends ArenaLoader {
     }
 
     private void addEntityToGrid(Entity entity) {
-        this.arena.gameGrid.get(entity.getPosition().getY() - 1).add(new RegularTile(entity.getPosition(), this.arena));
-        this.arena.gameGrid.get(entity.getPosition().getY() - 1).get(entity.getPosition().getX())
+        this.arena.getGameGrid().get(entity.getPosition().getY() - 1).add(new RegularTile(entity.getPosition(), this.arena));
+        this.arena.getGameGrid().get(entity.getPosition().getY() - 1).get(entity.getPosition().getX())
             .put(entity);
     }
 
@@ -159,6 +177,12 @@ public class FileArenaLoader extends ArenaLoader {
     }
 
     private void loadGate(GhostHouseGate gate) {
+        GhostHouse ghostHouse = this.arena.getGhostHouse();
+
+        if(ghostHouse.getGhostHouseGate() != null)
+            throw new IllegalArgumentException("There is a gate already defined!");
+
+        this.arena.getGhostHouse().setGhostHouseGate(gate);
         this.addEntityToGrid(gate);
     }
 }

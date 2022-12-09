@@ -8,10 +8,11 @@ import org.ldts.pacman.models.menus.PauseMenu;
 import org.ldts.pacman.states.ArenaState;
 import org.ldts.pacman.states.menus.PauseMenuState;
 import org.ldts.pacman.states.menus.RegularMenuState;
+import org.ldts.pacman.models.*;
 
 import java.io.IOException;
 
-public class ArenaController extends Controller<Arena> {
+public class ArenaController extends Controller<Arena> implements PacmanObserver {
     private final PacmanController pacmanController;
     private final RegularGhostController regularGhostController;
 
@@ -32,12 +33,17 @@ public class ArenaController extends Controller<Arena> {
 
     @Override
     public void step(Game game, GameActions.ControlActions action, long time) throws IOException {
-        if(getModel().getGeneralFixedEdibleList().isEmpty()) game.setState(new RegularMenuState(new GameOverMenu("win")));
+        if (getModel().getGeneralFixedEdibleList().isEmpty())
+            game.setState(null); // TODO set state para um menu a dizer que venceu
 
-        switch(action) {
-            case EXIT: game.setState(null); break;
-            case SWITCH_TO_PAUSE_MENU: game.setState(new PauseMenuState(new PauseMenu((ArenaState) game.getArenaState()))); break;
-            default: stepChildControllers(game, action, time); break;
+        switch (action) {
+            case EXIT:
+                game.setState(null);
+                break;
+            // case SWITCH_TO_PAUSE_MENU: game.setState(new PauseMenu()); break;
+            default:
+                stepChildControllers(game, action, time);
+                break;
         }
     }
 
@@ -48,5 +54,37 @@ public class ArenaController extends Controller<Arena> {
     private void stepChildControllers(Game game, GameActions.ControlActions action, long time) throws IOException {
         pacmanController.step(game, action, time);
         regularGhostController.step(game, action, time);
+    }
+
+    @Override
+    public void changeOnPacmanEatFixedEdibleAt(Position position) {
+        System.out.println("chega aqui?");
+        Tile currentTile = getModel().getGameGrid().get(position.getY() - 1).get(position.getX());
+        FixedEdible currentEdible = currentTile.getFixedEdible();
+        assert (currentEdible != null);
+
+        if (currentEdible instanceof PowerPelletObservable powerPelletObservable) {
+            powerPelletObservable.notifyObservers();
+        }
+
+        getModel().sumScoreWith(1);
+        getModel().removeFromGameGridAt(position, currentEdible);
+        getModel().getGeneralFixedEdibleList().remove(currentEdible);
+    }
+
+    @Override
+    public void changeOnPacmanCollisionWithGhostAt(Position position) {
+        Tile currentTile = getModel().getGameGrid().get(position.getY() - 1).get(position.getX());
+        Ghost ghost = currentTile.getGhost();
+
+        switch(ghost.getCollisionWithPacmanResult()) {
+            case KILL_GHOST: regularGhostController.killGhost(ghost); break;
+            case KILL_PACMAN: pacmanController.killPacmanAt(position); break;
+            default: break;
+        }
+    }
+
+    private void restart() {
+
     }
 }

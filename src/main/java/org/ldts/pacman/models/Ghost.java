@@ -6,11 +6,14 @@ public abstract class Ghost extends MovableEntity {
     protected ChaseStrategy chaseStrategy;
     protected FrightenedStrategy frightenedStrategy;
     protected ScatterStrategy scatterStrategy;
+    protected DyingStrategy dyingStrategy;
 
     protected GhostState previousState;
     protected GhostState currentState;
 
     protected TextColor.ANSI originalColor;
+
+    protected boolean alreadyPassedGhostHouseGateChasing;
 
     public GhostState getPreviousState() {
         return previousState;
@@ -22,6 +25,10 @@ public abstract class Ghost extends MovableEntity {
 
     public FrightenedStrategy getFrightenedStrategy() {
         return frightenedStrategy;
+    }
+
+    public DyingStrategy getDyingStrategy() {
+        return dyingStrategy;
     }
 
     public ScatterStrategy getScatterStrategy() {
