@@ -1,11 +1,12 @@
 package org.ldts.pacman.models;
 
 import com.googlecode.lanterna.TextColor;
+import org.ldts.pacman.Game;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PowerPellet extends FixedEdible implements GameObservable {
+public class PowerPellet extends FixedEdible implements PowerPelletObservable {
     private final List<EatenPowerPelletObserver> observers = new ArrayList<>();
 
     public PowerPellet(Position position) {
@@ -15,19 +16,19 @@ public class PowerPellet extends FixedEdible implements GameObservable {
     }
 
     @Override
-    public void addObserver(EatenPowerPelletObserver observer) {
-        observers.add(observer);
+    public void addObserver(GameObserver observer) {
+        observers.add((EatenPowerPelletObserver) observer);
     }
 
     @Override
-    public void removeObserver(EatenPowerPelletObserver observer) {
-        observers.remove(observer);
+    public void removeObserver(GameObserver observer) {
+        observers.remove((EatenPowerPelletObserver) observer);
     }
 
     @Override
     public void notifyObservers() {
         for(EatenPowerPelletObserver observer: observers) {
-            observer.changeBasedOnObservable();
+            observer.handlePowerPelletBeingEaten();
         }
     }
 }

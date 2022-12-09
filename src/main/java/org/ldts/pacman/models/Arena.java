@@ -22,12 +22,15 @@ public class Arena {
 
     private final ArenaLoader loader;
 
+    private Clock clock;
+
     private int score = 0;
 
     public Arena(int width, int height, String mapToLoad) throws IOException {
         this.width = width;
         this.height = height;
         this.loader = new FileArenaLoader(this, mapToLoad);
+        this.clock = new Clock();
 
         loader.load();
     }
@@ -81,6 +84,10 @@ public class Arena {
 
     public ArenaLoader getLoader() {
         return loader;
+    }
+
+    public Clock getClock() {
+        return clock;
     }
 
     public int getScore() {

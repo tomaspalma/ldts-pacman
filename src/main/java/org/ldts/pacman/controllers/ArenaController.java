@@ -5,10 +5,11 @@ import org.ldts.pacman.models.Arena;
 import org.ldts.pacman.models.GameActions;
 import org.ldts.pacman.models.EatenPowerPelletObserver;
 import org.ldts.pacman.models.Ghost;
+import org.ldts.pacman.models.PacmanObserver;
 
 import java.io.IOException;
 
-public class ArenaController extends Controller<Arena> {
+public class ArenaController extends Controller<Arena> implements PacmanObserver {
     private final PacmanController pacmanController;
     private final RegularGhostController regularGhostController;
 
@@ -46,5 +47,16 @@ public class ArenaController extends Controller<Arena> {
     private void stepChildControllers(Game game, GameActions.ControlActions action, long time) throws IOException {
         pacmanController.step(game, action, time);
         regularGhostController.step(game, action, time);
+        getModel().getClock().step();
+    }
+
+    @Override
+    public void handlePacmanEatFixedEdible() {
+
+    }
+
+    @Override
+    public void handlePacmanCollisionWithGhost() {
+
     }
 }
