@@ -1,5 +1,7 @@
 package org.ldts.pacman.gui;
 
+import com.googlecode.lanterna.TerminalPosition;
+import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 
 import org.ldts.pacman.models.GameActions;
@@ -29,4 +31,6 @@ public interface GUI {
 
     // Draw entities functions
     void drawEntity(Position position, TextColor.ANSI color, String drawSymbol);
+
+    void createRectangle(TerminalPosition topLeft, TerminalSize size, char character);
 }
