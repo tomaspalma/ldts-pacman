@@ -1,12 +1,15 @@
 package org.ldts.pacman.models;
 import com.googlecode.lanterna.TextColor;
 
-public class Pacman extends MovableEntity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Pacman extends MovableEntity implements PacmanObservable {
+    List<PacmanCollisionSpecialEntitiesObserver> observers = new ArrayList<>();
     private int lives = 3;
     public Pacman(Position position) {
         super(position);
         currentDirection = new PacmanDirectionRight(this);
-        // Aqui depois temos que ver qual é a orientação padrão que o pacman irá ter (se é que existirá uma)
         this.drawSymbol = currentDirection.getDrawSymbol();
         this.color = TextColor.ANSI.YELLOW_BRIGHT;
     }
@@ -22,5 +25,18 @@ public class Pacman extends MovableEntity {
 
     public void setLivesTo(int newLives) {
         this.lives = newLives;
+    }
+
+    @Override
+    public void addObserver(GameObserver observer) {
+
+    }
+
+    @Override
+    public void removeObserver(GameObserver observer) {
+    }
+
+    @Override
+    public void notifyObservers() {
     }
 }

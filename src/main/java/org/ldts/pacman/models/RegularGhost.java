@@ -24,7 +24,7 @@ public abstract class RegularGhost extends Ghost implements EatenPowerPelletObse
     }
 
     @Override
-    public void changeBasedOnObservable() {
+    public void handlePowerPelletBeingEaten() {
         this.currentState.transitionToState(new FrightenedState(this));
         Thread thread = new Thread(() -> {
             try {

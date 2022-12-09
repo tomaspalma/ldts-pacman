@@ -1,7 +1,6 @@
 package org.ldts.pacman.models;
 
 public interface GameObservable {
-    void addObserver(EatenPowerPelletObserver observer);
-    void removeObserver(EatenPowerPelletObserver observer);
-    void notifyObservers();
+    void addObserver(GameObserver observer);
+    void removeObserver(GameObserver observer);
 }
