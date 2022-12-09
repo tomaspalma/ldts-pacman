@@ -73,7 +73,9 @@ public class PacmanController extends Controller<Arena> {
 
         if(collidedWithEdible) {
             this.pacman.notifyObserversItAteFixedEdibleAt(newPacmanPosition);
-        } else if (collidedWithGhost) {
+        }
+
+        if (collidedWithGhost) {
             this.pacman.notifyObserversItCollidedWithGhostAt(newPacmanPosition);
         }
     }
