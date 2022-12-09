@@ -13,7 +13,7 @@ public class Inky extends RegularGhost {
         this.alreadyPassedGhostHouseGateChasing = false;
         this.originalColor = this.color;
         this.chaseStrategy = new PatrolChaseStrategy();
-        this.scatterStrategy = new ScatterToBottomLeft();
+        this.scatterStrategy = new ScatterToBottomRight();
         this.currentDirection = new GhostDirectionUp(this);
     }
 }
