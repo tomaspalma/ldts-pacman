@@ -2,9 +2,9 @@ package org.ldts.pacman;
 
 import org.ldts.pacman.gui.GUI;
 import org.ldts.pacman.gui.GUIForLanterna;
-import org.ldts.pacman.models.Arena;
-import org.ldts.pacman.states.ArenaState;
+import org.ldts.pacman.models.menus.MainMenu;
 import org.ldts.pacman.states.State;
+import org.ldts.pacman.states.menus.RegularMenuState;
 
 import java.awt.*;
 import java.io.IOException;
@@ -16,6 +16,10 @@ public class Game {
     private final int width;
     private final int height;
 
+    public State getArenaState() {
+        return currentState;
+    }
+
     public void setState(State state) {
         this.currentState = state;
     }
@@ -24,7 +28,7 @@ public class Game {
         this.width = 21;
         this.height = 21;
         this.gui = new GUIForLanterna(width, height);
-        currentState = new ArenaState(new Arena(width - 1, height, "maps/easy.txt"));
+        currentState = new RegularMenuState(new MainMenu());
     }
 
     private void run() throws IOException, InterruptedException {
