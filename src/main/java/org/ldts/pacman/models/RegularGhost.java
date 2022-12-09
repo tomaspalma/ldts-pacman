@@ -6,7 +6,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class RegularGhost extends Ghost implements EatenPowerPelletObserver {
 
-    private final Position startPosition;
     private final AtomicInteger noOfTimesConsequentlyEaten = new AtomicInteger(0);
 
     protected RegularGhost(Position position) {

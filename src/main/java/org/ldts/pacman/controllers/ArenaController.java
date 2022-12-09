@@ -8,6 +8,9 @@ import org.ldts.pacman.models.menus.PauseMenu;
 import org.ldts.pacman.states.ArenaState;
 import org.ldts.pacman.states.menus.PauseMenuState;
 import org.ldts.pacman.states.menus.RegularMenuState;
+import org.ldts.pacman.models.EatenPowerPelletObserver;
+import org.ldts.pacman.models.Ghost;
+import org.ldts.pacman.models.PacmanObserver;
 import org.ldts.pacman.models.*;
 
 import java.io.IOException;
@@ -49,6 +52,7 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
 
     public void processPacmanLoseLife() {
         getModel().getPacman().die(getModel().getStartPacmanPosition());
+        getModel().restart();
     }
 
     private void stepChildControllers(Game game, GameActions.ControlActions action, long time) throws IOException {

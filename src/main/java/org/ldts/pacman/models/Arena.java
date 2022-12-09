@@ -156,4 +156,10 @@ public class Arena {
 
        return null;
     }
+
+    public void restart() {
+        for(RegularGhost regularGhost: regularGhostsList) {
+            regularGhost.setPosition(regularGhost.getStartPosition());
+        }
+    }
 }
