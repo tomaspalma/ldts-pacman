@@ -80,8 +80,8 @@ public class PacmanController extends Controller<Arena> {
         }
     }
 
-    public void killPacmanAt(Position position) {
-        this.pacman.die(position);
+    public void killPacmanAt() {
+        parentController.processPacmanLoseLife();
     }
 
     private void changeLife(int i) {

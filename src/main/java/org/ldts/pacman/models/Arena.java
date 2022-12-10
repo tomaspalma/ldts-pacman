@@ -158,8 +158,11 @@ public class Arena {
     }
 
     public void restart() {
+        Position ghostStartPosition = null;
         for(RegularGhost regularGhost: regularGhostsList) {
-            regularGhost.setPosition(regularGhost.getStartPosition());
+            ghostStartPosition = regularGhost.getStartPosition();
+            regularGhost.switchTile(ghostStartPosition);
+            regularGhost.setPosition(ghostStartPosition);
         }
     }
 }

@@ -98,8 +98,6 @@ public class Position {
     public boolean isOnPacmanPosition() {
         Tile tile = this.arena.getGameGrid().get(this.y - 1).get(this.x);
 
-        if(tile.containsPacman()) System.out.println(this.x + ", " + this.y);
-
         return tile.containsPacman();
     }
 

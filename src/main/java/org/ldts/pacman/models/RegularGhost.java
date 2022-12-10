@@ -10,7 +10,6 @@ public abstract class RegularGhost extends Ghost implements EatenPowerPelletObse
 
     protected RegularGhost(Position position) {
         super(position);
-        this.startPosition = new Position(position.getX(), position.getY(), this.position.getArena());
         this.drawSymbol = "^";
         this.frightenedStrategy = new FrightenedRunAwayStrategy();
         this.dyingStrategy = new GhostHouseDyingStrategy();

@@ -51,7 +51,7 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
     }
 
     public void processPacmanLoseLife() {
-        getModel().getPacman().die(getModel().getStartPacmanPosition());
+        getModel().getPacman().die();
         getModel().restart();
     }
 
@@ -63,7 +63,6 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
 
     @Override
     public void changeOnPacmanEatFixedEdibleAt(Position position) {
-        System.out.println("chega aqui?");
         Tile currentTile = getModel().getGameGrid().get(position.getY() - 1).get(position.getX());
         FixedEdible currentEdible = currentTile.getFixedEdible();
         assert (currentEdible != null);
@@ -84,7 +83,7 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
 
         switch(ghost.getCollisionWithPacmanResult()) {
             case KILL_GHOST: regularGhostController.killGhost(ghost); break;
-            case KILL_PACMAN: pacmanController.killPacmanAt(position); break;
+            case KILL_PACMAN: pacmanController.killPacmanAt(); break;
             default: break;
         }
     }

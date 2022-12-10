@@ -15,8 +15,9 @@ public class Pacman extends MovableEntity implements PacmanObservable {
         this.color = TextColor.ANSI.YELLOW_BRIGHT;
     }
 
-    public void die(Position rebornPosition) {
-        this.position = rebornPosition;
+    public void die() {
+        switchTile(this.startPosition);
+        this.position = this.startPosition;
         lives--;
     }
 
@@ -46,7 +47,6 @@ public class Pacman extends MovableEntity implements PacmanObservable {
 
     @Override
     public void notifyObserversItCollidedWithGhostAt(Position position) {
-        System.out.println("s: " + this.observers.size());
         for(PacmanObserver observer: observers)
             observer.changeOnPacmanCollisionWithGhostAt(position);
     }
