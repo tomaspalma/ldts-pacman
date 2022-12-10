@@ -8,11 +8,16 @@ import java.util.List;
 public class Pacman extends MovableEntity implements PacmanObservable {
     List<PacmanObserver> observers = new ArrayList<>();
     private int lives = 3;
+    private boolean isMouthOpen = true;
     public Pacman(Position position) {
         super(position);
         currentDirection = new PacmanDirectionRight(this);
         this.drawSymbol = currentDirection.getDrawSymbol();
         this.color = TextColor.ANSI.YELLOW_BRIGHT;
+    }
+
+    public boolean isMouthOpen() {
+        return this.isMouthOpen;
     }
 
     public void die() {

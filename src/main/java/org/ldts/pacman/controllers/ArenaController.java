@@ -43,7 +43,7 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
             case EXIT:
                 game.setState(null);
                 break;
-            // case SWITCH_TO_PAUSE_MENU: game.setState(new PauseMenu()); break;
+            // case SWITCH_TO_PAUSE_MENU: entities.setState(new PauseMenu()); break;
             default:
                 stepChildControllers(game, action, time);
                 break;
@@ -81,14 +81,14 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
         Tile currentTile = getModel().getGameGrid().get(position.getY() - 1).get(position.getX());
         Ghost ghost = currentTile.getGhost();
 
-        switch(ghost.getCollisionWithPacmanResult()) {
-            case KILL_GHOST: regularGhostController.killGhost(ghost); break;
+        GameActions.GhostCollisionWithPacman collisionWithPacmanResult = ghost.getCollisionWithPacmanResult();
+        switch(collisionWithPacmanResult) {
+            case KILL_GHOST:
+                pacmanController.addAnimation(new PacmanEatingAnimation(2000, getModel().getPacman()));
+                regularGhostController.killGhost(ghost);
+                break;
             case KILL_PACMAN: pacmanController.killPacmanAt(); break;
             default: break;
         }
-    }
-
-    private void restart() {
-
     }
 }
