@@ -6,6 +6,6 @@ public class Cherry extends FixedEdible {
     public Cherry(Position position) {
         super(position);
         this.color = TextColor.ANSI.RED;
-        this.drawSymbol = "E";
+        this.drawSymbol = ",";
     }
 }
