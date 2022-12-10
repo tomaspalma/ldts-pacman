@@ -2,23 +2,28 @@ package org.ldts.pacman.models;
 
 public class PacmanEatingAnimation extends PacmanAnimation {
 
-    private int animationState = 0;
+    public int control = 0;
+
+    public int getControl() {
+        return this.control;
+    }
 
     public PacmanEatingAnimation(long durationInMilliseconds, Pacman pacman) {
         super(durationInMilliseconds, pacman);
     }
 
     public boolean isFinished() {
-        return this.internalClock.getElapsedMilliseconds() > this.durationInMilliseconds;
+        return false;
     }
 
     @Override
     public void step() {
-        this.internalClock.step();
-        if( (this.internalClock.getElapsedMilliseconds() / 5000) % 2 == 0)
+        if(control % 2 == 0)
             this.closePacmanMouth();
         else
             this.openPacmanMouth();
+
+        control+=3;
     }
 
     private void closePacmanMouth() {

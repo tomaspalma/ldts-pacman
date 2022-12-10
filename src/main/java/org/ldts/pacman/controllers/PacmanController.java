@@ -11,7 +11,6 @@ public class PacmanController extends Controller<Arena> {
     private PacmanDirection wantedDirection;
     private final ArenaController parentController;
     private final Pacman pacman;
-    private final List<PacmanAnimation> animationsToExecute = new ArrayList<>();
 
     public PacmanController(ArenaController parentController, Arena model) {
         super(model);
@@ -24,22 +23,18 @@ public class PacmanController extends Controller<Arena> {
         this.wantedDirection = (PacmanDirection) currentDirection;
     }
 
-    public void addAnimation(PacmanAnimation pacmanAnimation) {
-        this.animationsToExecute.add(pacmanAnimation);
-    }
-
     @Override
     public void step(Game game, GameActions.ControlActions action, long time) throws IOException {
-        executeAnimations();
         movePacmanAccordingTo(action);
+        executeAnimations();
     }
 
     private void executeAnimations() {
-        for(PacmanAnimation pacmanAnimation: animationsToExecute) {
+        for(PacmanAnimation pacmanAnimation: this.pacman.getAnimationsToExecute()) {
             pacmanAnimation.step();
         }
 
-        animationsToExecute.removeIf(Animation::isFinished);
+        this.pacman.getAnimationsToExecute().removeIf(Animation::isFinished);
     }
 
     public void movePacmanAccordingTo(GameActions.ControlActions action) {
@@ -78,10 +73,6 @@ public class PacmanController extends Controller<Arena> {
 
         if(isAbleToMoveInWantedDirection) {
             pacman.setCurrentDirectionTo(this.wantedDirection);
-
-            if(animationsToExecute.size() > 0)
-                return;
-
             this.actIfCollisionWithSpecialEntitiesAt(newWantedPacPosition);
         }
 
@@ -92,7 +83,6 @@ public class PacmanController extends Controller<Arena> {
         boolean collidedWithGhost = newPacmanPosition.isOnSomeGhostPosition();
 
         if(collidedWithEdible)
-            this.addAnimation(new PacmanEatingAnimation(100, this.pacman));
             this.pacman.notifyObserversItAteFixedEdibleAt(newPacmanPosition);
 
         if (collidedWithGhost)

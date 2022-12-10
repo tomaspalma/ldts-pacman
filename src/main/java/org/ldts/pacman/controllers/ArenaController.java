@@ -84,7 +84,6 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
         GameActions.GhostCollisionWithPacman collisionWithPacmanResult = ghost.getCollisionWithPacmanResult();
         switch(collisionWithPacmanResult) {
             case KILL_GHOST:
-                pacmanController.addAnimation(new PacmanEatingAnimation(2000, getModel().getPacman()));
                 regularGhostController.killGhost(ghost);
                 break;
             case KILL_PACMAN: pacmanController.killPacmanAt(); break;
