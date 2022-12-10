@@ -1,5 +1,8 @@
 package org.ldts.pacman.viewers.menus;
 
+import com.googlecode.lanterna.TerminalPosition;
+import com.googlecode.lanterna.TerminalSize;
+import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 import org.ldts.pacman.gui.GUI;
 import org.ldts.pacman.models.Position;
@@ -13,9 +16,11 @@ public class RegularMenuViewer extends Viewer<Menu> {
 
     @Override
     protected void drawEntities(GUI gui) {
+        //gui.createRectangle(new TerminalPosition(7,9), new TerminalSize(6,3), '-');
 
 
-        gui.writeToScreen(new Position(5, 5), getModel().getTitle(), getModel().getColor());
+
+        gui.writeToScreen(new Position(5, 4), getModel().getTitle(), getModel().getColor());
 
         for (int i = 0; i < getModel().getNumberOptions(); i++) {
             if (i == getModel().getCurrentNumber())
@@ -23,6 +28,8 @@ public class RegularMenuViewer extends Viewer<Menu> {
             else
                 gui.writeToScreen(new Position(8, 9+  i), getModel().getOption(i).getMessage(), TextColor.ANSI.WHITE);
         }
+
     }
+
 
 }
