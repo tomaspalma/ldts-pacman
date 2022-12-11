@@ -1,23 +1,20 @@
 package org.ldts.pacman.controllers;
 
 import org.ldts.pacman.Game;
+import org.ldts.pacman.sounds.SFX;
 import org.ldts.pacman.models.Arena;
 import org.ldts.pacman.models.GameActions;
-import org.ldts.pacman.models.menus.GameOverMenu;
-import org.ldts.pacman.models.menus.PauseMenu;
-import org.ldts.pacman.states.ArenaState;
-import org.ldts.pacman.states.menus.PauseMenuState;
-import org.ldts.pacman.states.menus.RegularMenuState;
-import org.ldts.pacman.models.EatenPowerPelletObserver;
 import org.ldts.pacman.models.Ghost;
 import org.ldts.pacman.models.PacmanObserver;
 import org.ldts.pacman.models.*;
 
 import java.io.IOException;
+import java.util.List;
 
 public class ArenaController extends Controller<Arena> implements PacmanObserver {
     private final PacmanController pacmanController;
     private final RegularGhostController regularGhostController;
+    private final List<SFX> sounds;
     private int currentLevel = 0;
 
     public PacmanController getPacmanController() {
@@ -33,6 +30,7 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
 
         this.pacmanController = new PacmanController(this, model);
         this.regularGhostController = new RegularGhostController(this, model);
+        this.sounds = null;
     }
 
     @Override

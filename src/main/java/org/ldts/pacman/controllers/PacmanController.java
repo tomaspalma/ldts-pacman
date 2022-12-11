@@ -82,11 +82,14 @@ public class PacmanController extends Controller<Arena> {
         boolean collidedWithEdible = newPacmanPosition.isOnFixedEdiblePosition();
         boolean collidedWithGhost = newPacmanPosition.isOnSomeGhostPosition();
 
-        if(collidedWithEdible)
+        if(collidedWithEdible) {
             this.pacman.notifyObserversItAteFixedEdibleAt(newPacmanPosition);
 
-        if (collidedWithGhost)
+        }
+
+        if (collidedWithGhost) {
             this.pacman.notifyObserversItCollidedWithGhostAt(newPacmanPosition);
+        }
     }
 
     public void killPacmanAt() {
