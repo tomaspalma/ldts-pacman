@@ -20,6 +20,12 @@ public class RegularGhostController extends Controller<Arena> {
     @Override
     public void step(Game game, GameActions.ControlActions action, long time) throws IOException {
         for(RegularGhost regularGhost: regularGhostsToControl) {
+            if(regularGhost instanceof Blinky) {
+                System.out.println("Current: " + regularGhost.getCurrentState().getClass());
+                System.out.println("Previous: " + regularGhost.getPreviousState().getClass());
+                System.out.println("Can move to gate: " + regularGhost.canCurrentlyMoveToGhostHouseGate());
+            }
+
             if(stateChangedIn(regularGhost)) regularGhost.getCurrentState().applyChangesToGhost();
             
             if(numberOfSteps > 1) {
@@ -29,6 +35,14 @@ public class RegularGhostController extends Controller<Arena> {
                 numberOfSteps++;
             } 
         }
+    }
+
+    private void reviveDeadGhost(RegularGhost regularGhost) {
+        GhostState currentGhostState = regularGhost.getCurrentState();
+        boolean isGhostDead = currentGhostState instanceof DeadState;
+
+        if(isGhostDead)
+            currentGhostState.transitionToState(new GhostHouseState(regularGhost));
     }
 
     private boolean stateChangedIn(Ghost ghost) {
@@ -44,6 +58,11 @@ public class RegularGhostController extends Controller<Arena> {
 
         ghost.setCurrentDirectionTo(ghost.getCurrentDirection().generateNextDirectionAfterChangeTo(realNewPosition));
         ghost.setPosition(realNewPosition);
+
+        this.reviveDeadGhost((RegularGhost) ghost);
+
+        if(realNewPosition.isOnGatePosition())
+            ghost.setCanCurrentlyMoveToGhostHouseGateTo(false);
 
         checkCollisionWithPacman(ghost, realNewPosition);
     }

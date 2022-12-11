@@ -12,7 +12,7 @@ public class PacmanDirectionUp extends PacmanDirection {
     }
 
     @Override
-    public Position getPositionToForwardLevel(int forwardLevel) {
+    public Position getGhostTargetTileWithForwardLevel(int forwardLevel) {
         int newY = this.movableEntity.getPosition().getY() - forwardLevel;
         int newX = this.movableEntity.getPosition().getX() - forwardLevel;
 

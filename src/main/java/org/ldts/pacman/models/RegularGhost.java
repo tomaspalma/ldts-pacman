@@ -13,6 +13,12 @@ public abstract class RegularGhost extends Ghost implements EatenPowerPelletObse
         this.drawSymbol = "^";
         this.frightenedStrategy = new FrightenedRunAwayStrategy();
         this.dyingStrategy = new GhostHouseDyingStrategy();
+        this.canCurrentlyMoveToGhostHouseGate = false;
+    }
+
+    @Override
+    public void die() {
+        this.currentState.transitionToState(new DeadState(this));
     }
 
     // Regular ghosts will always behave this way
@@ -30,7 +36,8 @@ public abstract class RegularGhost extends Ghost implements EatenPowerPelletObse
                 Thread.sleep(5000);
                 synchronized (noOfTimesConsequentlyEaten) {
                     noOfTimesConsequentlyEaten.getAndDecrement();
-                    if(noOfTimesConsequentlyEaten.intValue() == 0) this.currentState.transitionToState(new ChasingState(this));
+                    if(noOfTimesConsequentlyEaten.intValue() == 0)
+                        this.currentState.transitionToState(new ChasingState(this));
                 }
                 this.color = this.originalColor;
             } catch (InterruptedException e) {
@@ -40,6 +47,7 @@ public abstract class RegularGhost extends Ghost implements EatenPowerPelletObse
 
         thread.start();
     }
+
 
     public void changeColor(TextColor.ANSI newColor) {
         this.color = newColor;
