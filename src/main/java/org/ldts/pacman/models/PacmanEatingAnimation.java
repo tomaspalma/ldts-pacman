@@ -2,7 +2,7 @@ package org.ldts.pacman.models;
 
 public class PacmanEatingAnimation extends PacmanAnimation {
 
-    public int control = 0;
+    private int control = 0;
 
     public int getControl() {
         return this.control;
@@ -18,12 +18,17 @@ public class PacmanEatingAnimation extends PacmanAnimation {
 
     @Override
     public void step() {
-        if(control % 2 == 0)
+        if(this.control % 2 == 0) {
             this.closePacmanMouth();
+            this.control = 0;
+        }
         else
             this.openPacmanMouth();
 
-        control+=3;
+
+
+        control += 1000001;
+        System.out.println(control);
     }
 
     private void closePacmanMouth() {
