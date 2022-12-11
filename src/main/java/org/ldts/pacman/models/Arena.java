@@ -12,7 +12,7 @@ public class Arena {
     private Pacman pacman;
     private List<Obstacle> obstaclesList = new ArrayList<>();
     private final List<List<Tile>> gameGrid = new ArrayList<>();
-    private final ArenaLevelLoader arenaLevelLoader = null;
+    private final ArenaLevelLoader levelLoader;
     private final List<GameLevel> levels = new ArrayList<>();
     private Position startPacmanPosition;
     private int ateGhostsPoints = 200;
@@ -28,9 +28,13 @@ public class Arena {
     public Arena(int width, int height, String mapToLoad) throws IOException {
         this.width = width;
         this.height = height;
-        this.mapLoader = new FileMapArenaLoader(this, mapToLoad);
 
+        this.mapLoader = new FileMapArenaLoader(this, mapToLoad);
         mapLoader.load();
+
+        this.levelLoader = new DefaultArenaLevelLoader(1, this,
+            new DefaultStartSequenceLoader(this.getRegularGhostsList()), new DefaultDuringSequenceLoader(this.getRegularGhostsList()));
+        levelLoader.load();
     }
 
     public void createGhostHouse(Position position, int width, int height) {

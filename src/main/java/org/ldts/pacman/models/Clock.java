@@ -21,5 +21,10 @@ public class Clock {
         long currentTime = this.getCurrentSystemTime();
         elapsedMilliseconds += (currentTime - this.previousTime);
         this.previousTime = currentTime;
+        System.out.println("ELAPSED: " + elapsedMilliseconds);
+    }
+
+    public void reset() {
+        this.elapsedMilliseconds = 0;
     }
 }

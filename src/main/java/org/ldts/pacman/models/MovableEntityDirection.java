@@ -1,7 +1,5 @@
 package org.ldts.pacman.models;
 
-import java.util.List;
-
 public abstract class MovableEntityDirection {
     protected final MovableEntity movableEntity;
     protected final Arena movableEntityArena;

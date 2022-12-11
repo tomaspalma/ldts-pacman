@@ -1,7 +1,5 @@
 package org.ldts.pacman.models;
 
-import com.googlecode.lanterna.TextColor;
-
 public class ChasingState extends GhostState {
 
     public ChasingState(Ghost ghost) {

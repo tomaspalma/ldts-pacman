@@ -1,6 +1,6 @@
 package org.ldts.pacman.models;
 
-public class SpecificGhostStartSequence {
+public class SpecificGhostStartSequence implements LevelStateSequence {
 
     private final Ghost ghost;
     private final GhostState newStateToTransitionTo;

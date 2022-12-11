@@ -20,11 +20,12 @@ public class RegularGhostController extends Controller<Arena> {
     @Override
     public void step(Game game, GameActions.ControlActions action, long time) throws IOException {
         for(RegularGhost regularGhost: regularGhostsToControl) {
-            if(regularGhost instanceof Blinky) {
+            /*if(regularGhost instanceof Clyde || regularGhost instanceof Inky) {
+                System.out.println(regularGhost.getClass());
                 System.out.println("Current: " + regularGhost.getCurrentState().getClass());
                 System.out.println("Previous: " + regularGhost.getPreviousState().getClass());
                 System.out.println("Can move to gate: " + regularGhost.canCurrentlyMoveToGhostHouseGate());
-            }
+            }*/
 
             if(stateChangedIn(regularGhost)) regularGhost.getCurrentState().applyChangesToGhost();
             

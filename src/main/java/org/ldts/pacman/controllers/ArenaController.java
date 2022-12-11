@@ -3,17 +3,12 @@ package org.ldts.pacman.controllers;
 import org.ldts.pacman.Game;
 import org.ldts.pacman.models.Arena;
 import org.ldts.pacman.models.GameActions;
-import org.ldts.pacman.models.menus.GameOverMenu;
-import org.ldts.pacman.models.menus.PauseMenu;
-import org.ldts.pacman.states.ArenaState;
-import org.ldts.pacman.states.menus.PauseMenuState;
-import org.ldts.pacman.states.menus.RegularMenuState;
-import org.ldts.pacman.models.EatenPowerPelletObserver;
 import org.ldts.pacman.models.Ghost;
 import org.ldts.pacman.models.PacmanObserver;
 import org.ldts.pacman.models.*;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 
 public class ArenaController extends Controller<Arena> implements PacmanObserver {
     private final PacmanController pacmanController;
@@ -36,9 +31,12 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
     }
 
     @Override
-    public void step(Game game, GameActions.ControlActions action, long time) throws IOException {
-        if (getModel().getGeneralFixedEdibleList().isEmpty())
+    public void step(Game game, GameActions.ControlActions action, long time) throws IOException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        boolean levelEnded = getModel().getGeneralFixedEdibleList().isEmpty();
+        if (levelEnded)
             game.setState(null); // TODO set state para um menu a dizer que venceu
+
+        getModel().getLevels().get(currentLevel).step();
 
         switch (action) {
             case EXIT:
