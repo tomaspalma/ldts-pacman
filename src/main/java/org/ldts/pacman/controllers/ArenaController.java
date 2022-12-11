@@ -11,6 +11,7 @@ import java.io.IOException;
 public class ArenaController extends Controller<Arena> implements PacmanObserver {
     private final PacmanController pacmanController;
     private final RegularGhostController regularGhostController;
+    private int currentLevel = 0;
 
     public PacmanController getPacmanController() {
         return pacmanController;
@@ -33,7 +34,7 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
 
         switch(action) {
             case EXIT: game.setState(null); break;
-            // case SWITCH_TO_PAUSE_MENU: game.setState(new PauseMenu()); break;
+            //case SWITCH_TO_PAUSE_MENU: game.setState(new PauseMenu()); break;
             default: stepChildControllers(game, action, time); break;
         }
     }
@@ -45,7 +46,6 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
     private void stepChildControllers(Game game, GameActions.ControlActions action, long time) throws IOException {
         pacmanController.step(game, action, time);
         regularGhostController.step(game, action, time);
-        getModel().getClock().step();
     }
 
     @Override

@@ -2,10 +2,10 @@ package org.ldts.pacman.models;
 
 import java.io.IOException;
 
-public abstract class ArenaLoader {
+public abstract class MapArenaLoader {
     protected final Arena arena;
 
-    protected ArenaLoader(Arena arena) {
+    protected MapArenaLoader(Arena arena) {
         this.arena = arena;
     }
    

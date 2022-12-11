@@ -15,6 +15,7 @@ public abstract class RegularGhost extends Ghost implements EatenPowerPelletObse
         this.drawSymbol = "^";
         this.frightenedStrategy = new FrightenedRunAwayStrategy();
         this.dyingStrategy = new GhostHouseDyingStrategy();
+        this.nextStartState = new ChasingState(this);
     }
 
     // Regular ghosts will always behave this way

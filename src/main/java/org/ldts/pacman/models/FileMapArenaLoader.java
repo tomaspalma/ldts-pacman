@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 
 // Ler o mapa e carregar as entidades respetivas para a lista da arena
-public class FileArenaLoader extends ArenaLoader {
+public class FileMapArenaLoader extends MapArenaLoader {
     private final String mapToLoad;
     private final int width;
     private final int height;
@@ -18,7 +18,7 @@ public class FileArenaLoader extends ArenaLoader {
     private final BufferedReader mapFileReader;
     private final HashMap<Character, TeletransporterTile> possibleLetterToCorrespondence = new HashMap<>();
 
-    public FileArenaLoader(Arena arena, String mapToLoad) throws FileNotFoundException {
+    public FileMapArenaLoader(Arena arena, String mapToLoad) throws FileNotFoundException {
         super(arena);
         this.mapToLoad = mapToLoad;
         this.width = 20;

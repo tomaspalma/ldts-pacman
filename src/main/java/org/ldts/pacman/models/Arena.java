@@ -1,5 +1,7 @@
 package org.ldts.pacman.models;
 
+import org.ldts.pacman.GameLevel;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,28 +11,25 @@ public class Arena {
     private final int width;
     private int ghostHouseSize = 0;
     private GhostHouse ghostHouse;
-
     private Pacman pacman;
     private List<Obstacle> obstaclesList = new ArrayList<>();
     private final List<List<Tile>> gameGrid = new ArrayList<>();
-
+    private final List<GameLevel> levels = new ArrayList<>();
     private Position startPacmanPosition;
+    private int ateGhostsPoints = 200;
     
     private final List<RegularGhost> regularGhostsList = new ArrayList<>();
 
     private final List<FixedEdible> generalFixedEdibleList = new ArrayList<>();
 
-    private final ArenaLoader loader;
-
-    private Clock clock;
+    private final MapArenaLoader loader;
 
     private int score = 0;
 
     public Arena(int width, int height, String mapToLoad) throws IOException {
         this.width = width;
         this.height = height;
-        this.loader = new FileArenaLoader(this, mapToLoad);
-        this.clock = new Clock();
+        this.loader = new FileMapArenaLoader(this, mapToLoad);
 
         loader.load();
     }
@@ -41,6 +40,10 @@ public class Arena {
 
     public GhostHouse getGhostHouse() {
         return this.ghostHouse;
+    }
+
+    public List<GameLevel> getLevels() {
+        return levels;
     }
 
     public void addToGeneralFixedEdibleList(FixedEdible fixedEdible) {
@@ -82,12 +85,8 @@ public class Arena {
         this.regularGhostsList.add(ghost);
     }
 
-    public ArenaLoader getLoader() {
+    public MapArenaLoader getLoader() {
         return loader;
-    }
-
-    public Clock getClock() {
-        return clock;
     }
 
     public int getScore() {
