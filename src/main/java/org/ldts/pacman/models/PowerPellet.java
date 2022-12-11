@@ -13,6 +13,7 @@ public class PowerPellet extends FixedEdible implements GameObservable {
         super(position);
         this.drawSymbol = "O";
         this.color = TextColor.ANSI.WHITE;
+        this.points = 50;
     }
 
     @Override

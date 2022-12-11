@@ -7,5 +7,7 @@ public class Pacdot extends FixedEdible {
         super(position);
         this.drawSymbol = ".";
         this.color = TextColor.ANSI.YELLOW;
+        this.points = 10;
     }
+
 }
