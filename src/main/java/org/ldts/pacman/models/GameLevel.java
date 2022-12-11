@@ -37,9 +37,9 @@ public class GameLevel {
     public void step() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         this.clock.step();
 
-        if(otherStartSequencesRemaining)
+        if(this.otherStartSequencesRemaining)
             this.stepStartSequence();
-        else if(otherDuringSequencesRemaining)
+        else if(this.otherDuringSequencesRemaining)
             this.stepDuringSequence();
     }
 
@@ -65,10 +65,12 @@ public class GameLevel {
     }
 
     private void stepDuringSequence() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        if(this.duringStateMachineCounter >= this.duringStateMachine.size()) return;
+
         GhostDuringStateSequence ghostDuringStateSequence = this.duringStateMachine.get(duringStateMachineCounter);
         if(isTimeToActivate(ghostDuringStateSequence)) {
             ghostDuringStateSequence.execute(this.ghostsList);
-            this.startStateMachineCounter += 1;
+            this.duringStateMachineCounter += 1;
 
             this.otherStartSequencesRemaining = (this.startStateMachineCounter < this.startStateMachine.size());
             if(this.otherStartSequencesRemaining)
@@ -86,4 +88,20 @@ public class GameLevel {
                 break;
         }
     }
+
+    public void restart() {
+        this.resetRemainingBooleans();
+        this.resetCounters();
+    }
+
+    private void resetCounters() {
+        this.startStateMachineCounter = 0;
+        this.duringStateMachineCounter = 0;
+    }
+
+    private void resetRemainingBooleans() {
+        this.otherStartSequencesRemaining = true;
+        this.otherDuringSequencesRemaining = true;
+    }
+
 }

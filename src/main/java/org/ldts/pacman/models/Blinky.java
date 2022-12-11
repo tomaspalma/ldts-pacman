@@ -9,7 +9,7 @@ public class Blinky extends RegularGhost {
         this.currentState = this.previousState;
         this.color = TextColor.ANSI.RED;
         this.canCurrentlyMoveToGhostHouseGate = false;
-        this.startSequenceInMilliseconds = 10000;
+        this.startSequenceInMilliseconds = 4000;
         this.originalColor = color;
         this.chaseStrategy = new AgressiveChaseStrategy();
         this.scatterStrategy = new ScatterToTopRight();
