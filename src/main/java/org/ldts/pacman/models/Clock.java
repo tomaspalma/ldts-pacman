@@ -5,12 +5,12 @@ public class Clock {
     private long elapsedMilliseconds;
 
     public Clock() {
-        previousTime = System.currentTimeMillis();
-        elapsedMilliseconds = 0;
+        this.previousTime = System.currentTimeMillis();
+        this.elapsedMilliseconds = 0;
     }
 
-    public long getElapsed() {
-        return elapsedMilliseconds;
+    public long getElapsedMilliseconds() {
+        return this.elapsedMilliseconds;
     }
 
     public long getCurrentSystemTime() {
@@ -19,7 +19,7 @@ public class Clock {
 
     public void step() {
         long currentTime = this.getCurrentSystemTime();
-        elapsedMilliseconds += (currentTime - previousTime);
-        previousTime = currentTime;
+        elapsedMilliseconds += (currentTime - this.previousTime);
+        this.previousTime = currentTime;
     }
 }

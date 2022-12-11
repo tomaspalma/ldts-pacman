@@ -126,9 +126,9 @@ public class Arena {
     }
 
     public void removeFromGameGridAt(Position position, Entity entity) {
-        RegularTile regularTile = (RegularTile) gameGrid.get(position.getY() - 1).get(position.getX());
+        Tile tile = gameGrid.get(position.getY() - 1).get(position.getX());
 
-        regularTile.removeChild(entity);
+        tile.removeChild(entity);
     }
 
     public boolean isObstacleAt(Position position) {
@@ -154,5 +154,14 @@ public class Arena {
        }
 
        return null;
+    }
+
+    public void restart() {
+        Position ghostStartPosition = null;
+        for(RegularGhost regularGhost: regularGhostsList) {
+            ghostStartPosition = regularGhost.getStartPosition();
+            regularGhost.switchTile(ghostStartPosition);
+            regularGhost.setPosition(ghostStartPosition);
+        }
     }
 }

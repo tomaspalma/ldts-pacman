@@ -4,6 +4,8 @@ import org.ldts.pacman.Game;
 import org.ldts.pacman.models.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PacmanController extends Controller<Arena> {
     private PacmanDirection wantedDirection;
@@ -15,12 +17,24 @@ public class PacmanController extends Controller<Arena> {
         this.parentController = parentController;
 
         pacman = getModel().getPacman();
-        this.wantedDirection = (PacmanDirection) pacman.getCurrentDirection();
+        this.pacman.addObserver(parentController);
+
+        MovableEntityDirection currentDirection = pacman.getCurrentDirection();
+        this.wantedDirection = (PacmanDirection) currentDirection;
     }
 
     @Override
     public void step(Game game, GameActions.ControlActions action, long time) throws IOException {
         movePacmanAccordingTo(action);
+        executeAnimations();
+    }
+
+    private void executeAnimations() {
+        for(PacmanAnimation pacmanAnimation: this.pacman.getAnimationsToExecute()) {
+            pacmanAnimation.step();
+        }
+
+        this.pacman.getAnimationsToExecute().removeIf(Animation::isFinished);
     }
 
     public void movePacmanAccordingTo(GameActions.ControlActions action) {
@@ -51,52 +65,32 @@ public class PacmanController extends Controller<Arena> {
             actIfCollisionWithSpecialEntitiesAt(tileTrimmedPacmanPosition);
         }
     }
-
     private void tryToChangeToWantedDirection() {
         Position newWantedPacPosition = this.wantedDirection.getNextPosition();
 
         boolean isAbleToMoveInWantedDirection = !newWantedPacPosition.isOnSomeObstaclePosition()
                 && !newWantedPacPosition.isOnGatePosition();
 
-        if(isAbleToMoveInWantedDirection)
+        if(isAbleToMoveInWantedDirection) {
             pacman.setCurrentDirectionTo(this.wantedDirection);
+            this.actIfCollisionWithSpecialEntitiesAt(newWantedPacPosition);
+        }
+
     }
 
     private void actIfCollisionWithSpecialEntitiesAt(Position newPacmanPosition) {
         boolean collidedWithEdible = newPacmanPosition.isOnFixedEdiblePosition();
         boolean collidedWithGhost = newPacmanPosition.isOnSomeGhostPosition();
 
-        if(collidedWithEdible) {
-            eatEdibleAt(newPacmanPosition);
-        } else if (collidedWithGhost) {
-            processCollisionWithGhostAt(newPacmanPosition);
-        }
+        if(collidedWithEdible)
+            this.pacman.notifyObserversItAteFixedEdibleAt(newPacmanPosition);
+
+        if (collidedWithGhost)
+            this.pacman.notifyObserversItCollidedWithGhostAt(newPacmanPosition);
     }
 
-    private void processCollisionWithGhostAt(Position position) {
-        Tile currentTile = getModel().getGameGrid().get(position.getY() - 1).get(position.getX());
-        Ghost ghost = currentTile.getGhost();
-        assert(ghost != null);
-        
-        switch(ghost.getCollisionWithPacmanResult()) {
-            case KILL_GHOST: parentController.getRegularGhostController().killGhost(ghost); break;
-            case KILL_PACMAN: parentController.processPacmanLoseLife(); break;
-            default: break;
-        }
-    }
-
-    private void eatEdibleAt(Position position) {
-        Tile currentTile = getModel().getGameGrid().get(position.getY() - 1).get(position.getX());
-        FixedEdible currentEdible = currentTile.getFixedEdible();
-        assert(currentEdible != null);
-
-        if(currentEdible instanceof PowerPelletObservable) {
-            ((PowerPelletObservable) currentEdible).notifyObservers();
-        }
-
-        getModel().sumScoreWith(1);
-        getModel().removeFromGameGridAt(position, currentEdible);
-        getModel().getGeneralFixedEdibleList().remove(currentEdible);
+    public void killPacmanAt() {
+        parentController.processPacmanLoseLife();
     }
 
     private void changeLife(int i) {

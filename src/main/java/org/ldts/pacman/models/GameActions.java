@@ -15,6 +15,7 @@ public class GameActions {
         MOVE_DOWN,
         EXIT,
         SWITCH_TO_PAUSE_MENU,
+        SELECT,
         NONE,
     }
 }

@@ -5,7 +5,7 @@ import com.googlecode.lanterna.TextColor;
 public class Blinky extends RegularGhost {
     protected Blinky(Position position) {
         super(position);
-        this.previousState = new ChasingState(this); //alterar para scatter
+        this.previousState = new ChasingState(this);
         this.currentState = this.previousState;
         this.color = TextColor.ANSI.RED;
         this.alreadyPassedGhostHouseGateChasing = true;

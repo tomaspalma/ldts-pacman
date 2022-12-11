@@ -138,6 +138,7 @@ public class FileMapArenaLoader extends MapArenaLoader {
     @Override
     protected void loadPacmanAt(Position position) {
         Pacman pacman = new Pacman(position);
+
         this.arena.setPacman(pacman);
 
         this.addEntityToGrid(pacman);

@@ -42,13 +42,13 @@ public class GameLevel {
         this.clock.step();
 
         long sequenceDurationInMilliseconds = this.startStateMachine.get(startStateMachineCounter).getTimeToBeActivatedInMilliseconds();
-        if(sequenceDurationInMilliseconds < this.clock.getElapsed()) {
+        if(sequenceDurationInMilliseconds < this.clock.getElapsedMilliseconds()) {
             this.startStateMachine.get(startStateMachineCounter).execute();
             this.startStateMachineCounter += 1;
 
             otherSequencesStillRemaining = (this.startStateMachineCounter == this.startStateMachine.size() - 1);
             if(otherSequencesStillRemaining)
-                this.checkIfOtherStartSequencesHavePassed(this.startStateMachine, this.clock.getElapsed());
+                this.checkIfOtherStartSequencesHavePassed(this.startStateMachine, this.clock.getElapsedMilliseconds());
         }
     }
 

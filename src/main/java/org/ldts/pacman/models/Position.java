@@ -98,8 +98,6 @@ public class Position {
     public boolean isOnPacmanPosition() {
         Tile tile = this.arena.getGameGrid().get(this.y - 1).get(this.x);
 
-        if(tile.containsPacman()) System.out.println(this.x + ", " + this.y);
-
         return tile.containsPacman();
     }
 
@@ -112,9 +110,14 @@ public class Position {
     public boolean isInvalidTo(MovableEntity movableEntity) {
         if(this.isOutOfBounds()) return true;
 
-        boolean isAliveGhostAndOnHouseGate = movableEntity instanceof Ghost && this.isOnGatePosition();
+        boolean canMoveToHouseGate = false;
+        if(movableEntity instanceof Ghost) {
+            canMoveToHouseGate = ((Ghost) movableEntity).getIsAlreadyPassedGhostHouseGateChasing();
+        }
 
-        return this.isOnSomeObstaclePosition() || isAliveGhostAndOnHouseGate;
+        boolean isOnGatePositionAndCantBe = !canMoveToHouseGate && this.isOnGatePosition();
+
+        return this.isOnSomeObstaclePosition() || isOnGatePositionAndCantBe;
     }
 
     public Vector getVectorTo(Position position1) {

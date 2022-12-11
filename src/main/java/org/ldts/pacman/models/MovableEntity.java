@@ -3,9 +3,15 @@ package org.ldts.pacman.models;
 import java.beans.JavaBean;
 
 public abstract class MovableEntity extends Entity {
+    protected final Position startPosition;
     protected MovableEntityDirection currentDirection;
     protected MovableEntity(Position position) {
         super(position);
+        this.startPosition = new Position(position.getX(), position.getY(), position.getArena());
+    }
+
+    public Position getStartPosition() {
+        return this.startPosition;
     }
 
     public void setPosition(Position position) {

@@ -10,12 +10,11 @@ public abstract class Ghost extends MovableEntity {
 
     protected GhostState previousState;
     protected GhostState currentState;
-
     protected TextColor.ANSI originalColor;
     protected long startSequenceInMilliseconds;
     protected GhostState nextStartState;
 
-    protected boolean alreadyPassedGhostHouseGateChasing;
+    protected boolean alreadyPassedGhostHouseGateChasing = false;
 
     public GhostState getNextStartState() {
         return nextStartState;
@@ -31,6 +30,10 @@ public abstract class Ghost extends MovableEntity {
 
     public ChaseStrategy getChaseStrategy() {
         return chaseStrategy;
+    }
+
+    public boolean getIsAlreadyPassedGhostHouseGateChasing() {
+        return this.alreadyPassedGhostHouseGateChasing;
     }
 
     public FrightenedStrategy getFrightenedStrategy() {

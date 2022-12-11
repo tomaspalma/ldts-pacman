@@ -27,6 +27,13 @@ public class GhostHouse {
         return new Vector(xOffset, yOffset).getPositionBasedOnSumWith(upperLeftPosition);
     }
 
+    public Position getAvailablePosition() {
+        int xOffset = (this.ghostHolder.size() % width) + 1;
+        int yOffset = (this.ghostHolder.size() / height) + 1;
+
+        return new Vector(xOffset, yOffset).getPositionBasedOnSumWith(upperLeftPosition);
+    }
+
     public GhostHouseGate getGhostHouseGate() {
         return gate;
     }

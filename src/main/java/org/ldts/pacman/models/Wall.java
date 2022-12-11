@@ -5,7 +5,7 @@ import com.googlecode.lanterna.TextColor;
 public class Wall extends Obstacle {
     public Wall(Position position) {
         super(position);
-        this.drawSymbol = "#";
+        this.drawSymbol = ";";
         this.color = TextColor.ANSI.BLUE;
     }
 }

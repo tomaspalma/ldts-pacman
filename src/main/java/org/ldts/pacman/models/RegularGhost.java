@@ -6,12 +6,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class RegularGhost extends Ghost implements EatenPowerPelletObserver {
 
-    private final Position startPosition;
     private final AtomicInteger noOfTimesConsequentlyEaten = new AtomicInteger(0);
 
     protected RegularGhost(Position position) {
         super(position);
-        this.startPosition = new Position(position.getX(), position.getY(), this.position.getArena());
         this.drawSymbol = "^";
         this.frightenedStrategy = new FrightenedRunAwayStrategy();
         this.dyingStrategy = new GhostHouseDyingStrategy();

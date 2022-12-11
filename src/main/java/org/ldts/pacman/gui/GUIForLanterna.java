@@ -105,6 +105,8 @@ public class GUIForLanterna implements GUI {
                 return GameActions.ControlActions.MOVE_LEFT;
             case ArrowRight:
                 return GameActions.ControlActions.MOVE_RIGHT;
+            case Enter:
+                return GameActions.ControlActions.SELECT;
             case Escape:
                 return GameActions.ControlActions.SWITCH_TO_PAUSE_MENU;
         }
@@ -154,7 +156,7 @@ public class GUIForLanterna implements GUI {
         GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
         graphicsEnvironment.registerFont(newFont);
 
-        Font loadedFont = newFont.deriveFont(Font.PLAIN, 25);
+        Font loadedFont = newFont.deriveFont(Font.PLAIN, 40);
 
         return AWTTerminalFontConfiguration.newInstance(loadedFont);
     }
