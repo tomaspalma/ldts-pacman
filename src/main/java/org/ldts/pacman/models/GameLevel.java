@@ -1,4 +1,4 @@
-package org.ldts.pacman;
+package org.ldts.pacman.models;
 
 import org.ldts.pacman.models.Clock;
 import org.ldts.pacman.models.GhostDuringStateSequence;
@@ -16,7 +16,6 @@ public class GameLevel {
 
     private int startStateMachineCounter = 0;
     private int duringStateMachineCounter = 0;
-
 
     private final Clock clock;
 

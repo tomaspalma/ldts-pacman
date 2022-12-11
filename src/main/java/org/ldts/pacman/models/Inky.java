@@ -11,7 +11,7 @@ public class Inky extends RegularGhost {
         this.currentState = this.previousState;
         this.color = TextColor.ANSI.BLUE_BRIGHT;
         this.startSequenceInMilliseconds = 5000;
-        this.alreadyPassedGhostHouseGateChasing = false;
+        this.canCurrentlyMoveToGhostHouseGate = false;
         this.originalColor = this.color;
         this.chaseStrategy = new PatrolChaseStrategy();
         this.scatterStrategy = new ScatterToBottomRight();

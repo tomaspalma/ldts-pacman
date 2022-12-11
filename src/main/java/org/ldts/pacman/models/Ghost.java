@@ -14,7 +14,7 @@ public abstract class Ghost extends MovableEntity {
     protected long startSequenceInMilliseconds;
     protected GhostState nextStartState;
 
-    protected boolean alreadyPassedGhostHouseGateChasing = false;
+    protected boolean canCurrentlyMoveToGhostHouseGate;
 
     public GhostState getNextStartState() {
         return nextStartState;
@@ -32,8 +32,12 @@ public abstract class Ghost extends MovableEntity {
         return chaseStrategy;
     }
 
-    public boolean getIsAlreadyPassedGhostHouseGateChasing() {
-        return this.alreadyPassedGhostHouseGateChasing;
+    public boolean canCurrentlyMoveToGhostHouseGate() {
+        return this.canCurrentlyMoveToGhostHouseGate;
+    }
+
+    public void setCanCurrentlyMoveToGhostHouseGateTo(boolean newValue) {
+        this.canCurrentlyMoveToGhostHouseGate = newValue;
     }
 
     public FrightenedStrategy getFrightenedStrategy() {
@@ -60,10 +64,8 @@ public abstract class Ghost extends MovableEntity {
         return currentState;
     }
 
-    public void die() {
-        this.currentState.transitionToState(new DeadState(this));
-    }
-    
+    public abstract void die();
+
     public boolean isOnGhostHouseState() {
         return this.currentState instanceof GhostHouseState;
     }
@@ -78,4 +80,12 @@ public abstract class Ghost extends MovableEntity {
         return this.originalColor;
     }
 
+    public boolean willBeInInvalidPosition(Position newPosition) {
+        if(newPosition.isOutOfBounds()) return true;
+
+        boolean canMoveToHouseGate = this.canCurrentlyMoveToGhostHouseGate();
+        boolean isOnGatePositionAndCantBe = !canMoveToHouseGate && newPosition.isOnGatePosition();
+
+        return newPosition.isOnSomeObstaclePosition() || isOnGatePositionAndCantBe;
+    }
 }

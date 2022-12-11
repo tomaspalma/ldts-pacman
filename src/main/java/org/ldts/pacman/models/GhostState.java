@@ -19,5 +19,11 @@ public abstract class GhostState {
         currentDirection.turnAround();
 
         this.affectedGhost.setPreviousStateTo(this);
+
+        boolean ghostIsGoingToChaseMode = newGhostState instanceof ChasingState;
+        boolean ghostWasOnGhostHouseMode = this.affectedGhost.getPreviousState() instanceof GhostHouseState;
+        if(ghostWasOnGhostHouseMode && ghostIsGoingToChaseMode) {
+            this.affectedGhost.setCanCurrentlyMoveToGhostHouseGateTo(true);
+        }
     }
 }

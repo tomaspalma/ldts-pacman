@@ -1,7 +1,5 @@
 package org.ldts.pacman.models;
 
-import org.ldts.pacman.GameLevel;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +12,7 @@ public class Arena {
     private Pacman pacman;
     private List<Obstacle> obstaclesList = new ArrayList<>();
     private final List<List<Tile>> gameGrid = new ArrayList<>();
+    private final ArenaLevelLoader arenaLevelLoader = null;
     private final List<GameLevel> levels = new ArrayList<>();
     private Position startPacmanPosition;
     private int ateGhostsPoints = 200;
@@ -22,16 +21,16 @@ public class Arena {
 
     private final List<FixedEdible> generalFixedEdibleList = new ArrayList<>();
 
-    private final MapArenaLoader loader;
+    private final MapArenaLoader mapLoader;
 
     private int score = 0;
 
     public Arena(int width, int height, String mapToLoad) throws IOException {
         this.width = width;
         this.height = height;
-        this.loader = new FileMapArenaLoader(this, mapToLoad);
+        this.mapLoader = new FileMapArenaLoader(this, mapToLoad);
 
-        loader.load();
+        mapLoader.load();
     }
 
     public void createGhostHouse(Position position, int width, int height) {
@@ -85,8 +84,8 @@ public class Arena {
         this.regularGhostsList.add(ghost);
     }
 
-    public MapArenaLoader getLoader() {
-        return loader;
+    public MapArenaLoader getMapLoader() {
+        return mapLoader;
     }
 
     public int getScore() {

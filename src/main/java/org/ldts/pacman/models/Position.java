@@ -107,19 +107,6 @@ public class Position {
         return tile.containsFixedEdible();
     }
 
-    public boolean isInvalidTo(MovableEntity movableEntity) {
-        if(this.isOutOfBounds()) return true;
-
-        boolean canMoveToHouseGate = false;
-        if(movableEntity instanceof Ghost) {
-            canMoveToHouseGate = ((Ghost) movableEntity).getIsAlreadyPassedGhostHouseGateChasing();
-        }
-
-        boolean isOnGatePositionAndCantBe = !canMoveToHouseGate && this.isOnGatePosition();
-
-        return this.isOnSomeObstaclePosition() || isOnGatePositionAndCantBe;
-    }
-
     public Vector getVectorTo(Position position1) {
         int x1 = position1.getX();
         int y1 = position1.getY();

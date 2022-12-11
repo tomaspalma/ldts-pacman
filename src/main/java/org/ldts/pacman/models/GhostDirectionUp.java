@@ -13,9 +13,9 @@ public class GhostDirectionUp extends GhostDirection {
         Position leftPosition = this.getPossiblePositionToMoveLeft();
         Position rightPosition = this.getPossiblePositionToMoveRight();
         Position upPosition = this.getPossiblePositionToMoveUp();
-        List<Position> result = new ArrayList<>(Arrays.asList(leftPosition, rightPosition, upPosition));
 
-        result.removeIf(position -> position.isInvalidTo(movableEntity));
+        List<Position> result = new ArrayList<>(Arrays.asList(leftPosition, rightPosition, upPosition));
+        result.removeIf(((Ghost)this.movableEntity)::willBeInInvalidPosition);
 
         return result;
     }

@@ -13,7 +13,8 @@ public abstract class StartSequenceLoader {
     }
 
     public List<SpecificGhostStartSequence> getLoadedStartSequence() {
-        assert !this.specificGhostStartSequenceList.isEmpty();
+        if(specificGhostStartSequenceList.isEmpty())
+            return this.populate();
 
         return this.specificGhostStartSequenceList;
     }

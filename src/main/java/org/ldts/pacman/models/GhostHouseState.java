@@ -7,7 +7,7 @@ public class GhostHouseState extends GhostState {
 
     @Override
     public GameActions.GhostCollisionWithPacman collideWithPacmanResult() {
-        return GameActions.GhostCollisionWithPacman.KILL_PACMAN;
+        return GameActions.GhostCollisionWithPacman.NONE;
     }
 
     @Override

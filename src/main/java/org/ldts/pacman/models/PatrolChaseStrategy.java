@@ -8,7 +8,7 @@ public class PatrolChaseStrategy implements ChaseStrategy {
         Arena arena = ghost.getArena();
         PacmanDirection pacmanDirection = (PacmanDirection) arena.getPacman().getCurrentDirection();
 
-        Position desiredPosition = pacmanDirection.getPositionToForwardLevel(2);
+        Position desiredPosition = pacmanDirection.getGhostTargetTileWithForwardLevel(2);
         Position blinkyPosition = this.getBlinkyPositionIn(arena);
         assert blinkyPosition != null;
 

@@ -4,7 +4,6 @@ import java.util.List;
 
 public class DefaultStartSequenceLoader extends StartSequenceLoader {
 
-
     public DefaultStartSequenceLoader(Arena arena) {
         super(arena);
     }
@@ -21,5 +20,9 @@ public class DefaultStartSequenceLoader extends StartSequenceLoader {
         }
 
         return this.specificGhostStartSequenceList;
+    }
+
+    public void load() {
+
     }
 }
