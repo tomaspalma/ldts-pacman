@@ -1,10 +1,7 @@
 package org.ldts.pacman.controllers;
 
 import org.ldts.pacman.Game;
-import org.ldts.pacman.sounds.IntroSound;
-import org.ldts.pacman.sounds.PacmanDeathSound;
-import org.ldts.pacman.sounds.PacmanMunch;
-import org.ldts.pacman.sounds.SFX;
+import org.ldts.pacman.sounds.*;
 import org.ldts.pacman.models.Arena;
 import org.ldts.pacman.models.GameActions;
 import org.ldts.pacman.models.Ghost;
@@ -38,7 +35,7 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
         this.regularGhostController = new RegularGhostController(this, model);
 
         try {
-            sounds = Arrays.asList(new PacmanMunch(), new PacmanDeathSound());
+            sounds = Arrays.asList(new PacmanMunch(), new PacmanDeathSound(), new EatGhostSound());
         }
         catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
             System.out.println(e);
@@ -96,6 +93,7 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
         switch(collisionWithPacmanResult) {
             case KILL_GHOST:
                 regularGhostController.killGhost(ghost);
+                sounds.get(2).play();
                 break;
             case KILL_PACMAN:
                 pacmanController.killPacmanAt();
