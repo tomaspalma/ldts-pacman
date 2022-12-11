@@ -4,16 +4,9 @@ import javax.sound.sampled.*;
 import java.io.IOException;
 import java.net.URL;
 
-public class PacmanMunch implements SFX {
-    private final Clip sound;
-
+public class PacmanMunch extends SFX {
     public PacmanMunch() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        URL resource = getClass().getClassLoader().getResource("sounds/pacman_chomp.wav");
-
-        assert resource != null;
-        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(resource);
-        sound = AudioSystem.getClip();
-        sound.open(audioInputStream);
+        super("sounds/pacman_chomp.wav");
     }
 
     @Override
@@ -22,10 +15,5 @@ public class PacmanMunch implements SFX {
             return;
         sound.setMicrosecondPosition(0);
         sound.start();
-    }
-
-    @Override
-    public void stop() {
-        sound.stop();
     }
 }

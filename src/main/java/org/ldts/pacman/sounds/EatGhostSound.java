@@ -4,16 +4,9 @@ import javax.sound.sampled.*;
 import java.io.IOException;
 import java.net.URL;
 
-public class EatGhostSound implements SFX {
-    private final Clip sound;
-
+public class EatGhostSound extends SFX {
     public EatGhostSound() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        URL resource = getClass().getClassLoader().getResource("sounds/pacman_eatghost.wav");
-
-        assert resource != null;
-        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(resource);
-        sound = AudioSystem.getClip();
-        sound.open(audioInputStream);
+        super("sounds/pacman_eatghost.wav");
     }
 
     @Override
@@ -22,10 +15,5 @@ public class EatGhostSound implements SFX {
             return;
         sound.setMicrosecondPosition(0);
         sound.start();
-    }
-
-    @Override
-    public void stop() {
-        sound.stop();
     }
 }
