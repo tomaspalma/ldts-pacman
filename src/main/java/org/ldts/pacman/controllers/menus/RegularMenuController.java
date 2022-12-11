@@ -34,6 +34,7 @@ public class RegularMenuController extends Controller<Menu> {
                 getModel().moveUp();
                 break;
             case EXIT:
+                music.stop();
                 game.setState(null);
                 break;
             case SELECT:
