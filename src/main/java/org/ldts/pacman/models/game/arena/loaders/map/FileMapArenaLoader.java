@@ -38,8 +38,10 @@ public class FileMapArenaLoader extends MapArenaLoader {
         this.mapToLoad = mapToLoad;
         this.width = 20;
         this.height = 20;
+
         this.mapResource = getClass().getClassLoader().getResource(mapToLoad);
         assert mapResource != null;
+
         this.mapFileReader = new BufferedReader(new FileReader(mapResource.getFile()));
     }
 
@@ -55,7 +57,6 @@ public class FileMapArenaLoader extends MapArenaLoader {
     // Ler o mapa de um fichiero e carregar as entidades corretas para a lista
     public void load() throws IOException {
         String currentCharRow;
-        Position currentPosition;
         int x = 0;
         int y = 1;
 
