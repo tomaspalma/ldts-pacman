@@ -1,6 +1,7 @@
 package org.ldts.pacman.controllers;
 
 import org.ldts.pacman.Game;
+import org.ldts.pacman.sounds.*;
 import org.ldts.pacman.models.Arena;
 import org.ldts.pacman.models.GameActions;
 import org.ldts.pacman.models.game.Clock;
@@ -13,14 +14,19 @@ import org.ldts.pacman.models.*;
 import org.ldts.pacman.models.game.entities.ghost.RegularGhost;
 import org.ldts.pacman.models.game.entities.ghost.states.FrightenedState;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collections;
+import java.util.Arrays;
+import java.util.List;
 
 public class ArenaController extends Controller<Arena> implements PacmanObserver {
     private final PacmanController pacmanController;
     private final RegularGhostController regularGhostController;
     private int ateGhostPoints = 200;
+    private List<SFX> sounds;
     private int currentLevel = 0;
 
     public PacmanController getPacmanController() {
@@ -36,6 +42,13 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
 
         this.pacmanController = new PacmanController(this, model);
         this.regularGhostController = new RegularGhostController(this, model);
+
+        try {
+            sounds = Arrays.asList(new PacmanMunch(), new PacmanDeathSound(), new EatGhostSound());
+        }
+        catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            System.out.println(e);
+        }
     }
 
     @Override
@@ -114,6 +127,7 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
             powerPelletObservable.notifyObservers();
         }
 
+        sounds.get(0).play();
         getModel().sumScoreWith(1);
         getModel().removeFromGameGridAt(position, currentEdible);
         getModel().getGeneralFixedEdibleList().remove(currentEdible);
@@ -133,10 +147,12 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
             case KILL_GHOST:
                 regularGhostController.killGhost(ghost);
                 getModel().sumScoreWith(this.ateGhostPoints);
+                sounds.get(2).play();
                 break;
             case KILL_PACMAN:
                 ateGhostPoints = 200;
                 pacmanController.killPacmanAt();
+                sounds.get(1).play();
                 break;
             default: break;
         }

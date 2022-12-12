@@ -85,11 +85,14 @@ public class PacmanController extends Controller<Arena> {
         boolean collidedWithEdible = parentController.getArenaTileAt(newPacmanPosition).containsFixedEdible();
         boolean collidedWithGhost = parentController.getArenaTileAt(newPacmanPosition).containsGhost();
 
-        if(collidedWithEdible)
+        if(collidedWithEdible) {
             this.pacman.notifyObserversItAteFixedEdibleAt(newPacmanPosition);
 
-        if (collidedWithGhost)
+        }
+
+        if (collidedWithGhost) {
             this.pacman.notifyObserversItCollidedWithGhostAt(newPacmanPosition);
+        }
     }
 
     public void killPacmanAt() {
