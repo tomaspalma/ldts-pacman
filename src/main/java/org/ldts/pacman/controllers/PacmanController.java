@@ -82,9 +82,6 @@ public class PacmanController extends Controller<Arena> {
     }
 
     private void actIfCollisionWithSpecialEntitiesAt(Position newPacmanPosition) {
-        int newX = newPacmanPosition.getX();
-        int newY = newPacmanPosition.getY();
-
         boolean collidedWithEdible = parentController.getArenaTileAt(newPacmanPosition).containsFixedEdible();
         boolean collidedWithGhost = parentController.getArenaTileAt(newPacmanPosition).containsGhost();
 

@@ -17,6 +17,7 @@ import org.ldts.pacman.models.game.entities.pacman.Pacman;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Arena {
@@ -31,11 +32,11 @@ public class Arena {
     private final List<GameLevel> levels = new ArrayList<>();
     private int currentLevel = 0;
     private Position startPacmanPosition;
-    private int ateGhostsPoints = 200;
-    
+
     private final List<RegularGhost> regularGhostsList = new ArrayList<>();
 
     private final List<FixedEdible> generalFixedEdibleList = new ArrayList<>();
+    private final List<FixedEdible> fixedEdiblesPool;
 
     private final MapArenaLoader mapLoader;
 
@@ -51,6 +52,8 @@ public class Arena {
         this.levelLoader = new DefaultArenaLevelLoader(1, this,
             new DefaultStartSequenceLoader(this.getRegularGhostsList()), new DefaultDuringSequenceLoader(this.getRegularGhostsList()));
         levelLoader.load();
+
+        this.fixedEdiblesPool = List.copyOf(generalFixedEdibleList);
     }
 
     public void createGhostHouse(Position position, int width, int height) {
@@ -106,6 +109,10 @@ public class Arena {
 
     public MapArenaLoader getMapLoader() {
         return mapLoader;
+    }
+
+    public List<FixedEdible> getEatenFixedEdiblePool() {
+        return fixedEdiblesPool;
     }
 
     public int getScore() {
