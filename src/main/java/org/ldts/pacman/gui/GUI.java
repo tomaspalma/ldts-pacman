@@ -3,7 +3,7 @@ package org.ldts.pacman.gui;
 import com.googlecode.lanterna.TextColor;
 
 import org.ldts.pacman.models.GameActions;
-import org.ldts.pacman.models.Position;
+import org.ldts.pacman.models.game.Position;
 
 import java.io.IOException;
 

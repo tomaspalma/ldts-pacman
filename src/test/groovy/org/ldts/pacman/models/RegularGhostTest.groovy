@@ -1,6 +1,9 @@
 package org.ldts.pacman.models
 
-import com.googlecode.lanterna.TextColor;
+import com.googlecode.lanterna.TextColor
+import org.ldts.pacman.models.game.Position
+import org.ldts.pacman.models.game.entities.ghost.Pinky
+import org.ldts.pacman.models.game.entities.ghost.states.FrightenedState;
 import spock.lang.Specification;
 
 public class RegularGhostTest extends Specification {

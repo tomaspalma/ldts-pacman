@@ -1,5 +1,8 @@
 package org.ldts.pacman.models;
 
+import org.ldts.pacman.models.game.entities.ghost.RegularGhost;
+import org.ldts.pacman.models.game.entities.ghost.states.GhostState;
+
 import java.util.List;
 
 public class DefaultStartSequenceLoader extends StartSequenceLoader {
@@ -13,7 +16,7 @@ public class DefaultStartSequenceLoader extends StartSequenceLoader {
         GhostState nextStartSequenceState = null;
         long durationInMillseconds;
         for(RegularGhost regularGhost: this.ghostsList) {
-            nextStartSequenceState = regularGhost.nextStartState;
+            nextStartSequenceState = regularGhost.getNextStartState();
             durationInMillseconds = regularGhost.getStartSequenceInMilliseconds();
             SpecificGhostStartSequence startSequence = new SpecificGhostStartSequence(regularGhost, nextStartSequenceState, durationInMillseconds);
 

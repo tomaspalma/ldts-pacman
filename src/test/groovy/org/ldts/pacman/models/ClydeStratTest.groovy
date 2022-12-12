@@ -1,5 +1,10 @@
 package org.ldts.pacman.models
 
+import org.ldts.pacman.models.game.Position
+import org.ldts.pacman.models.game.entities.ghost.Clyde
+import org.ldts.pacman.models.game.entities.ghost.strategies.chasing.HybridIgnorantChaseStrategy
+import org.ldts.pacman.models.game.entities.ghost.strategies.chasing.AgressiveChaseStrategy
+import org.ldts.pacman.models.game.entities.ghost.strategies.chasing.RunToBottomLeftChaseStrategy
 import spock.lang.Specification
 
 class ClydeStratTest extends Specification {
@@ -18,7 +23,7 @@ class ClydeStratTest extends Specification {
         when:
             clyde.getChaseStrategy().getNextPosition(clyde)
         then:
-            HybridIgnorantChaseStrategy clydeStrat = clyde.getChaseStrategy() as HybridIgnorantChaseStrategy;
+        HybridIgnorantChaseStrategy clydeStrat = clyde.getChaseStrategy() as HybridIgnorantChaseStrategy;
             clydeStrat.getCurrentChosenStrategy() instanceof RunToBottomLeftChaseStrategy
     }
 

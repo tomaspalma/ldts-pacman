@@ -1,5 +1,6 @@
 package org.ldts.pacman.models
 
+import org.ldts.pacman.models.game.arena.grid.RegularTile
 import spock.lang.Specification
 
 class TileTest extends Specification {

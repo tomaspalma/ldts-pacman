@@ -2,10 +2,13 @@ package org.ldts.pacman.controllers;
 
 import org.ldts.pacman.Game;
 import org.ldts.pacman.models.*;
+import org.ldts.pacman.models.animations.Animation;
+import org.ldts.pacman.models.game.Position;
+import org.ldts.pacman.models.game.entities.pacman.animations.PacmanAnimation;
+import org.ldts.pacman.models.game.entities.pacman.directions.*;
+import org.ldts.pacman.models.game.entities.pacman.Pacman;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class PacmanController extends Controller<Arena> {
     private PacmanDirection wantedDirection;

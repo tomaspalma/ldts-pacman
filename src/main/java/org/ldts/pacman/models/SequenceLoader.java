@@ -1,5 +1,7 @@
 package org.ldts.pacman.models;
 
+import org.ldts.pacman.models.game.entities.ghost.RegularGhost;
+
 import java.util.ArrayList;
 import java.util.List;
 

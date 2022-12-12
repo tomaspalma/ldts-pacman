@@ -1,5 +1,20 @@
 package org.ldts.pacman.models;
 
+import org.ldts.pacman.models.game.GhostHouse;
+import org.ldts.pacman.models.game.entities.Obstacle;
+import org.ldts.pacman.models.game.Position;
+import org.ldts.pacman.models.game.arena.grid.Tile;
+import org.ldts.pacman.models.game.arena.levels.GameLevel;
+import org.ldts.pacman.models.game.arena.loaders.levels.ArenaLevelLoader;
+import org.ldts.pacman.models.game.arena.loaders.levels.DefaultArenaLevelLoader;
+import org.ldts.pacman.models.game.arena.loaders.map.FileMapArenaLoader;
+import org.ldts.pacman.models.game.arena.loaders.map.MapArenaLoader;
+import org.ldts.pacman.models.game.entities.Entity;
+import org.ldts.pacman.models.game.entities.fixededibles.FixedEdible;
+import org.ldts.pacman.models.game.entities.ghost.Ghost;
+import org.ldts.pacman.models.game.entities.ghost.RegularGhost;
+import org.ldts.pacman.models.game.entities.pacman.Pacman;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -158,15 +173,5 @@ public class Arena {
        }
 
        return null;
-    }
-
-    public void restart() {
-        Position ghostStartPosition = null;
-        for(RegularGhost regularGhost: regularGhostsList) {
-            ghostStartPosition = regularGhost.getStartPosition();
-            regularGhost.switchTile(ghostStartPosition);
-            regularGhost.setPosition(ghostStartPosition);
-        }
-        this.levels.get(this.currentLevel).restart();
     }
 }

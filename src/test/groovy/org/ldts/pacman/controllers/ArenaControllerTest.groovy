@@ -1,10 +1,10 @@
 package org.ldts.pacman.controllers
 
 import org.ldts.pacman.models.Arena
-import org.ldts.pacman.models.Cherry
-import org.ldts.pacman.models.Pacman
-import org.ldts.pacman.models.Position
-import org.ldts.pacman.models.Wall
+import org.ldts.pacman.models.game.entities.fixededibles.Cherry
+import org.ldts.pacman.models.game.entities.pacman.Pacman
+import org.ldts.pacman.models.game.Position
+import org.ldts.pacman.models.game.entities.obstacles.Wall
 import spock.lang.Specification
 
 class ArenaControllerTest extends Specification {

@@ -1,7 +1,7 @@
 package org.ldts.pacman.models
 
-import org.ldts.pacman.models.Position
-import spock.lang.Shared
+import org.ldts.pacman.models.game.Position
+import org.ldts.pacman.models.game.Vector
 import spock.lang.Specification
 
 class PositionTest extends Specification {

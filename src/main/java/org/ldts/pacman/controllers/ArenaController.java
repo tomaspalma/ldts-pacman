@@ -3,9 +3,15 @@ package org.ldts.pacman.controllers;
 import org.ldts.pacman.Game;
 import org.ldts.pacman.models.Arena;
 import org.ldts.pacman.models.GameActions;
-import org.ldts.pacman.models.Ghost;
+import org.ldts.pacman.models.game.Clock;
+import org.ldts.pacman.models.game.Position;
+import org.ldts.pacman.models.game.arena.grid.Tile;
+import org.ldts.pacman.models.game.entities.fixededibles.FixedEdible;
+import org.ldts.pacman.models.game.entities.ghost.Ghost;
 import org.ldts.pacman.models.PacmanObserver;
 import org.ldts.pacman.models.*;
+import org.ldts.pacman.models.game.entities.ghost.RegularGhost;
+import org.ldts.pacman.models.game.entities.ghost.states.FrightenedState;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -33,8 +39,12 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
     @Override
     public void step(Game game, GameActions.ControlActions action, long time) throws IOException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         boolean levelEnded = getModel().getGeneralFixedEdibleList().isEmpty();
-        if (levelEnded)
-            game.setState(null); // TODO set state para um menu a dizer que venceu
+        if(levelEnded) {
+            this.switchToNextLevel();
+            this.currentLevel = (this.currentLevel + 1) % getModel().getLevels().size();
+        }
+
+        this.checkConditionsToPauseLevelClock();
 
         getModel().getLevels().get(currentLevel).step();
 
@@ -42,21 +52,43 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
             case EXIT:
                 game.setState(null);
                 break;
-            // case SWITCH_TO_PAUSE_MENU: entities.setState(new PauseMenu()); break;
+            //case SWITCH_TO_PAUSE_MENU: entities.setState(new PauseMenu()); break;
             default:
                 stepChildControllers(game, action, time);
                 break;
         }
     }
 
+    private void switchToNextLevel() {
+        this.currentLevel = (this.currentLevel + 1) % getModel().getLevels().size();
+    }
+
+    private void checkConditionsToPauseLevelClock() {
+        Clock levelClock = getModel().getLevels().get(this.currentLevel).getClock();
+        for(RegularGhost regularGhost: getModel().getRegularGhostsList()) {
+            if(regularGhost.getCurrentState() instanceof FrightenedState) {
+               levelClock.pause();
+               return;
+            }
+        }
+
+        if(levelClock.isPaused())
+            levelClock.unpause();
+    }
+
     public void processPacmanLoseLife() {
         getModel().getPacman().die();
-        getModel().restart();
+        this.putCurrentLevelBackToStartPositions(); 
     }
 
     private void stepChildControllers(Game game, GameActions.ControlActions action, long time) throws IOException {
         pacmanController.step(game, action, time);
         regularGhostController.step(game, action, time);
+    }
+
+    private void putCurrentLevelBackToStartPositions() {
+        regularGhostController.putGhostsBackInInitialState();
+        getModel().getLevels().get(this.currentLevel).restart();
     }
 
     @Override

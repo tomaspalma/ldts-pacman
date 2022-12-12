@@ -2,6 +2,10 @@ package org.ldts.pacman.controllers;
 
 import org.ldts.pacman.Game;
 import org.ldts.pacman.models.*;
+import org.ldts.pacman.models.game.Position;
+import org.ldts.pacman.models.game.entities.ghost.Ghost;
+import org.ldts.pacman.models.game.entities.ghost.RegularGhost;
+import org.ldts.pacman.models.game.entities.ghost.states.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -20,16 +24,10 @@ public class RegularGhostController extends Controller<Arena> {
     @Override
     public void step(Game game, GameActions.ControlActions action, long time) throws IOException {
         for(RegularGhost regularGhost: regularGhostsToControl) {
-            /*if(regularGhost instanceof Clyde || regularGhost instanceof Inky) {
-                System.out.println(regularGhost.getClass());
-                System.out.println("Current: " + regularGhost.getCurrentState().getClass());
-                System.out.println("Previous: " + regularGhost.getPreviousState().getClass());
-                System.out.println("Can move to gate: " + regularGhost.canCurrentlyMoveToGhostHouseGate());
-            }*/
-
-            if(stateChangedIn(regularGhost)) regularGhost.getCurrentState().applyChangesToGhost();
+            if(stateChangedIn(regularGhost))
+                regularGhost.getCurrentState().applyChangesToGhost();
             
-            if(numberOfSteps > 1) {
+            if(numberOfSteps > regularGhost.getVelocity()) {
                 moveGhost(regularGhost, regularGhost.getCurrentState().getNextPosition());
                 numberOfSteps = 0;
             } else {
@@ -42,8 +40,10 @@ public class RegularGhostController extends Controller<Arena> {
         GhostState currentGhostState = regularGhost.getCurrentState();
         boolean isGhostDead = currentGhostState instanceof DeadState;
 
-        if(isGhostDead)
-            currentGhostState.transitionToState(new GhostHouseState(regularGhost));
+        if(isGhostDead) {
+            regularGhost.setPreviousStateTo(new GhostHouseState(regularGhost));
+            regularGhost.setCurrentStateTo(new ChasingState(regularGhost));
+        }
     }
 
     private boolean stateChangedIn(Ghost ghost) {
@@ -55,6 +55,13 @@ public class RegularGhostController extends Controller<Arena> {
     }
 
     private void moveGhost(Ghost ghost, Position newPosition) {
+        boolean isOnGhostHouseAndCanLeaveIt = (ghost.getPreviousState() instanceof GhostHouseState && ghost.getCurrentState().canMoveOutsideGhostHouse());
+        if(isOnGhostHouseAndCanLeaveIt) {
+            ghost.setPosition(getModel().getGhostHouse().getExitPosition());
+            ghost.setPreviousStateTo(ghost.getCurrentState());
+            return;
+        }
+
         Position realNewPosition = ghost.switchTile(newPosition);
 
         ghost.setCurrentDirectionTo(ghost.getCurrentDirection().generateNextDirectionAfterChangeTo(realNewPosition));
@@ -62,10 +69,19 @@ public class RegularGhostController extends Controller<Arena> {
 
         this.reviveDeadGhost((RegularGhost) ghost);
 
-        if(realNewPosition.isOnGatePosition())
-            ghost.setCanCurrentlyMoveToGhostHouseGateTo(false);
-
         checkCollisionWithPacman(ghost, realNewPosition);
+    }
+
+    public void putGhostsBackInInitialState() {
+        Position ghostStartPosition = null;
+        for(RegularGhost regularGhost: getModel().getRegularGhostsList()) {
+            ghostStartPosition = regularGhost.getStartPosition();
+            regularGhost.switchTile(ghostStartPosition);
+            regularGhost.setPosition(ghostStartPosition);
+
+            regularGhost.setCurrentStateTo(regularGhost.getOriginalState());
+            regularGhost.setPreviousStateTo(regularGhost.getOriginalState());
+        }
     }
 
     private void checkCollisionWithPacman(Ghost ghost, Position newPosition) {

@@ -1,5 +1,8 @@
 package org.ldts.pacman.models;
 
+import org.ldts.pacman.models.game.entities.ghost.Ghost;
+import org.ldts.pacman.models.game.entities.ghost.states.GhostState;
+
 public class SpecificGhostStartSequence implements LevelStateSequence {
 
     private final Ghost ghost;

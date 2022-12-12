@@ -2,7 +2,7 @@ package org.ldts.pacman.viewers.menus;
 
 import com.googlecode.lanterna.TextColor;
 import org.ldts.pacman.gui.GUI;
-import org.ldts.pacman.models.Position;
+import org.ldts.pacman.models.game.Position;
 import org.ldts.pacman.models.menus.PauseMenu;
 import org.ldts.pacman.viewers.Viewer;
 

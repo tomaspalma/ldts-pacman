@@ -2,7 +2,7 @@ package org.ldts.pacman.viewers.menus;
 
 import com.googlecode.lanterna.TextColor;
 import org.ldts.pacman.gui.GUI;
-import org.ldts.pacman.models.Position;
+import org.ldts.pacman.models.game.Position;
 import org.ldts.pacman.models.menus.Menu;
 import org.ldts.pacman.viewers.Viewer;
 
@@ -19,7 +19,7 @@ public class RegularMenuViewer extends Viewer<Menu> {
             if (i == getModel().getCurrentNumber())
                 gui.writeToScreen(new Position(8, 9+  i, null), getModel().getOption(i).getMessage(), TextColor.ANSI.GREEN_BRIGHT);
             else
-                gui.writeToScreen(new Position(8, 9 + 1 + i, null), getModel().getOption(i).getMessage(), TextColor.ANSI.WHITE);
+                gui.writeToScreen(new Position(8, 9 + i, null), getModel().getOption(i).getMessage(), TextColor.ANSI.WHITE);
         }
     }
 }
