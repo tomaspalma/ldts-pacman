@@ -30,7 +30,10 @@ public abstract class Menu {
     }
 
     public void moveUp() {
-        currentOption = abs((currentOption - 1) % getNumberOptions());
+        if (currentOption == 0)
+            currentOption = getNumberOptions() - 1;
+        else
+            currentOption = abs((currentOption - 1) % getNumberOptions());
     }
 
     public int getNumberOptions() {
