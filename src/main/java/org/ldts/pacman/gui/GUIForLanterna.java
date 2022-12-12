@@ -165,6 +165,9 @@ public class GUIForLanterna implements GUI {
         this.graphics.setForegroundColor(color);
         this.graphics.putString(position.getX(), position.getY(), drawSymbol);
     }
-
+    
+    public void createRectangle(TerminalPosition topLeft, TerminalSize size, char character){
+        graphics.drawRectangle(topLeft,size,character);
+    }
 
 }

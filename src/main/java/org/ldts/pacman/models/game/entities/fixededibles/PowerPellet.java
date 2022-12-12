@@ -17,6 +17,7 @@ public class PowerPellet extends FixedEdible implements PowerPelletObservable {
         super(position, arena);
         this.drawSymbol = ":";
         this.color = TextColor.ANSI.YELLOW;
+        this.points = 50;
     }
 
     @Override

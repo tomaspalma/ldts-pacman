@@ -9,5 +9,6 @@ public class Cherry extends FixedEdible {
         super(position, arena);
         this.color = TextColor.ANSI.RED;
         this.drawSymbol = ",";
+        this.points = 100;
     }
 }
