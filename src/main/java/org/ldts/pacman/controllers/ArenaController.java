@@ -1,6 +1,7 @@
 package org.ldts.pacman.controllers;
 
 import org.ldts.pacman.Game;
+import org.ldts.pacman.models.menus.GameOverMenu;
 import org.ldts.pacman.models.menus.PauseMenu;
 import org.ldts.pacman.sounds.*;
 import org.ldts.pacman.models.Arena;
@@ -16,6 +17,7 @@ import org.ldts.pacman.models.game.entities.ghost.RegularGhost;
 import org.ldts.pacman.models.game.entities.ghost.states.FrightenedState;
 import org.ldts.pacman.states.ArenaState;
 import org.ldts.pacman.states.menus.PauseMenuState;
+import org.ldts.pacman.states.menus.RegularMenuState;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -61,6 +63,9 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
         this.checkConditionsToPauseLevelClock();
 
         getModel().getLevels().get(currentLevel).step();
+
+        if (getModel().getPacman().getRemainingLives() == 0)
+            game.setState(new RegularMenuState(new GameOverMenu("loss")));
 
         switch (action) {
             case EXIT:
