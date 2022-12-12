@@ -95,7 +95,7 @@ public abstract class Tile {
 
     public Pacman getPacman() {
         for(Entity entity: childrenEntities) {
-            if(entity instanceof Ghost) return (Pacman) entity;
+            if(entity instanceof Pacman pacman) return pacman;
         }
 
         return null;

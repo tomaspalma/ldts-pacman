@@ -47,7 +47,7 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
             sounds = Arrays.asList(new PacmanMunch(), new PacmanDeathSound(), new EatGhostSound());
         }
         catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -78,7 +78,8 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
     }
 
     private void switchToNextLevel() {
-        this.currentLevel = (this.currentLevel + 1) % getModel().getLevels().size();
+        if(this.currentLevel != getModel().getLevels().size() - 1)
+            this.currentLevel = (this.currentLevel + 1) % getModel().getLevels().size();
         this.restoreFixedEdibles();
     }
 
@@ -96,8 +97,14 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
     }
 
     public void processPacmanLoseLife() {
+        sounds.get(1).play();
         getModel().getPacman().die();
-        this.putCurrentLevelBackToStartPositions(); 
+        this.putCurrentLevelBackToStartPositions();
+        try {
+            Thread.sleep(1000);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void stepChildControllers(Game game, GameActions.ControlActions action, long time) throws IOException {
@@ -114,6 +121,7 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
         getModel().getGeneralFixedEdibleList().clear();
         for(FixedEdible fixedEdible: getModel().getEatenFixedEdiblePool()) {
             getModel().getGeneralFixedEdibleList().add(fixedEdible);
+            getModel().getGameGrid().get(fixedEdible.getPosition().getY() - 1).get(fixedEdible.getPosition().getX()).put(fixedEdible);
         }
     }
 
@@ -151,8 +159,7 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
                 break;
             case KILL_PACMAN:
                 ateGhostPoints = 200;
-                pacmanController.killPacmanAt();
-                sounds.get(1).play();
+                this.processPacmanLoseLife();
                 break;
             default: break;
         }

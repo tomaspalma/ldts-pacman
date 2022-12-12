@@ -12,6 +12,7 @@ public abstract class ArenaLevelLoader implements ArenaLoader {
     protected StartSequenceLoader startSequenceLoader;
     protected DuringSequenceLoader duringSequenceLoader;
     protected int amountOfLevels;
+    protected float multiplier;
 
     public ArenaLevelLoader(int amountOfLevels, Arena arena, StartSequenceLoader startSequenceLoader, DuringSequenceLoader duringSequenceLoader) {
         this.amountOfLevels = amountOfLevels;
@@ -23,7 +24,8 @@ public abstract class ArenaLevelLoader implements ArenaLoader {
     @Override
     public void load() {
         for(int i = 0; i < amountOfLevels; i++) {
-            this.arena.getLevels().add(new GameLevel(this.startSequenceLoader.populate(), this.duringSequenceLoader.populate(), this.arena.getRegularGhostsList()));
+            this.arena.getLevels().add(new GameLevel(this.startSequenceLoader.populate(this.multiplier),
+                    this.duringSequenceLoader.populate(this.multiplier), this.arena.getRegularGhostsList()));
         }
     }
 }

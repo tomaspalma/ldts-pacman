@@ -23,7 +23,8 @@ public class GhostDuringStateSequence implements LevelStateSequence {
 
     public void execute(List<RegularGhost> commonGhostsToApplyTo) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         for(Ghost ghost: commonGhostsToApplyTo) {
-            ghost.getCurrentState().transitionToState((GhostState) ghostState.getDeclaredConstructor(Ghost.class).newInstance(ghost));
+            GhostState currentState = ghost.getCurrentState();
+            currentState.transitionToState((GhostState) ghostState.getDeclaredConstructor(Ghost.class).newInstance(ghost));
         }
     }
 

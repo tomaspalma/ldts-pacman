@@ -46,7 +46,7 @@ public class GUIForLanterna implements GUI {
         this.graphics = this.screen.newTextGraphics();
     }
 
-    public TerminalSize getTerminalSize() throws IOException {
+    public TerminalSize getTerminalSize() {
         return this.screen.getTerminalSize();
     }
 
