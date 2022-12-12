@@ -3,21 +3,25 @@ package org.ldts.pacman.controllers;
 import org.ldts.pacman.Game;
 import org.ldts.pacman.models.Arena;
 import org.ldts.pacman.models.GameActions;
-import org.ldts.pacman.models.menus.GameOverMenu;
-import org.ldts.pacman.models.menus.PauseMenu;
-import org.ldts.pacman.states.ArenaState;
-import org.ldts.pacman.states.menus.PauseMenuState;
-import org.ldts.pacman.states.menus.RegularMenuState;
-import org.ldts.pacman.models.EatenPowerPelletObserver;
-import org.ldts.pacman.models.Ghost;
+import org.ldts.pacman.models.game.Clock;
+import org.ldts.pacman.models.game.Position;
+import org.ldts.pacman.models.game.arena.grid.Tile;
+import org.ldts.pacman.models.game.entities.fixededibles.FixedEdible;
+import org.ldts.pacman.models.game.entities.ghost.Ghost;
 import org.ldts.pacman.models.PacmanObserver;
 import org.ldts.pacman.models.*;
+import org.ldts.pacman.models.game.entities.ghost.RegularGhost;
+import org.ldts.pacman.models.game.entities.ghost.states.FrightenedState;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Collections;
 
 public class ArenaController extends Controller<Arena> implements PacmanObserver {
     private final PacmanController pacmanController;
     private final RegularGhostController regularGhostController;
+    private int ateGhostPoints = 200;
+    private int currentLevel = 0;
 
     public PacmanController getPacmanController() {
         return pacmanController;
@@ -35,30 +39,69 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
     }
 
     @Override
-    public void step(Game game, GameActions.ControlActions action, long time) throws IOException {
-        if (getModel().getGeneralFixedEdibleList().isEmpty())
-            game.setState(null); // TODO set state para um menu a dizer que venceu
+    public void step(Game game, GameActions.ControlActions action, long time) throws IOException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        this.actIfLevelEnded();
+
+        this.checkConditionsToPauseLevelClock();
+
+        getModel().getLevels().get(currentLevel).step();
 
         switch (action) {
             case EXIT:
                 game.setState(null);
                 break;
-            // case SWITCH_TO_PAUSE_MENU: entities.setState(new PauseMenu()); break;
+            //case SWITCH_TO_PAUSE_MENU: entities.setState(new PauseMenu()); break;
             default:
                 stepChildControllers(game, action, time);
                 break;
         }
     }
 
+    private void actIfLevelEnded() {
+        boolean levelEnded = getModel().getGeneralFixedEdibleList().isEmpty();
+        if(levelEnded) {
+            this.switchToNextLevel();
+        }
+    }
+
+    private void switchToNextLevel() {
+        this.currentLevel = (this.currentLevel + 1) % getModel().getLevels().size();
+        this.restoreFixedEdibles();
+    }
+
+    private void checkConditionsToPauseLevelClock() {
+        Clock levelClock = getModel().getLevels().get(this.currentLevel).getClock();
+        for(RegularGhost regularGhost: getModel().getRegularGhostsList()) {
+            if(regularGhost.getCurrentState() instanceof FrightenedState) {
+               levelClock.pause();
+               return;
+            }
+        }
+
+        if(levelClock.isPaused())
+            levelClock.unpause();
+    }
+
     public void processPacmanLoseLife() {
         getModel().getPacman().die();
-        getModel().restart();
+        this.putCurrentLevelBackToStartPositions(); 
     }
 
     private void stepChildControllers(Game game, GameActions.ControlActions action, long time) throws IOException {
         pacmanController.step(game, action, time);
         regularGhostController.step(game, action, time);
-        getModel().getClock().step();
+    }
+
+    private void putCurrentLevelBackToStartPositions() {
+        regularGhostController.putGhostsBackInInitialState();
+        getModel().getLevels().get(this.currentLevel).restart();
+    }
+
+    private void restoreFixedEdibles() {
+        getModel().getGeneralFixedEdibleList().clear();
+        for(FixedEdible fixedEdible: getModel().getEatenFixedEdiblePool()) {
+            getModel().getGeneralFixedEdibleList().add(fixedEdible);
+        }
     }
 
     @Override
@@ -76,6 +119,10 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
         getModel().getGeneralFixedEdibleList().remove(currentEdible);
     }
 
+    public Tile getArenaTileAt(Position position) {
+        return getModel().getArenaTileAt(position);
+    }
+
     @Override
     public void changeOnPacmanCollisionWithGhostAt(Position position) {
         Tile currentTile = getModel().getGameGrid().get(position.getY() - 1).get(position.getX());
@@ -85,8 +132,12 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
         switch(collisionWithPacmanResult) {
             case KILL_GHOST:
                 regularGhostController.killGhost(ghost);
+                getModel().sumScoreWith(this.ateGhostPoints);
                 break;
-            case KILL_PACMAN: pacmanController.killPacmanAt(); break;
+            case KILL_PACMAN:
+                ateGhostPoints = 200;
+                pacmanController.killPacmanAt();
+                break;
             default: break;
         }
     }

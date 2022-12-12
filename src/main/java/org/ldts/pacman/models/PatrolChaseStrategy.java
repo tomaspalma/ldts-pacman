@@ -1,5 +1,14 @@
 package org.ldts.pacman.models;
 
+import org.ldts.pacman.models.game.Position;
+import org.ldts.pacman.models.game.Vector;
+import org.ldts.pacman.models.game.entities.ghost.Blinky;
+import org.ldts.pacman.models.game.entities.ghost.Ghost;
+import org.ldts.pacman.models.game.entities.ghost.RegularGhost;
+import org.ldts.pacman.models.game.entities.ghost.directions.GhostDirection;
+import org.ldts.pacman.models.game.entities.ghost.strategies.chasing.ChaseStrategy;
+import org.ldts.pacman.models.game.entities.pacman.directions.PacmanDirection;
+
 import java.util.List;
 
 public class PatrolChaseStrategy implements ChaseStrategy {

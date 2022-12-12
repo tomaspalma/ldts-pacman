@@ -14,6 +14,6 @@ public class PlayOption extends Option {
 
     @Override
     public void select(Game game, State state) throws IOException {
-        game.setState(new ArenaState(new Arena(21, 21, "maps/easy.txt")));
+        game.setState(new ArenaState(new Arena(20, 21, "maps/easy.txt")));
     }
 }

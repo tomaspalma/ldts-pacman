@@ -1,5 +1,11 @@
 package org.ldts.pacman.models
 
+import org.ldts.pacman.models.game.Position
+import org.ldts.pacman.models.game.entities.ghost.Pinky
+import org.ldts.pacman.models.game.entities.ghost.directions.GhostDirectionDown
+import org.ldts.pacman.models.game.entities.ghost.directions.GhostDirectionLeft
+import org.ldts.pacman.models.game.entities.ghost.directions.GhostDirectionRight
+import org.ldts.pacman.models.game.entities.ghost.directions.GhostDirectionUp
 import spock.lang.Specification
 
 class GhostDirectionTest extends Specification {

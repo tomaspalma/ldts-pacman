@@ -2,10 +2,13 @@ package org.ldts.pacman.controllers;
 
 import org.ldts.pacman.Game;
 import org.ldts.pacman.models.*;
+import org.ldts.pacman.models.animations.Animation;
+import org.ldts.pacman.models.game.Position;
+import org.ldts.pacman.models.game.entities.pacman.animations.PacmanAnimation;
+import org.ldts.pacman.models.game.entities.pacman.directions.*;
+import org.ldts.pacman.models.game.entities.pacman.Pacman;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class PacmanController extends Controller<Arena> {
     private PacmanDirection wantedDirection;
@@ -55,8 +58,8 @@ public class PacmanController extends Controller<Arena> {
         PacmanDirection currentPacmanDirection = (PacmanDirection) this.pacman.getCurrentDirection();
         Position currentDirectionNextPosition = currentPacmanDirection.getNextPosition();
 
-        boolean isAbleToMoveInNextPosition = !currentDirectionNextPosition.isOnSomeObstaclePosition()
-                && !currentDirectionNextPosition.isOnGatePosition();
+        boolean isAbleToMoveInNextPosition = !(parentController.getArenaTileAt(currentDirectionNextPosition).containsObstacle())
+                && !(parentController.getArenaTileAt(currentDirectionNextPosition).containsGate());
 
         if(isAbleToMoveInNextPosition) {
             Position tileTrimmedPacmanPosition = pacman.switchTile(currentDirectionNextPosition);
@@ -66,21 +69,21 @@ public class PacmanController extends Controller<Arena> {
         }
     }
     private void tryToChangeToWantedDirection() {
-        Position newWantedPacPosition = this.wantedDirection.getNextPosition();
+        Position newWantedPosition = this.wantedDirection.getNextPosition();
 
-        boolean isAbleToMoveInWantedDirection = !newWantedPacPosition.isOnSomeObstaclePosition()
-                && !newWantedPacPosition.isOnGatePosition();
+        boolean isAbleToMoveInWantedDirection = !(parentController.getArenaTileAt(newWantedPosition).containsObstacle())
+                && !(parentController.getArenaTileAt(newWantedPosition).containsGate());
 
         if(isAbleToMoveInWantedDirection) {
             pacman.setCurrentDirectionTo(this.wantedDirection);
-            this.actIfCollisionWithSpecialEntitiesAt(newWantedPacPosition);
+            this.actIfCollisionWithSpecialEntitiesAt( newWantedPosition);
         }
 
     }
 
     private void actIfCollisionWithSpecialEntitiesAt(Position newPacmanPosition) {
-        boolean collidedWithEdible = newPacmanPosition.isOnFixedEdiblePosition();
-        boolean collidedWithGhost = newPacmanPosition.isOnSomeGhostPosition();
+        boolean collidedWithEdible = parentController.getArenaTileAt(newPacmanPosition).containsFixedEdible();
+        boolean collidedWithGhost = parentController.getArenaTileAt(newPacmanPosition).containsGhost();
 
         if(collidedWithEdible)
             this.pacman.notifyObserversItAteFixedEdibleAt(newPacmanPosition);

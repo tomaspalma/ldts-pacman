@@ -8,6 +8,7 @@ import org.ldts.pacman.states.menus.RegularMenuState;
 
 import java.awt.*;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
 
 public class Game {
@@ -31,7 +32,7 @@ public class Game {
         currentState = new RegularMenuState(new MainMenu());
     }
 
-    private void run() throws IOException, InterruptedException {
+    private void run() throws IOException, InterruptedException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         int FPSLimit = 10;
         int frameTime = 1000 / FPSLimit;
 

@@ -2,7 +2,11 @@ package org.ldts.pacman.viewers;
 
 import com.googlecode.lanterna.TextColor;
 import org.ldts.pacman.gui.GUI;
-import org.ldts.pacman.models.*;
+import org.ldts.pacman.models.game.entities.Obstacle;
+import org.ldts.pacman.models.game.Position;
+import org.ldts.pacman.models.game.entities.fixededibles.FixedEdible;
+import org.ldts.pacman.models.game.entities.ghost.RegularGhost;
+import org.ldts.pacman.models.Arena;
 
 import java.io.IOException;
 
@@ -29,8 +33,8 @@ public class ArenaViewer extends Viewer<Arena> {
 
         new EntityViewer(getModel().getPacman()).drawEntities(gui);
 
-        gui.writeToScreen(new Position(0, 0, getModel()), "Score " + getModel().getScore(), TextColor.ANSI.WHITE);
-        gui.writeToScreen(new Position(getModel().getWidth() - 10, 0, getModel()), "Lives " + getModel().getPacman().getRemainingLives(), TextColor.ANSI.WHITE);
+        gui.writeToScreen(new Position(0, 0), "Score " + getModel().getScore(), TextColor.ANSI.WHITE);
+        gui.writeToScreen(new Position(getModel().getWidth() - 10, 0), "Lives " + getModel().getPacman().getRemainingLives(), TextColor.ANSI.WHITE);
     }
 
     public void delegateToViewer(GUI gui, EntityViewer viewer) throws IOException {

@@ -1,5 +1,11 @@
 package org.ldts.pacman.models
 
+import org.ldts.pacman.models.game.Position
+import org.ldts.pacman.models.game.entities.ghost.Clyde
+import org.ldts.pacman.models.game.entities.ghost.strategies.chasing.HybridIgnorantChaseStrategy
+import org.ldts.pacman.models.game.entities.ghost.strategies.chasing.AgressiveChaseStrategy
+import org.ldts.pacman.models.game.entities.ghost.strategies.chasing.RunToBottomLeftChaseStrategy
+import org.ldts.pacman.models.game.entities.pacman.Pacman
 import spock.lang.Specification
 
 class ClydeStratTest extends Specification {
@@ -8,7 +14,9 @@ class ClydeStratTest extends Specification {
 
     def setup() {
         arena = new Arena(20, 21, "maps/testmap.txt")
-        pacman = arena.getPacman()
+       // arena = Mock(Arena)
+        pacman = new Pacman(new Position(6, 6, arena))
+        arena.setPacman(pacman)
     }
 
     def "When within a distance of 8 tiles clyde should use RunToBottomLeftStrategy"() {
@@ -18,7 +26,7 @@ class ClydeStratTest extends Specification {
         when:
             clyde.getChaseStrategy().getNextPosition(clyde)
         then:
-            HybridIgnorantChaseStrategy clydeStrat = clyde.getChaseStrategy() as HybridIgnorantChaseStrategy;
+        HybridIgnorantChaseStrategy clydeStrat = clyde.getChaseStrategy() as HybridIgnorantChaseStrategy;
             clydeStrat.getCurrentChosenStrategy() instanceof RunToBottomLeftChaseStrategy
     }
 

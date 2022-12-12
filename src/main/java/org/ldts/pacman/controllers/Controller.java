@@ -4,6 +4,7 @@ import org.ldts.pacman.Game;
 import org.ldts.pacman.models.GameActions;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 
 // O controller vai processar e efetuar mudanças num modelo
 public abstract class Controller<T> {
@@ -18,5 +19,5 @@ public abstract class Controller<T> {
         return model;
     }
 
-    public abstract void step(Game game, GameActions.ControlActions action, long time) throws IOException;
+    public abstract void step(Game game, GameActions.ControlActions action, long time) throws IOException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
 }

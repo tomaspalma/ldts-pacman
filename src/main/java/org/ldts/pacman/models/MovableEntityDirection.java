@@ -1,6 +1,12 @@
 package org.ldts.pacman.models;
 
-import java.util.List;
+import org.ldts.pacman.models.game.Position;
+import org.ldts.pacman.models.game.entities.MovableEntity;
+import org.ldts.pacman.models.game.entities.ghost.Ghost;
+import org.ldts.pacman.models.game.entities.ghost.directions.GhostDirectionDown;
+import org.ldts.pacman.models.game.entities.ghost.directions.GhostDirectionLeft;
+import org.ldts.pacman.models.game.entities.ghost.directions.GhostDirectionRight;
+import org.ldts.pacman.models.game.entities.ghost.directions.GhostDirectionUp;
 
 public abstract class MovableEntityDirection {
     protected final MovableEntity movableEntity;
@@ -11,10 +17,10 @@ public abstract class MovableEntityDirection {
         movableEntityArena = movableEntity.getArena();
     }
     public MovableEntityDirection generateNextDirectionAfterChangeTo(Position nextPosition) {
-        boolean movedToLeft = this.movableEntity.position.getX() > nextPosition.getX();
-        boolean movedToRight = this.movableEntity.position.getX() < nextPosition.getX();
-        boolean movedUp = this.movableEntity.position.getY() > nextPosition.getY();
-        boolean movedDown = this.movableEntity.position.getY() < nextPosition.getY();
+        boolean movedToLeft = this.movableEntity.getPosition().getX() > nextPosition.getX();
+        boolean movedToRight = this.movableEntity.getPosition().getX() < nextPosition.getX();
+        boolean movedUp = this.movableEntity.getPosition().getY() > nextPosition.getY();
+        boolean movedDown = this.movableEntity.getPosition().getY() < nextPosition.getY();
 
         boolean notAlreadyInLeft = !(this.movableEntity.getCurrentDirection() instanceof GhostDirectionLeft);
         boolean notAlreadyInRight = !(this.movableEntity.getCurrentDirection() instanceof GhostDirectionRight);

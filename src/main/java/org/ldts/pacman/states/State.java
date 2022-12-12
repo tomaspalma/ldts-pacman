@@ -7,6 +7,7 @@ import org.ldts.pacman.models.GameActions;
 import org.ldts.pacman.viewers.Viewer;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 
 public abstract class State<T> {
     private final T model;
@@ -28,7 +29,7 @@ public abstract class State<T> {
     }
 
     // Função que acaba
-    public void step(Game game, GUI gui, long time) throws IOException  {
+    public void step(Game game, GUI gui, long time) throws IOException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         GameActions.ControlActions userControlAction = gui.getNextUserInput();
         controller.step(game, userControlAction, time);
         viewer.draw(gui);

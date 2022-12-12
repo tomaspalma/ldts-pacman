@@ -1,10 +1,6 @@
 import com.googlecode.lanterna.TerminalSize
-import com.googlecode.lanterna.TextColor
-import com.googlecode.lanterna.screen.Screen;
-import com.googlecode.lanterna.bundle.LanternaThemes
-import org.ldts.pacman.gui.GUI
+import com.googlecode.lanterna.screen.Screen
 import org.ldts.pacman.gui.GUIForLanterna
-import org.ldts.pacman.models.Position
 import spock.lang.Specification
 
 class GUIForLanternaTest extends Specification {

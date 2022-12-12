@@ -1,5 +1,10 @@
 package org.ldts.pacman.models
 
+import org.ldts.pacman.models.game.Position
+import org.ldts.pacman.models.game.entities.pacman.directions.PacmanDirectionDown
+import org.ldts.pacman.models.game.entities.pacman.directions.PacmanDirectionLeft
+import org.ldts.pacman.models.game.entities.pacman.directions.PacmanDirectionRight
+import org.ldts.pacman.models.game.entities.pacman.directions.PacmanDirectionUp
 import spock.lang.Specification
 
 class PacmanDirectionTest extends Specification {
