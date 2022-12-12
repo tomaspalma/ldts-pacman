@@ -10,7 +10,7 @@ public class RunToBottomLeftChaseStrategy implements ChaseStrategy {
     public Position getNextPosition(Ghost ghost) {
         int arenaHeight = ghost.getArena().getHeight();
 
-        Position desiredPosition = new Position(2, arenaHeight - 2, ghost.getArena());
+        Position desiredPosition = new Position(2, arenaHeight - 2);
 
         GhostDirection currentGhostDirection = (GhostDirection) ghost.getCurrentDirection();
         return desiredPosition.getClosestPositionFrom(currentGhostDirection.getPossiblePositionsToMove());

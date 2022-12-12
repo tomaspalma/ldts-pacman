@@ -19,8 +19,8 @@ public class Pacman extends MovableEntity implements PacmanObservable {
     private boolean isMouthOpen = true;
     private final List<PacmanAnimation> animationsToExecute = new ArrayList<>();
 
-    public Pacman(Position position) {
-        super(position);
+    public Pacman(Position position, Arena arena) {
+        super(position, arena);
         currentDirection = new PacmanDirectionRight(this);
         this.drawSymbol = currentDirection.getDrawSymbol();
         this.color = TextColor.ANSI.YELLOW_BRIGHT;

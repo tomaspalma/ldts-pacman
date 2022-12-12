@@ -16,8 +16,8 @@ public abstract class RegularGhost extends Ghost implements EatenPowerPelletObse
 
     private final AtomicInteger noOfTimesConsequentlyEaten = new AtomicInteger(0);
 
-    protected RegularGhost(Position position) {
-        super(position);
+    protected RegularGhost(Position position, Arena arena) {
+        super(position, arena);
         this.drawSymbol = "^";
         this.frightenedStrategy = new FrightenedRunAwayStrategy();
         this.dyingStrategy = new GhostHouseDyingStrategy();

@@ -34,7 +34,7 @@ public abstract class Tile {
 
     public void removeChild(Entity child) {
         childrenEntities.remove(child);
-        if(childrenEntities.isEmpty()) childrenEntities.add(new EmptySpace(position));
+        if(childrenEntities.isEmpty()) childrenEntities.add(new EmptySpace(position, this.arena));
     }
 
     public boolean containsFixedEdible() {

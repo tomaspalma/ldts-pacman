@@ -1,6 +1,7 @@
 package org.ldts.pacman.models.game.entities.fixededibles;
 
 import com.googlecode.lanterna.TextColor;
+import org.ldts.pacman.models.Arena;
 import org.ldts.pacman.models.EatenPowerPelletObserver;
 import org.ldts.pacman.models.GameObserver;
 import org.ldts.pacman.models.game.Position;
@@ -12,8 +13,8 @@ import java.util.List;
 public class PowerPellet extends FixedEdible implements PowerPelletObservable {
     private final List<EatenPowerPelletObserver> observers = new ArrayList<>();
 
-    public PowerPellet(Position position) {
-        super(position);
+    public PowerPellet(Position position, Arena arena) {
+        super(position, arena);
         this.drawSymbol = ":";
         this.color = TextColor.ANSI.YELLOW;
     }

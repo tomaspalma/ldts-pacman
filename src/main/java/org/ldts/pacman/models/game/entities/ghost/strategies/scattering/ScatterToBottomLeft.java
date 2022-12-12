@@ -9,7 +9,7 @@ import java.util.List;
 public class ScatterToBottomLeft implements ScatterStrategy {
     @Override
     public Position getNextPosition(Ghost ghost) {
-        Position bottomLeft = new Position(0, ghost.getArena().getHeight(), ghost.getArena());
+        Position bottomLeft = new Position(0, ghost.getArena().getHeight());
         GhostDirection currentGhostDirection = (GhostDirection) ghost.getCurrentDirection();
         List<Position> possibleGhostPositions = currentGhostDirection.getPossiblePositionsToMove();
 

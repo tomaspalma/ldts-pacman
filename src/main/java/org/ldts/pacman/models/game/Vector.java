@@ -12,6 +12,6 @@ public class Vector {
     }
 
     public Position getPositionBasedOnSumWith(Position position) {
-        return new Position(position.getX() + this.x, position.getY() + this.y, position.getArena());
+        return new Position(position.getX() + this.x, position.getY() + this.y);
     }
 }

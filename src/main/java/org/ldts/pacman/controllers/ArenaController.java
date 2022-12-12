@@ -106,6 +106,10 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
         getModel().getGeneralFixedEdibleList().remove(currentEdible);
     }
 
+    public Tile getArenaTileAt(Position position) {
+        return getModel().getArenaTileAt(position);
+    }
+
     @Override
     public void changeOnPacmanCollisionWithGhostAt(Position position) {
         Tile currentTile = getModel().getGameGrid().get(position.getY() - 1).get(position.getX());

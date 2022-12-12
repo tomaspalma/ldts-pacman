@@ -11,7 +11,7 @@ public class PacmanDirectionUp extends PacmanDirection {
 
     @Override
     public Position getNextPosition() {
-        return new Position(this.movableEntity.getPosition().getX(), this.movableEntity.getPosition().getY() - 1, this.movableEntity.getArena());
+        return new Position(this.movableEntity.getPosition().getX(), this.movableEntity.getPosition().getY() - 1);
     }
 
     @Override
@@ -19,6 +19,6 @@ public class PacmanDirectionUp extends PacmanDirection {
         int newY = this.movableEntity.getPosition().getY() - forwardLevel;
         int newX = this.movableEntity.getPosition().getX() - forwardLevel;
 
-        return new Position(newX, newY, this.movableEntity.getArena());
+        return new Position(newX, newY);
     }
 }

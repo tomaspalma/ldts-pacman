@@ -80,8 +80,8 @@ public abstract class Ghost extends MovableEntity {
 
     public abstract GameActions.GhostCollisionWithPacman getCollisionWithPacmanResult();
     
-    protected Ghost(Position position) {
-        super(position);
+    protected Ghost(Position position, Arena arena) {
+        super(position, arena);
     }
 
     public TextColor.ANSI getOriginalColor() {
@@ -89,9 +89,11 @@ public abstract class Ghost extends MovableEntity {
     }
 
     public boolean willBeInInvalidPosition(Position newPosition) {
-        if(newPosition.isOutOfBounds()) return true;
+        if(this.arena.hasItsBoundsViolatedBy(newPosition)) return true;
 
+        boolean willBeOnObstacle = this.arena.getArenaTileAt(newPosition).containsObstacle();
+        boolean willBeOnGate = this.arena.getArenaTileAt(newPosition).containsGate();
 
-        return newPosition.isOnSomeObstaclePosition() || newPosition.isOnGatePosition();
+        return willBeOnObstacle || willBeOnGate;
     }
 }

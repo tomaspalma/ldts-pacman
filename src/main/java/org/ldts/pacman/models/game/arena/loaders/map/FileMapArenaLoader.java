@@ -66,7 +66,7 @@ public class FileMapArenaLoader extends MapArenaLoader {
             this.arena.getGameGrid().add(new ArrayList<>());
 
             for(Character c: currentCharRow.toCharArray()) {
-                addRespectiveElementOf(c, new Position(x, y, this.arena));
+                addRespectiveElementOf(c, new Position(x, y));
                 x += 1;
             }
 
@@ -84,7 +84,7 @@ public class FileMapArenaLoader extends MapArenaLoader {
         specialLimitParemeters = positionCoordinates.split("x");
         int ghostHouseX = Integer.parseInt(specialLimitParemeters[0]);
         int ghostHouseY = Integer.parseInt(specialLimitParemeters[1]);
-        Position ghostHousePosition = new Position(ghostHouseX, ghostHouseY, this.arena);
+        Position ghostHousePosition = new Position(ghostHouseX, ghostHouseY);
 
         String widthParameters = this.mapFileReader.readLine();
         specialLimitParemeters = widthParameters.split("x");
@@ -110,17 +110,17 @@ public class FileMapArenaLoader extends MapArenaLoader {
 
     private void addRespectiveElementOf(Character character, Position currentPosition) {
         switch(character) {
-            case 'W': loadObstacle(new Wall(currentPosition)); break;
+            case 'W': loadObstacle(new Wall(currentPosition, this.arena)); break;
             case 'P': loadPacmanAt(currentPosition); break;
-            case 'o': loadFixedEdible(new Pacdot(currentPosition)); break;
-            case 'O': loadFixedEdible(new PowerPellet(currentPosition)); break;
-            case 'C': loadFixedEdible(new Cherry(currentPosition)); break;
-            case 'p': loadRegularGhost(new Pinky(currentPosition)); break;
-            case 'c': loadRegularGhost(new Clyde(currentPosition)); break;
-            case 'i': loadRegularGhost(new Inky(currentPosition)); break;
-            case 'b': loadRegularGhost(new Blinky(currentPosition)); break;
-            case 'G': loadGate(new GhostHouseGate(currentPosition)); break;
-            case ' ': loadEmptySpace(new EmptySpace(currentPosition)); break;
+            case 'o': loadFixedEdible(new Pacdot(currentPosition, this.arena)); break;
+            case 'O': loadFixedEdible(new PowerPellet(currentPosition, this.arena)); break;
+            case 'C': loadFixedEdible(new Cherry(currentPosition, this.arena)); break;
+            case 'p': loadRegularGhost(new Pinky(currentPosition, this.arena)); break;
+            case 'c': loadRegularGhost(new Clyde(currentPosition, this.arena)); break;
+            case 'i': loadRegularGhost(new Inky(currentPosition, this.arena)); break;
+            case 'b': loadRegularGhost(new Blinky(currentPosition, this.arena)); break;
+            case 'G': loadGate(new GhostHouseGate(currentPosition, this.arena)); break;
+            case ' ': loadEmptySpace(new EmptySpace(currentPosition, this.arena)); break;
             default: addTeletransporterToMap(character, currentPosition); break;
         }
     }
@@ -153,7 +153,7 @@ public class FileMapArenaLoader extends MapArenaLoader {
 
     @Override
     protected void loadPacmanAt(Position position) {
-        Pacman pacman = new Pacman(position);
+        Pacman pacman = new Pacman(position, this.arena);
 
         this.arena.setPacman(pacman);
 

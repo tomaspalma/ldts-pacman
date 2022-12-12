@@ -8,8 +8,8 @@ import org.ldts.pacman.models.game.entities.ghost.states.GhostHouseState;
 import org.ldts.pacman.models.game.entities.ghost.strategies.scattering.ScatterToBottomRight;
 
 public class Inky extends RegularGhost {
-    public Inky(Position position) {
-        super(position);
+    public Inky(Position position, Arena arena) {
+        super(position, arena);
         this.previousState = new GhostHouseState(this);
         this.currentState = this.previousState;
         this.originalState = this.previousState;

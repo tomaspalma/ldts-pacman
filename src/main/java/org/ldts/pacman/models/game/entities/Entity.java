@@ -15,10 +15,10 @@ public abstract class Entity {
     protected final Arena arena;
     protected final List<Animation> possibleAnimations;
 
-    public Entity(Position position) {
+    public Entity(Position position, Arena arena) {
         this.position = position;
-        this.arena = this.position.getArena();
         this.possibleAnimations = new ArrayList<>();
+        this.arena = arena;
     }
 
     public Position getPosition() {

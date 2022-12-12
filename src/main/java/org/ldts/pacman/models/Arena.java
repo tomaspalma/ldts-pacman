@@ -144,6 +144,13 @@ public class Arena {
         this.startPacmanPosition = startPacmanPosition;
     }
 
+    public boolean hasItsBoundsViolatedBy(Position position) {
+        boolean isOutOfBoundsHorizontally = position.getX() < 0 || position.getX() >= this.gameGrid.get(0).size();
+        boolean isOutOfBoundsVertically = position.getY() < 1 || position.getY() >= this.gameGrid.size();
+
+        return isOutOfBoundsHorizontally || isOutOfBoundsVertically;
+    }
+
     public void removeFromGameGridAt(Position position, Entity entity) {
         Tile tile = gameGrid.get(position.getY() - 1).get(position.getX());
 
@@ -173,5 +180,9 @@ public class Arena {
        }
 
        return null;
+    }
+
+    public Tile getArenaTileAt(Position position) {
+        return this.gameGrid.get(position.getY() - 1).get(position.getX());
     }
 }

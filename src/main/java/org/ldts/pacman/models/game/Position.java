@@ -9,12 +9,10 @@ import java.util.Objects;
 public class Position {
     private int x;
     private int y;
-    private final Arena arena;
 
-    public Position(int x, int y, Arena arena) {
+    public Position(int x, int y) {
         this.x = x;
         this.y = y;
-        this.arena = arena;
     }
 
     public int getX() {
@@ -33,24 +31,20 @@ public class Position {
         this.y = y;
     }
 
-    public Arena getArena() {
-        return this.arena;
-    }
-
     public Position getPositionToTheLeft() {
-       return new Position(this.x - 1, this.y, this.arena);
+       return new Position(this.x - 1, this.y);
     }
 
     public Position getPositionToTheRight() {
-        return new Position(this.x + 1, this.y, this.arena);
+        return new Position(this.x + 1, this.y);
     }
 
     public Position getPositionAbove() {
-        return new Position(this.x, this.y - 1, this.arena);
+        return new Position(this.x, this.y - 1);
     }
 
     public Position getPositionBelow() {
-        return new Position(this.x, this.y + 1, this.arena);
+        return new Position(this.x, this.y + 1);
     }
 
     public double getDistanceTo(Position position) {
@@ -71,43 +65,6 @@ public class Position {
         }
 
         return closestPossiblePosition;
-    }
-
-    public boolean isOutOfBounds() {
-        boolean isOutOfBoundsHorizontally = this.x < 0 || this.x >= this.arena.getGameGrid().get(0).size();
-        boolean isOutOfBoundsVertically = this.y < 1 || this.y >= this.arena.getGameGrid().size();
-
-        return isOutOfBoundsHorizontally || isOutOfBoundsVertically;
-    }
-
-    public boolean isOnSomeGhostPosition() {
-        Tile tile = this.arena.getGameGrid().get(this.y - 1).get(this.x);
-
-        return tile.containsGhost();
-    }
-
-    public boolean isOnSomeObstaclePosition() {
-        Tile tile = this.arena.getGameGrid().get(this.y - 1).get(this.x);
-
-        return tile.containsObstacle();
-    }
-
-    public boolean isOnGatePosition() {
-        Tile tile = this.arena.getGameGrid().get(this.y - 1).get(this.x);
-
-        return tile.containsGate();
-    }
-
-    public boolean isOnPacmanPosition() {
-        Tile tile = this.arena.getGameGrid().get(this.y - 1).get(this.x);
-
-        return tile.containsPacman();
-    }
-
-    public boolean isOnFixedEdiblePosition() {
-        Tile tile = this.arena.getGameGrid().get(this.y - 1).get(this.x);
-
-        return tile.containsFixedEdible();
     }
 
     public Vector getVectorTo(Position position1) {

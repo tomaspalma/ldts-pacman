@@ -1,5 +1,6 @@
 package org.ldts.pacman.models.game.entities;
 
+import org.ldts.pacman.models.Arena;
 import org.ldts.pacman.models.MovableEntityDirection;
 import org.ldts.pacman.models.game.Position;
 import org.ldts.pacman.models.game.arena.grid.TeletransporterTile;
@@ -9,9 +10,9 @@ public abstract class MovableEntity extends Entity {
     protected final Position startPosition;
     protected int velocity;
     protected MovableEntityDirection currentDirection;
-    public MovableEntity(Position position) {
-        super(position);
-        this.startPosition = new Position(position.getX(), position.getY(), position.getArena());
+    public MovableEntity(Position position, Arena arena) {
+        super(position, arena);
+        this.startPosition = new Position(position.getX(), position.getY());
     }
 
     public int getVelocity() {

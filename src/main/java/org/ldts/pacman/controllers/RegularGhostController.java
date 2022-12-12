@@ -55,7 +55,9 @@ public class RegularGhostController extends Controller<Arena> {
     }
 
     private void moveGhost(Ghost ghost, Position newPosition) {
-        boolean isOnGhostHouseAndCanLeaveIt = (ghost.getPreviousState() instanceof GhostHouseState && ghost.getCurrentState().canMoveOutsideGhostHouse());
+        boolean isOnGhostHouseAndCanLeaveIt = (ghost.getPreviousState() instanceof GhostHouseState
+                && ghost.getCurrentState().canMoveOutsideGhostHouse());
+
         if(isOnGhostHouseAndCanLeaveIt) {
             ghost.setPosition(getModel().getGhostHouse().getExitPosition());
             ghost.setPreviousStateTo(ghost.getCurrentState());
