@@ -36,6 +36,8 @@ public abstract class MovableEntity extends Entity {
         this.currentDirection = currentDirection;
     }
 
+
+
     public Position switchTile(Position position) {
         int x = this.getPosition().getX();
         int y = this.getPosition().getY();

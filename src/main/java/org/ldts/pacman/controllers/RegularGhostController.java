@@ -76,13 +76,12 @@ public class RegularGhostController extends Controller<Arena> {
 
     public void putGhostsBackInInitialState() {
         Position ghostStartPosition = null;
-        for(RegularGhost regularGhost: getModel().getRegularGhostsList()) {
+        for (RegularGhost regularGhost : getModel().getRegularGhostsList()) {
             ghostStartPosition = regularGhost.getStartPosition();
             regularGhost.switchTile(ghostStartPosition);
             regularGhost.setPosition(ghostStartPosition);
 
-            regularGhost.setCurrentStateTo(regularGhost.getOriginalState());
-            regularGhost.setPreviousStateTo(regularGhost.getOriginalState());
+            regularGhost.returnToOriginalState();
         }
     }
 

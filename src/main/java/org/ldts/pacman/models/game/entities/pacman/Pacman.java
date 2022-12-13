@@ -32,8 +32,8 @@ public class Pacman extends MovableEntity implements PacmanObservable {
         return this.animationsToExecute;
     }
 
-    public boolean isMouthOpen() {
-        return this.isMouthOpen;
+    public int getLives() {
+        return lives;
     }
 
     public void die() {

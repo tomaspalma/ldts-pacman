@@ -57,6 +57,11 @@ public abstract class RegularGhost extends Ghost implements EatenPowerPelletObse
         thread.start();
     }
 
+    public void returnToOriginalState() {
+        this.currentState = this.originalState;
+        this.previousState = this.originalState;
+    }
+
 
     public void changeColor(TextColor.ANSI newColor) {
         this.color = newColor;
