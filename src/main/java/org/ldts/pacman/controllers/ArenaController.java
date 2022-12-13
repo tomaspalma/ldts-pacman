@@ -146,7 +146,7 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
         }
 
         sounds.get(0).play();
-        getModel().sumScoreWith(1);
+        getModel().sumScoreWith(currentEdible.getPoints());
         getModel().removeFromGameGridAt(position, currentEdible);
         getModel().getGeneralFixedEdibleList().remove(currentEdible);
     }
