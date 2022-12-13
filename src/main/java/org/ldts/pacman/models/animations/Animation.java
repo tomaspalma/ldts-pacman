@@ -9,7 +9,7 @@ public abstract class Animation {
 
    public Animation(long durationInMilliseconds) {
       this.durationInMilliseconds = durationInMilliseconds;
-      this.internalClock = new Clock();
+      this.internalClock = new Clock(System.currentTimeMillis());
    }
 
    public long getDurationInMilliseconds() {

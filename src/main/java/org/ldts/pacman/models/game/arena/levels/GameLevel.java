@@ -33,7 +33,7 @@ public class GameLevel {
 
         this.ghostsList = ghostsList;
 
-        this.clock = new Clock();
+        this.clock = new Clock(System.currentTimeMillis());
     }
 
     public void step() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {

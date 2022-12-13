@@ -24,14 +24,13 @@ import org.ldts.pacman.models.game.Position;
 
 public class GUIForLanterna implements GUI {
     private final Screen screen;
-    private final Terminal terminal;
-    private final TextGraphics graphics;
-    private final AWTTerminalFontConfiguration font;
+    private Terminal terminal;
+    private TextGraphics graphics;
+    private AWTTerminalFontConfiguration font;
 
-    /*
     public GUIForLanterna(Screen screen) {
         this.screen = screen;
-    }*/
+    }
 
     // O código de criar terminal só deve ser corrido uma vez por objeto de GUI
     public GUIForLanterna(int width, int height) throws IOException, URISyntaxException, FontFormatException {
@@ -48,10 +47,6 @@ public class GUIForLanterna implements GUI {
 
     public TerminalSize getTerminalSize() {
         return this.screen.getTerminalSize();
-    }
-
-    public Terminal getTerminal() {
-        return terminal;
     }
 
     public Screen getScreen() {
@@ -80,11 +75,6 @@ public class GUIForLanterna implements GUI {
     @Override
     public void hideCursor() {
         this.screen.setCursorPosition(null);
-    }
-
-    @Override
-    public void showCursor() {
-
     }
 
     @Override
@@ -165,9 +155,4 @@ public class GUIForLanterna implements GUI {
         this.graphics.setForegroundColor(color);
         this.graphics.putString(position.getX(), position.getY(), drawSymbol);
     }
-    
-    public void createRectangle(TerminalPosition topLeft, TerminalSize size, char character){
-        graphics.drawRectangle(topLeft,size,character);
-    }
-
 }

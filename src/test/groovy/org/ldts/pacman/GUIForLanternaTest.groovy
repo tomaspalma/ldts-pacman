@@ -1,6 +1,10 @@
 import com.googlecode.lanterna.TerminalSize
+import com.googlecode.lanterna.TextColor
+import com.googlecode.lanterna.graphics.TextGraphics
 import com.googlecode.lanterna.screen.Screen
+import org.apache.groovy.groovysh.Groovysh
 import org.ldts.pacman.gui.GUIForLanterna
+import org.ldts.pacman.models.game.Position
 import spock.lang.Specification
 
 class GUIForLanternaTest extends Specification {
@@ -54,4 +58,47 @@ class GUIForLanternaTest extends Specification {
             1 * screen.newTextGraphics()
     }*/
 
+    def "Should be able to refresh screen"() {
+        given:
+            def screen = Mock(Screen)
+            def gui = new GUIForLanterna(screen)
+        when:
+            gui.refresh()
+        then:
+            1 * screen.refresh()
+    }
+
+    def "Should be able to close screen"() {
+        given:
+            def screen = Mock(Screen)
+            def gui = new GUIForLanterna(screen)
+        when:
+            gui.close()
+        then:
+            1 * screen.close()
+    }
+
+    def "We should be able to clear our screen"() {
+        given:
+            def screen = Mock(Screen)
+            def gui = new GUIForLanterna(screen)
+        when:
+            gui.clear()
+        then:
+            1 * screen.clear()
+    }
+
+    def "We should be able to invoke the correct methods in writing to screen"() {
+        given:
+            def screen = Mock(Screen)
+            def gui = new GUIForLanterna(screen)
+            def textGraphics = Mock(TextGraphics)
+            screen.newTextGraphics() >> textGraphics
+        when:
+            gui.writeToScreen(new Position(5, 5),
+                "test", TextColor.ANSI.WHITE)
+        then:
+            1 * textGraphics.setForegroundColor(TextColor.ANSI.WHITE)
+            1 * textGraphics.putString(_, "test")
+    }
 }
