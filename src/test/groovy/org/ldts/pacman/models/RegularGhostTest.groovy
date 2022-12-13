@@ -10,12 +10,12 @@ public class RegularGhostTest extends Specification {
     private def regularGhost;
 
     def setup() {
-        regularGhost = new Pinky(new Position(5, 5, new Arena(20, 21, "maps/testmap.txt")));
+        regularGhost = new Pinky(new Position(5, 5), new Arena(20, 21, "maps/testmap.txt"));
     }
 
     def "Regular ghost will switch to frightened stage after pacman eats powerpellet"() {
         when:
-            regularGhost.changeBasedOnObservable()
+            regularGhost.handlePowerPelletBeingEaten();
         then:
             regularGhost.getCurrentState() instanceof FrightenedState
     }

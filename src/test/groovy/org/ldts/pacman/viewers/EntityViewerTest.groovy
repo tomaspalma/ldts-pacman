@@ -13,8 +13,8 @@ class EntityViewerTest extends Specification {
     private def pacman
 
     def setup() {
-        position = new Position(5, 5, new Arena(20, 21, "maps/testmap.txt"))
-        pacman = new Pacman(position)
+        position = new Position(5, 5)
+        pacman = new Pacman(position, new Arena(20, 21, "maps/testmap.txt"))
         entityViewer = new EntityViewer(pacman)
     }
 

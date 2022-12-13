@@ -15,14 +15,14 @@ class ClydeStratTest extends Specification {
     def setup() {
         arena = new Arena(20, 21, "maps/testmap.txt")
        // arena = Mock(Arena)
-        pacman = new Pacman(new Position(6, 6, arena))
+        pacman = new Pacman(new Position(6, 6), arena)
         arena.setPacman(pacman)
     }
 
     def "When within a distance of 8 tiles clyde should use RunToBottomLeftStrategy"() {
         given:
-            def clyde = new Clyde(new Position(4, 4, arena))
-            pacman.setPosition(new Position(5, 5, arena))
+            def clyde = new Clyde(new Position(4, 4), arena)
+            pacman.setPosition(new Position(5, 5))
         when:
             clyde.getChaseStrategy().getNextPosition(clyde)
         then:
@@ -32,8 +32,8 @@ class ClydeStratTest extends Specification {
 
     def "When the distance is more than 8 tiles, clyde should follow an aggressive chase strategy"() {
         given:
-            def clyde = new Clyde(new Position(4, 4, arena))
-            pacman.setPosition(new Position(19, 19, arena))
+            def clyde = new Clyde(new Position(4, 4), arena)
+            pacman.setPosition(new Position(19, 19))
         when:
             clyde.getChaseStrategy().getNextPosition(clyde)
         then:

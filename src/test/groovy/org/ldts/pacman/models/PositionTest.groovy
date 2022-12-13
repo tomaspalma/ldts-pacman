@@ -5,52 +5,35 @@ import org.ldts.pacman.models.game.Vector
 import spock.lang.Specification
 
 class PositionTest extends Specification {
-    private def arena
     private def pos
 
     def setup() {
-        arena = new Arena(20, 21, "maps/testmap.txt");
-        pos = new Position(15, 15, arena);
+        pos = new Position(15, 15);
     }
 
     def "We should be able to get relative positions from one"() {
         expect:
-            pos.getPositionToTheLeft() == new Position(14, 15, arena)
-            pos.getPositionToTheRight() == new Position(16, 15, arena)
-            pos.getPositionAbove() == new Position(15, 14, arena)
-            pos.getPositionBelow() == new Position(15, 16, arena)
-    }
-
-    def "We should be able to correctly detect if a position is out of bounds"() {
-        expect:
-            new Position(22, 22, arena).isOutOfBounds() == true
-            new Position(19, 19, arena).isOutOfBounds() == false
-            new Position(40, 10, arena).isOutOfBounds() == true
-            new Position(10, 40, arena).isOutOfBounds() == true
-            new Position(-1, 5, arena).isOutOfBounds() == true
-    }
-
-    def "We should be able to detect if we are on a ghost position"() {
-        expect:
-            new Position(7, 5, arena).isOnSomeGhostPosition() == true
-            new Position(8, 5, arena).isOnSomeGhostPosition() == false
-    }
-
-    def "We should be able to detect if we are on an obstacle position"() {
-        expect:
-            new Position(0, 1, arena).isOnSomeObstaclePosition()
-            new Position(7, 18, arena).isOnSomeObstaclePosition()
+            pos.getPositionToTheLeft() == new Position(14, 15)
+            pos.getPositionToTheRight() == new Position(16, 15)
+            pos.getPositionAbove() == new Position(15, 14)
+            pos.getPositionBelow() == new Position(15, 16)
     }
 
     def "We should be able to get a vector between two points in the direction of point2 to point1"() {
         given:
-            def position1 = new Position(4 , 4, arena)
-            def position2 = new Position(12, 19, arena)
+            def position1 = new Position(4 , 4)
+            def position2 = new Position(12, 19)
         expect:
-            position2.getVectorBetweenTwoPositionsFromThisToPos1(position1) == new Vector(8, 15);
+            position1.getVectorTo(position2).equals(new Vector(8, 15));
     }
 
-    def cleanup() {
-        arena.getGameGrid().clear()
+    def "We should correctly receive the distance between two positions"() {
+
     }
+
+    def "We should be able to get the closest position to a certain position"() {
+        given:
+            def position1 = new Position(5, 5);
+    }
+
 }

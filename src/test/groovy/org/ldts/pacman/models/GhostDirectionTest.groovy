@@ -18,17 +18,17 @@ class GhostDirectionTest extends Specification {
 
     def "We should be able to detect if a ghost switched direction (orientation)"() {
        given:
-            ghostDirection = new GhostDirectionUp(new Pinky(new Position(5, 5, arena)));
+            ghostDirection = new GhostDirectionUp(new Pinky(new Position(5, 5), arena));
        when:
-            def result = ghostDirection.generateNextDirectionAfterChangeTo(new Position(5, 4, arena));
+            def result = ghostDirection.generateNextDirectionAfterChangeTo(new Position(5, 4));
        then:
             result instanceof GhostDirectionUp
        and:
-            ghostDirection.generateNextDirectionAfterChangeTo(new Position(5, 6, arena)) instanceof GhostDirectionDown
+            ghostDirection.generateNextDirectionAfterChangeTo(new Position(5, 6)) instanceof GhostDirectionDown
        and:
-            ghostDirection.generateNextDirectionAfterChangeTo(new Position(4, 5, arena)) instanceof GhostDirectionLeft
+            ghostDirection.generateNextDirectionAfterChangeTo(new Position(4, 5)) instanceof GhostDirectionLeft
        and:
-            ghostDirection.generateNextDirectionAfterChangeTo(new Position(6, 5, arena)) instanceof GhostDirectionRight
+            ghostDirection.generateNextDirectionAfterChangeTo(new Position(6, 5)) instanceof GhostDirectionRight
     }
 
     def "BUG: Ghost direction is generating positions that are not valid to move to"() {

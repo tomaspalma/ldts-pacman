@@ -25,25 +25,25 @@ class PacmanDirectionTest extends Specification {
         given:
             def direction = new PacmanDirectionDown(pacman)
         expect:
-            direction.getGhostTargetTileWithForwardLevel(2) == new Position(pacmanX, pacmanY + 2, arena)
+            direction.getGhostTargetTileWithForwardLevel(2) == new Position(pacmanX, pacmanY + 2)
     }
 
     def "We should be able to get correct forward position from left direction"() {
         given:
             def direction = new PacmanDirectionLeft(pacman)
         expect:
-            direction.getGhostTargetTileWithForwardLevel(3) == new Position(pacmanX - 3, pacmanY , arena)
+            direction.getGhostTargetTileWithForwardLevel(3) == new Position(pacmanX - 3, pacmanY)
     }
     def "We should be able to get correct forward position from right direction"() {
         given:
             def direction = new PacmanDirectionRight(pacman)
         expect:
-            direction.getGhostTargetTileWithForwardLevel(5) == new Position(pacmanX + 5, pacmanY, arena)
+            direction.getGhostTargetTileWithForwardLevel(5) == new Position(pacmanX + 5, pacmanY)
     }
     def "We should be able to get correct forward position from up direction"() {
         given:
             def direction = new PacmanDirectionUp(pacman)
         expect:
-            direction.getGhostTargetTileWithForwardLevel(2) == new Position(pacmanX - 2, pacmanY - 2, arena)
+            direction.getGhostTargetTileWithForwardLevel(2) == new Position(pacmanX - 2, pacmanY - 2)
     }
 }

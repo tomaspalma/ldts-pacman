@@ -9,6 +9,4 @@ class VectorTest extends Specification {
     def setup() {
         arena = new Arena(20, 21, "maps/testmap.txt")
     }
-
-
 }
