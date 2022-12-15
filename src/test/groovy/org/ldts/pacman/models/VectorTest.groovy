@@ -25,4 +25,9 @@ class VectorTest extends Specification {
             new Vector(5, 1).equals(new Vector(5, 1))
             new Vector(2, 3).equals(new Vector(2, 3))
     }
+
+    def "We should have an hash code function working correctly"() {
+        expect:
+            vector.hashCode() == Objects.hash(vector.getX(), vector.getY())
+    }
 }

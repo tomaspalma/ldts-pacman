@@ -36,4 +36,20 @@ class PositionTest extends Specification {
             def position1 = new Position(5, 5);
     }
 
+    def "We should be able to change position attributes"() {
+        when:
+            pos.setXTo(4)
+        then:
+            pos == new Position(4, 15)
+        when:
+            pos.setYTo(5)
+        then:
+            pos == new Position(4, 5)
+    }
+
+    def "We should have an hash code function working correctly"() {
+        expect:
+            pos.hashCode() == Objects.hash(pos.getX(), pos.getY())
+    }
+
 }

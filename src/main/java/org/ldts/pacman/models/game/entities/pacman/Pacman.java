@@ -79,4 +79,13 @@ public class Pacman extends MovableEntity implements PacmanObservable {
         for(PacmanObserver observer: observers)
             observer.changeOnPacmanCollisionWithGhostAt(position);
     }
+
+    public void openMouth() {
+        String currentPacDirectionSymbol = this.currentDirection.getDrawSymbol();
+        this.setDrawSymbolTo(currentPacDirectionSymbol);
+    }
+
+    public void closeMouth() {
+        this.setDrawSymbolTo("[");
+    }
 }

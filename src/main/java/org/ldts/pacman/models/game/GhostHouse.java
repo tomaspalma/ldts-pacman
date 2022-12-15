@@ -22,13 +22,6 @@ public class GhostHouse {
         this.gatePosition = new Vector(this.width / 2, 0).getPositionBasedOnSumWith(upperLeftPosition);
     }
 
-    public Position getGhostRevivalSpot() {
-        int xOffset = width / 2;
-        int yOffset = height / 2;
-
-        return new Vector(xOffset, yOffset).getPositionBasedOnSumWith(upperLeftPosition);
-    }
-
     public Position getAvailablePosition() {
         int xOffset = (this.ghostHolder.size() % width) + 1;
         int yOffset = (this.ghostHolder.size() / height) + 1;
@@ -46,22 +39,6 @@ public class GhostHouse {
 
     public void setGhostHouseGate(GhostHouseGate newGhostHouseGate) {
         this.gate = newGhostHouseGate;
-    }
-
-    public void addToGhostHolderAndSetPositionOf(Ghost ghost) {
-       ghostHolder.add(ghost);
-    }
-
-    public Position getUpperLeftPosition() {
-        return this.upperLeftPosition;
-    }
-
-    public List<Ghost> getGhostsInHolder() {
-        return this.ghostHolder;
-    }
-
-    public Position getGatePosition() {
-        return this.gatePosition;
     }
 
     public int getWidth() {

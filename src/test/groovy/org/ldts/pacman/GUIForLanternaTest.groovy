@@ -88,7 +88,7 @@ class GUIForLanternaTest extends Specification {
             1 * screen.clear()
     }
 
-    def "We should be able to invoke the correct methods in writing to screen"() {
+    /*def "We should be able to invoke the correct methods in writing to screen"() {
         given:
             def screen = Mock(Screen)
             def gui = new GUIForLanterna(screen)
@@ -100,5 +100,5 @@ class GUIForLanternaTest extends Specification {
         then:
             1 * textGraphics.setForegroundColor(TextColor.ANSI.WHITE)
             1 * textGraphics.putString(_, "test")
-    }
+    }*/
 }
