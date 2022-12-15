@@ -17,6 +17,18 @@ class GhostDirectionLeftTest extends Specification {
         dir = new GhostDirectionLeft(ghost)
     }
 
+    def "It should correctly return the list of possible positions to move"() {
+        given:
+            def ghostStub = Stub(Ghost.class)
+            def dir1 = new GhostDirectionLeft(ghostStub)
+            ghostStub.willBeInInvalidPosition(_ as Position) >> false
+        when:
+            def l = dir1.getPossiblePositionsToMove()
+        then:
+            l == [dir1.getPossiblePositionToMoveLeft(), dir1.getPossiblePositionToMoveUp(),
+                dir1.getPossiblePositionToMoveDown()]
+    }
+
     def "it should turn around to direction up"() {
         given:
             ghost.setCurrentDirectionTo(dir)

@@ -13,17 +13,31 @@ class GhostDirectionDownTest extends Specification {
     private def ghost
 
     def setup() {
-        ghost = Mock(Ghost)
+        ghost = Stub(Ghost)
         dir = new GhostDirectionDown(ghost)
+    }
+
+    def "It should correctly return the list of possible positions to move"() {
+        given:
+            def ghostStub = Stub(Ghost.class)
+            def dir1 = new GhostDirectionDown(ghostStub)
+            ghostStub.willBeInInvalidPosition(_ as Position) >> false
+        when:
+            def l = dir1.getPossiblePositionsToMove()
+        then:
+            l == [dir1.getPossiblePositionToMoveLeft(), dir1.getPossiblePositionToMoveRight(),
+                dir1.getPossiblePositionToMoveDown()]
     }
 
     def "it should turn around to direction up"() {
         given:
-            ghost.setCurrentDirectionTo(dir)
+            def ghostMock = Mock(Ghost)
+            def dir1 = new GhostDirectionDown(ghostMock)
+            ghostMock.setCurrentDirectionTo(dir1)
         when:
-            dir.turnAround()
+            dir1.turnAround()
         then:
-            1 * ghost.setCurrentDirectionTo(_)
+            1 * ghostMock.setCurrentDirectionTo(_)
     }
 
     def "It should step the direction to the new correct one"() {
