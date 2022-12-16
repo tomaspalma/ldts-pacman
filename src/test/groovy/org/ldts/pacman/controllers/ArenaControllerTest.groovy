@@ -66,7 +66,7 @@ class ArenaControllerTest extends Specification {
 
     def "We should restore the fixed edibles list the next level if the current leven has ended and do nothting if it hasn't ended yet"() {
         given:
-            arenaController.getModel().getGeneralFixedEdibleList().clear();
+            arenaController.getModel().getGeneralFixedEdibleList().clear()
         when:
             arenaController.actIfLevelEnded()
         then:

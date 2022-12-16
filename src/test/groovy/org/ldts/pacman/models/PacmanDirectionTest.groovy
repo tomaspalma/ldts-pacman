@@ -15,7 +15,7 @@ class PacmanDirectionTest extends Specification {
     private def arena
 
     def setup() {
-        arena = new Arena(20, 21, "maps/testmap.txt");
+        arena = new Arena(20, 21, "maps/testmap.txt")
         pacman = arena.getPacman()
         pacmanX = pacman.getPosition().getX()
         pacmanY = pacman.getPosition().getY()

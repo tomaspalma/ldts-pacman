@@ -8,8 +8,8 @@ class ClockTest extends Specification {
     private def startTime
 
     def setup() {
-        startTime = System.currentTimeMillis();
-        clock = new Clock(startTime);
+        startTime = System.currentTimeMillis()
+        clock = new Clock(startTime)
     }
 
     def "Initializes elapsedMilliseconds as zero"() {

@@ -35,12 +35,12 @@ class ArenaTest extends Specification {
 
     def "Amount of grid elements must be equal to the total amount of elements in the other separate lists"() {
         given:
-            def noOfGridElements = 0;
-            def totalEntities = 1 + arena.getObstaclesList().size() + arena.getGeneralFixedEdibleList().size() + arena.getRegularGhostsList().size() + arena.getGhostHouseSize();
+            def noOfGridElements = 0
+            def totalEntities = 1 + arena.getObstaclesList().size() + arena.getGeneralFixedEdibleList().size() + arena.getRegularGhostsList().size() + arena.getGhostHouseSize()
         when:
             for(list in arena.getGameGrid()) {
                 for(element in list) {
-                   noOfGridElements += 1;
+                   noOfGridElements += 1
                 }
             }
         then:
@@ -55,13 +55,13 @@ class ArenaTest extends Specification {
             def sum = 0
             for(list in arena.getGameGrid()) {
                 for(element in list) {
-                    sum += 1;
+                    sum += 1
                 }
                 if(sum != expectedSizeOfEachRow) {
                     expectedResult = false
-                    break;
+                    break
                 }
-                sum = 0;
+                sum = 0
             }
         then:
             expectedResult == true

@@ -11,7 +11,7 @@ class MovableEntityTest extends Specification {
 
     def setup() {
         arena = Stub(Arena)
-        movableEntity = new Pacman(new Position(0, 1), arena);
+        movableEntity = new Pacman(new Position(0, 1), arena)
         arena.setPacman(movableEntity)
     }
 

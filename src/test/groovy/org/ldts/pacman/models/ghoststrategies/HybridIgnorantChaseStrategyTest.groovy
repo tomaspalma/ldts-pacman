@@ -15,7 +15,7 @@ class HybridIgnorantChaseStrategyTest extends Specification {
        arena = Mock(Arena.class)
        pacman = Mock(Pacman.class)
        arena.setPacman(pacman)
-       ghost = new Clyde(new Position(5, 5), arena);
+       ghost = new Clyde(new Position(5, 5), arena)
     }
 
     def "This strategy should return the closest position to pacman if more than 8 tiles away from it"() {

@@ -16,7 +16,7 @@ public class Pacman extends MovableEntity implements PacmanObservable {
     List<PacmanObserver> observers = new ArrayList<>();
     List<PacmanAnimation> animations = new ArrayList<>();
     private int lives = 3;
-    private boolean isMouthOpen = true;
+    private final boolean isMouthOpen = true;
     private final List<PacmanAnimation> animationsToExecute = new ArrayList<>();
 
     public Pacman(Position position, Arena arena) {

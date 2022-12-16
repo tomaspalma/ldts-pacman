@@ -12,7 +12,7 @@ class TileTest extends Specification {
     def setup() {
         arena = new Arena(20, 21, "maps/testmap.txt")
         pacman = arena.getPacman()
-        position = pacman.getPosition();
+        position = pacman.getPosition()
         tile = new RegularTile(position, arena)
     }
 

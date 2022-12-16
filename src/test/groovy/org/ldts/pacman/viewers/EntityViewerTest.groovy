@@ -22,10 +22,10 @@ class EntityViewerTest extends Specification {
         given:
             def gui = Mock(GUI)
             def color = TextColor.ANSI.YELLOW_BRIGHT
-            def drawSymbol = pacman.getDrawSymbol();
+            def drawSymbol = pacman.getDrawSymbol()
         when:
             entityViewer.drawEntities(gui, position, color, drawSymbol)
         then:
-            1 * gui.drawEntity(position, color, drawSymbol);
+            1 * gui.drawEntity(position, color, drawSymbol)
     }
 }

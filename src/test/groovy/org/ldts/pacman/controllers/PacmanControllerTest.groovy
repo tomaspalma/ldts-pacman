@@ -3,6 +3,8 @@ package org.ldts.pacman.controllers
 import org.ldts.pacman.Game
 import org.ldts.pacman.models.Arena
 import org.ldts.pacman.models.GameActions
+import org.ldts.pacman.models.game.Position
+import org.ldts.pacman.models.game.entities.ghost.Pinky
 import org.ldts.pacman.models.game.entities.pacman.Pacman
 import org.ldts.pacman.models.game.entities.pacman.animations.PacmanAnimation
 import org.ldts.pacman.models.game.entities.pacman.directions.PacmanDirectionDown
@@ -54,15 +56,6 @@ class PacmanControllerTest extends Specification {
 
     }
 
-    def "We should be able to change the number of lives our pacman has"() {
-        expect:
-            pacman.getRemainingLives() == 3
-        when:
-            pacController.changeLife(9)
-        then:
-            pacman.getRemainingLives() == 9
-    }
-
     def "We should execute the step of our animations"() {
         given:
             def animationMock = Mock(PacmanAnimation.class)
@@ -77,6 +70,18 @@ class PacmanControllerTest extends Specification {
             pacController.executeAnimations()
         then:
             pacman.getAnimationsToExecute().isEmpty()
+    }
+
+    def "It should notify pacman it collided with a ghost"() {
+        given:
+            def tile = arenaController.getModel().getGameGrid().get(0).get(0)
+            tile.put(new Pinky(new Position(0, 1), arena))
+            def pac = Mock(Pacman.class)
+            pacController.setPacmanTo(pac)
+        when:
+            pacController.actIfCollisionWithSpecialEntitiesAt(new Position(0, 1))
+        then:
+            1 * pac.notifyObserversItCollidedWithGhostAt(new Position(0, 1))
     }
 
 }

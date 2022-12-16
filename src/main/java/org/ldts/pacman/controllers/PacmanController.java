@@ -13,7 +13,7 @@ import java.io.IOException;
 public class PacmanController extends Controller<Arena> {
     private PacmanDirection wantedDirection;
     private final ArenaController parentController;
-    private final Pacman pacman;
+    private Pacman pacman;
 
     public PacmanController(ArenaController parentController, Arena model) {
         super(model);
@@ -24,6 +24,10 @@ public class PacmanController extends Controller<Arena> {
 
         MovableEntityDirection currentDirection = pacman.getCurrentDirection();
         this.wantedDirection = (PacmanDirection) currentDirection;
+    }
+
+    public void setPacmanTo(Pacman pacman) {
+        this.pacman = pacman;
     }
 
     @Override
@@ -99,9 +103,5 @@ public class PacmanController extends Controller<Arena> {
         if (collidedWithGhost) {
             this.pacman.notifyObserversItCollidedWithGhostAt(newPacmanPosition);
         }
-    }
-
-    private void changeLife(int i) {
-        pacman.setLivesTo(i);
     }
 }

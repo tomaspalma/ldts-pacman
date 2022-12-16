@@ -10,14 +10,14 @@ class PacmanTest extends Specification {
 
     def setup() {
         arena = new Arena(20, 21, "maps/testmap.txt")
-        pacman = arena.getPacman();
+        pacman = arena.getPacman()
     }
 
     def "It should correctly close its mouth"() {
          when:
             pacman.closeMouth()
         then:
-            pacman.getDrawSymbol() == "[";
+            pacman.getDrawSymbol() == "["
     }
 
     def "It should correctly open its mouth"() {

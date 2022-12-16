@@ -30,7 +30,7 @@ public class Arena {
     private final List<List<Tile>> gameGrid = new ArrayList<>();
     private final ArenaLevelLoader levelLoader;
     private final List<GameLevel> levels = new ArrayList<>();
-    private int currentLevel = 0;
+    private final int currentLevel = 0;
     private Position startPacmanPosition;
 
     private final List<RegularGhost> regularGhostsList = new ArrayList<>();

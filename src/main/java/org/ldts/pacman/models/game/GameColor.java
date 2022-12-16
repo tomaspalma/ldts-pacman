@@ -11,7 +11,7 @@ public enum GameColor {
 
     public String hexCode;
 
-    private GameColor(String colorHexCode) {
+    GameColor(String colorHexCode) {
         this.hexCode = colorHexCode;
     }
 }

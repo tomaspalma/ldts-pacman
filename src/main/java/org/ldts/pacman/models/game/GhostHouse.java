@@ -11,8 +11,8 @@ public class GhostHouse {
     private final Position upperLeftPosition;
     private final Position gatePosition;
     private GhostHouseGate gate;
-    private int width;
-    private int height;
+    private final int width;
+    private final int height;
 
     public GhostHouse(Position upperLeftPosition, int width, int height) {
         this.upperLeftPosition = upperLeftPosition;
