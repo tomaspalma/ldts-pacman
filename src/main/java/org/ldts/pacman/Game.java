@@ -17,7 +17,7 @@ public class Game {
     private final int width;
     private final int height;
 
-    public State getArenaState() {
+    public State getState() {
         return currentState;
     }
 

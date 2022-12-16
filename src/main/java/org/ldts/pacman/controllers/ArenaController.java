@@ -27,8 +27,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ArenaController extends Controller<Arena> implements PacmanObserver {
-    private final PacmanController pacmanController;
-    private final RegularGhostController regularGhostController;
+    private PacmanController pacmanController;
+    private RegularGhostController regularGhostController;
     private int ateGhostPoints = 200;
     private List<SFX> sounds;
     private int currentLevel = 0;
@@ -55,6 +55,14 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
         }
     }
 
+    public void setPacmanController(PacmanController pacmanController) {
+       this.pacmanController = pacmanController;
+    }
+
+    public void setRegularGhostController(RegularGhostController regularGhostController) {
+        this.regularGhostController = regularGhostController;
+    }
+
     @Override
     public void step(Game game, GameActions.ControlActions action, long time) throws IOException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         this.actIfLevelEnded();
@@ -71,7 +79,7 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
                 game.setState(null);
                 break;
             case SWITCH_TO_PAUSE_MENU:
-                game.setState(new PauseMenuState(new PauseMenu((ArenaState) game.getArenaState())));
+                game.setState(new PauseMenuState(new PauseMenu((ArenaState) game.getState())));
                 break;
             default:
                 stepChildControllers(game, action, time);
