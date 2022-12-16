@@ -146,7 +146,8 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
     public void changeOnPacmanEatFixedEdibleAt(Position position) {
         Tile currentTile = getModel().getGameGrid().get(position.getY() - 1).get(position.getX());
         FixedEdible currentEdible = currentTile.getFixedEdible();
-        assert (currentEdible != null);
+
+        if(currentEdible == null) return;
 
         if (currentEdible instanceof PowerPelletObservable powerPelletObservable) {
             powerPelletObservable.notifyObservers();

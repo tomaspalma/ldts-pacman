@@ -32,6 +32,10 @@ public class PacmanController extends Controller<Arena> {
         executeAnimations();
     }
 
+    public PacmanDirection getWantedDirection() {
+        return wantedDirection;
+    }
+
     private void executeAnimations() {
         for(PacmanAnimation pacmanAnimation: this.pacman.getAnimationsToExecute()) {
             pacmanAnimation.step();
@@ -51,6 +55,8 @@ public class PacmanController extends Controller<Arena> {
 
         movePacman();
     }
+
+
 
     private void movePacman() {
         this.tryToChangeToWantedDirection();
@@ -93,10 +99,6 @@ public class PacmanController extends Controller<Arena> {
         if (collidedWithGhost) {
             this.pacman.notifyObserversItCollidedWithGhostAt(newPacmanPosition);
         }
-    }
-
-    public void killPacmanAt() {
-        parentController.processPacmanLoseLife();
     }
 
     private void changeLife(int i) {

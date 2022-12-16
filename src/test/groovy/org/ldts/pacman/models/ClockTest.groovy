@@ -36,7 +36,6 @@ class ClockTest extends Specification {
         when:
             clock.step()
         then:
-            clock.getElapsedMilliseconds() != 0
             previousElapsed < clock.getElapsedMilliseconds()
         when:
             clock.reset()
