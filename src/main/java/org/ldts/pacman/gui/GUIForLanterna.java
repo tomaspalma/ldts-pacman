@@ -45,6 +45,10 @@ public class GUIForLanterna implements GUI {
         this.graphics = this.screen.newTextGraphics();
     }
 
+    public void setTerminalTo(Terminal terminal) {
+        this.terminal = terminal;
+    }
+
     public TerminalSize getTerminalSize() {
         return this.screen.getTerminalSize();
     }
@@ -82,7 +86,7 @@ public class GUIForLanterna implements GUI {
         KeyStroke pressedKey;
 
         if((pressedKey = this.terminal.pollInput()) == null) return GameActions.ControlActions.NONE;
-        
+
         switch(pressedKey.getKeyType()) {
             case Character:
                 if(Character.toLowerCase(pressedKey.getCharacter()) == 'q') return GameActions.ControlActions.EXIT;
@@ -152,6 +156,7 @@ public class GUIForLanterna implements GUI {
     }
 
     private void drawElement(Position position, TextColor.ANSI color, String drawSymbol) {
+        this.graphics = this.screen.newTextGraphics();
         this.graphics.setForegroundColor(color);
         this.graphics.putString(position.getX(), position.getY(), drawSymbol);
     }
