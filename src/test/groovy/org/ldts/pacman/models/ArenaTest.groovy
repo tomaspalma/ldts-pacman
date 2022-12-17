@@ -33,6 +33,33 @@ class ArenaTest extends Specification {
             arena.getFixedEdibleAt(new Position(5, 5)) != -1
     }
 
+    def "If we don't find a certain fixed edible in the list of the arena, we need to return -1"() {
+        given:
+            arena.getGeneralFixedEdibleList().clear()
+        expect:
+            arena.getFixedEdibleAt(new Position(4, 2)) == -1
+    }
+
+    def "We should be able to get a ghost that is at a certain position"() {
+        given:
+            def desiredPosition = arena.getRegularGhostsList().get(0).getPosition()
+            def desiredGhost = arena.getRegularGhostsList().get(0)
+        expect:
+            desiredGhost == arena.getGhostAt(desiredPosition)
+    }
+
+    def "If we don't find a ghost, we should return -1 in getGhostAt function"() {
+        expect:
+            arena.getGhostAt(new Position(0, 0)) == null
+    }
+
+    def "If there is no obstacle at a certain position we should return false"() {
+        given:
+            def pacPos = arena.getPacman().getPosition()
+        expect:
+            arena.isObstacleAt(pacPos) == false
+    }
+
     def "Amount of grid elements must be equal to the total amount of elements in the other separate lists"() {
         given:
             def noOfGridElements = 0

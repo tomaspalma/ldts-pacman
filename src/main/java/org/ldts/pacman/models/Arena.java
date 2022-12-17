@@ -123,10 +123,6 @@ public class Arena {
         this.score += increment;
     }
 
-    public void setScore(int score) {
-       this.score = score;
-    }
-
     public int getHeight() {
         return height;
     }
@@ -141,10 +137,6 @@ public class Arena {
 
     public void setPacman(Pacman pacman) {
         this.pacman = pacman;
-    }
-
-    public void setObstacles(List<Obstacle> newObstaclesList) {
-        this.obstaclesList = newObstaclesList;
     }
 
     public void setStartPacmanPosition(Position startPacmanPosition) {
