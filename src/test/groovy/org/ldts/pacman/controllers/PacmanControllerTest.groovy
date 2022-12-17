@@ -7,6 +7,7 @@ import org.ldts.pacman.models.game.Position
 import org.ldts.pacman.models.game.entities.ghost.Pinky
 import org.ldts.pacman.models.game.entities.pacman.Pacman
 import org.ldts.pacman.models.game.entities.pacman.animations.PacmanAnimation
+import org.ldts.pacman.models.game.entities.pacman.animations.PacmanEatingAnimation
 import org.ldts.pacman.models.game.entities.pacman.directions.PacmanDirectionDown
 import org.ldts.pacman.models.game.entities.pacman.directions.PacmanDirectionLeft
 import org.ldts.pacman.models.game.entities.pacman.directions.PacmanDirectionRight
@@ -25,16 +26,6 @@ class PacmanControllerTest extends Specification {
         pacController = new PacmanController(arenaController, arena)
         pacman = pacController.getModel().getPacman()
     }
-
-    /*def "Step should execute the move pacman function as well as the animation executions"() {
-        given:
-            def game = Mock(Game.class)
-            def action = GroovyMock(GameActions.ControlActions)
-        when:
-            pacController.step(game, action, 1000)
-        then:
-            1 * pacController.movePacmanAccordingToAction(action)
-    }*/
 
     def "When moving pacman depending on the right action it should set the controller wanted direction to the correct one"() {
         when:
@@ -82,6 +73,21 @@ class PacmanControllerTest extends Specification {
             pacController.actIfCollisionWithSpecialEntitiesAt(new Position(0, 1))
         then:
             1 * pac.notifyObserversItCollidedWithGhostAt(new Position(0, 1))
+    }
+
+    def "Step function should execute the move pacman function and execute the step of its animations"() {
+        given:
+            arena.getPacman().getAnimationsToExecute().clear()
+            def pacAnimationMock = Mock(PacmanEatingAnimation.class)
+            arena.getPacman().getAnimationsToExecute().add(pacAnimationMock)
+            pacController.setWantedDirectionTo(new PacmanDirectionRight(arena.getPacman()))
+            def gameMock = Mock(Game.class)
+            def action = GameActions.ControlActions.MOVE_LEFT
+        when:
+            pacController.step(gameMock, action, 1000)
+        then:
+            1 * pacAnimationMock.step()
+            pacController.getWantedDirection() instanceof PacmanDirectionLeft
     }
 
 }

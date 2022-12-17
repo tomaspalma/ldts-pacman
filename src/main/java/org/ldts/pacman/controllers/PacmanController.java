@@ -40,6 +40,10 @@ public class PacmanController extends Controller<Arena> {
         return wantedDirection;
     }
 
+    public void setWantedDirectionTo(PacmanDirection pacmanDirection) {
+        this.wantedDirection = pacmanDirection;
+    }
+
     private void executeAnimations() {
         for(PacmanAnimation pacmanAnimation: this.pacman.getAnimationsToExecute()) {
             pacmanAnimation.step();
@@ -78,6 +82,7 @@ public class PacmanController extends Controller<Arena> {
             actIfCollisionWithSpecialEntitiesAt(tileTrimmedPacmanPosition);
         }
     }
+
     private void tryToChangeToWantedDirection() {
         Position newWantedPosition = this.wantedDirection.getNextPosition();
 

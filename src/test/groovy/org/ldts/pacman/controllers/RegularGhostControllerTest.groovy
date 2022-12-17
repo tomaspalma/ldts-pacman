@@ -3,8 +3,8 @@ package org.ldts.pacman.controllers
 import org.ldts.pacman.Game
 import org.ldts.pacman.models.Arena
 import org.ldts.pacman.models.GameActions
-import org.ldts.pacman.models.PositionTest
 import org.ldts.pacman.models.game.Position
+import org.ldts.pacman.models.game.entities.ghost.Clyde
 import org.ldts.pacman.models.game.entities.ghost.Ghost
 import org.ldts.pacman.models.game.entities.ghost.Pinky
 import org.ldts.pacman.models.game.entities.ghost.RegularGhost
@@ -109,5 +109,32 @@ class RegularGhostControllerTest extends Specification{
         then:
             1 * acMock.processPacmanLoseLife()
     }
+
+    def "If the ghost can move outside ghost house we should be able to execute all the necessary steps to put the ghost out of the ghost house"() {
+        given:
+            def ghostMock = Mock(Ghost.class)
+            def pos = Mock(Position.class)
+            ghostMock.getPreviousState() >> new GhostHouseState(ghostMock)
+            ghostMock.getCurrentState() >> new ChasingState(ghostMock)
+        when:
+            regularGhostController.moveGhost(ghostMock, pos)
+        then:
+            1 * ghostMock.setPosition(arenaController.getModel().getGhostHouse().getExitPosition())
+            1 * ghostMock.setPreviousStateTo(_)
+    }
+
+    def "If the ghost can move outside of the ghost house we should be able to change its position"() {
+        given:
+            def ghost = new Clyde(new Position(5, 5), arena)
+            def newPos = Mock(Position.class)
+            ghost.setPreviousStateTo(new GhostHouseState(ghost))
+            ghost.setCurrentStateTo(new ChasingState(ghost))
+        when:
+            regularGhostController.moveGhost(ghost, newPos)
+        then:
+            ghost.getPosition() == arena.getGhostHouse().getExitPosition()
+            ghost.getPreviousState() instanceof ChasingState
+    }
+
 
 }

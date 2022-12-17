@@ -8,7 +8,7 @@ import org.ldts.pacman.models.game.entities.ghost.Ghost;
 public class FrightenedState extends GhostState {
     public FrightenedState(Ghost ghost) {
         super(ghost);
-        this.canMoveOutsideGhostHouse = true;
+        this.canMoveOutsideGhostHouse = false;
     }
 
     @Override

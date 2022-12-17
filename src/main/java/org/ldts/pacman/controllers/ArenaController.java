@@ -55,6 +55,14 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
         }
     }
 
+    public int getAteGhostPoints() {
+        return ateGhostPoints;
+    }
+
+    public void setAteGhostPoints(int ateGhostPoints) {
+        this.ateGhostPoints = ateGhostPoints;
+    }
+
     public void setPacmanController(PacmanController pacmanController) {
        this.pacmanController = pacmanController;
     }

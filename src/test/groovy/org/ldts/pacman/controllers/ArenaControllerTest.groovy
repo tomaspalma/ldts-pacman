@@ -4,7 +4,10 @@ import org.ldts.pacman.Game
 import org.ldts.pacman.gui.GUI
 import org.ldts.pacman.models.Arena
 import org.ldts.pacman.models.GameActions
+import org.ldts.pacman.models.PowerPelletObservable
 import org.ldts.pacman.models.game.entities.fixededibles.Cherry
+import org.ldts.pacman.models.game.entities.fixededibles.PowerPellet
+import org.ldts.pacman.models.game.entities.ghost.Ghost
 import org.ldts.pacman.models.game.entities.ghost.Pinky
 import org.ldts.pacman.models.game.entities.ghost.RegularGhost
 import org.ldts.pacman.models.game.entities.ghost.states.FrightenedState
@@ -180,4 +183,33 @@ class ArenaControllerTest extends Specification {
             1 * pac.die()
     }
 
+    def "It should kill pacman if the collision with a ghost results in KILL_PACMAN action"() {
+        given:
+            arenaController.setAteGhostPoints(500)
+            def tile = arena.getGameGrid().get(0).get(0)
+            def ghostMock = Stub(Ghost.class)
+            ghostMock.getCollisionWithPacmanResult() >> GameActions.GhostCollisionWithPacman.KILL_PACMAN
+            tile.put(ghostMock)
+            def pacMock = Mock(Pacman.class)
+            arena.setPacman(pacMock)
+        when:
+            arenaController.changeOnPacmanCollisionWithGhostAt(new Position(0, 1))
+        then:
+            arenaController.getAteGhostPoints() == 200
+            1 * pacMock.die()
+    }
+
+    def "It should kill the ghosts if the collision between pacman and ghots results in KILL_GHOST action"() {
+        given:
+            arena.sumScoreWith(459)
+            def tile = arena.getGameGrid().get(0).get(0)
+            def ghostMock = Stub(Ghost.class)
+            ghostMock.getCollisionWithPacmanResult() >> GameActions.GhostCollisionWithPacman.KILL_GHOST
+            tile.put(ghostMock)
+        when:
+            arenaController.changeOnPacmanCollisionWithGhostAt(new Position(0, 1))
+        then:
+            arena.getScore() == 659
+            1 * regularGhostController.killGhost(ghostMock)
+    }
 }
