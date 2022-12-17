@@ -1,5 +1,6 @@
 package org.ldts.pacman.models.game.entities.pacman.animations;
 
+import org.ldts.pacman.models.game.Clock;
 import org.ldts.pacman.models.game.entities.pacman.Pacman;
 import org.ldts.pacman.models.game.entities.pacman.directions.PacmanDirection;
 
@@ -11,8 +12,8 @@ public class PacmanEatingAnimation extends PacmanAnimation {
         return this.control;
     }
 
-    public PacmanEatingAnimation(long durationInMilliseconds, Pacman pacman) {
-        super(durationInMilliseconds, pacman);
+    public PacmanEatingAnimation(long durationInMilliseconds, Clock internalClock, Pacman pacman) {
+        super(durationInMilliseconds, internalClock, pacman);
     }
 
     public boolean isFinished() {
