@@ -97,8 +97,6 @@ class RegularGhostControllerTest extends Specification{
         then:
             1 * ghostMock.switchTile(_)
             1 * ghostMock.setPosition(_)
-            1 * ghostMock.setCurrentStateTo(_)
-            1 * ghostMock.setPreviousStateTo(_)
             ghostReal.getPosition() == ghostReal.getStartPosition()
             ghostReal.getCurrentState() == ghostReal.getOriginalState()
             ghostReal.getPreviousState() == ghostReal.getOriginalState()
