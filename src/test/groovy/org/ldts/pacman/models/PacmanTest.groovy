@@ -1,5 +1,11 @@
 package org.ldts.pacman.models
 
+import com.googlecode.lanterna.TextColor
+import org.ldts.pacman.models.game.Clock
+import org.ldts.pacman.models.game.Position
+import org.ldts.pacman.models.game.entities.pacman.Pacman
+import org.ldts.pacman.models.game.entities.pacman.animations.PacmanAnimation
+import org.ldts.pacman.models.game.entities.pacman.animations.PacmanEatingAnimation
 import org.ldts.pacman.models.game.entities.pacman.directions.PacmanDirection
 import org.ldts.pacman.models.game.entities.pacman.directions.PacmanDirectionDown
 import org.ldts.pacman.models.game.entities.pacman.directions.PacmanDirectionRight
@@ -52,7 +58,27 @@ class PacmanTest extends Specification {
         when:
             pacman.die()
         then:
-            1 * pacman.switchTile(pacman.getStartPosition())
+            pacman.getPosition() == pacman.getStartPosition()
+    }
+
+    def "We should be able to get the animations of a certain pacman"() {
+        given:
+            def clockMock = Mock(Clock.class)
+            pacman.getAnimations().add(new PacmanEatingAnimation(1000, clockMock, pacman))
+        expect:
+            pacman.getAnimations().size() == 1
+    }
+
+    def "We need to be able to add an animation to pacman"() {
+        expect:
+            pacman.getAnimations().size() == 0
+        when:
+            def clockMock = Mock(Clock.class)
+            def pacAnimationToAdd = new PacmanEatingAnimation(1000, clockMock, pacman)
+            pacman.addAnimation(pacAnimationToAdd)
+        then:
+            pacman.getAnimations().size() == 1
+            pacman.getAnimations().get(0) == pacAnimationToAdd
     }
 
     def "We should be able to change pacman direction"() {
@@ -86,6 +112,29 @@ class PacmanTest extends Specification {
             pacman.setLivesTo(1);
         then:
             pacman.getLives() == 1;
+    }
+
+    def "When pacman eats a ghost it should notify its observers of said event"() {
+        given:
+            def posMock = Mock(Position.class)
+            pacman.getObservers().clear()
+            def pacObserverMock = Mock(PacmanObserver.class)
+            pacman.addObserver(pacObserverMock)
+        when:
+            pacman.notifyObserversItCollidedWithGhostAt(posMock)
+        then:
+            1 * pacObserverMock.changeOnPacmanCollisionWithGhostAt(posMock)
+    }
+
+    def "We should be able to remove an observer from the list that pacman has"() {
+        given:
+            pacman.getObservers().clear()
+            def pacObserverMock = Mock(PacmanObserver.class)
+            pacman.addObserver(pacObserverMock)
+        when:
+            pacman.removeObserver(pacObserverMock)
+        then:
+            pacman.getObservers().size() == 0
     }
 
 }
