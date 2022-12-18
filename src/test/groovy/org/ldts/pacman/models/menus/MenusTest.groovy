@@ -47,4 +47,21 @@ class MenusTest extends Specification {
         pauseMenu.getOption(1) instanceof GoToMainMenuOption
         pauseMenu.getOption(2) instanceof ExitOption
     }
+
+    def "Menu option selection"() {
+        given:
+        def menu = new GameOverMenu("loss")
+        menu.currentOption = 0
+
+        when:
+        menu.moveUp()
+        then:
+        menu.getCurrentNumber() == menu.getNumberOptions() - 1
+
+        when:
+        menu.currentOption = 0
+        menu.moveDown()
+        then:
+        menu.getCurrentNumber() == 1 % menu.getNumberOptions()
+    }
 }
