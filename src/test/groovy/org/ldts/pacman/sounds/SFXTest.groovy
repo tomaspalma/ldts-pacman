@@ -10,4 +10,17 @@ class SFXTest extends Specification {
     def setup() {
         clip = Mock(Clip.class)
     }
+
+    def "EatGhostSound"() {
+        given:
+        def sound = new EatGhostSound(clip);
+
+        when:
+        sound.play()
+
+        then:
+        1 * clip.isRunning()
+        1 * clip.setMicrosecondPosition(0)
+        1 * clip.start()
+    }
 }
