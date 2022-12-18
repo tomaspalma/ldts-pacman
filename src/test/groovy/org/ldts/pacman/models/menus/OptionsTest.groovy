@@ -1,10 +1,9 @@
 package org.ldts.pacman.models.menus
 
 import org.ldts.pacman.Game
-import org.ldts.pacman.models.Arena
+import org.ldts.pacman.models.menus.options.GoToMainMenuOption
 import org.ldts.pacman.models.menus.options.PlayOption
 import org.ldts.pacman.models.menus.options.ResumeOption
-import org.ldts.pacman.states.ArenaState
 import org.ldts.pacman.states.State
 import org.ldts.pacman.models.menus.options.ExitOption
 import org.ldts.pacman.states.menus.RegularMenuState
@@ -32,7 +31,7 @@ class OptionsTest extends Specification {
 
     def "GoToMainMenuOption"() {
         given:
-        def option = new ExitOption("main menu")
+        def option = new GoToMainMenuOption("main menu")
 
         when:
         option.select(game, state)
