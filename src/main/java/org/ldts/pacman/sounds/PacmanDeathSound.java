@@ -9,6 +9,10 @@ public class PacmanDeathSound extends SFX {
         super("sounds/pacman_death.wav");
     }
 
+    private PacmanDeathSound(Clip sound) {
+        super(sound);
+    }
+
     @Override
     public void play() {
         sound.setMicrosecondPosition(0);

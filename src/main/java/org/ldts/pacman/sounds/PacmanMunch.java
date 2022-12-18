@@ -9,6 +9,10 @@ public class PacmanMunch extends SFX {
         super("sounds/pacman_chomp.wav");
     }
 
+    private PacmanMunch(Clip sound) {
+        super(sound);
+    }
+
     @Override
     public void play() {
         if (sound.isRunning())
