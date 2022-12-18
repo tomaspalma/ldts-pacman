@@ -26,6 +26,14 @@ public class PacmanController extends Controller<Arena> {
         this.wantedDirection = (PacmanDirection) currentDirection;
     }
 
+    public Pacman getPacman() {
+        return pacman;
+    }
+
+    public void setPacman(Pacman pacman) {
+        this.pacman = pacman;
+    }
+
     public void setPacmanTo(Pacman pacman) {
         this.pacman = pacman;
     }

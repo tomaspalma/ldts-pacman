@@ -4,10 +4,12 @@ import org.ldts.pacman.Game
 import org.ldts.pacman.models.Arena
 import org.ldts.pacman.models.GameActions
 import org.ldts.pacman.models.game.Position
+import org.ldts.pacman.models.game.entities.fixededibles.FixedEdible
 import org.ldts.pacman.models.game.entities.ghost.Pinky
 import org.ldts.pacman.models.game.entities.pacman.Pacman
 import org.ldts.pacman.models.game.entities.pacman.animations.PacmanAnimation
 import org.ldts.pacman.models.game.entities.pacman.animations.PacmanEatingAnimation
+import org.ldts.pacman.models.game.entities.pacman.directions.PacmanDirection
 import org.ldts.pacman.models.game.entities.pacman.directions.PacmanDirectionDown
 import org.ldts.pacman.models.game.entities.pacman.directions.PacmanDirectionLeft
 import org.ldts.pacman.models.game.entities.pacman.directions.PacmanDirectionRight
@@ -25,6 +27,11 @@ class PacmanControllerTest extends Specification {
         arenaController = new ArenaController(arena)
         pacController = new PacmanController(arenaController, arena)
         pacman = pacController.getModel().getPacman()
+    }
+
+    def "Upon instantation it should add itself to the pacman observers list"() {
+        expect:
+            pacman.getObservers().contains(arenaController)
     }
 
     def "When moving pacman depending on the right action it should set the controller wanted direction to the correct one"() {
@@ -90,4 +97,40 @@ class PacmanControllerTest extends Specification {
             pacController.getWantedDirection() instanceof PacmanDirectionLeft
     }
 
+    def "When moving pacman we should only change pacman's position if he's able to go to a certain position"() {
+        given:
+            pacman.setPosition(new Position(0, 1))
+            def pacDirStub = Stub(PacmanDirection)
+            pacman.setCurrentDirectionTo(pacDirStub)
+            pacDirStub.getNextPosition() >> pacman.getStartPosition()
+        when:
+            pacController.movePacman()
+        then:
+            pacman.getPosition() == pacman.getStartPosition()
+    }
+
+    def "When trying to change direction of pacman it should correctly check if pacman will be able to move to that position"() {
+        given:
+            def pacDirStub = Stub(PacmanDirection.class)
+            pacController.setWantedDirectionTo(pacDirStub)
+            pacDirStub.getNextPosition() >> pacman.getStartPosition()
+        when:
+            pacController.tryToChangeToWantedDirection()
+        then:
+            pacman.getCurrentDirection() == pacDirStub
+    }
+
+    def "It should make pacman notify its observers"() {
+        given:
+            def pos = new Position(5, 5)
+            def fixedEdible = Mock(FixedEdible.class)
+            def tile = arena.getGameGrid().get(pos.getY() - 1).get(pos.getX())
+            def pacman = Mock(Pacman.class)
+            pacController.setPacman(pacman)
+            tile.put(fixedEdible)
+        when:
+            pacController.actIfCollisionWithSpecialEntitiesAt(pos)
+        then:
+            1 * pacman.notifyObserversItAteFixedEdibleAt(pos)
+    }
 }

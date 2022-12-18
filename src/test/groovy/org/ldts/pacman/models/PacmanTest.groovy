@@ -29,6 +29,7 @@ class PacmanTest extends Specification {
 
     def "It should correctly open its mouth"() {
         given:
+            pacman.setDrawSymbolTo("B");
             def pacDir = Stub(PacmanDirectionDown)
             pacDir.getDrawSymbol() >> "A"
             pacman.setCurrentDirectionTo(pacDir)
@@ -55,10 +56,13 @@ class PacmanTest extends Specification {
     }
 
     def "Pacman should be able to die"() {
+        given:
+            def previousLives = pacman.getLives()
         when:
             pacman.die()
         then:
             pacman.getPosition() == pacman.getStartPosition()
+            pacman.getLives() == (previousLives - 1)
     }
 
     def "We should be able to get the animations of a certain pacman"() {
@@ -135,6 +139,20 @@ class PacmanTest extends Specification {
             pacman.removeObserver(pacObserverMock)
         then:
             pacman.getObservers().size() == 0
+    }
+
+    def "Pacman should know if its mouth is open or not"() {
+        given:
+            pacman.openMouth()
+        expect:
+            pacman.isMouthOpen()
+    }
+
+    def "Pacman should know if its mouth is closed or not"() {
+        given:
+            pacman.closeMouth()
+        expect:
+            pacman.isMouthOpen() == false
     }
 
 }

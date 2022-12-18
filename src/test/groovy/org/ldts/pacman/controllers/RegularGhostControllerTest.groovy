@@ -3,13 +3,18 @@ package org.ldts.pacman.controllers
 import org.ldts.pacman.Game
 import org.ldts.pacman.models.Arena
 import org.ldts.pacman.models.GameActions
+import org.ldts.pacman.models.game.GhostHouseGate
 import org.ldts.pacman.models.game.Position
 import org.ldts.pacman.models.game.entities.ghost.Clyde
 import org.ldts.pacman.models.game.entities.ghost.Ghost
+import org.ldts.pacman.models.game.entities.ghost.Inky
 import org.ldts.pacman.models.game.entities.ghost.Pinky
 import org.ldts.pacman.models.game.entities.ghost.RegularGhost
+import org.ldts.pacman.models.game.entities.ghost.directions.GhostDirectionLeft
+import org.ldts.pacman.models.game.entities.ghost.directions.GhostDirectionUp
 import org.ldts.pacman.models.game.entities.ghost.states.ChasingState
 import org.ldts.pacman.models.game.entities.ghost.states.DeadState
+import org.ldts.pacman.models.game.entities.ghost.states.FrightenedState
 import org.ldts.pacman.models.game.entities.ghost.states.GhostHouseState
 import org.ldts.pacman.models.game.entities.ghost.states.ScatteringState
 import spock.lang.Specification
@@ -92,8 +97,6 @@ class RegularGhostControllerTest extends Specification{
         then:
             1 * ghostMock.switchTile(_)
             1 * ghostMock.setPosition(_)
-            1 * ghostMock.setCurrentStateTo(_)
-            1 * ghostMock.setPreviousStateTo(_)
             ghostReal.getPosition() == ghostReal.getStartPosition()
             ghostReal.getCurrentState() == ghostReal.getOriginalState()
             ghostReal.getPreviousState() == ghostReal.getOriginalState()
@@ -135,4 +138,45 @@ class RegularGhostControllerTest extends Specification{
             ghost.getPosition() == arena.getGhostHouse().getExitPosition()
             ghost.getPreviousState() instanceof ChasingState
     }
+
+    def "We should get the number of steps"() {
+        given:
+            regularGhostController.setNumberOfSteps(10921)
+        expect:
+            regularGhostController.getNumberOfSteps() == 10921
+    }
+
+    def "We need to be able to see if the state changed in a ghost"() {
+        given:
+            def ghost = new Pinky(new Position(5,5), arena)
+            ghost.setCurrentStateTo(new ChasingState(ghost))
+            ghost.setCurrentStateTo(new FrightenedState(ghost))
+        expect:
+            regularGhostController.stateChangedIn(ghost) == true
+    }
+
+    def "Move ghost needs to be able to effectively make changes in both the direction and position of the ghost"() {
+        given:
+            def ghost = new Inky(new Position(1, 12), arena)
+            ghost.setCurrentDirectionTo(new GhostDirectionLeft(ghost))
+            def newPos = new Position(1, 11)
+        when:
+            regularGhostController.moveGhost(ghost, newPos)
+        then:
+            ghost.getCurrentDirection().getClass() == ghost.getCurrentDirection().generateNextDirectionAfterChangeTo(newPos).getClass()
+    }
+
+    def "If we have a dead ghost, when we call the move function it should revive them"() {
+        given:
+            def ghost = new Inky(new Position(1, 12), arena)
+            ghost.setCurrentDirectionTo(new GhostDirectionLeft(ghost))
+            ghost.setCurrentStateTo(new DeadState(ghost))
+            def newPos = new Position(1, 11)
+        when:
+            regularGhostController.moveGhost(ghost, newPos)
+        then:
+            ghost.getCurrentState() instanceof ChasingState
+            ghost.getPreviousState() instanceof GhostHouseState
+    }
+
 }
