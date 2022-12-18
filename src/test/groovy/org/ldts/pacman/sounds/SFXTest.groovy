@@ -47,4 +47,17 @@ class SFXTest extends Specification {
         1 * clip.setMicrosecondPosition(0)
         1 * clip.start()
     }
+
+    def "PacmanMunch"() {
+        given:
+        def sound = new PacmanMunch(clip);
+
+        when:
+        sound.play()
+
+        then:
+        1 * clip.isRunning()
+        1 * clip.setMicrosecondPosition(0)
+        1 * clip.start()
+    }
 }
