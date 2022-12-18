@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'groovy'
-    id 'info.solidsoft.pitest' version '1.6.0'
+    id 'info.solidsoft.pitest' version '1.9.11'
     id 'application'
 }
 
@@ -25,7 +25,8 @@ dependencies {
 }
 
 pitest {
-    junit5PluginVersion = '0.12'
+    targetClasses = ['org.ldts.pacman.*']
+    junit5PluginVersion = '1.0.0'
 }
 
 test {

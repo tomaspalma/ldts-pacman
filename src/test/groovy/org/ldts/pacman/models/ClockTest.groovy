@@ -30,7 +30,7 @@ class ClockTest extends Specification {
             clock.isPaused() == false
     }
 
-    def "Clock should increase ellapsed milliseconds and should be able to reset"() {
+    /*def "Clock should increase ellapsed milliseconds and should be able to reset"() {
         given:
             def previousElapsed = clock.getElapsedMilliseconds()
         when:
@@ -41,6 +41,6 @@ class ClockTest extends Specification {
             clock.reset()
         then:
             clock.getElapsedMilliseconds() == 0
-    }
+    }*/
 
 }

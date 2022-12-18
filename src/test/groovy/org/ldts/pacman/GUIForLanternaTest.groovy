@@ -149,7 +149,7 @@ class GUIForLanternaTest extends Specification {
             result == GameActions.ControlActions.MOVE_RIGHT
     }*/
 
-    def "When receiving the ENTER key it should return the game action to select something"() {
+    /*def "When receiving the ENTER key it should return the game action to select something"() {
         given:
             def terminalMock = Stub(Terminal.class)
             def keystrokeMock = Mock(com.googlecode.lanterna.input.KeyStroke.class)
@@ -160,7 +160,7 @@ class GUIForLanternaTest extends Specification {
             def result = lanternaGUI.getNextUserInput()
         then:
             result == GameActions.ControlActions.SELECT
-    }
+    }*/
 
     /*def "When receiving the ESCAPE key it should return the game action to switch to pause main menu"() {
         given:

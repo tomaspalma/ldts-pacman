@@ -64,6 +64,7 @@ class ArenaTest extends Specification {
         given:
             def noOfGridElements = 0
             def totalEntities = 1 + arena.getObstaclesList().size() + arena.getGeneralFixedEdibleList().size() + arena.getRegularGhostsList().size() + arena.getGhostHouseSize()
+            def noOfNonGridElementsInMap = 3 //ghost house and the 2 teletransporter tiles
         when:
             for(list in arena.getGameGrid()) {
                 for(element in list) {
@@ -71,7 +72,7 @@ class ArenaTest extends Specification {
                 }
             }
         then:
-            noOfGridElements == totalEntities
+            (noOfGridElements - noOfNonGridElementsInMap) == totalEntities
     }
 
     def "Size of each row must be equal to each other"() {
