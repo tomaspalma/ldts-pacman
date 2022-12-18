@@ -6,7 +6,6 @@ import org.ldts.pacman.models.menus.options.PlayOption
 import org.ldts.pacman.models.menus.options.ResumeOption
 import org.ldts.pacman.states.State
 import org.ldts.pacman.models.menus.options.ExitOption
-import org.ldts.pacman.states.menus.RegularMenuState
 import spock.lang.Specification
 
 class OptionsTest extends Specification {
