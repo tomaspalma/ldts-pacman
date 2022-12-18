@@ -1,5 +1,6 @@
 package org.ldts.pacman.models.menus
 
+import com.googlecode.lanterna.TextColor
 import org.codehaus.groovy.transform.tailrec.GotoRecurHereException
 import org.ldts.pacman.Game
 import org.ldts.pacman.models.menus.options.ExitOption
@@ -15,6 +16,7 @@ class MenusTest extends Specification {
         def mainMenu = new MainMenu()
 
         then:
+        mainMenu.getColor() instanceof TextColor.ANSI
         mainMenu.getNumberOptions() == 2
         mainMenu.getCurrentNumber() == 0
         mainMenu.getOption(0) instanceof PlayOption
@@ -26,6 +28,8 @@ class MenusTest extends Specification {
         def gameOverMenu = new GameOverMenu("loss")
 
         then:
+        gameOverMenu.getTitle() == "You Lose"
+        gameOverMenu.getColor() instanceof TextColor.ANSI
         gameOverMenu.getNumberOptions() == 3
         gameOverMenu.getCurrentNumber() == 0
         gameOverMenu.getOption(0) instanceof PlayOption
@@ -41,6 +45,7 @@ class MenusTest extends Specification {
         def pauseMenu = new PauseMenu(arenaState)
 
         then:
+        pauseMenu.getColor() instanceof TextColor.ANSI
         pauseMenu.getNumberOptions() == 3
         pauseMenu.getCurrentNumber() == 0
         pauseMenu.getOption(0) instanceof ResumeOption
