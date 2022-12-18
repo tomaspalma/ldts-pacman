@@ -35,4 +35,16 @@ class SFXTest extends Specification {
         1 * clip.start();
         1 * clip.loop(Clip.LOOP_CONTINUOUSLY)
     }
+
+    def "PacmanDeathSound"() {
+        given:
+        def sound = new PacmanDeathSound(clip);
+
+        when:
+        sound.play()
+
+        then:
+        1 * clip.setMicrosecondPosition(0)
+        1 * clip.start()
+    }
 }
