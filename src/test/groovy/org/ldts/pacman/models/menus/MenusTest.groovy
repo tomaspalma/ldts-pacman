@@ -51,6 +51,7 @@ class MenusTest extends Specification {
         pauseMenu.getOption(0) instanceof ResumeOption
         pauseMenu.getOption(1) instanceof GoToMainMenuOption
         pauseMenu.getOption(2) instanceof ExitOption
+        pauseMenu.getArenaState() != null
     }
 
     def "Menu option selection"() {

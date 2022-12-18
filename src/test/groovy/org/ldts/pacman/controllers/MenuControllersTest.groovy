@@ -54,6 +54,7 @@ class MenuControllersTest extends Specification {
         when:
         menuController.step(game, pause, time)
         then:
+        1 * pauseMenu.getArenaState()
         1 * game.setState(pauseMenu.getArenaState())
     }
 }
