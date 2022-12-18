@@ -4,8 +4,14 @@ import org.ldts.pacman.Game
 import org.ldts.pacman.gui.GUI
 import org.ldts.pacman.models.Arena
 import org.ldts.pacman.models.GameActions
+import org.ldts.pacman.models.GhostDuringStateSequence
 import org.ldts.pacman.models.PowerPelletObservable
+import org.ldts.pacman.models.SpecificGhostStartSequence
+import org.ldts.pacman.models.game.Clock
+import org.ldts.pacman.models.game.arena.levels.GameLevel
 import org.ldts.pacman.models.game.entities.fixededibles.Cherry
+import org.ldts.pacman.models.game.entities.fixededibles.FixedEdible
+import org.ldts.pacman.models.game.entities.fixededibles.Pacdot
 import org.ldts.pacman.models.game.entities.fixededibles.PowerPellet
 import org.ldts.pacman.models.game.entities.ghost.Ghost
 import org.ldts.pacman.models.game.entities.ghost.Pinky
@@ -17,6 +23,7 @@ import org.ldts.pacman.models.game.entities.obstacles.Wall
 import org.ldts.pacman.controllers.ArenaController
 import org.ldts.pacman.models.menus.GameOverMenu
 import org.ldts.pacman.models.menus.PauseMenu
+import org.ldts.pacman.sounds.SFX
 import org.ldts.pacman.states.ArenaState
 import org.ldts.pacman.states.menus.PauseMenuState
 import org.ldts.pacman.states.menus.RegularMenuState
@@ -28,6 +35,9 @@ class ArenaControllerTest extends Specification {
     private def arenaController
     private def pacController
     private def regularGhostController
+    private def pacman_eating_edible = Mock(SFX.class)
+    private def pacman_dying_sound = Mock(SFX.class)
+    private def kill_ghost_sound = Mock(SFX.class)
 
     def setup() {
         arena = new Arena(20, 20, "maps/easy.txt")
@@ -36,6 +46,7 @@ class ArenaControllerTest extends Specification {
         arenaController = new ArenaController(arena)
         arenaController.setPacmanController(pacController)
         arenaController.setRegularGhostController(regularGhostController)
+        arenaController.setSounds(new ArrayList<>(Arrays.asList(pacman_eating_edible, pacman_dying_sound, kill_ghost_sound)))
     }
 
     def "We should be able to detect if wall is at a certain position"() {
@@ -142,7 +153,7 @@ class ArenaControllerTest extends Specification {
         given:
             def gui = Mock(GUI.class)
             def action = GameActions.ControlActions.EXIT
-            def game = new Game(21, 21, gui, null)
+            def game = new Game(21, 21, gui, new ArenaState(arena))
         when:
             arenaController.step(game, action, 1000)
         then:
@@ -180,6 +191,7 @@ class ArenaControllerTest extends Specification {
         when:
             arenaController.processPacmanLoseLife()
         then:
+            1 * pacman_dying_sound.play()
             1 * pac.die()
     }
 
@@ -211,5 +223,99 @@ class ArenaControllerTest extends Specification {
         then:
             arena.getScore() == 659
             1 * regularGhostController.killGhost(ghostMock)
+            1 * kill_ghost_sound.play()
     }
+
+    def "It should call the step function of the current level"() {
+       given:
+            arenaController.getModel().getLevels().clear()
+            def ssM = Mock(List<SpecificGhostStartSequence>)
+            def dSM = Mock(List<GhostDuringStateSequence>)
+            def gL = Mock(List<RegularGhost>)
+            def level = new GameLevel(ssM, dSM, gL)
+            def levelMock = Spy(level)
+            arenaController.getModel().getLevels().add(levelMock)
+            def gameMock = Mock(Game.class)
+            def actionsMock = GroovyMock(GameActions.ControlActions)
+        when:
+            arenaController.step(gameMock, actionsMock, 1000)
+        then:
+            1 * levelMock.step();
+    }
+
+    def "We should correctly act if pacman eats a fixed edible"() {
+        given:
+            def edible = Mock(FixedEdible.class)
+            def pos = new Position(5, 5)
+            def tile = arena.getGameGrid().get(pos.getY() - 1).get(pos.getX())
+            tile.put(edible)
+        when:
+            arenaController.changeOnPacmanEatFixedEdibleAt(pos)
+        then:
+            1 * pacman_eating_edible.play()
+            tile.containsFixedEdible() == false
+    }
+
+    def "When pacman eats a fixed edible, if it is a power pellet observable, the power pellet should notify its observers"() {
+        given:
+            def pos = new Position(5, 5)
+            def powerPelletObservable = Mock(PowerPellet.class)
+            def tile = arena.getGameGrid().get(pos.getY() - 1).get(pos.getX())
+            tile.put(powerPelletObservable)
+        when:
+            arenaController.changeOnPacmanEatFixedEdibleAt(pos)
+        then:
+            1 *powerPelletObservable.notifyObservers()
+    }
+
+    def "When changing when pacman eats a fixed edible it should force arena to sum score"() {
+        given:
+            def pos = new Position(5, 5)
+            def fixedEdible = new Pacdot(pos, arena)
+            def tile = arena.getGameGrid().get(pos.getY() - 1).get(pos.getX())
+            def previousScore = arena.getScore()
+            tile.put(fixedEdible)
+        when:
+            arenaController.changeOnPacmanEatFixedEdibleAt(new Position(5, 5))
+        then:
+            arena.getScore() == (previousScore + fixedEdible.getPoints())
+    }
+
+    def "When switching to next level it should apply the modulo operator with the size of arena.getLevels()"() {
+        given:
+            def noOfLevels = arena.getLevels().size()
+            arenaController.setCurrentLevel(noOfLevels)
+        when:
+            arenaController.switchToNextLevel()
+        then:
+            arenaController.getCurrentLevel() == 0
+    }
+
+    def "It should pause the level clock if a regular ghost is on frightened mode"() {
+        given:
+            arena.getLevels().clear()
+            def levelMock = Mock(GameLevel.class)
+            arena.getLevels().add(levelMock)
+            def clock = Mock(Clock.class)
+            levelMock.getClock() >> clock
+            arena.getRegularGhostsList().clear()
+            def ghost = new Pinky(new Position(4, 1), arena)
+            ghost.setCurrentStateTo(new FrightenedState(ghost))
+            arena.getRegularGhostsList().add(ghost)
+        when:
+            arenaController.checkConditionsToPauseLevelClock()
+        then:
+            1 * clock.pause()
+    }
+
+    def "Arena controller should be able to restore fixed edibles"() {
+        given:
+            arena.getGeneralFixedEdibleList().clear()
+        when:
+            arenaController.restoreFixedEdibles()
+        then:
+            arena.getGeneralFixedEdibleList().size() > 0
+            arena.getGeneralFixedEdibleList().size() == arena.getEatenFixedEdiblePool().size()
+    }
+
 }

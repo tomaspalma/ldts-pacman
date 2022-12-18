@@ -41,6 +41,22 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
         return regularGhostController;
     }
 
+    public List<SFX> getSounds() {
+        return sounds;
+    }
+
+    public void setSounds(List<SFX> sounds) {
+        this.sounds = sounds;
+    }
+
+    public int getCurrentLevel() {
+        return currentLevel;
+    }
+
+    public void setCurrentLevel(int currentLevel) {
+        this.currentLevel = currentLevel;
+    }
+
     public ArenaController(Arena model) {
         super(model);
 
@@ -154,8 +170,6 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
     public void changeOnPacmanEatFixedEdibleAt(Position position) {
         Tile currentTile = getModel().getGameGrid().get(position.getY() - 1).get(position.getX());
         FixedEdible currentEdible = currentTile.getFixedEdible();
-
-        if(currentEdible == null) return;
 
         if (currentEdible instanceof PowerPelletObservable powerPelletObservable) {
             powerPelletObservable.notifyObservers();
