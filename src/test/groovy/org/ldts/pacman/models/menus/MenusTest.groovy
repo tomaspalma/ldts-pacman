@@ -68,5 +68,8 @@ class MenusTest extends Specification {
         menu.moveDown()
         then:
         menu.getCurrentNumber() == 1 % menu.getNumberOptions()
+
+        expect:
+        menu.getCurrentOption() instanceof GoToMainMenuOption
     }
 }
