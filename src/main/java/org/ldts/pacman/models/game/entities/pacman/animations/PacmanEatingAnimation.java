@@ -1,6 +1,8 @@
 package org.ldts.pacman.models.game.entities.pacman.animations;
 
+import org.ldts.pacman.models.game.Clock;
 import org.ldts.pacman.models.game.entities.pacman.Pacman;
+import org.ldts.pacman.models.game.entities.pacman.directions.PacmanDirection;
 
 public class PacmanEatingAnimation extends PacmanAnimation {
 
@@ -10,8 +12,8 @@ public class PacmanEatingAnimation extends PacmanAnimation {
         return this.control;
     }
 
-    public PacmanEatingAnimation(long durationInMilliseconds, Pacman pacman) {
-        super(durationInMilliseconds, pacman);
+    public PacmanEatingAnimation(long durationInMilliseconds, Clock internalClock, Pacman pacman) {
+        super(durationInMilliseconds, internalClock, pacman);
     }
 
     public boolean isFinished() {
@@ -21,21 +23,12 @@ public class PacmanEatingAnimation extends PacmanAnimation {
     @Override
     public void step() {
         if(this.control % 2 == 0) {
-            this.closePacmanMouth();
+            this.pacman.closeMouth();
             this.control = 0;
         }
         else
-            this.openPacmanMouth();
+            this.pacman.openMouth();
 
         control += 1000001;
-    }
-
-    private void closePacmanMouth() {
-        this.pacman.setDrawSymbolTo("[");
-    }
-
-    private void openPacmanMouth() {
-        String currentPacDirectionSymbol = this.pacman.getCurrentDirection().getDrawSymbol();
-        this.pacman.setDrawSymbolTo(currentPacDirectionSymbol);
     }
 }

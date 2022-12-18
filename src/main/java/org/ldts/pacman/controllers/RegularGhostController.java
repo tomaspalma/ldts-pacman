@@ -21,18 +21,26 @@ public class RegularGhostController extends Controller<Arena> {
         this.regularGhostsToControl = getModel().getRegularGhostsList();
     }
 
+    public int getNumberOfSteps() {
+        return numberOfSteps;
+    }
+
+    public void setNumberOfSteps(int numberOfSteps) {
+        this.numberOfSteps = numberOfSteps;
+    }
+
     @Override
     public void step(Game game, GameActions.ControlActions action, long time) throws IOException {
         for(RegularGhost regularGhost: regularGhostsToControl) {
             if(stateChangedIn(regularGhost))
                 regularGhost.getCurrentState().applyChangesToGhost();
 
-            if(numberOfSteps > regularGhost.getVelocity()) {
+            if(numberOfSteps > 1) {
                 moveGhost(regularGhost, regularGhost.getCurrentState().getNextPosition());
                 numberOfSteps = 0;
             } else {
                 numberOfSteps++;
-            } 
+            }
         }
     }
 
@@ -91,7 +99,5 @@ public class RegularGhostController extends Controller<Arena> {
 
         if(newPosition.equals(getModel().getPacman().getPosition()))
             parentController.processPacmanLoseLife();
-
-        if(ghost.getPosition() == getModel().getPacman().getPosition()) parentController.processPacmanLoseLife();
     }
 }

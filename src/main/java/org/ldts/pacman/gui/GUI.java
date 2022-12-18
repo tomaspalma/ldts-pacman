@@ -23,7 +23,6 @@ public interface GUI {
 
     // Cursor manipulation
     void hideCursor();
-    void showCursor();
 
     GameActions.ControlActions getNextUserInput() throws IOException;
 
@@ -31,8 +30,4 @@ public interface GUI {
 
     // Draw entities functions
     void drawEntity(Position position, TextColor.ANSI color, String drawSymbol);
-
-    void createRectangle(TerminalPosition topLeft, TerminalSize size, char character);
-
-
 }

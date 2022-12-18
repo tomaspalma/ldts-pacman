@@ -7,9 +7,9 @@ public abstract class Animation {
    protected final Clock internalClock;
    protected final long durationInMilliseconds;
 
-   public Animation(long durationInMilliseconds) {
+   public Animation(long durationInMilliseconds, Clock internalClock) {
       this.durationInMilliseconds = durationInMilliseconds;
-      this.internalClock = new Clock();
+      this.internalClock = internalClock;
    }
 
    public long getDurationInMilliseconds() {

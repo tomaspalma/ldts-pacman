@@ -33,18 +33,46 @@ class ArenaTest extends Specification {
             arena.getFixedEdibleAt(new Position(5, 5)) != -1
     }
 
+    def "If we don't find a certain fixed edible in the list of the arena, we need to return -1"() {
+        given:
+            arena.getGeneralFixedEdibleList().clear()
+        expect:
+            arena.getFixedEdibleAt(new Position(4, 2)) == -1
+    }
+
+    def "We should be able to get a ghost that is at a certain position"() {
+        given:
+            def desiredPosition = arena.getRegularGhostsList().get(0).getPosition()
+            def desiredGhost = arena.getRegularGhostsList().get(0)
+        expect:
+            desiredGhost == arena.getGhostAt(desiredPosition)
+    }
+
+    def "If we don't find a ghost, we should return -1 in getGhostAt function"() {
+        expect:
+            arena.getGhostAt(new Position(0, 0)) == null
+    }
+
+    def "If there is no obstacle at a certain position we should return false"() {
+        given:
+            def pacPos = arena.getPacman().getPosition()
+        expect:
+            arena.isObstacleAt(pacPos) == false
+    }
+
     def "Amount of grid elements must be equal to the total amount of elements in the other separate lists"() {
         given:
-            def noOfGridElements = 0;
-            def totalEntities = 1 + arena.getObstaclesList().size() + arena.getGeneralFixedEdibleList().size() + arena.getRegularGhostsList().size() + arena.getGhostHouseSize();
+            def noOfGridElements = 0
+            def totalEntities = 1 + arena.getObstaclesList().size() + arena.getGeneralFixedEdibleList().size() + arena.getRegularGhostsList().size() + arena.getGhostHouseSize()
+            def noOfNonGridElementsInMap = 3 //ghost house and the 2 teletransporter tiles
         when:
             for(list in arena.getGameGrid()) {
                 for(element in list) {
-                   noOfGridElements += 1;
+                   noOfGridElements += 1
                 }
             }
         then:
-            noOfGridElements == totalEntities
+            (noOfGridElements - noOfNonGridElementsInMap) == totalEntities
     }
 
     def "Size of each row must be equal to each other"() {
@@ -55,13 +83,13 @@ class ArenaTest extends Specification {
             def sum = 0
             for(list in arena.getGameGrid()) {
                 for(element in list) {
-                    sum += 1;
+                    sum += 1
                 }
                 if(sum != expectedSizeOfEachRow) {
                     expectedResult = false
-                    break;
+                    break
                 }
-                sum = 0;
+                sum = 0
             }
         then:
             expectedResult == true

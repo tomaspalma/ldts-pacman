@@ -17,7 +17,7 @@ public class Game {
     private final int width;
     private final int height;
 
-    public State getArenaState() {
+    public State getState() {
         return currentState;
     }
 
@@ -25,11 +25,11 @@ public class Game {
         this.currentState = state;
     }
 
-    public Game() throws IOException, URISyntaxException, FontFormatException {
-        this.width = 21;
-        this.height = 21;
-        this.gui = new GUIForLanterna(width, height);
-        currentState = new RegularMenuState(new MainMenu());
+    public Game(int width, int height, GUI gui, State currentState) throws IOException, URISyntaxException, FontFormatException {
+        this.width = width;
+        this.height = height;
+        this.gui = gui;
+        this.currentState = currentState;
     }
 
     private void run() throws IOException, InterruptedException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
@@ -53,7 +53,8 @@ public class Game {
 
     public static void main(String[] args) {
         try {
-            new Game().run();
+            new Game(21, 21, new GUIForLanterna(21, 21),
+                new RegularMenuState(new MainMenu())).run();
         } catch(Exception e) {
             e.printStackTrace();
         }

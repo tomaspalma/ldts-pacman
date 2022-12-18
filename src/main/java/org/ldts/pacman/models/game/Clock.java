@@ -5,8 +5,8 @@ public class Clock {
     private long elapsedMilliseconds;
     private boolean paused = false;
 
-    public Clock() {
-        this.previousTime = System.currentTimeMillis();
+    public Clock(long previousTimeInMilliseconds) {
+        this.previousTime = previousTimeInMilliseconds;
         this.elapsedMilliseconds = 0;
     }
 

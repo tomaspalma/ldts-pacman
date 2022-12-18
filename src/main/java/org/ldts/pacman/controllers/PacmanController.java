@@ -13,7 +13,7 @@ import java.io.IOException;
 public class PacmanController extends Controller<Arena> {
     private PacmanDirection wantedDirection;
     private final ArenaController parentController;
-    private final Pacman pacman;
+    private Pacman pacman;
 
     public PacmanController(ArenaController parentController, Arena model) {
         super(model);
@@ -26,10 +26,22 @@ public class PacmanController extends Controller<Arena> {
         this.wantedDirection = (PacmanDirection) currentDirection;
     }
 
+    public void setPacmanTo(Pacman pacman) {
+        this.pacman = pacman;
+    }
+
     @Override
     public void step(Game game, GameActions.ControlActions action, long time) throws IOException {
         movePacmanAccordingTo(action);
         executeAnimations();
+    }
+
+    public PacmanDirection getWantedDirection() {
+        return wantedDirection;
+    }
+
+    public void setWantedDirectionTo(PacmanDirection pacmanDirection) {
+        this.wantedDirection = pacmanDirection;
     }
 
     private void executeAnimations() {
@@ -52,6 +64,8 @@ public class PacmanController extends Controller<Arena> {
         movePacman();
     }
 
+
+
     private void movePacman() {
         this.tryToChangeToWantedDirection();
 
@@ -68,6 +82,7 @@ public class PacmanController extends Controller<Arena> {
             actIfCollisionWithSpecialEntitiesAt(tileTrimmedPacmanPosition);
         }
     }
+
     private void tryToChangeToWantedDirection() {
         Position newWantedPosition = this.wantedDirection.getNextPosition();
 
@@ -93,13 +108,5 @@ public class PacmanController extends Controller<Arena> {
         if (collidedWithGhost) {
             this.pacman.notifyObserversItCollidedWithGhostAt(newPacmanPosition);
         }
-    }
-
-    public void killPacmanAt() {
-        parentController.processPacmanLoseLife();
-    }
-
-    private void changeLife(int i) {
-        pacman.setLivesTo(i);
     }
 }

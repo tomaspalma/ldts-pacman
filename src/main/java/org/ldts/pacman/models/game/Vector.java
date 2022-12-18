@@ -5,12 +5,20 @@ import org.ldts.pacman.models.game.Position;
 import java.util.Objects;
 
 public class Vector {
-    private int x;
-    private int y;
+    private final int x;
+    private final int y;
 
     public Vector(int x, int y) {
         this.x = x;
         this.y = y;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 
     public Position getPositionBasedOnSumWith(Position position) {

@@ -26,7 +26,7 @@ class ClydeStratTest extends Specification {
         when:
             clyde.getChaseStrategy().getNextPosition(clyde)
         then:
-        HybridIgnorantChaseStrategy clydeStrat = clyde.getChaseStrategy() as HybridIgnorantChaseStrategy;
+        HybridIgnorantChaseStrategy clydeStrat = clyde.getChaseStrategy() as HybridIgnorantChaseStrategy
             clydeStrat.getCurrentChosenStrategy() instanceof RunToBottomLeftChaseStrategy
     }
 
@@ -37,7 +37,7 @@ class ClydeStratTest extends Specification {
         when:
             clyde.getChaseStrategy().getNextPosition(clyde)
         then:
-            HybridIgnorantChaseStrategy clydeStrat = clyde.getChaseStrategy() as HybridIgnorantChaseStrategy;
+            HybridIgnorantChaseStrategy clydeStrat = clyde.getChaseStrategy() as HybridIgnorantChaseStrategy
             clydeStrat.getCurrentChosenStrategy() instanceof AgressiveChaseStrategy
     }
 

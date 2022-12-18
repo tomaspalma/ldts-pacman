@@ -15,10 +15,6 @@ public abstract class MovableEntity extends Entity {
         this.startPosition = new Position(position.getX(), position.getY());
     }
 
-    public int getVelocity() {
-        return velocity;
-    }
-
     public Position getStartPosition() {
         return this.startPosition;
     }

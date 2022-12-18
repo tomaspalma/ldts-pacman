@@ -24,14 +24,13 @@ import org.ldts.pacman.models.game.Position;
 
 public class GUIForLanterna implements GUI {
     private final Screen screen;
-    private final Terminal terminal;
-    private final TextGraphics graphics;
-    private final AWTTerminalFontConfiguration font;
+    private Terminal terminal;
+    private TextGraphics graphics;
+    private AWTTerminalFontConfiguration font;
 
-    /*
     public GUIForLanterna(Screen screen) {
         this.screen = screen;
-    }*/
+    }
 
     // O código de criar terminal só deve ser corrido uma vez por objeto de GUI
     public GUIForLanterna(int width, int height) throws IOException, URISyntaxException, FontFormatException {
@@ -46,12 +45,12 @@ public class GUIForLanterna implements GUI {
         this.graphics = this.screen.newTextGraphics();
     }
 
-    public TerminalSize getTerminalSize() {
-        return this.screen.getTerminalSize();
+    public void setTerminalTo(Terminal terminal) {
+        this.terminal = terminal;
     }
 
-    public Terminal getTerminal() {
-        return terminal;
+    public TerminalSize getTerminalSize() {
+        return this.screen.getTerminalSize();
     }
 
     public Screen getScreen() {
@@ -83,16 +82,11 @@ public class GUIForLanterna implements GUI {
     }
 
     @Override
-    public void showCursor() {
-
-    }
-
-    @Override
     public GameActions.ControlActions getNextUserInput() throws IOException {
         KeyStroke pressedKey;
 
         if((pressedKey = this.terminal.pollInput()) == null) return GameActions.ControlActions.NONE;
-        
+
         switch(pressedKey.getKeyType()) {
             case Character:
                 if(Character.toLowerCase(pressedKey.getCharacter()) == 'q') return GameActions.ControlActions.EXIT;
@@ -162,12 +156,8 @@ public class GUIForLanterna implements GUI {
     }
 
     private void drawElement(Position position, TextColor.ANSI color, String drawSymbol) {
+        this.graphics = this.screen.newTextGraphics();
         this.graphics.setForegroundColor(color);
         this.graphics.putString(position.getX(), position.getY(), drawSymbol);
     }
-    
-    public void createRectangle(TerminalPosition topLeft, TerminalSize size, char character){
-        graphics.drawRectangle(topLeft,size,character);
-    }
-
 }
