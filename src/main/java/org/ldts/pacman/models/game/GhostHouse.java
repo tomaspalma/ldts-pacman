@@ -48,4 +48,8 @@ public class GhostHouse {
     public int getHeight() {
         return this.height;
     }
+
+    public Position getGatePosition() {
+        return gatePosition;
+    }
 }
