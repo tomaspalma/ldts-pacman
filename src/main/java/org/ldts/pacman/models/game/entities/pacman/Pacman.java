@@ -17,7 +17,7 @@ public class Pacman extends MovableEntity implements PacmanObservable {
     List<PacmanObserver> observers = new ArrayList<>();
     List<PacmanAnimation> animations = new ArrayList<>();
     private int lives = 3;
-    private final boolean isMouthOpen = true;
+    private boolean isMouthOpen = true;
     private final List<PacmanAnimation> animationsToExecute = new ArrayList<>();
 
     public List<PacmanObserver> getObservers() {
@@ -35,6 +35,10 @@ public class Pacman extends MovableEntity implements PacmanObservable {
 
     public List<PacmanAnimation> getAnimationsToExecute() {
         return this.animationsToExecute;
+    }
+
+    public boolean isMouthOpen() {
+        return this.isMouthOpen;
     }
 
     public int getLives() {
@@ -88,9 +92,15 @@ public class Pacman extends MovableEntity implements PacmanObservable {
     public void openMouth() {
         String currentPacDirectionSymbol = this.currentDirection.getDrawSymbol();
         this.setDrawSymbolTo(currentPacDirectionSymbol);
+        this.isMouthOpen = true;
+    }
+
+    public void setAnimations(List<PacmanAnimation> animations) {
+        this.animations = animations;
     }
 
     public void closeMouth() {
         this.setDrawSymbolTo("[");
+        this.isMouthOpen = false;
     }
 }
