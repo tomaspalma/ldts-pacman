@@ -23,9 +23,13 @@ class OptionsTest extends Specification {
 
         when:
         option.select(game, state)
-
         then:
         1 * game.setState(null)
+
+        when:
+        def message = option.getMessage()
+        then:
+        message == "quit"
     }
 
     def "GoToMainMenuOption"() {
@@ -34,9 +38,13 @@ class OptionsTest extends Specification {
 
         when:
         option.select(game, state)
-
         then:
         1 * game.setState(_)
+
+        when:
+        def message = option.getMessage()
+        then:
+        message == "main menu"
     }
 
     def "PlayOption"() {
@@ -45,9 +53,13 @@ class OptionsTest extends Specification {
 
         when:
         option.select(game, state)
-
         then:
         1 * game.setState(_)
+
+        when:
+        def message = option.getMessage()
+        then:
+        message == "play"
     }
 
     def "ResumeOption"() {
@@ -56,8 +68,12 @@ class OptionsTest extends Specification {
 
         when:
         option.select(game, state)
-
         then:
         1 * game.setState(state)
+
+        when:
+        def message = option.getMessage()
+        then:
+        message == "resume"
     }
 }
