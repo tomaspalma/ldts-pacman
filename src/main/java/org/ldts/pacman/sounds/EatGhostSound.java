@@ -9,6 +9,10 @@ public class EatGhostSound extends SFX {
         super("sounds/pacman_eatghost.wav");
     }
 
+    private EatGhostSound(Clip sound) {
+        super(sound);
+    }
+
     @Override
     public void play() {
         if (sound.isRunning())

@@ -9,6 +9,10 @@ public class IntroSound extends SFX {
         super("sounds/pacman_beginning.wav");
     }
 
+    private IntroSound(Clip sound) {
+        super(sound);
+    }
+
     @Override
     public void play() {
         sound.start();

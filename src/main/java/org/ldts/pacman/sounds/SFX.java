@@ -16,6 +16,10 @@ public abstract class SFX {
         sound.open(audioInputStream);
     }
 
+    protected SFX(Clip sound) {
+        this.sound = sound;
+    }
+
     public abstract void play();
 
     public void stop() {
