@@ -23,4 +23,15 @@ class PowerPelletObservableTest extends Specification {
         then:
            1 * observer.handlePowerPelletBeingEaten()
     }
+
+    def "It should be able to remove an observer from its list"() {
+        given:
+            powerPellet.getObservers().clear()
+            def observer = Mock(EatenPowerPelletObserver.class)
+            powerPellet.addObserver(observer)
+        when:
+            powerPellet.removeObserver(observer)
+        then:
+            powerPellet.getObservers().size() == 0
+    }
 }

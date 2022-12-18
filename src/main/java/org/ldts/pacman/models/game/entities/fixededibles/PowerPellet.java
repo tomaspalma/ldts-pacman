@@ -30,6 +30,10 @@ public class PowerPellet extends FixedEdible implements PowerPelletObservable {
         observers.remove((EatenPowerPelletObserver) observer);
     }
 
+    public List<EatenPowerPelletObserver> getObservers() {
+        return observers;
+    }
+
     @Override
     public void notifyObservers() {
         for(EatenPowerPelletObserver observer: observers) {
