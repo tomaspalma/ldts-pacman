@@ -4,15 +4,15 @@ import org.ldts.pacman.models.GhostDuringStateSequence;
 import org.ldts.pacman.models.LevelStateSequence;
 import org.ldts.pacman.models.SpecificGhostStartSequence;
 import org.ldts.pacman.models.game.Clock;
+import org.ldts.pacman.models.game.entities.ghost.Ghost;
 import org.ldts.pacman.models.game.entities.ghost.RegularGhost;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 public class GameLevel {
-    //private final List<StateMachine> stateMachine;
-    private final List<SpecificGhostStartSequence> startStateMachine;
-    private final List<GhostDuringStateSequence> duringStateMachine;
+    private List<SpecificGhostStartSequence> startStateMachine;
+    private List<GhostDuringStateSequence> duringStateMachine;
 
     private boolean otherStartSequencesRemaining;
     private boolean otherDuringSequencesRemaining;
@@ -21,10 +21,38 @@ public class GameLevel {
     private int duringStateMachineCounter = 0;
     private final List<RegularGhost>  ghostsList;
 
-    private final Clock clock;
+    private Clock clock;
+
+    public boolean isOtherStartSequencesRemaining() {
+        return otherStartSequencesRemaining;
+    }
+
+    public boolean isOtherDuringSequencesRemaining() {
+        return otherDuringSequencesRemaining;
+    }
+
+    public void setStartStateMachine(List<SpecificGhostStartSequence> startStateMachine) {
+        this.startStateMachine = startStateMachine;
+    }
+
+    public void setDuringStateMachine(List<GhostDuringStateSequence> duringStateMachine) {
+        this.duringStateMachine = duringStateMachine;
+    }
+
+    public void setClock(Clock clock) {
+        this.clock = clock;
+    }
+
+    public int getStartStateMachineCounter() {
+        return startStateMachineCounter;
+    }
+
+    public int getDuringStateMachineCounter() {
+        return duringStateMachineCounter;
+    }
 
     public GameLevel(List<SpecificGhostStartSequence> startStateMachine, List<GhostDuringStateSequence> duringStateMachine
-        , List<RegularGhost> ghostsList) {
+        , List<RegularGhost> ghostsList, Clock clock) {
         this.startStateMachine = startStateMachine;
         this.duringStateMachine = duringStateMachine;
 
@@ -33,7 +61,15 @@ public class GameLevel {
 
         this.ghostsList = ghostsList;
 
-        this.clock = new Clock(System.currentTimeMillis());
+        this.clock = clock;
+    }
+
+    public List<SpecificGhostStartSequence> getStartStateMachine() {
+        return startStateMachine;
+    }
+
+    public List<GhostDuringStateSequence> getDuringStateMachine() {
+        return duringStateMachine;
     }
 
     public void step() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
@@ -70,24 +106,53 @@ public class GameLevel {
         return clock;
     }
 
+    public void setOtherStartSequencesRemaining(boolean otherStartSequencesRemaining) {
+        this.otherStartSequencesRemaining = otherStartSequencesRemaining;
+    }
+
+    public void setOtherDuringSequencesRemaining(boolean otherDuringSequencesRemaining) {
+        this.otherDuringSequencesRemaining = otherDuringSequencesRemaining;
+    }
+
+    public void setStartStateMachineCounter(int startStateMachineCounter) {
+        this.startStateMachineCounter = startStateMachineCounter;
+    }
+
+    public void setDuringStateMachineCounter(int duringStateMachineCounter) {
+        this.duringStateMachineCounter = duringStateMachineCounter;
+    }
+
     private void stepDuringSequence() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         GhostDuringStateSequence ghostDuringStateSequence = this.duringStateMachine.get(duringStateMachineCounter);
         if(isTimeToActivate(ghostDuringStateSequence)) {
             ghostDuringStateSequence.execute(this.ghostsList);
             this.duringStateMachineCounter = (this.duringStateMachineCounter + 1) % this.duringStateMachine.size();
 
-            this.otherStartSequencesRemaining = (this.startStateMachineCounter < this.startStateMachine.size());
-            if(this.otherStartSequencesRemaining)
-                this.checkIfOtherStartSequencesHavePassed(this.startStateMachine, this.clock.getElapsedMilliseconds());
+            this.otherDuringSequencesRemaining = (this.duringStateMachineCounter < this.duringStateMachine.size());
+            if(this.otherDuringSequencesRemaining)
+                this.checkIfOtherDuringSequencesHavePassed(this.duringStateMachine, this.clock.getElapsedMilliseconds());
             else
                 this.clock.reset();
         }
     }
 
-    private <T extends LevelStateSequence> void checkIfOtherStartSequencesHavePassed(List<T> list, long timePassedInMilliseconds) {
+    private void checkIfOtherStartSequencesHavePassed(List<SpecificGhostStartSequence> list, long timePassedInMilliseconds) {
         for(int i = this.startStateMachineCounter; i < list.size(); i++) {
-            if(list.get(i).getTimeToBeActivatedInMilliseconds() < timePassedInMilliseconds)
-                startStateMachineCounter += 1;
+            if(list.get(i).getTimeToBeActivatedInMilliseconds() <= timePassedInMilliseconds) {
+                this.startStateMachineCounter += 1;
+                this.otherStartSequencesRemaining = (this.startStateMachineCounter < this.startStateMachine.size());
+            }
+            else
+                break;
+        }
+    }
+
+    private void checkIfOtherDuringSequencesHavePassed(List<GhostDuringStateSequence> list, long timePassedInMilliseconds) {
+        for(int i = this.duringStateMachineCounter; i < list.size(); i++) {
+            if(list.get(i).getTimeToBeActivatedInMilliseconds() <= timePassedInMilliseconds) {
+                this.duringStateMachineCounter += 1;
+                this.otherDuringSequencesRemaining = (this.duringStateMachineCounter < this.duringStateMachine.size());
+            }
             else
                 break;
         }

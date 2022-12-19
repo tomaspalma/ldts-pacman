@@ -49,26 +49,6 @@ class ArenaControllerTest extends Specification {
         arenaController.setSounds(new ArrayList<>(Arrays.asList(pacman_eating_edible, pacman_dying_sound, kill_ghost_sound)))
     }
 
-    def "We should be able to detect if wall is at a certain position"() {
-        given:
-            pacman = new Pacman(new Position(5, 5), arena)
-            arena.setPacman(pacman)
-            def wall = new Wall(new Position(5, 5), arena)
-        when:
-            arena.addObstacle(wall)
-        then:
-            arena.isObstacleAt(new Position(5, 5))
-    }
-
-    def "Arena should be able to return valid index if fixed edible is at a certain position"() {
-        given:
-            def fixedEdible = new Cherry(new Position(5, 5), arena)
-        when:
-            arena.addToGeneralFixedEdibleList(fixedEdible)
-        then:
-            arena.getFixedEdibleAt(new Position(5, 5)) != -1
-    }
-
     def "Arena controller should be initialized with pacman and regular ghsot controller"() {
         given:
             arenaController.setPacmanController(new PacmanController(arenaController, arena))
@@ -232,7 +212,7 @@ class ArenaControllerTest extends Specification {
             def ssM = Mock(List<SpecificGhostStartSequence>)
             def dSM = Mock(List<GhostDuringStateSequence>)
             def gL = Mock(List<RegularGhost>)
-            def level = new GameLevel(ssM, dSM, gL)
+            def level = new GameLevel(ssM, dSM, gL, new Clock(System.currentTimeMillis()))
             def levelMock = Spy(level)
             arenaController.getModel().getLevels().add(levelMock)
             def gameMock = Mock(Game.class)

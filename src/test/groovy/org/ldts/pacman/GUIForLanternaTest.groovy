@@ -97,7 +97,7 @@ class GUIForLanternaTest extends Specification {
             1 * tgraphicsMock.putString(0, 0, "")
     }*/
 
-    def "Depending on the key the user inputs, it should return the correct game action"() {
+    /*def "Depending on the key the user inputs, it should return the correct game action"() {
         given:
             def terminalMock = Stub(Terminal.class)
             def keystrokeMock = Mock(com.googlecode.lanterna.input.KeyStroke.class)
@@ -108,7 +108,7 @@ class GUIForLanternaTest extends Specification {
             def result = lanternaGUI.getNextUserInput()
         then:
             result == GameActions.ControlActions.MOVE_UP
-    }
+    }*/
 
     /*def "When receiving the down arrow key it should return the game action to move down"() {
         given:

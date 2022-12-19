@@ -156,30 +156,6 @@ public class Arena {
         tile.removeChild(entity);
     }
 
-    public boolean isObstacleAt(Position position) {
-        for (Obstacle obstacle: obstaclesList) {
-            if (obstacle.getPosition().equals(position))
-                return true;
-        }
-
-        return false;
-    }
-
-    public int getFixedEdibleAt(Position position) {
-        for(int i = 0; i < generalFixedEdibleList.size(); i++) {
-            if(generalFixedEdibleList.get(i).getPosition().equals(position)) return i;
-        }
-
-        return -1;
-    }
-
-    public Ghost getGhostAt(Position position) {
-       for(Ghost ghost: this.getRegularGhostsList()) {
-           if(ghost.getPosition().equals(position)) return ghost;
-       }
-
-       return null;
-    }
 
     public Tile getArenaTileAt(Position position) {
         return this.gameGrid.get(position.getY() - 1).get(position.getX());

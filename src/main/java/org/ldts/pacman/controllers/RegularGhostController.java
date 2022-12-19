@@ -35,7 +35,7 @@ public class RegularGhostController extends Controller<Arena> {
             if(stateChangedIn(regularGhost))
                 regularGhost.getCurrentState().applyChangesToGhost();
 
-            if(numberOfSteps > 1) {
+            if(numberOfSteps >= 1.3) {
                 moveGhost(regularGhost, regularGhost.getCurrentState().getNextPosition());
                 numberOfSteps = 0;
             } else {

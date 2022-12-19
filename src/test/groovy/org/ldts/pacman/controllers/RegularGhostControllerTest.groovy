@@ -25,7 +25,7 @@ class RegularGhostControllerTest extends Specification{
     private def regularGhostController
 
     def setup() {
-        arena = new Arena(20, 21, "maps/easy.txt")
+        arena = new Arena(20, 21, "maps/testmap.txt")
         arenaController = new ArenaController(arena)
         regularGhostController = new RegularGhostController(arenaController, arena)
     }
@@ -34,8 +34,9 @@ class RegularGhostControllerTest extends Specification{
         given:
             def ghost = new Pinky(new Position(5, 5), arena)
             ghost.setPreviousStateTo(new ScatteringState(ghost))
-            def stateMock = Mock(ChasingState.class)
-            ghost.setCurrentStateTo(stateMock)
+            def currentState = new ChasingState(ghost)
+            def stateSpy= Spy(currentState)
+            ghost.setCurrentStateTo(stateSpy)
             arena.getRegularGhostsList().clear()
             arena.getRegularGhostsList().add(ghost)
             def game = Mock(Game.class)
@@ -43,7 +44,7 @@ class RegularGhostControllerTest extends Specification{
         when:
             regularGhostController.step(game, action, 1000)
         then:
-            1 * stateMock.applyChangesToGhost()
+            1 * stateSpy.applyChangesToGhost()
     }
 
     def "If the number of steps is greater than 1 it should reset numberofsteps"() {
