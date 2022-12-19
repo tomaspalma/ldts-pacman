@@ -3,7 +3,6 @@ package org.ldts.pacman.controllers
 import org.ldts.pacman.Game
 import org.ldts.pacman.models.Arena
 import org.ldts.pacman.models.GameActions
-import org.ldts.pacman.models.game.GhostHouseGate
 import org.ldts.pacman.models.game.Position
 import org.ldts.pacman.models.game.entities.ghost.Clyde
 import org.ldts.pacman.models.game.entities.ghost.Ghost
@@ -11,7 +10,6 @@ import org.ldts.pacman.models.game.entities.ghost.Inky
 import org.ldts.pacman.models.game.entities.ghost.Pinky
 import org.ldts.pacman.models.game.entities.ghost.RegularGhost
 import org.ldts.pacman.models.game.entities.ghost.directions.GhostDirectionLeft
-import org.ldts.pacman.models.game.entities.ghost.directions.GhostDirectionUp
 import org.ldts.pacman.models.game.entities.ghost.states.ChasingState
 import org.ldts.pacman.models.game.entities.ghost.states.DeadState
 import org.ldts.pacman.models.game.entities.ghost.states.FrightenedState

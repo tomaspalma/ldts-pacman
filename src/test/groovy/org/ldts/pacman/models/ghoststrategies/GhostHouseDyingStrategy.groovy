@@ -4,7 +4,6 @@ import org.ldts.pacman.models.Arena
 import org.ldts.pacman.models.game.GhostHouse
 import org.ldts.pacman.models.game.Position
 import org.ldts.pacman.models.game.entities.ghost.Pinky
-import org.ldts.pacman.models.game.entities.ghost.strategies.dying.GhostHouseDyingStrategy
 import spock.lang.Specification
 
 class GhostHouseDyingStrategy extends Specification {

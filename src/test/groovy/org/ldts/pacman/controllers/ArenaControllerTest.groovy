@@ -5,11 +5,9 @@ import org.ldts.pacman.gui.GUI
 import org.ldts.pacman.models.Arena
 import org.ldts.pacman.models.GameActions
 import org.ldts.pacman.models.GhostDuringStateSequence
-import org.ldts.pacman.models.PowerPelletObservable
 import org.ldts.pacman.models.SpecificGhostStartSequence
 import org.ldts.pacman.models.game.Clock
 import org.ldts.pacman.models.game.arena.levels.GameLevel
-import org.ldts.pacman.models.game.entities.fixededibles.Cherry
 import org.ldts.pacman.models.game.entities.fixededibles.FixedEdible
 import org.ldts.pacman.models.game.entities.fixededibles.Pacdot
 import org.ldts.pacman.models.game.entities.fixededibles.PowerPellet
@@ -19,8 +17,6 @@ import org.ldts.pacman.models.game.entities.ghost.RegularGhost
 import org.ldts.pacman.models.game.entities.ghost.states.FrightenedState
 import org.ldts.pacman.models.game.entities.pacman.Pacman
 import org.ldts.pacman.models.game.Position
-import org.ldts.pacman.models.game.entities.obstacles.Wall
-import org.ldts.pacman.controllers.ArenaController
 import org.ldts.pacman.models.menus.GameOverMenu
 import org.ldts.pacman.models.menus.PauseMenu
 import org.ldts.pacman.sounds.SFX

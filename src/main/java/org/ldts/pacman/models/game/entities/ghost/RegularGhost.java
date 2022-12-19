@@ -67,8 +67,4 @@ public abstract class RegularGhost extends Ghost implements EatenPowerPelletObse
         this.color = newColor;
     }
 
-    public GhostState getState() {
-        return currentState;
-    }
-
 }
