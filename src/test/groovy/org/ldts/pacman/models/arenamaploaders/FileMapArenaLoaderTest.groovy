@@ -1,7 +1,11 @@
 package org.ldts.pacman.models.arenamaploaders
 
 import org.ldts.pacman.models.Arena
+import org.ldts.pacman.models.PowerPelletObservable
 import org.ldts.pacman.models.game.GhostHouseGate
+import org.ldts.pacman.models.game.arena.grid.TeletransporterTile
+import org.ldts.pacman.models.game.arena.grid.Tile
+import org.ldts.pacman.models.game.entities.fixededibles.FixedEdible
 import spock.lang.Specification
 
 class FileMapArenaLoaderTest extends Specification {
@@ -30,6 +34,32 @@ class FileMapArenaLoaderTest extends Specification {
             mapLoader.loadGate(ghostHouseGate)
         then:
             thrown(IllegalArgumentException)
+    }
+
+    def "If there are any power pellet observables, regular ghosts should be added to the observers list of them"() {
+        expect:
+            for(FixedEdible e: arena.getGeneralFixedEdibleList()) {
+                if(e instanceof PowerPelletObservable) {
+                    e.getObservers().size() == arena.getRegularGhostsList().size()
+                }
+            }
+    }
+
+    def "We need to be able to correctly set the pacman position to the start position when loading"() {
+        expect:
+            arena.getPacman().getPosition() == arena.getPacman().getStartPosition()
+    }
+
+    def "On a valid map like the test map, every teletransporter tile should have an exit tile and that tile should be a teletransporter as well"() {
+        expect:
+            for(List<Tile> row: arena.getGameGrid()) {
+                for(Tile t: row) {
+                    if(t instanceof TeletransporterTile) {
+                        t.getExitTile() != null
+                        t.getExitTile() instanceof TeletransporterTile
+                    }
+                }
+            }
     }
 
 }
