@@ -4,6 +4,7 @@ import org.ldts.pacman.Game;
 import org.ldts.pacman.models.*;
 import org.ldts.pacman.models.animations.Animation;
 import org.ldts.pacman.models.game.Position;
+import org.ldts.pacman.models.game.arena.grid.TeletransporterTile;
 import org.ldts.pacman.models.game.entities.pacman.animations.PacmanAnimation;
 import org.ldts.pacman.models.game.entities.pacman.directions.*;
 import org.ldts.pacman.models.game.entities.pacman.Pacman;
@@ -61,12 +62,27 @@ public class PacmanController extends Controller<Arena> {
     }
 
     public void movePacmanAccordingTo(GameActions.ControlActions action) {
-        switch (action) {
-            case MOVE_LEFT: this.wantedDirection = new PacmanDirectionLeft(this.pacman); break;
-            case MOVE_DOWN: this.wantedDirection = new PacmanDirectionDown(this.pacman); break;
-            case MOVE_RIGHT: this.wantedDirection = new PacmanDirectionRight(this.pacman); break;
-            case MOVE_UP: this.wantedDirection = new PacmanDirectionUp(this.pacman); break;
-            default: break;
+        int pacX = pacman.getPosition().getX();
+        int pacY = pacman.getPosition().getY();
+        boolean isAbleToReceiveUserInput = !(getModel().getGameGrid().get(pacY - 1).get(pacX) instanceof TeletransporterTile);
+
+        if(isAbleToReceiveUserInput) {
+            switch (action) {
+                case MOVE_LEFT:
+                    this.wantedDirection = new PacmanDirectionLeft(this.pacman);
+                    break;
+                case MOVE_DOWN:
+                    this.wantedDirection = new PacmanDirectionDown(this.pacman);
+                    break;
+                case MOVE_RIGHT:
+                    this.wantedDirection = new PacmanDirectionRight(this.pacman);
+                    break;
+                case MOVE_UP:
+                    this.wantedDirection = new PacmanDirectionUp(this.pacman);
+                    break;
+                default:
+                    break;
+            }
         }
 
         movePacman();
