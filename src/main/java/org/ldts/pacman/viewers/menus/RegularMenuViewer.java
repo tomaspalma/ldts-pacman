@@ -16,20 +16,15 @@ public class RegularMenuViewer extends Viewer<Menu> {
 
     @Override
     protected void drawEntities(GUI gui) {
-        //gui.createRectangle(new TerminalPosition(7,9), new TerminalSize(6,3), '-');
-
-
-
-        gui.writeToScreen(new Position(5, 4), getModel().getTitle(), getModel().getColor());
+        String title = getModel().getTitle();
+        gui.writeToScreen(new Position(10 - title.length() / 2, 4), title, getModel().getColor());
 
         for (int i = 0; i < getModel().getNumberOptions(); i++) {
+            String message = getModel().getOption(i).getMessage();
             if (i == getModel().getCurrentNumber())
-                gui.writeToScreen(new Position(8, 9 + i), getModel().getOption(i).getMessage(), TextColor.ANSI.GREEN_BRIGHT);
+                gui.writeToScreen(new Position(10 - message.length() / 2, 9 + i), message, TextColor.ANSI.GREEN_BRIGHT);
             else
-                gui.writeToScreen(new Position(8, 9 + i), getModel().getOption(i).getMessage(), TextColor.ANSI.WHITE);
+                gui.writeToScreen(new Position(10 - message.length() / 2, 9 + i), message, TextColor.ANSI.WHITE);
         }
-
     }
-
-
 }

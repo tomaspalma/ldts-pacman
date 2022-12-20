@@ -22,10 +22,11 @@ class MenuViewersTest extends Specification {
         def menuViewer = new RegularMenuViewer(menu)
 
         when:
+        menu.getTitle() >> "menu"
         menuViewer.drawEntities(gui)
 
         then:
-        1 * gui.writeToScreen(_ as Position, menu.getTitle(), menu.getColor())
+        1 * gui.writeToScreen(_ as Position, _ as String, menu.getColor())
         menu.getNumberOptions() * menu.getOption(_)
         menu.getNumberOptions() * gui.writeToScreen(_ as Position, _ as String, _ as TextColor.ANSI)
     }
