@@ -10,6 +10,9 @@ import java.awt.*;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
+import java.util.logging.Logger;
+
+import static java.util.logging.Level.INFO;
 
 public class Game {
     private final GUI gui;
@@ -25,7 +28,7 @@ public class Game {
         this.currentState = state;
     }
 
-    public Game(int width, int height, GUI gui, State currentState) throws IOException, URISyntaxException, FontFormatException {
+    public Game(int width, int height, GUI gui, State currentState) {
         this.width = width;
         this.height = height;
         this.gui = gui;
@@ -56,7 +59,8 @@ public class Game {
             new Game(21, 21, new GUIForLanterna(21, 21),
                 new RegularMenuState(new MainMenu())).run();
         } catch(Exception e) {
-            e.printStackTrace();
+            Logger logger = Logger.getAnonymousLogger();
+            logger.log(INFO, "A problem has occured running the game loop: ", e);
         }
     }
 }

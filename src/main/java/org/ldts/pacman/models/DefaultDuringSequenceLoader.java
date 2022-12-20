@@ -2,6 +2,7 @@ package org.ldts.pacman.models;
 
 import org.ldts.pacman.models.game.entities.ghost.RegularGhost;
 import org.ldts.pacman.models.game.entities.ghost.states.ChasingState;
+import org.ldts.pacman.models.game.entities.ghost.states.GhostState;
 import org.ldts.pacman.models.game.entities.ghost.states.ScatteringState;
 
 import java.util.ArrayList;

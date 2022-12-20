@@ -40,7 +40,7 @@ public class PacmanController extends Controller<Arena> {
     }
 
     @Override
-    public void step(Game game, GameActions.ControlActions action, long time) throws IOException {
+    public void step(Game game, GameActions.ControlActions action, long time) throws IOException, InterruptedException {
         movePacmanAccordingTo(action);
         executeAnimations();
     }
@@ -61,7 +61,7 @@ public class PacmanController extends Controller<Arena> {
         this.pacman.getAnimationsToExecute().removeIf(Animation::isFinished);
     }
 
-    public void movePacmanAccordingTo(GameActions.ControlActions action) {
+    public void movePacmanAccordingTo(GameActions.ControlActions action) throws InterruptedException {
         int pacX = pacman.getPosition().getX();
         int pacY = pacman.getPosition().getY();
         boolean isAbleToReceiveUserInput = !(getModel().getGameGrid().get(pacY - 1).get(pacX) instanceof TeletransporterTile);
@@ -90,14 +90,14 @@ public class PacmanController extends Controller<Arena> {
 
 
 
-    private void movePacman() {
+    private void movePacman() throws InterruptedException {
         this.tryToChangeToWantedDirection();
 
         PacmanDirection currentPacmanDirection = (PacmanDirection) this.pacman.getCurrentDirection();
         Position currentDirectionNextPosition = currentPacmanDirection.getNextPosition();
 
-        boolean isAbleToMoveInNextPosition = !(parentController.getArenaTileAt(currentDirectionNextPosition).containsObstacle())
-                && !(parentController.getArenaTileAt(currentDirectionNextPosition).containsGate());
+        boolean isAbleToMoveInNextPosition = !parentController.getArenaTileAt(currentDirectionNextPosition).containsObstacle()
+                && !parentController.getArenaTileAt(currentDirectionNextPosition).containsGate();
 
         if(isAbleToMoveInNextPosition) {
             Position tileTrimmedPacmanPosition = pacman.switchTile(currentDirectionNextPosition);
@@ -107,11 +107,11 @@ public class PacmanController extends Controller<Arena> {
         }
     }
 
-    private void tryToChangeToWantedDirection() {
+    private void tryToChangeToWantedDirection() throws InterruptedException {
         Position newWantedPosition = this.wantedDirection.getNextPosition();
 
-        boolean isAbleToMoveInWantedDirection = !(parentController.getArenaTileAt(newWantedPosition).containsObstacle())
-                && !(parentController.getArenaTileAt(newWantedPosition).containsGate());
+        boolean isAbleToMoveInWantedDirection = !parentController.getArenaTileAt(newWantedPosition).containsObstacle()
+                && !parentController.getArenaTileAt(newWantedPosition).containsGate();
 
         if(isAbleToMoveInWantedDirection) {
             pacman.setCurrentDirectionTo(this.wantedDirection);
@@ -120,7 +120,7 @@ public class PacmanController extends Controller<Arena> {
 
     }
 
-    private void actIfCollisionWithSpecialEntitiesAt(Position newPacmanPosition) {
+    private void actIfCollisionWithSpecialEntitiesAt(Position newPacmanPosition) throws InterruptedException {
         boolean collidedWithEdible = parentController.getArenaTileAt(newPacmanPosition).containsFixedEdible();
         boolean collidedWithGhost = parentController.getArenaTileAt(newPacmanPosition).containsGhost();
 

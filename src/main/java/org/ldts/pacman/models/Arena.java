@@ -11,13 +11,11 @@ import org.ldts.pacman.models.game.arena.loaders.map.FileMapArenaLoader;
 import org.ldts.pacman.models.game.arena.loaders.map.MapArenaLoader;
 import org.ldts.pacman.models.game.entities.Entity;
 import org.ldts.pacman.models.game.entities.fixededibles.FixedEdible;
-import org.ldts.pacman.models.game.entities.ghost.Ghost;
 import org.ldts.pacman.models.game.entities.ghost.RegularGhost;
 import org.ldts.pacman.models.game.entities.pacman.Pacman;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Arena {
@@ -26,7 +24,7 @@ public class Arena {
     private int ghostHouseSize = 0;
     private GhostHouse ghostHouse;
     private Pacman pacman;
-    private List<Obstacle> obstaclesList = new ArrayList<>();
+    private final List<Obstacle> obstaclesList = new ArrayList<>();
     private final List<List<Tile>> gameGrid = new ArrayList<>();
     private final ArenaLevelLoader levelLoader;
     private final List<GameLevel> levels = new ArrayList<>();

@@ -35,7 +35,7 @@ class ArenaViewerTest extends Specification {
             for(RegularGhost g: arena.getRegularGhostsList()) {
                 1 * gui.drawEntity(g.getPosition(), g.getColor(), g.getDrawSymbol())
             }
-            1 * gui.writeToScreen(new Position(0, 0), "Score " + arena.getScore(), TextColor.ANSI.WHITE);
-            1 * gui.writeToScreen(new Position(arena.getWidth() - 10, 0), "Lives " + arena.getPacman().getRemainingLives(), TextColor.ANSI.WHITE);
+            1 * gui.writeToScreen(new Position(0, 0), "Score " + arena.getScore(), TextColor.ANSI.WHITE)
+            1 * gui.writeToScreen(new Position(arena.getWidth() - 10, 0), "Lives " + arena.getPacman().getRemainingLives(), TextColor.ANSI.WHITE)
     }
 }

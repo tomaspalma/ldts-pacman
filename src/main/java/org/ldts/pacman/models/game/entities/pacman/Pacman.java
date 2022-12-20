@@ -84,7 +84,7 @@ public class Pacman extends MovableEntity implements PacmanObservable {
     }
 
     @Override
-    public void notifyObserversItCollidedWithGhostAt(Position position) {
+    public void notifyObserversItCollidedWithGhostAt(Position position) throws InterruptedException {
         for(PacmanObserver observer: observers)
             observer.changeOnPacmanCollisionWithGhostAt(position);
     }

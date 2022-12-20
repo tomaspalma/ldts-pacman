@@ -12,6 +12,7 @@ public class GhostDirectionRight extends GhostDirection {
         super(ghost);
     }
 
+    @Override
     public List<Position> getPossiblePositionsToMove() {
 
         Position rightPosition = this.getPossiblePositionToMoveRight();

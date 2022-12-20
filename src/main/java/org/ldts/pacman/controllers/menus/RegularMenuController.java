@@ -40,6 +40,7 @@ public class RegularMenuController extends Controller<Menu> {
             case SELECT:
                 music.stop();
                 getModel().getCurrentOption().select(game, null);
+                break;
             default:
                 break;
         }

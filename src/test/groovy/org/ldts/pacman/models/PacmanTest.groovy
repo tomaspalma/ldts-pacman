@@ -29,7 +29,7 @@ class PacmanTest extends Specification {
 
     def "It should correctly open its mouth"() {
         given:
-            pacman.setDrawSymbolTo("B");
+            pacman.setDrawSymbolTo("B")
             def pacDir = Stub(PacmanDirectionDown)
             pacDir.getDrawSymbol() >> "A"
             pacman.setCurrentDirectionTo(pacDir)
@@ -113,9 +113,9 @@ class PacmanTest extends Specification {
 
     def "We should be able to change the lives attribute of pacman"() {
         when:
-            pacman.setLivesTo(1);
+            pacman.setLivesTo(1)
         then:
-            pacman.getLives() == 1;
+            pacman.getLives() == 1
     }
 
     def "When pacman eats a ghost it should notify its observers of said event"() {

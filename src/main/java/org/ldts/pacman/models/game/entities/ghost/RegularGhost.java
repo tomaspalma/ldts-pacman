@@ -6,7 +6,6 @@ import org.ldts.pacman.models.game.Position;
 import org.ldts.pacman.models.game.entities.ghost.states.ChasingState;
 import org.ldts.pacman.models.game.entities.ghost.states.DeadState;
 import org.ldts.pacman.models.game.entities.ghost.states.FrightenedState;
-import org.ldts.pacman.models.game.entities.ghost.states.GhostState;
 import org.ldts.pacman.models.game.entities.ghost.strategies.dying.GhostHouseDyingStrategy;
 import org.ldts.pacman.models.game.entities.ghost.strategies.frightened.FrightenedRunAwayStrategy;
 

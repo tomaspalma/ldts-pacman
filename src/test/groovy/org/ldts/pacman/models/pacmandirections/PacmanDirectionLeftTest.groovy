@@ -28,7 +28,7 @@ class PacmanDirectionLeftTest extends Specification {
 
     def "It should return the correct position in order to pacman to continue moving in this direction"() {
         given:
-            pacman.setPosition(new Position(4, 9));
+            pacman.setPosition(new Position(4, 9))
         expect:
             direction.getNextPosition() == new Position(3, 9)
     }

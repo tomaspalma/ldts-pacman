@@ -107,6 +107,13 @@ class RegularGhostTest extends Specification {
             regularGhost.willBeInInvalidPosition(newPos)
     }
 
+    def "When a ghost is not on ghost house state it should say so"() {
+        given:
+            regularGhost.setCurrentStateTo(new ChasingState(regularGhost))
+        expect:
+            regularGhost.isOnGhostHouseState() == false
+    }
+
     def "Verify if regular ghost model says it will be at invalid position if there's an obstacle there"() {
         given:
             def newPos = arena.getGhostHouse().getGatePosition()

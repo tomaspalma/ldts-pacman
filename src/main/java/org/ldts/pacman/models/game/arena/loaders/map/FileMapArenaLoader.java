@@ -16,33 +16,34 @@ import org.ldts.pacman.models.game.entities.pacman.Pacman;
 import org.ldts.pacman.models.Arena;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 // Ler o mapa e carregar as entidades respetivas para a lista da arena
 public class FileMapArenaLoader extends MapArenaLoader {
-    private final String mapToLoad;
     private final int width;
     private final int height;
     private final URL mapResource;
     private final BufferedReader mapFileReader;
     private final HashMap<Character, TeletransporterTile> possibleLetterToCorrespondence = new HashMap<>();
 
-    public FileMapArenaLoader(Arena arena, String mapToLoad) throws FileNotFoundException {
+    public FileMapArenaLoader(Arena arena, String mapToLoad) throws IOException {
         super(arena);
-        this.mapToLoad = mapToLoad;
         this.width = 20;
         this.height = 20;
 
         this.mapResource = getClass().getClassLoader().getResource(mapToLoad);
         assert mapResource != null;
 
-        this.mapFileReader = new BufferedReader(new FileReader(mapResource.getFile()));
+        this.mapFileReader = Files.newBufferedReader(Paths.get(mapResource.getFile()), UTF_8);
+
     }
 
     public int getWidth() {
@@ -65,7 +66,8 @@ public class FileMapArenaLoader extends MapArenaLoader {
         while((currentCharRow = this.mapFileReader.readLine()) != null) {
             this.arena.getGameGrid().add(new ArrayList<>());
 
-            for(Character c: currentCharRow.toCharArray()) {
+            for(int i = 0; i < currentCharRow.length(); i++) {
+                char c = currentCharRow.charAt(i);
                 addRespectiveElementOf(c, new Position(x, y));
                 x += 1;
             }
@@ -126,7 +128,7 @@ public class FileMapArenaLoader extends MapArenaLoader {
     }
 
     private void addTeletransporterToMap(Character character, Position positionToAddTo) {
-        boolean notYetFoundTeletransporterPair = !(possibleLetterToCorrespondence.containsKey(character));
+        boolean notYetFoundTeletransporterPair = !possibleLetterToCorrespondence.containsKey(character);
 
         if(notYetFoundTeletransporterPair) {
             TeletransporterTile firstElementOfPair = new TeletransporterTile(positionToAddTo, this.arena);
