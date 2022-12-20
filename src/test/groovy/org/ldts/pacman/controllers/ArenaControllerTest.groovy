@@ -43,6 +43,7 @@ class ArenaControllerTest extends Specification {
         arenaController.setPacmanController(pacController)
         arenaController.setRegularGhostController(regularGhostController)
         arenaController.setSounds(new ArrayList<>(Arrays.asList(pacman_eating_edible, pacman_dying_sound, kill_ghost_sound)))
+        arenaController.setAreSoundsSilenced(true)
     }
 
     def "Arena controller should be initialized with pacman and regular ghsot controller"() {
@@ -167,7 +168,9 @@ class ArenaControllerTest extends Specification {
         when:
             arenaController.processPacmanLoseLife()
         then:
-            1 * pacman_dying_sound.play()
+            if(!arenaController.areSoundsSilenced)
+                1 * pacman_dying_sound.play()
+
             1 * pac.die()
     }
 
@@ -199,7 +202,8 @@ class ArenaControllerTest extends Specification {
         then:
             arena.getScore() == 659
             1 * regularGhostController.killGhost(ghostMock)
-            1 * kill_ghost_sound.play()
+            if(!arenaController.areSoundsSilenced())
+                1 * kill_ghost_sound.play()
     }
 
     def "It should call the step function of the current level"() {
@@ -228,7 +232,9 @@ class ArenaControllerTest extends Specification {
         when:
             arenaController.changeOnPacmanEatFixedEdibleAt(pos)
         then:
-            1 * pacman_eating_edible.play()
+            if(!arenaController.areSoundsSilenced())
+                1 * pacman_eating_edible.play()
+
             tile.containsFixedEdible() == false
     }
 

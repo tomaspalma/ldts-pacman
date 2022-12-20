@@ -28,6 +28,10 @@ public class GhostDuringStateSequence<T extends GhostState> implements LevelStat
         }
     }
 
+    public void setTimeToBeActivatedInMilliseconds(long timeToBeActivatedInMilliseconds) {
+        this.timeToBeActivatedInMilliseconds = timeToBeActivatedInMilliseconds;
+    }
+
     @Override
     public long getTimeToBeActivatedInMilliseconds() {
         return this.timeToBeActivatedInMilliseconds;

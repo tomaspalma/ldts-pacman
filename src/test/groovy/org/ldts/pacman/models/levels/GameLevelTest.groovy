@@ -130,7 +130,7 @@ class GameLevelTest extends Specification {
         when:
             level.step()
         then:
-            level.getStartStateMachineCounter() == 2
+            level.getStartStateMachineCounter() == 0
     }
 
 }

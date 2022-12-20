@@ -13,6 +13,7 @@ import java.util.List;
 public class GameLevel {
     private List<SpecificGhostStartSequence> startStateMachine;
     private List<GhostDuringStateSequence> duringStateMachine;
+    private int multiplier = 1;
 
     private boolean otherStartSequencesRemaining;
     private boolean otherDuringSequencesRemaining;
@@ -99,6 +100,13 @@ public class GameLevel {
                 this.checkIfOtherStartSequencesHavePassed(this.startStateMachine, this.clock.getElapsedMilliseconds());
             else
                 this.clock.reset();
+        }
+    }
+
+    public void transformItselfIntoAnotherLevel() {
+        this.restart();
+        for(GhostDuringStateSequence g: duringStateMachine) {
+            g.setTimeToBeActivatedInMilliseconds(g.getTimeToBeActivatedInMilliseconds() - (6000 * multiplier));
         }
     }
 

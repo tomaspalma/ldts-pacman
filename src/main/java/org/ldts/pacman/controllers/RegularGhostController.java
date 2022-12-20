@@ -97,6 +97,9 @@ public class RegularGhostController extends Controller<Arena> {
     }
 
     private void checkCollisionWithPacman(Ghost ghost, Position position) {
+        if(position == null)
+            return;
+
         boolean onFrightenedState = ghost.getCurrentState() instanceof FrightenedState;
         boolean onDeadState = ghost.getCurrentState() instanceof  DeadState;
         if(onFrightenedState || onDeadState) return;

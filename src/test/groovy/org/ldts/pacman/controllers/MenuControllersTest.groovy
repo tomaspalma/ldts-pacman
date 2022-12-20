@@ -29,6 +29,7 @@ class MenuControllersTest extends Specification {
         given:
         def menu = Mock(Menu.class)
         def menuController = new RegularMenuController(menu)
+        menuController.setAreSoundsSilenced(true)
 
         when:
         menuController.step(game, moveDown, time)
@@ -50,6 +51,7 @@ class MenuControllersTest extends Specification {
         given:
         def pauseMenu = Mock(PauseMenu.class)
         def menuController = new PauseMenuController(pauseMenu)
+        menuController.setAreSoundsSilenced(true)
 
         when:
         menuController.step(game, pause, time)
