@@ -7,7 +7,7 @@ public class SpecificGhostStartSequence implements LevelStateSequence {
 
     private final Ghost ghost;
     private final GhostState newStateToTransitionTo;
-    private final long timeToBeActivatedInMilliseconds;
+    private long timeToBeActivatedInMilliseconds;
 
     public SpecificGhostStartSequence(Ghost ghost, GhostState newState, long timeToBeActivatedInMilliseconds) {
         this.ghost = ghost;
@@ -17,6 +17,10 @@ public class SpecificGhostStartSequence implements LevelStateSequence {
 
     public Ghost getGhost() {
         return ghost;
+    }
+
+    public void setTimeToBeActivatedInMilliseconds(long timeInMilliseconds) {
+        this.timeToBeActivatedInMilliseconds = timeInMilliseconds;
     }
 
     public GhostState getNewStateToTransitionTo() {

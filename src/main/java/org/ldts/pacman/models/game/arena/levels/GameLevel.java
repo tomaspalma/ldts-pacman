@@ -105,7 +105,10 @@ public class GameLevel {
     public void transformItselfIntoAnotherLevel() {
         this.restart();
         for(GhostDuringStateSequence g: duringStateMachine) {
-            g.setTimeToBeActivatedInMilliseconds(g.getTimeToBeActivatedInMilliseconds() - (6000 * multiplier));
+            g.setTimeToBeActivatedInMilliseconds(g.getTimeToBeActivatedInMilliseconds() - (6000L * multiplier));
+        }
+        for(SpecificGhostStartSequence g: startStateMachine) {
+            g.setTimeToBeActivatedInMilliseconds(g.getTimeToBeActivatedInMilliseconds() - (500L * multiplier));
         }
     }
 
