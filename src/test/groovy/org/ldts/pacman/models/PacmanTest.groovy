@@ -44,6 +44,18 @@ class PacmanTest extends Specification {
             pacman.getColor() == TextColor.ANSI.YELLOW_BRIGHT
     }
 
+    def "Pacman should be able to notify its observers that it ate a fixed edible"() {
+        given:
+            def posMock = Mock(Position.class)
+            pacman.getObservers().clear()
+            def pacObserverMock = Mock(PacmanObserver.class)
+            pacman.addObserver(pacObserverMock)
+        when:
+            pacman.notifyObserversItAteFixedEdibleAt(posMock)
+        then:
+            1 * pacObserverMock.changeOnPacmanEatFixedEdibleAt(posMock)
+    }
+
     def "Pacman should have the draw symbol of the right direction on being initialized"() {
         expect:
             pacman.getCurrentDirection().getClass() == PacmanDirectionRight
