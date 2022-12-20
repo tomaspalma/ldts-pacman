@@ -25,6 +25,9 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
+
+import static java.util.logging.Level.INFO;
 
 public class ArenaController extends Controller<Arena> implements PacmanObserver {
     private PacmanController pacmanController;
@@ -67,7 +70,8 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
             sounds = Arrays.asList(new PacmanMunch(), new PacmanDeathSound(), new EatGhostSound());
         }
         catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            e.printStackTrace();
+            Logger logger = Logger.getAnonymousLogger();
+            logger.log(INFO, "Problem with sound or retrieving sound: ", e);
         }
     }
 
@@ -88,7 +92,7 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
     }
 
     @Override
-    public void step(Game game, GameActions.ControlActions action, long time) throws IOException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public void step(Game game, GameActions.ControlActions action, long time) throws IOException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, InterruptedException {
         this.actIfLevelEnded();
 
         this.checkConditionsToPauseLevelClock();
@@ -143,12 +147,14 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
         this.putCurrentLevelBackToStartPositions();
         try {
             Thread.sleep(1000);
-        } catch(Exception e) {
-            e.printStackTrace();
+        } catch(InterruptedException e) {
+            Logger logger = Logger.getAnonymousLogger();
+            logger.log(INFO, "A problem occured while trying to sleep thread to paralyse pacman upon dying: ", e);
+            Thread.currentThread().interrupt();
         }
     }
 
-    private void stepChildControllers(Game game, GameActions.ControlActions action, long time) throws IOException {
+    private void stepChildControllers(Game game, GameActions.ControlActions action, long time) throws IOException, InterruptedException {
         pacmanController.step(game, action, time);
         regularGhostController.step(game, action, time);
     }
@@ -189,7 +195,7 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
     }
 
     @Override
-    public void changeOnPacmanCollisionWithGhostAt(Position position) {
+    public void changeOnPacmanCollisionWithGhostAt(Position position) throws InterruptedException {
         Tile currentTile = getModel().getGameGrid().get(position.getY() - 1).get(position.getX());
         Ghost ghost = currentTile.getGhost();
 

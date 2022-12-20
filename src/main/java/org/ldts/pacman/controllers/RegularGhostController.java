@@ -30,7 +30,7 @@ public class RegularGhostController extends Controller<Arena> {
     }
 
     @Override
-    public void step(Game game, GameActions.ControlActions action, long time) throws IOException {
+    public void step(Game game, GameActions.ControlActions action, long time) throws IOException, InterruptedException {
         for(RegularGhost regularGhost: regularGhostsToControl) {
             if(stateChangedIn(regularGhost))
                 regularGhost.getCurrentState().applyChangesToGhost();
@@ -62,7 +62,7 @@ public class RegularGhostController extends Controller<Arena> {
         ghost.die();
     }
 
-    private void moveGhost(Ghost ghost, Position newPosition) {
+    private void moveGhost(Ghost ghost, Position newPosition) throws InterruptedException {
         boolean isOnGhostHouseAndCanLeaveIt = (ghost.getPreviousState() instanceof GhostHouseState
                 && ghost.getCurrentState().canMoveOutsideGhostHouse());
 
@@ -93,7 +93,7 @@ public class RegularGhostController extends Controller<Arena> {
         }
     }
 
-    private void checkCollisionWithPacman(Ghost ghost, Position newPosition) {
+    private void checkCollisionWithPacman(Ghost ghost, Position newPosition) throws InterruptedException {
         boolean onFrightenedState = ghost.getCurrentState() instanceof FrightenedState;
         if(onFrightenedState) return;
 

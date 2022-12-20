@@ -216,7 +216,7 @@ class ArenaControllerTest extends Specification {
         when:
             arenaController.step(gameMock, actionsMock, 1000)
         then:
-            1 * levelMock.step();
+            1 * levelMock.step()
     }
 
     def "We should correctly act if pacman eats a fixed edible"() {

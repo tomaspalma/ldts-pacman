@@ -23,6 +23,7 @@ public class SpecificGhostStartSequence implements LevelStateSequence {
         return this.newStateToTransitionTo;
     }
 
+    @Override
     public long getTimeToBeActivatedInMilliseconds() {
         return this.timeToBeActivatedInMilliseconds;
     }

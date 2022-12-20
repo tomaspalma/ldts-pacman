@@ -13,7 +13,7 @@ class SFXTest extends Specification {
 
     def "EatGhostSound"() {
         given:
-        def sound = new EatGhostSound(clip);
+        def sound = new EatGhostSound(clip)
 
         when:
         sound.play()
@@ -26,19 +26,19 @@ class SFXTest extends Specification {
 
     def "IntroSound"() {
         given:
-        def sound = new IntroSound(clip);
+        def sound = new IntroSound(clip)
 
         when:
         sound.play()
 
         then:
-        1 * clip.start();
+        1 * clip.start()
         1 * clip.loop(Clip.LOOP_CONTINUOUSLY)
     }
 
     def "PacmanDeathSound"() {
         given:
-        def sound = new PacmanDeathSound(clip);
+        def sound = new PacmanDeathSound(clip)
 
         when:
         sound.play()
@@ -50,7 +50,7 @@ class SFXTest extends Specification {
 
     def "PacmanMunch"() {
         given:
-        def sound = new PacmanMunch(clip);
+        def sound = new PacmanMunch(clip)
 
         when:
         sound.play()

@@ -34,7 +34,7 @@ public abstract class State<T> {
     }
 
     // Função que acaba
-    public void step(Game game, GUI gui, long time) throws IOException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public void step(Game game, GUI gui, long time) throws IOException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, InterruptedException {
         this.userControlAction = gui.getNextUserInput();
         controller.step(game, userControlAction, time);
         viewer.draw(gui);

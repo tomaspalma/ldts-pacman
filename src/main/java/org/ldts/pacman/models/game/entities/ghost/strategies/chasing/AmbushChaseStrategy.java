@@ -8,8 +8,6 @@ import org.ldts.pacman.models.game.entities.ghost.directions.GhostDirection;
 
 public class AmbushChaseStrategy implements ChaseStrategy {
 
-    private Entity secondaryEntityBesidesPacman;
-
     @Override
     public Position getNextPosition(Ghost ghost) {
         PacmanDirection currentPacmanDirection = (PacmanDirection) ghost.getArena().getPacman().getCurrentDirection();

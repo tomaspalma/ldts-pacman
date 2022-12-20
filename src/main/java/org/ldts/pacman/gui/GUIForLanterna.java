@@ -103,6 +103,8 @@ public class GUIForLanterna implements GUI {
                 return GameActions.ControlActions.SELECT;
             case Escape:
                 return GameActions.ControlActions.SWITCH_TO_PAUSE_MENU;
+            default:
+                break;
         }
 
         // Se chegar aqui é por que não leu nenhuma tecla interessante

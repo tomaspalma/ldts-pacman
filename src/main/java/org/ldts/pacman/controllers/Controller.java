@@ -9,7 +9,6 @@ import java.lang.reflect.InvocationTargetException;
 // O controller vai processar e efetuar mudanças num modelo
 public abstract class Controller<T> {
     private final T model;
-    private int numberOfSteps;
 
     protected Controller(T model) {
         this.model = model;
@@ -19,5 +18,5 @@ public abstract class Controller<T> {
         return model;
     }
 
-    public abstract void step(Game game, GameActions.ControlActions action, long time) throws IOException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
+    public abstract void step(Game game, GameActions.ControlActions action, long time) throws IOException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, InterruptedException;
 }

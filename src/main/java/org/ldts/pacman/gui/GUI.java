@@ -1,8 +1,5 @@
 package org.ldts.pacman.gui;
 
-import com.googlecode.lanterna.TerminalPosition;
-import com.googlecode.lanterna.TerminalSize;
-import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 
 import org.ldts.pacman.models.GameActions;

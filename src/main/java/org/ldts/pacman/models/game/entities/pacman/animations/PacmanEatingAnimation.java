@@ -16,6 +16,7 @@ public class PacmanEatingAnimation extends PacmanAnimation {
         super(durationInMilliseconds, internalClock, pacman);
     }
 
+    @Override
     public boolean isFinished() {
         return false;
     }
