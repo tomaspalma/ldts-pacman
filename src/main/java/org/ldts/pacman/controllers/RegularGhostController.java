@@ -4,6 +4,8 @@ import org.ldts.pacman.Game;
 import org.ldts.pacman.models.*;
 import org.ldts.pacman.models.game.Position;
 import org.ldts.pacman.models.game.entities.ghost.Ghost;
+import org.ldts.pacman.models.game.entities.ghost.Inky;
+import org.ldts.pacman.models.game.entities.ghost.Pinky;
 import org.ldts.pacman.models.game.entities.ghost.RegularGhost;
 import org.ldts.pacman.models.game.entities.ghost.states.*;
 
@@ -63,6 +65,8 @@ public class RegularGhostController extends Controller<Arena> {
     }
 
     private void moveGhost(Ghost ghost, Position newPosition) throws InterruptedException {
+        checkCollisionWithPacman(ghost, ghost.getPosition());
+
         boolean isOnGhostHouseAndCanLeaveIt = (ghost.getPreviousState() instanceof GhostHouseState
                 && ghost.getCurrentState().canMoveOutsideGhostHouse());
 
@@ -79,7 +83,6 @@ public class RegularGhostController extends Controller<Arena> {
 
         this.reviveDeadGhost((RegularGhost) ghost);
 
-        checkCollisionWithPacman(ghost, realNewPosition);
     }
 
     public void putGhostsBackInInitialState() {
@@ -93,11 +96,18 @@ public class RegularGhostController extends Controller<Arena> {
         }
     }
 
-    private void checkCollisionWithPacman(Ghost ghost, Position newPosition) throws InterruptedException {
-        boolean onFrightenedState = ghost.getCurrentState() instanceof FrightenedState;
-        if(onFrightenedState) return;
+    private void checkCollisionWithPacman(Ghost ghost, Position position) {
+        if(position == null)
+            return;
 
-        if(newPosition.equals(getModel().getPacman().getPosition()))
+        boolean onFrightenedState = ghost.getCurrentState() instanceof FrightenedState;
+        boolean onDeadState = ghost.getCurrentState() instanceof  DeadState;
+        if(onFrightenedState || onDeadState) return;
+
+
+        if(position.equals(getModel().getPacman().getPosition())) {
+            System.out.println(ghost.getCurrentState());
             parentController.processPacmanLoseLife();
+        }
     }
 }

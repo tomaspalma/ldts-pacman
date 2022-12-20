@@ -126,6 +126,7 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
         if(this.currentLevel != getModel().getLevels().size() - 1)
             this.currentLevel = (this.currentLevel + 1) % getModel().getLevels().size();
         this.restoreFixedEdibles();
+        getModel().getLevels().get(0).transformItselfIntoAnotherLevel();
     }
 
     private void checkConditionsToPauseLevelClock() {
@@ -142,7 +143,9 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
     }
 
     public void processPacmanLoseLife() {
-        sounds.get(1).play();
+        if(!areSoundsSilenced)
+            sounds.get(1).play();
+
         getModel().getPacman().die();
         this.putCurrentLevelBackToStartPositions();
         try {
@@ -184,7 +187,9 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
             powerPelletObservable.notifyObservers();
         }
 
-        sounds.get(0).play();
+        if(!areSoundsSilenced)
+            sounds.get(0).play();
+
         getModel().sumScoreWith(currentEdible.getPoints());
         getModel().removeFromGameGridAt(position, currentEdible);
         getModel().getGeneralFixedEdibleList().remove(currentEdible);
@@ -204,7 +209,10 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
             case KILL_GHOST:
                 regularGhostController.killGhost(ghost);
                 getModel().sumScoreWith(this.ateGhostPoints);
-                sounds.get(2).play();
+
+                if(!areSoundsSilenced)
+                    sounds.get(2).play();
+
                 break;
             case KILL_PACMAN:
                 ateGhostPoints = 200;
