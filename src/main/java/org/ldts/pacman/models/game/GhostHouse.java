@@ -22,6 +22,14 @@ public class GhostHouse {
         this.gatePosition = new Vector(this.width / 2, 0).getPositionBasedOnSumWith(upperLeftPosition);
     }
 
+    public Position getUpperLeftPosition() {
+        return upperLeftPosition;
+    }
+
+    public List<Ghost> getGhostHolder() {
+        return ghostHolder;
+    }
+
     public Position getAvailablePosition() {
         int xOffset = (this.ghostHolder.size() % width) + 1;
         int yOffset = (this.ghostHolder.size() / height) + 1;

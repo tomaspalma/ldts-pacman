@@ -22,4 +22,19 @@ class GhostHouseTest extends Specification {
             ghostHouse.getHeight() == 21
     }
 
+    def "We neeed to be able to get what's the exit position of the ghost house"() {
+        given:
+            def pos = ghostHouse.getGatePosition()
+        expect:
+            ghostHouse.getExitPosition() == new Position(pos.getX(), pos.getY() - 1)
+    }
+
+    def "We should be able to correctly get an available position from inside the ghost house"() {
+        given:
+            def pos = ghostHouse.getUpperLeftPosition()
+            ghostHouse.getGhostHolder().clear();
+        expect:
+            ghostHouse.getAvailablePosition() == new Position(pos.getX() + 1, pos.getY() + 1)
+    }
+
 }
