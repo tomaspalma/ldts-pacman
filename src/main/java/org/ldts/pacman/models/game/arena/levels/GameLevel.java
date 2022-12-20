@@ -161,6 +161,7 @@ public class GameLevel {
     public void restart() {
         this.resetRemainingBooleans();
         this.resetCounters();
+        this.clock.reset();
     }
 
     private void resetCounters() {

@@ -88,9 +88,9 @@ public class PacmanController extends Controller<Arena> {
         movePacman();
     }
 
-
-
     private void movePacman() {
+        this.actIfCollisionWithSpecialEntitiesAt(pacman.getPosition());
+
         this.tryToChangeToWantedDirection();
 
         PacmanDirection currentPacmanDirection = (PacmanDirection) this.pacman.getCurrentDirection();
@@ -103,7 +103,6 @@ public class PacmanController extends Controller<Arena> {
             Position tileTrimmedPacmanPosition = pacman.switchTile(currentDirectionNextPosition);
             pacman.setPosition(tileTrimmedPacmanPosition);
 
-            actIfCollisionWithSpecialEntitiesAt(tileTrimmedPacmanPosition);
         }
     }
 
@@ -120,17 +119,17 @@ public class PacmanController extends Controller<Arena> {
 
     }
 
-    private void actIfCollisionWithSpecialEntitiesAt(Position newPacmanPosition) {
-        boolean collidedWithEdible = parentController.getArenaTileAt(newPacmanPosition).containsFixedEdible();
-        boolean collidedWithGhost = parentController.getArenaTileAt(newPacmanPosition).containsGhost();
+    private void actIfCollisionWithSpecialEntitiesAt(Position pacmanPosition) {
+        boolean collidedWithEdible = parentController.getArenaTileAt(pacmanPosition).containsFixedEdible();
+        boolean collidedWithGhost = parentController.getArenaTileAt(pacmanPosition).containsGhost();
 
         if(collidedWithEdible) {
-            this.pacman.notifyObserversItAteFixedEdibleAt(newPacmanPosition);
+            this.pacman.notifyObserversItAteFixedEdibleAt(pacmanPosition);
 
         }
 
         if (collidedWithGhost) {
-            this.pacman.notifyObserversItCollidedWithGhostAt(newPacmanPosition);
+            this.pacman.notifyObserversItCollidedWithGhostAt(pacmanPosition);
         }
     }
 }

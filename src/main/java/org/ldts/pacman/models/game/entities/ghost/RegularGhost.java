@@ -3,10 +3,7 @@ package org.ldts.pacman.models.game.entities.ghost;
 import com.googlecode.lanterna.TextColor;
 import org.ldts.pacman.models.*;
 import org.ldts.pacman.models.game.Position;
-import org.ldts.pacman.models.game.entities.ghost.states.ChasingState;
-import org.ldts.pacman.models.game.entities.ghost.states.DeadState;
-import org.ldts.pacman.models.game.entities.ghost.states.FrightenedState;
-import org.ldts.pacman.models.game.entities.ghost.states.GhostState;
+import org.ldts.pacman.models.game.entities.ghost.states.*;
 import org.ldts.pacman.models.game.entities.ghost.strategies.dying.GhostHouseDyingStrategy;
 import org.ldts.pacman.models.game.entities.ghost.strategies.frightened.FrightenedRunAwayStrategy;
 
@@ -45,8 +42,10 @@ public abstract class RegularGhost extends Ghost implements EatenPowerPelletObse
                 Thread.sleep(5000);
                 synchronized (noOfTimesConsequentlyEaten) {
                     noOfTimesConsequentlyEaten.getAndDecrement();
-                    if(noOfTimesConsequentlyEaten.intValue() == 0)
-                        this.currentState.transitionToState(new ChasingState(this));
+                    if(noOfTimesConsequentlyEaten.intValue() == 0) {
+                        GhostState newState = (this.previousState instanceof GhostHouseState) ? new GhostHouseState(this) : new ChasingState(this);
+                        this.currentState.transitionToState(newState);
+                    }
                 }
                 this.color = this.originalColor;
             } catch (InterruptedException e) {

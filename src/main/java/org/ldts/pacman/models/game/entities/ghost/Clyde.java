@@ -16,7 +16,7 @@ public class Clyde extends RegularGhost {
         this.originalState = this.previousState;
         this.color = TextColor.ANSI.YELLOW;
         this.originalColor = color;
-        this.startSequenceInMilliseconds = 10000;
+        this.startSequenceInMilliseconds = 7000;
         this.chaseStrategy = new HybridIgnorantChaseStrategy();
         this.scatterStrategy = new ScatterToBottomLeft();
         this.currentDirection = new GhostDirectionUp(this);

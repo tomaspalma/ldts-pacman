@@ -14,7 +14,7 @@ public class Pinky extends RegularGhost {
         this.currentState = this.previousState;
         this.originalState = this.previousState;
         this.originalColor = color;
-        this.startSequenceInMilliseconds = 6000;
+        this.startSequenceInMilliseconds = 3000;
         this.chaseStrategy = new AmbushChaseStrategy();
         this.scatterStrategy = new ScatterToTopLeft();
         this.currentDirection = new GhostDirectionUp(this);
