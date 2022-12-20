@@ -17,8 +17,6 @@ import static java.util.logging.Level.INFO;
 public class Game {
     private final GUI gui;
     private State currentState;
-    private final int width;
-    private final int height;
 
     public State getState() {
         return currentState;
@@ -29,8 +27,6 @@ public class Game {
     }
 
     public Game(int width, int height, GUI gui, State currentState) {
-        this.width = width;
-        this.height = height;
         this.gui = gui;
         this.currentState = currentState;
     }
