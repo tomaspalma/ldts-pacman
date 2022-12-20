@@ -80,10 +80,9 @@ public class FileMapArenaLoader extends MapArenaLoader {
     }
 
     private void createGhostHouse() throws IOException {
-        String[] specialLimitParemeters = new String[2];
         String positionCoordinates = this.mapFileReader.readLine();
 
-        specialLimitParemeters = positionCoordinates.split("x");
+        String[] specialLimitParemeters = positionCoordinates.split("x");
         int ghostHouseX = Integer.parseInt(specialLimitParemeters[0]);
         int ghostHouseY = Integer.parseInt(specialLimitParemeters[1]);
         Position ghostHousePosition = new Position(ghostHouseX, ghostHouseY);

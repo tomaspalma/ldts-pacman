@@ -14,7 +14,7 @@ public abstract class SFX {
         AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(resource);
         sound = AudioSystem.getClip();
         sound.open(audioInputStream);
-        FloatControl gainControl = (FloatControl) (sound.getControl(FloatControl.Type.MASTER_GAIN));
+        FloatControl gainControl = (FloatControl) sound.getControl(FloatControl.Type.MASTER_GAIN);
         gainControl.setValue(-20.0f);
     }
 
