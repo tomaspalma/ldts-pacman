@@ -15,7 +15,10 @@ they will be in scatter mode.
 
 Although pacman is an extremely popular game, there are some things that we should explain, especially
 about ghost behaviour and strategies, that will be explained at the end of this document in order
-not to obfuscate more important aspects for the evaluation of this project such as screenshots and a simple description.
+not to obfuscate more important aspects for the evaluation of this project such as screenshots and a simple description
+that is written above.
+
+<hr>
 
 ## Screenshots
 
@@ -23,14 +26,30 @@ not to obfuscate more important aspects for the evaluation of this project such 
 
 #### Starting Menu
 
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055107937078620190/image.png)
+
 #### Pause Menu
 
 You can go to this menu by pressing the *ESC* key of your keyboard. Unfortantely, it is not possible for you to change that key
 unless you change the code.
 
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055108801583386724/image.png)
+
 #### Game Over Menu
 
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055109291239030824/image.png)
+
+Yes, the menus are not very visually appealing.
+
+<hr>
+
 ### Gameplay
+
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055111527633518612/image.png)
+
+### Gameplay Demo
+
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055114255474626710/2022-12-21-13-24-31.gif)
 
 **There are different kinds of strategies:**
 
