@@ -1,6 +1,7 @@
 package org.ldts.pacman.controllers
 
 import org.ldts.pacman.Game
+import javax.sound.*;
 import org.ldts.pacman.gui.GUI
 import org.ldts.pacman.models.Arena
 import org.ldts.pacman.models.GameActions
@@ -24,6 +25,11 @@ import org.ldts.pacman.states.ArenaState
 import org.ldts.pacman.states.menus.PauseMenuState
 import org.ldts.pacman.states.menus.RegularMenuState
 import spock.lang.Specification
+
+import javax.sound.sampled.AudioSystem
+import javax.sound.sampled.Line
+import javax.sound.sampled.LineUnavailableException
+import javax.sound.sampled.Mixer
 
 class ArenaControllerTest extends Specification {
     private def arena
@@ -143,6 +149,7 @@ class ArenaControllerTest extends Specification {
             def action = GameActions.ControlActions.SWITCH_TO_PAUSE_MENU
             def game = new Game(21, 21, gui, null)
             def result = new PauseMenuState(new PauseMenu((ArenaState) game.getState()))
+            arenaController.setAreSoundsSilenced(true)
         when:
             arenaController.step(game, action, 1000)
         then:
@@ -155,6 +162,7 @@ class ArenaControllerTest extends Specification {
             def action = GameActions.ControlActions.SWITCH_TO_PAUSE_MENU
             def game = new Game(21, 21, gui, null)
             arenaController.getModel().getLevels().get(0).getClock().pause()
+            arenaController.setAreSoundsSilenced(true)
         when:
             arenaController.step(game, action, 1000)
         then:
@@ -165,6 +173,7 @@ class ArenaControllerTest extends Specification {
         given:
             def pac = Mock(Pacman.class)
             arenaController.getModel().setPacman(pac)
+            arenaController.setAreSoundsSilenced(true)
         when:
             arenaController.processPacmanLoseLife()
         then:
@@ -183,6 +192,7 @@ class ArenaControllerTest extends Specification {
             tile.put(ghostMock)
             def pacMock = Mock(Pacman.class)
             arena.setPacman(pacMock)
+            arenaController.setAreSoundsSilenced(true)
         when:
             arenaController.changeOnPacmanCollisionWithGhostAt(new Position(0, 1))
         then:
@@ -197,6 +207,7 @@ class ArenaControllerTest extends Specification {
             def ghostMock = Stub(Ghost.class)
             ghostMock.getCollisionWithPacmanResult() >> GameActions.GhostCollisionWithPacman.KILL_GHOST
             tile.put(ghostMock)
+            arenaController.setAreSoundsSilenced(true)
         when:
             arenaController.changeOnPacmanCollisionWithGhostAt(new Position(0, 1))
         then:
@@ -217,6 +228,7 @@ class ArenaControllerTest extends Specification {
             arenaController.getModel().getLevels().add(levelMock)
             def gameMock = Mock(Game.class)
             def actionsMock = GroovyMock(GameActions.ControlActions)
+            arenaController.setAreSoundsSilenced(true)
         when:
             arenaController.step(gameMock, actionsMock, 1000)
         then:
@@ -229,6 +241,7 @@ class ArenaControllerTest extends Specification {
             def pos = new Position(5, 5)
             def tile = arena.getGameGrid().get(pos.getY() - 1).get(pos.getX())
             tile.put(edible)
+            arenaController.setAreSoundsSilenced(true)
         when:
             arenaController.changeOnPacmanEatFixedEdibleAt(pos)
         then:
@@ -244,6 +257,7 @@ class ArenaControllerTest extends Specification {
             def powerPelletObservable = Mock(PowerPellet.class)
             def tile = arena.getGameGrid().get(pos.getY() - 1).get(pos.getX())
             tile.put(powerPelletObservable)
+            arenaController.setAreSoundsSilenced(true)
         when:
             arenaController.changeOnPacmanEatFixedEdibleAt(pos)
         then:
@@ -257,6 +271,7 @@ class ArenaControllerTest extends Specification {
             def tile = arena.getGameGrid().get(pos.getY() - 1).get(pos.getX())
             def previousScore = arena.getScore()
             tile.put(fixedEdible)
+            arenaController.setAreSoundsSilenced(true)
         when:
             arenaController.changeOnPacmanEatFixedEdibleAt(new Position(5, 5))
         then:
@@ -267,6 +282,7 @@ class ArenaControllerTest extends Specification {
         given:
             def noOfLevels = arena.getLevels().size()
             arenaController.setCurrentLevel(noOfLevels)
+            arenaController.setAreSoundsSilenced(true)
         when:
             arenaController.switchToNextLevel()
         then:
@@ -284,6 +300,7 @@ class ArenaControllerTest extends Specification {
             def ghost = new Pinky(new Position(4, 1), arena)
             ghost.setCurrentStateTo(new FrightenedState(ghost))
             arena.getRegularGhostsList().add(ghost)
+            arenaController.setAreSoundsSilenced(true)
         when:
             arenaController.checkConditionsToPauseLevelClock()
         then:

@@ -28,7 +28,7 @@ class PacmanEatingTest extends Specification {
         when:
             pacAnimation.step()
         then:
-            pacAnimation.getControl() == (previous + 1000001)
+            pacAnimation.getControl() == (previous + 100000001)
     }
 
     def "We should be able to use the getter for duration in milliseconds"() {

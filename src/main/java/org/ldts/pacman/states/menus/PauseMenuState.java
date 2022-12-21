@@ -18,7 +18,7 @@ public class PauseMenuState extends State<PauseMenu> {
     }
 
     @Override
-    protected Controller<PauseMenu> getController() {
+    public Controller<PauseMenu> getController() {
         return new PauseMenuController(getModel());
     }
 }

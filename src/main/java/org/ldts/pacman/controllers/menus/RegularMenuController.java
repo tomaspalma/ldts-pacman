@@ -21,6 +21,7 @@ public class RegularMenuController extends Controller<Menu> {
         catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
             System.out.println(e);
         }
+
         music.play();
     }
 

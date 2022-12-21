@@ -18,7 +18,7 @@ public class RegularMenuState extends State<Menu> {
     }
 
     @Override
-    protected Controller<Menu> getController() {
+    public Controller<Menu> getController() {
         return new RegularMenuController(getModel());
     }
 }

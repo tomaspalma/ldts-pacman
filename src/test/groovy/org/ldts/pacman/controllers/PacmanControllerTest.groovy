@@ -26,6 +26,7 @@ class PacmanControllerTest extends Specification {
         arena = new Arena(20, 21, "maps/easy.txt")
         arenaController = new ArenaController(arena)
         pacController = new PacmanController(arenaController, arena)
+        arenaController.setAreSoundsSilenced(true)
         pacman = pacController.getModel().getPacman()
     }
 

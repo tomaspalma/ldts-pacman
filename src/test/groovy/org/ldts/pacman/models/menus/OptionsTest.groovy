@@ -19,17 +19,17 @@ class OptionsTest extends Specification {
 
     def "ExitOption"() {
         given:
-        def option = new ExitOption("quit")
+            def option = new ExitOption("quit")
 
         when:
-        option.select(game, state)
+            option.select(game, state)
         then:
-        1 * game.setState(null)
+            1 * game.setState(null)
 
         when:
-        def message = option.getMessage()
+            def message = option.getMessage()
         then:
-        message == "quit"
+            message == "quit"
     }
 
     def "GoToMainMenuOption"() {
@@ -37,7 +37,7 @@ class OptionsTest extends Specification {
         def option = new GoToMainMenuOption("main menu")
 
         when:
-        option.select(game, state)
+            option.select(game, state)
         then:
         1 * game.setState(_)
 
@@ -49,31 +49,31 @@ class OptionsTest extends Specification {
 
     def "PlayOption"() {
         given:
-        def option = new PlayOption("play")
+            def option = new PlayOption("play")
 
         when:
-        option.select(game, state)
+            option.select(game, state)
         then:
-        1 * game.setState(_)
+            1 * game.setState(_)
 
         when:
-        def message = option.getMessage()
+            def message = option.getMessage()
         then:
-        message == "play"
+            message == "play"
     }
 
     def "ResumeOption"() {
         given:
-        def option = new ResumeOption("resume")
+            def option = new ResumeOption("resume")
 
         when:
-        option.select(game, state)
+            option.select(game, state)
         then:
-        1 * game.setState(state)
+            1 * game.setState(state)
 
         when:
-        def message = option.getMessage()
+            def message = option.getMessage()
         then:
-        message == "resume"
+            message == "resume"
     }
 }

@@ -99,8 +99,11 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
 
         getModel().getLevels().get(currentLevel).step();
 
-        if (getModel().getPacman().getRemainingLives() == 0)
-            game.setState(new RegularMenuState(new GameOverMenu("loss")));
+        if (getModel().getPacman().getRemainingLives() == 0) {
+            RegularMenuState newState = new RegularMenuState(new GameOverMenu("loss"));
+            newState.getRealController().setAreSoundsSilenced(this.areSoundsSilenced);
+            game.setState(newState);
+        }
 
         switch (action) {
             case EXIT:

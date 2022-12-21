@@ -25,6 +25,7 @@ class RegularGhostControllerTest extends Specification{
     def setup() {
         arena = new Arena(20, 21, "maps/testmap.txt")
         arenaController = new ArenaController(arena)
+        arenaController.setAreSoundsSilenced(true)
         regularGhostController = new RegularGhostController(arenaController, arena)
     }
 

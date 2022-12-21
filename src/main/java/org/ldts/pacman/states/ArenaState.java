@@ -17,7 +17,7 @@ public class ArenaState extends State<Arena> {
     }
 
     @Override
-    protected Controller<Arena> getController() {
+    public Controller<Arena> getController() {
         return new ArenaController(getModel());
     }
 
