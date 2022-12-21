@@ -31,15 +31,10 @@ public class RegularGhostController extends Controller<Arena> {
     @Override
     public void step(Game game, GameActions.ControlActions action, long time) throws IOException, InterruptedException {
         for(RegularGhost regularGhost: regularGhostsToControl) {
-            /*if(regularGhost instanceof Clyde) {
-                System.out.println(regularGhost.getCurrentState());
-                System.out.println(regularGhost.getPreviousState());
-            }*/
-
             if(stateChangedIn(regularGhost))
                 regularGhost.getCurrentState().applyChangesToGhost();
 
-            if(numberOfSteps >= 1.3) {
+            if(numberOfSteps >= 1.1) {
                 moveGhost(regularGhost, regularGhost.getCurrentState().getNextPosition());
                 numberOfSteps = 0;
             } else {
@@ -50,7 +45,6 @@ public class RegularGhostController extends Controller<Arena> {
 
     private void reviveDeadGhost(RegularGhost regularGhost) {
         GhostState currentGhostState = regularGhost.getCurrentState();
-        GhostState previousGhostState = regularGhost.getPreviousState();
 
         boolean isGhostDead = currentGhostState instanceof DeadState;
 
@@ -62,6 +56,24 @@ public class RegularGhostController extends Controller<Arena> {
 
     private boolean stateChangedIn(Ghost ghost) {
         return !ghost.getCurrentState().getClass().equals(ghost.getPreviousState().getClass());
+    }
+
+    public void resetGhostPositions() {
+        Position newGhostPosition = null;
+        for(RegularGhost ghost: getModel().getRegularGhostsList()) {
+            if(ghost instanceof Blinky) {
+                newGhostPosition = getModel().getGhostHouse().getExitPosition();
+            } else {
+                newGhostPosition = getModel().getGhostHouse().getAvailablePosition();
+
+                getModel().getGhostHouse().getGhostHolder().add(ghost);
+                ghost.setCurrentStateTo(new GhostHouseState(ghost));
+                ghost.setPreviousStateTo(new GhostHouseState(ghost));
+            }
+
+            ghost.setPosition(newGhostPosition);
+            ghost.switchTile(newGhostPosition);
+        }
     }
 
     public void killGhost(Ghost ghost) {

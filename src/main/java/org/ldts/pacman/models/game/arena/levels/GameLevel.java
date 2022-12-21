@@ -72,6 +72,22 @@ public class GameLevel {
         return duringStateMachine;
     }
 
+    public Clock getClock() {
+        return clock;
+    }
+
+    public void setOtherStartSequencesRemaining(boolean otherStartSequencesRemaining) {
+        this.otherStartSequencesRemaining = otherStartSequencesRemaining;
+    }
+
+    public void setOtherDuringSequencesRemaining(boolean otherDuringSequencesRemaining) {
+        this.otherDuringSequencesRemaining = otherDuringSequencesRemaining;
+    }
+
+    public void setStartStateMachineCounter(int startStateMachineCounter) {
+        this.startStateMachineCounter = startStateMachineCounter;
+    }
+
     public void step() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         this.clock.step();
 
@@ -112,21 +128,6 @@ public class GameLevel {
         }
     }
 
-    public Clock getClock() {
-        return clock;
-    }
-
-    public void setOtherStartSequencesRemaining(boolean otherStartSequencesRemaining) {
-        this.otherStartSequencesRemaining = otherStartSequencesRemaining;
-    }
-
-    public void setOtherDuringSequencesRemaining(boolean otherDuringSequencesRemaining) {
-        this.otherDuringSequencesRemaining = otherDuringSequencesRemaining;
-    }
-
-    public void setStartStateMachineCounter(int startStateMachineCounter) {
-        this.startStateMachineCounter = startStateMachineCounter;
-    }
 
     public void setDuringStateMachineCounter(int duringStateMachineCounter) {
         this.duringStateMachineCounter = duringStateMachineCounter;

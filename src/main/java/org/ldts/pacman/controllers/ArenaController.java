@@ -128,8 +128,12 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
     private void switchToNextLevel() {
         if(this.currentLevel != getModel().getLevels().size() - 1)
             this.currentLevel = (this.currentLevel + 1) % getModel().getLevels().size();
+
         this.restoreFixedEdibles();
         getModel().getLevels().get(0).transformItselfIntoAnotherLevel();
+        getModel().getPacman().setPosition(getModel().getPacman().getStartPosition());
+
+        regularGhostController.resetGhostPositions();
     }
 
     private void checkConditionsToPauseLevelClock() {
