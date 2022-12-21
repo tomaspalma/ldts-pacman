@@ -30,6 +30,6 @@ public class PacmanEatingAnimation extends PacmanAnimation {
         else
             this.pacman.openMouth();
 
-        control += 1000001;
+        control += 100000001;
     }
 }

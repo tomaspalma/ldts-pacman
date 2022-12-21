@@ -46,11 +46,11 @@ public abstract class RegularGhost extends Ghost implements EatenPowerPelletObse
                 synchronized (noOfTimesConsequentlyEaten) {
                     noOfTimesConsequentlyEaten.getAndDecrement();
                     if(noOfTimesConsequentlyEaten.intValue() == 0) {
+                        this.color = this.originalColor;
                         GhostState newState = (this.previousState instanceof GhostHouseState) ? new GhostHouseState(this) : new ChasingState(this);
                         this.currentState.transitionToState(newState);
                     }
                 }
-                this.color = this.originalColor;
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }

@@ -128,6 +128,7 @@ public class PacmanController extends Controller<Arena> {
         }
 
         if (collidedWithGhost) {
+            System.out.println(parentController.getArenaTileAt(pacmanPosition).getGhost().getCurrentState());
             this.pacman.notifyObserversItCollidedWithGhostAt(pacmanPosition);
         }
     }
