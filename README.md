@@ -49,7 +49,14 @@ Yes, the menus are not very visually appealing.
 
 ### Gameplay Demo
 
-![](https://cdn.discordapp.com/attachments/1019715937009672223/1055114255474626710/2022-12-21-13-24-31.gif)
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055171205788872834/2022-12-21-13-31-04_1.gif)
+
+There is a slight pause in the middle but that's because we're trying to show that, after some time, the ghosts go to
+scatter mode and each other will start to go to their respective corners.
+
+# Features
+
+# Ghost behaviour
 
 **There are different kinds of strategies:**
 
