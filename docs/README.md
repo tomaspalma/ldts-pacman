@@ -93,9 +93,7 @@ The arena viewer, controller and model are the main classes of each of its MVC c
 
 ***Model***
 
-Movable entities
-
-Ghost strategies and states
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055528348635365456/pacman1.drawio.png)
 
 ***Controllers***
 
