@@ -4,6 +4,8 @@ import org.ldts.pacman.models.game.Position
 import org.ldts.pacman.models.game.Vector
 import spock.lang.Specification
 
+import java.awt.image.AreaAveragingScaleFilter
+
 class PositionTest extends Specification {
     private def pos
 
@@ -28,7 +30,10 @@ class PositionTest extends Specification {
     }
 
     def "We should correctly receive the distance between two positions"() {
-
+        given:
+            def expected = Math.sqrt(Math.pow(4, 2) + Math.pow(3, 2))
+        expect:
+            pos.getDistanceTo(new Position(11, 12)) == expected
     }
 
     def "We should be able to get the closest position to a certain position"() {
@@ -50,6 +55,42 @@ class PositionTest extends Specification {
     def "We should have an hash code function working correctly"() {
         expect:
             pos.hashCode() == Objects.hash(pos.getX(), pos.getY())
+    }
+
+    def "If the list is empty, the closest position is the position itself"() {
+        when:
+            def result = pos.getClosestPositionFrom(new ArrayList<>())
+        then:
+            result == pos
+    }
+
+    def "It should be able to correctly return the closest position from a given list"() {
+        given:
+            def pos1 = new Position(13, 11)
+            def pos2 = new Position(14, 14)
+            def list = new ArrayList<>(Arrays.asList(pos1, pos2))
+        expect:
+            pos.getClosestPositionFrom(list) == pos2
+    }
+
+    def "It should correctly determine if its equal to itself"() {
+        expect:
+            pos.equals(pos) == true
+    }
+
+    def "It should correctly determine if its equal to another position"() {
+        expect:
+            pos.equals(new Position(pos.getX(), pos.getY())) == true
+    }
+
+    def "It should know its not equal to another position if the position is null"() {
+        expect:
+            pos.equals(null) == false
+    }
+
+    def "It should know that if an object is not a Position it can't be equal to pos"() {
+        expect:
+            pos.equals(new Vector(5, 9)) == false
     }
 
 }

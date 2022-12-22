@@ -9,7 +9,6 @@ import java.lang.reflect.InvocationTargetException;
 // O controller vai processar e efetuar mudanças num modelo
 public abstract class Controller<T> {
     private final T model;
-    private int numberOfSteps;
     boolean areSoundsSilenced = false;
 
     protected Controller(T model) {

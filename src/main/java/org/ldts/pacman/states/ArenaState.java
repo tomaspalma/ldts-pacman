@@ -11,6 +11,10 @@ public class ArenaState extends State<Arena> {
         super(arena);
     }
 
+    public ArenaState(Arena arena, Viewer viewer, Controller controller) {
+        super(arena, viewer, controller);
+    }
+
     @Override
     protected Viewer<Arena> getViewer() {
         return new ArenaViewer(getModel());

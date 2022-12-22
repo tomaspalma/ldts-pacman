@@ -77,8 +77,6 @@ public class GameLevel {
     public void step() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         this.clock.step();
 
-        System.out.println(this.otherDuringSequencesRemaining);
-
         if(this.otherStartSequencesRemaining)
             this.stepStartSequence();
         else if(this.otherDuringSequencesRemaining)

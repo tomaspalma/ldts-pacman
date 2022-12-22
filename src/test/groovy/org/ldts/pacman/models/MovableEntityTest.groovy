@@ -41,4 +41,18 @@ class MovableEntityTest extends Specification {
             tile1.containsPacman() == false
             tile2.containsPacman() == true
     }
+
+    def "In swithc tgile it should be able to return teletransporter tile exit tile position"() {
+        given:
+            def tile1 = new TeletransporterTile(new Position(0, 1), arena)
+            def tile2 = new TeletransporterTile(new Position(1, 1), arena)
+            tile1.setExitTile(tile2)
+            arena.getGameGrid().get(0).set(0, tile1)
+            arena.getGameGrid().get(0).set(1, tile2)
+            tile1.put(movableEntity)
+        when:
+           def result = movableEntity.switchTile(new Position(0, 1))
+        then:
+            result == new Position(1, 1)
+    }
 }

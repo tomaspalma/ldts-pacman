@@ -35,5 +35,4 @@ class GhostHouseTest extends Specification {
         expect:
             ghostHouse.getAvailablePosition() == new Position(pos.getX() + 1, pos.getY() + 1)
     }
-
 }

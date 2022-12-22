@@ -60,7 +60,14 @@ class GhostDirectionTest extends Specification {
             ghostDirection.getPossiblePositionToMoveDown() == new Position(ghost.getPosition().getX(), ghost.getPosition().getY() + 1)
     }
 
-    def "BUG: Ghost direction is generating positions that are not valid to move to"() {
-
+    def "We need to be able to detect if we moved up"() {
+        given:
+            ghost.setPosition(new Position(5, 5))
+            ghost.setCurrentDirectionTo(new GhostDirectionDown(ghost))
+        when:
+            def result = ghost.getCurrentDirection().generateNextDirectionAfterChangeTo(new Position(5, 4))
+        then:
+            result instanceof GhostDirectionUp
     }
+
 }

@@ -12,7 +12,7 @@ public class DefaultStartSequenceLoader extends StartSequenceLoader {
     }
 
     @Override
-    public List<SpecificGhostStartSequence> populate(float multiplier) {
+    public List<SpecificGhostStartSequence> populate() {
         GhostState nextStartSequenceState = null;
         long durationInMillseconds;
         for(RegularGhost regularGhost: this.ghostsList) {

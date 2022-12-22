@@ -1,0 +1,1709 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+
+
+<h1>Ghost.java</h1>
+
+<table class="src">
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_1'/>
+1
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_1'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>package org.ldts.pacman.models.game.entities.ghost;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_2'/>
+2
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_2'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_3'/>
+3
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_3'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.googlecode.lanterna.TextColor;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_4'/>
+4
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_4'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import org.ldts.pacman.models.game.GameActions;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_5'/>
+5
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_5'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import org.ldts.pacman.models.game.Position;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_6'/>
+6
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_6'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import org.ldts.pacman.models.game.arena.Arena;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_7'/>
+7
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_7'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import org.ldts.pacman.models.game.entities.MovableEntity;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_8'/>
+8
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_8'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import org.ldts.pacman.models.game.entities.ghost.states.GhostHouseState;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_9'/>
+9
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_9'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import org.ldts.pacman.models.game.entities.ghost.states.GhostState;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_10'/>
+10
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_10'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import org.ldts.pacman.models.game.entities.ghost.strategies.chasing.ChaseStrategy;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_11'/>
+11
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_11'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import org.ldts.pacman.models.game.entities.ghost.strategies.dying.DyingStrategy;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_12'/>
+12
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_12'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import org.ldts.pacman.models.game.entities.ghost.strategies.frightened.FrightenedStrategy;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_13'/>
+13
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_13'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import org.ldts.pacman.models.game.entities.ghost.strategies.scattering.ScatterStrategy;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_14'/>
+14
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_14'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_15'/>
+15
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_15'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>public abstract class Ghost extends MovableEntity {</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_16'/>
+16
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_16'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    protected ChaseStrategy chaseStrategy;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_17'/>
+17
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_17'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    protected FrightenedStrategy frightenedStrategy;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_18'/>
+18
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_18'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    protected ScatterStrategy scatterStrategy;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_19'/>
+19
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_19'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    protected DyingStrategy dyingStrategy;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_20'/>
+20
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_20'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_21'/>
+21
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_21'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    protected GhostState originalState;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_22'/>
+22
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_22'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    protected GhostState previousState;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_23'/>
+23
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_23'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    protected GhostState currentState;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_24'/>
+24
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_24'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    protected TextColor.ANSI originalColor;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_25'/>
+25
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_25'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    protected long startSequenceInMilliseconds;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_26'/>
+26
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_26'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    protected GhostState nextStartState;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_27'/>
+27
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_27'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_28'/>
+28
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_28'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public GhostState getNextStartState() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_29'/>
+29
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_29'>1</a>
+<span>
+1. getNextStartState : replaced return value with null for org/ldts/pacman/models/game/entities/ghost/Ghost::getNextStartState &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return nextStartState;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_30'/>
+30
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_30'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_31'/>
+31
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_31'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_32'/>
+32
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_32'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public GhostState getPreviousState() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_33'/>
+33
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_33'>1</a>
+<span>
+1. getPreviousState : replaced return value with null for org/ldts/pacman/models/game/entities/ghost/Ghost::getPreviousState &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return previousState;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_34'/>
+34
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_34'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_35'/>
+35
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_35'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_36'/>
+36
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_36'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public GhostState getOriginalState() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_37'/>
+37
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_37'>1</a>
+<span>
+1. getOriginalState : replaced return value with null for org/ldts/pacman/models/game/entities/ghost/Ghost::getOriginalState &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return originalState;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_38'/>
+38
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_38'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_39'/>
+39
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_39'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_40'/>
+40
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_40'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public void setOriginalState(GhostState originalState) {</span></pre></td></tr>
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_41'/>
+41
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_41'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class=''>        this.originalState = originalState;</span></pre></td></tr>
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_42'/>
+42
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_42'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_43'/>
+43
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_43'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_44'/>
+44
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_44'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public long getStartSequenceInMilliseconds() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_45'/>
+45
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_45'>1</a>
+<span>
+1. getStartSequenceInMilliseconds : replaced long return with 0 for org/ldts/pacman/models/game/entities/ghost/Ghost::getStartSequenceInMilliseconds &rarr; SURVIVED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>        return this.startSequenceInMilliseconds;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_46'/>
+46
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_46'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_47'/>
+47
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_47'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_48'/>
+48
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_48'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public ChaseStrategy getChaseStrategy() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_49'/>
+49
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_49'>1</a>
+<span>
+1. getChaseStrategy : replaced return value with null for org/ldts/pacman/models/game/entities/ghost/Ghost::getChaseStrategy &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return chaseStrategy;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_50'/>
+50
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_50'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_51'/>
+51
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_51'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_52'/>
+52
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_52'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public FrightenedStrategy getFrightenedStrategy() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_53'/>
+53
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_53'>1</a>
+<span>
+1. getFrightenedStrategy : replaced return value with null for org/ldts/pacman/models/game/entities/ghost/Ghost::getFrightenedStrategy &rarr; SURVIVED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>        return frightenedStrategy;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_54'/>
+54
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_54'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_55'/>
+55
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_55'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_56'/>
+56
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_56'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public DyingStrategy getDyingStrategy() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_57'/>
+57
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_57'>1</a>
+<span>
+1. getDyingStrategy : replaced return value with null for org/ldts/pacman/models/game/entities/ghost/Ghost::getDyingStrategy &rarr; SURVIVED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>        return dyingStrategy;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_58'/>
+58
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_58'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_59'/>
+59
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_59'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_60'/>
+60
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_60'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public ScatterStrategy getScatterStrategy() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_61'/>
+61
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_61'>1</a>
+<span>
+1. getScatterStrategy : replaced return value with null for org/ldts/pacman/models/game/entities/ghost/Ghost::getScatterStrategy &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return scatterStrategy;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_62'/>
+62
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_62'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_63'/>
+63
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_63'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_64'/>
+64
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_64'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public void setPreviousStateTo(GhostState state) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_65'/>
+65
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_65'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>       this.previousState = state;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_66'/>
+66
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_66'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_67'/>
+67
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_67'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_68'/>
+68
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_68'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public void setCurrentStateTo(GhostState state) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_69'/>
+69
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_69'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.currentState = state;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_70'/>
+70
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_70'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_71'/>
+71
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_71'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_72'/>
+72
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_72'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public GhostState getCurrentState() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_73'/>
+73
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_73'>1</a>
+<span>
+1. getCurrentState : replaced return value with null for org/ldts/pacman/models/game/entities/ghost/Ghost::getCurrentState &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return currentState;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_74'/>
+74
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_74'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_75'/>
+75
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_75'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_76'/>
+76
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_76'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public abstract void die();</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_77'/>
+77
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_77'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_78'/>
+78
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_78'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public boolean isOnGhostHouseState() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_79'/>
+79
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_79'>2</a>
+<span>
+1. isOnGhostHouseState : replaced boolean return with false for org/ldts/pacman/models/game/entities/ghost/Ghost::isOnGhostHouseState &rarr; KILLED<br/>
+2. isOnGhostHouseState : replaced boolean return with true for org/ldts/pacman/models/game/entities/ghost/Ghost::isOnGhostHouseState &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return this.currentState instanceof GhostHouseState;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_80'/>
+80
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_80'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_81'/>
+81
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_81'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_82'/>
+82
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_82'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public abstract GameActions.GhostCollisionWithPacman getCollisionWithPacmanResult();</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_83'/>
+83
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_83'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    </span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_84'/>
+84
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_84'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    protected Ghost(Position position, Arena arena) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_85'/>
+85
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_85'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        super(position, arena);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_86'/>
+86
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_86'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_87'/>
+87
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_87'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_88'/>
+88
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_88'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public TextColor.ANSI getOriginalColor() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_89'/>
+89
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_89'>1</a>
+<span>
+1. getOriginalColor : replaced return value with null for org/ldts/pacman/models/game/entities/ghost/Ghost::getOriginalColor &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return this.originalColor;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_90'/>
+90
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_90'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_91'/>
+91
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_91'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_92'/>
+92
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_92'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public boolean willBeInInvalidPosition(Position newPosition) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_93'/>
+93
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_93'>2</a>
+<span>
+1. willBeInInvalidPosition : negated conditional &rarr; KILLED<br/>
+2. willBeInInvalidPosition : replaced boolean return with false for org/ldts/pacman/models/game/entities/ghost/Ghost::willBeInInvalidPosition &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if(this.arena.hasItsBoundsViolatedBy(newPosition)) return true;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_94'/>
+94
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_94'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_95'/>
+95
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_95'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        boolean willBeOnObstacle = this.arena.getArenaTileAt(newPosition).containsObstacle();</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_96'/>
+96
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_96'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        boolean willBeOnGate = this.arena.getArenaTileAt(newPosition).containsGate();</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_97'/>
+97
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_97'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_98'/>
+98
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_98'>3</a>
+<span>
+1. willBeInInvalidPosition : negated conditional &rarr; KILLED<br/>
+2. willBeInInvalidPosition : negated conditional &rarr; KILLED<br/>
+3. willBeInInvalidPosition : replaced boolean return with true for org/ldts/pacman/models/game/entities/ghost/Ghost::willBeInInvalidPosition &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return willBeOnObstacle || willBeOnGate;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_99'/>
+99
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_99'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@b7d2d51_100'/>
+100
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_100'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>}</span></pre></td></tr>
+
+
+
+<tr><td></td><td></td><td><h2>Mutations</h2></td></tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@b7d2d51_29'>29</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_29'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getNextStartState<br/><b>Killed by : </b>org.ldts.pacman.state.StateTest.[engine:spock]/[spec:org.ldts.pacman.state.StateTest]/[feature:$spock_feature_0_0]</span></span> replaced return value with null for org/ldts/pacman/models/game/entities/ghost/Ghost::getNextStartState &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@b7d2d51_33'>33</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_33'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getPreviousState<br/><b>Killed by : </b>org.ldts.pacman.controllers.RegularGhostControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.RegularGhostControllerTest]/[feature:$spock_feature_0_4]</span></span> replaced return value with null for org/ldts/pacman/models/game/entities/ghost/Ghost::getPreviousState &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@b7d2d51_37'>37</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_37'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getOriginalState<br/><b>Killed by : </b>org.ldts.pacman.controllers.RegularGhostControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.RegularGhostControllerTest]/[feature:$spock_feature_0_5]</span></span> replaced return value with null for org/ldts/pacman/models/game/entities/ghost/Ghost::getOriginalState &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@b7d2d51_45'>45</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_45'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getStartSequenceInMilliseconds<br/><b>Killed by : </b>none</span></span> replaced long return with 0 for org/ldts/pacman/models/game/entities/ghost/Ghost::getStartSequenceInMilliseconds &rarr; SURVIVED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@b7d2d51_49'>49</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_49'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getChaseStrategy<br/><b>Killed by : </b>org.ldts.pacman.models.ClydeStratTest.[engine:spock]/[spec:org.ldts.pacman.models.ClydeStratTest]/[feature:$spock_feature_0_1]</span></span> replaced return value with null for org/ldts/pacman/models/game/entities/ghost/Ghost::getChaseStrategy &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@b7d2d51_53'>53</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_53'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getFrightenedStrategy<br/><b>Killed by : </b>none</span></span> replaced return value with null for org/ldts/pacman/models/game/entities/ghost/Ghost::getFrightenedStrategy &rarr; SURVIVED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@b7d2d51_57'>57</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_57'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getDyingStrategy<br/><b>Killed by : </b>none</span></span> replaced return value with null for org/ldts/pacman/models/game/entities/ghost/Ghost::getDyingStrategy &rarr; SURVIVED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@b7d2d51_61'>61</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_61'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getScatterStrategy<br/><b>Killed by : </b>org.ldts.pacman.controllers.RegularGhostControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.RegularGhostControllerTest]/[feature:$spock_feature_0_1]</span></span> replaced return value with null for org/ldts/pacman/models/game/entities/ghost/Ghost::getScatterStrategy &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@b7d2d51_73'>73</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_73'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getCurrentState<br/><b>Killed by : </b>org.ldts.pacman.models.RegularGhostTest.[engine:spock]/[spec:org.ldts.pacman.models.RegularGhostTest]/[feature:$spock_feature_0_4]</span></span> replaced return value with null for org/ldts/pacman/models/game/entities/ghost/Ghost::getCurrentState &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@b7d2d51_79'>79</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_79'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>isOnGhostHouseState<br/><b>Killed by : </b>org.ldts.pacman.models.RegularGhostTest.[engine:spock]/[spec:org.ldts.pacman.models.RegularGhostTest]/[feature:$spock_feature_0_7]</span></span> replaced boolean return with false for org/ldts/pacman/models/game/entities/ghost/Ghost::isOnGhostHouseState &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>isOnGhostHouseState<br/><b>Killed by : </b>org.ldts.pacman.models.RegularGhostTest.[engine:spock]/[spec:org.ldts.pacman.models.RegularGhostTest]/[feature:$spock_feature_0_11]</span></span> replaced boolean return with true for org/ldts/pacman/models/game/entities/ghost/Ghost::isOnGhostHouseState &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@b7d2d51_89'>89</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_89'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getOriginalColor<br/><b>Killed by : </b>org.ldts.pacman.models.RegularGhostTest.[engine:spock]/[spec:org.ldts.pacman.models.RegularGhostTest]/[feature:$spock_feature_0_8]</span></span> replaced return value with null for org/ldts/pacman/models/game/entities/ghost/Ghost::getOriginalColor &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@b7d2d51_93'>93</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_93'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>willBeInInvalidPosition<br/><b>Killed by : </b>org.ldts.pacman.models.RegularGhostTest.[engine:spock]/[spec:org.ldts.pacman.models.RegularGhostTest]/[feature:$spock_feature_0_9]</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>willBeInInvalidPosition<br/><b>Killed by : </b>org.ldts.pacman.models.RegularGhostTest.[engine:spock]/[spec:org.ldts.pacman.models.RegularGhostTest]/[feature:$spock_feature_0_9]</span></span> replaced boolean return with false for org/ldts/pacman/models/game/entities/ghost/Ghost::willBeInInvalidPosition &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@b7d2d51_98'>98</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@b7d2d51_98'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>willBeInInvalidPosition<br/><b>Killed by : </b>org.ldts.pacman.models.RegularGhostTest.[engine:spock]/[spec:org.ldts.pacman.models.RegularGhostTest]/[feature:$spock_feature_0_10]</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>willBeInInvalidPosition<br/><b>Killed by : </b>org.ldts.pacman.models.RegularGhostTest.[engine:spock]/[spec:org.ldts.pacman.models.RegularGhostTest]/[feature:$spock_feature_0_12]</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>willBeInInvalidPosition<br/><b>Killed by : </b>org.ldts.pacman.controllers.RegularGhostControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.RegularGhostControllerTest]/[feature:$spock_feature_0_1]</span></span> replaced boolean return with true for org/ldts/pacman/models/game/entities/ghost/Ghost::willBeInInvalidPosition &rarr; KILLED</p> 
+</td>
+</tr>
+
+</table>
+
+
+<h2>Active mutators</h2>
+<ul>
+<li class='mutator'>CONDITIONALS_BOUNDARY</li>
+<li class='mutator'>EMPTY_RETURNS</li>
+<li class='mutator'>FALSE_RETURNS</li>
+<li class='mutator'>INCREMENTS</li>
+<li class='mutator'>INVERT_NEGS</li>
+<li class='mutator'>MATH</li>
+<li class='mutator'>NEGATE_CONDITIONALS</li>
+<li class='mutator'>NULL_RETURNS</li>
+<li class='mutator'>PRIMITIVE_RETURNS</li>
+<li class='mutator'>TRUE_RETURNS</li>
+<li class='mutator'>VOID_METHOD_CALLS</li>
+
+</ul>
+
+<h2>Tests examined</h2>
+<ul>
+<li>org.ldts.pacman.models.arenamaploaders.FileMapArenaLoaderTest.[engine:spock]/[spec:org.ldts.pacman.models.arenamaploaders.FileMapArenaLoaderTest]/[feature:$spock_feature_0_4] (0 ms)</li><li>org.ldts.pacman.controllers.ArenaControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.ArenaControllerTest]/[feature:$spock_feature_0_10] (1317 ms)</li><li>org.ldts.pacman.controllers.RegularGhostControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.RegularGhostControllerTest]/[feature:$spock_feature_0_6] (79 ms)</li><li>org.ldts.pacman.models.PacmanTest.[engine:spock]/[spec:org.ldts.pacman.models.PacmanTest]/[feature:$spock_feature_0_8] (2 ms)</li><li>org.ldts.pacman.controllers.ArenaControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.ArenaControllerTest]/[feature:$spock_feature_0_18] (97 ms)</li><li>org.ldts.pacman.controllers.ArenaControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.ArenaControllerTest]/[feature:$spock_feature_0_14] (157 ms)</li><li>org.ldts.pacman.models.PacmanTest.[engine:spock]/[spec:org.ldts.pacman.models.PacmanTest]/[feature:$spock_feature_0_11] (5 ms)</li><li>org.ldts.pacman.models.PacmanTest.[engine:spock]/[spec:org.ldts.pacman.models.PacmanTest]/[feature:$spock_feature_0_15] (1 ms)</li><li>org.ldts.pacman.models.RegularGhostTest.[engine:spock]/[spec:org.ldts.pacman.models.RegularGhostTest]/[feature:$spock_feature_0_12] (2 ms)</li><li>org.ldts.pacman.models.PacmanTest.[engine:spock]/[spec:org.ldts.pacman.models.PacmanTest]/[feature:$spock_feature_0_4] (1 ms)</li><li>org.ldts.pacman.controllers.RegularGhostControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.RegularGhostControllerTest]/[feature:$spock_feature_0_2] (64 ms)</li><li>org.ldts.pacman.models.TileTest.[engine:spock]/[spec:org.ldts.pacman.models.TileTest]/[feature:$spock_feature_0_6] (1 ms)</li><li>org.ldts.pacman.models.PacmanDirectionTest.[engine:spock]/[spec:org.ldts.pacman.models.PacmanDirectionTest]/[feature:$spock_feature_0_3] (1 ms)</li><li>org.ldts.pacman.models.PacmanTest.[engine:spock]/[spec:org.ldts.pacman.models.PacmanTest]/[feature:$spock_feature_0_0] (1 ms)</li><li>org.ldts.pacman.models.TileTest.[engine:spock]/[spec:org.ldts.pacman.models.TileTest]/[feature:$spock_feature_0_2] (5 ms)</li><li>org.ldts.pacman.models.ArenaTest.[engine:spock]/[spec:org.ldts.pacman.models.ArenaTest]/[feature:$spock_feature_0_1] (1 ms)</li><li>org.ldts.pacman.models.RegularGhostTest.[engine:spock]/[spec:org.ldts.pacman.models.RegularGhostTest]/[feature:$spock_feature_0_0] (2 ms)</li><li>org.ldts.pacman.models.ClydeStratTest.[engine:spock]/[spec:org.ldts.pacman.models.ClydeStratTest]/[feature:$spock_feature_0_1] (0 ms)</li><li>org.ldts.pacman.models.RegularGhostTest.[engine:spock]/[spec:org.ldts.pacman.models.RegularGhostTest]/[feature:$spock_feature_0_4] (1 ms)</li><li>org.ldts.pacman.controllers.ArenaControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.ArenaControllerTest]/[feature:$spock_feature_0_8] (126 ms)</li><li>org.ldts.pacman.models.RegularGhostTest.[engine:spock]/[spec:org.ldts.pacman.models.RegularGhostTest]/[feature:$spock_feature_0_8] (2 ms)</li><li>org.ldts.pacman.controllers.ArenaControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.ArenaControllerTest]/[feature:$spock_feature_0_4] (99 ms)</li><li>org.ldts.pacman.controllers.ArenaControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.ArenaControllerTest]/[feature:$spock_feature_0_0] (680 ms)</li><li>org.ldts.pacman.models.GhostDirectionTest.[engine:spock]/[spec:org.ldts.pacman.models.GhostDirectionTest]/[feature:$spock_feature_0_3] (1 ms)</li><li>org.ldts.pacman.controllers.PacmanControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.PacmanControllerTest]/[feature:$spock_feature_0_5] (113 ms)</li><li>org.ldts.pacman.controllers.PacmanControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.PacmanControllerTest]/[feature:$spock_feature_0_1] (61 ms)</li><li>org.ldts.pacman.models.arenamaploaders.FileMapArenaLoaderTest.[engine:spock]/[spec:org.ldts.pacman.models.arenamaploaders.FileMapArenaLoaderTest]/[feature:$spock_feature_0_0] (6 ms)</li><li>org.ldts.pacman.models.MovableEntityTest.[engine:spock]/[spec:org.ldts.pacman.models.MovableEntityTest]/[feature:$spock_feature_0_1] (5 ms)</li><li>org.ldts.pacman.models.arenamaploaders.FileMapArenaLoaderTest.[engine:spock]/[spec:org.ldts.pacman.models.arenamaploaders.FileMapArenaLoaderTest]/[feature:$spock_feature_0_5] (2 ms)</li><li>org.ldts.pacman.models.arenamaploaders.FileMapArenaLoaderTest.[engine:spock]/[spec:org.ldts.pacman.models.arenamaploaders.FileMapArenaLoaderTest]/[feature:$spock_feature_0_1] (16 ms)</li><li>org.ldts.pacman.controllers.RegularGhostControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.RegularGhostControllerTest]/[feature:$spock_feature_0_9] (66 ms)</li><li>org.ldts.pacman.models.PacmanTest.[engine:spock]/[spec:org.ldts.pacman.models.PacmanTest]/[feature:$spock_feature_0_7] (1 ms)</li><li>org.ldts.pacman.controllers.ArenaControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.ArenaControllerTest]/[feature:$spock_feature_0_17] (105 ms)</li><li>org.ldts.pacman.controllers.ArenaControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.ArenaControllerTest]/[feature:$spock_feature_0_13] (189 ms)</li><li>org.ldts.pacman.models.PacmanTest.[engine:spock]/[spec:org.ldts.pacman.models.PacmanTest]/[feature:$spock_feature_0_12] (1 ms)</li><li>org.ldts.pacman.models.PacmanTest.[engine:spock]/[spec:org.ldts.pacman.models.PacmanTest]/[feature:$spock_feature_0_16] (0 ms)</li><li>org.ldts.pacman.models.TileTest.[engine:spock]/[spec:org.ldts.pacman.models.TileTest]/[feature:$spock_feature_0_5] (2 ms)</li><li>org.ldts.pacman.controllers.RegularGhostControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.RegularGhostControllerTest]/[feature:$spock_feature_0_5] (124 ms)</li><li>org.ldts.pacman.models.PacmanTest.[engine:spock]/[spec:org.ldts.pacman.models.PacmanTest]/[feature:$spock_feature_0_3] (10 ms)</li><li>org.ldts.pacman.models.TileTest.[engine:spock]/[spec:org.ldts.pacman.models.TileTest]/[feature:$spock_feature_0_1] (4 ms)</li><li>org.ldts.pacman.controllers.RegularGhostControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.RegularGhostControllerTest]/[feature:$spock_feature_0_1] (82 ms)</li><li>org.ldts.pacman.controllers.RegularGhostControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.RegularGhostControllerTest]/[feature:$spock_feature_0_10] (77 ms)</li><li>org.ldts.pacman.models.RegularGhostTest.[engine:spock]/[spec:org.ldts.pacman.models.RegularGhostTest]/[feature:$spock_feature_0_11] (2 ms)</li><li>org.ldts.pacman.models.ArenaTest.[engine:spock]/[spec:org.ldts.pacman.models.ArenaTest]/[feature:$spock_feature_0_0] (2 ms)</li><li>org.ldts.pacman.models.ClydeStratTest.[engine:spock]/[spec:org.ldts.pacman.models.ClydeStratTest]/[feature:$spock_feature_0_0] (4 ms)</li><li>org.ldts.pacman.models.PacmanDirectionTest.[engine:spock]/[spec:org.ldts.pacman.models.PacmanDirectionTest]/[feature:$spock_feature_0_0] (1 ms)</li><li>org.ldts.pacman.models.RegularGhostTest.[engine:spock]/[spec:org.ldts.pacman.models.RegularGhostTest]/[feature:$spock_feature_0_3] (1 ms)</li><li>org.ldts.pacman.models.RegularGhostTest.[engine:spock]/[spec:org.ldts.pacman.models.RegularGhostTest]/[feature:$spock_feature_0_7] (2 ms)</li><li>org.ldts.pacman.controllers.ArenaControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.ArenaControllerTest]/[feature:$spock_feature_0_9] (1143 ms)</li><li>org.ldts.pacman.controllers.ArenaControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.ArenaControllerTest]/[feature:$spock_feature_0_5] (119 ms)</li><li>org.ldts.pacman.models.GhostDirectionTest.[engine:spock]/[spec:org.ldts.pacman.models.GhostDirectionTest]/[feature:$spock_feature_0_0] (0 ms)</li><li>org.ldts.pacman.models.GhostDirectionTest.[engine:spock]/[spec:org.ldts.pacman.models.GhostDirectionTest]/[feature:$spock_feature_0_4] (1 ms)</li><li>org.ldts.pacman.controllers.ArenaControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.ArenaControllerTest]/[feature:$spock_feature_0_1] (65 ms)</li><li>org.ldts.pacman.viewers.ArenaViewerTest.[engine:spock]/[spec:org.ldts.pacman.viewers.ArenaViewerTest]/[feature:$spock_feature_0_0] (202 ms)</li><li>org.ldts.pacman.models.menus.OptionsTest.[engine:spock]/[spec:org.ldts.pacman.models.menus.OptionsTest]/[feature:$spock_feature_0_2] (426 ms)</li><li>org.ldts.pacman.controllers.PacmanControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.PacmanControllerTest]/[feature:$spock_feature_0_6] (71 ms)</li><li>org.ldts.pacman.controllers.PacmanControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.PacmanControllerTest]/[feature:$spock_feature_0_2] (91 ms)</li><li>org.ldts.pacman.controllers.RegularGhostControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.RegularGhostControllerTest]/[feature:$spock_feature_0_11] (94 ms)</li><li>org.ldts.pacman.viewers.EntityViewerTest.[engine:spock]/[spec:org.ldts.pacman.viewers.EntityViewerTest]/[feature:$spock_feature_0_0] (1 ms)</li><li>org.ldts.pacman.models.arenamaploaders.FileMapArenaLoaderTest.[engine:spock]/[spec:org.ldts.pacman.models.arenamaploaders.FileMapArenaLoaderTest]/[feature:$spock_feature_0_2] (49 ms)</li><li>org.ldts.pacman.state.StateTest.[engine:spock]/[spec:org.ldts.pacman.state.StateTest]/[feature:$spock_feature_0_0] (322 ms)</li><li>org.ldts.pacman.controllers.RegularGhostControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.RegularGhostControllerTest]/[feature:$spock_feature_0_8] (62 ms)</li><li>org.ldts.pacman.models.PacmanTest.[engine:spock]/[spec:org.ldts.pacman.models.PacmanTest]/[feature:$spock_feature_0_6] (2 ms)</li><li>org.ldts.pacman.controllers.ArenaControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.ArenaControllerTest]/[feature:$spock_feature_0_16] (76 ms)</li><li>org.ldts.pacman.controllers.ArenaControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.ArenaControllerTest]/[feature:$spock_feature_0_12] (116 ms)</li><li>org.ldts.pacman.models.PacmanTest.[engine:spock]/[spec:org.ldts.pacman.models.PacmanTest]/[feature:$spock_feature_0_13] (7 ms)</li><li>org.ldts.pacman.models.TileTest.[engine:spock]/[spec:org.ldts.pacman.models.TileTest]/[feature:$spock_feature_0_4] (9 ms)</li><li>org.ldts.pacman.controllers.RegularGhostControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.RegularGhostControllerTest]/[feature:$spock_feature_0_4] (58 ms)</li><li>org.ldts.pacman.models.PacmanTest.[engine:spock]/[spec:org.ldts.pacman.models.PacmanTest]/[feature:$spock_feature_0_2] (1 ms)</li><li>org.ldts.pacman.models.TileTest.[engine:spock]/[spec:org.ldts.pacman.models.TileTest]/[feature:$spock_feature_0_0] (1 ms)</li><li>org.ldts.pacman.models.RegularGhostTest.[engine:spock]/[spec:org.ldts.pacman.models.RegularGhostTest]/[feature:$spock_feature_0_10] (3 ms)</li><li>org.ldts.pacman.controllers.RegularGhostControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.RegularGhostControllerTest]/[feature:$spock_feature_0_0] (280 ms)</li><li>org.ldts.pacman.models.PacmanDirectionTest.[engine:spock]/[spec:org.ldts.pacman.models.PacmanDirectionTest]/[feature:$spock_feature_0_1] (1 ms)</li><li>org.ldts.pacman.models.RegularGhostTest.[engine:spock]/[spec:org.ldts.pacman.models.RegularGhostTest]/[feature:$spock_feature_0_2] (1 ms)</li><li>org.ldts.pacman.models.RegularGhostTest.[engine:spock]/[spec:org.ldts.pacman.models.RegularGhostTest]/[feature:$spock_feature_0_6] (2 ms)</li><li>org.ldts.pacman.controllers.ArenaControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.ArenaControllerTest]/[feature:$spock_feature_0_6] (154 ms)</li><li>org.ldts.pacman.models.GhostDirectionTest.[engine:spock]/[spec:org.ldts.pacman.models.GhostDirectionTest]/[feature:$spock_feature_0_1] (1 ms)</li><li>org.ldts.pacman.controllers.PacmanControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.PacmanControllerTest]/[feature:$spock_feature_0_7] (55 ms)</li><li>org.ldts.pacman.controllers.ArenaControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.ArenaControllerTest]/[feature:$spock_feature_0_2] (67 ms)</li><li>org.ldts.pacman.models.GhostDirectionTest.[engine:spock]/[spec:org.ldts.pacman.models.GhostDirectionTest]/[feature:$spock_feature_0_5] (1 ms)</li><li>org.ldts.pacman.controllers.PacmanControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.PacmanControllerTest]/[feature:$spock_feature_0_3] (79 ms)</li><li>org.ldts.pacman.controllers.RegularGhostControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.RegularGhostControllerTest]/[feature:$spock_feature_0_12] (87 ms)</li><li>org.ldts.pacman.models.arenamaploaders.FileMapArenaLoaderTest.[engine:spock]/[spec:org.ldts.pacman.models.arenamaploaders.FileMapArenaLoaderTest]/[feature:$spock_feature_0_3] (1 ms)</li><li>org.ldts.pacman.controllers.RegularGhostControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.RegularGhostControllerTest]/[feature:$spock_feature_0_7] (95 ms)</li><li>org.ldts.pacman.controllers.ArenaControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.ArenaControllerTest]/[feature:$spock_feature_0_15] (75 ms)</li><li>org.ldts.pacman.models.PacmanTest.[engine:spock]/[spec:org.ldts.pacman.models.PacmanTest]/[feature:$spock_feature_0_9] (3 ms)</li><li>org.ldts.pacman.controllers.ArenaControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.ArenaControllerTest]/[feature:$spock_feature_0_11] (194 ms)</li><li>org.ldts.pacman.models.PacmanTest.[engine:spock]/[spec:org.ldts.pacman.models.PacmanTest]/[feature:$spock_feature_0_14] (2 ms)</li><li>org.ldts.pacman.controllers.RegularGhostControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.RegularGhostControllerTest]/[feature:$spock_feature_0_3] (80 ms)</li><li>org.ldts.pacman.models.PacmanTest.[engine:spock]/[spec:org.ldts.pacman.models.PacmanTest]/[feature:$spock_feature_0_5] (1 ms)</li><li>org.ldts.pacman.models.TileTest.[engine:spock]/[spec:org.ldts.pacman.models.TileTest]/[feature:$spock_feature_0_7] (2 ms)</li><li>org.ldts.pacman.models.PacmanTest.[engine:spock]/[spec:org.ldts.pacman.models.PacmanTest]/[feature:$spock_feature_0_10] (1 ms)</li><li>org.ldts.pacman.models.PacmanTest.[engine:spock]/[spec:org.ldts.pacman.models.PacmanTest]/[feature:$spock_feature_0_1] (30 ms)</li><li>org.ldts.pacman.models.TileTest.[engine:spock]/[spec:org.ldts.pacman.models.TileTest]/[feature:$spock_feature_0_3] (1 ms)</li><li>org.ldts.pacman.models.ArenaTest.[engine:spock]/[spec:org.ldts.pacman.models.ArenaTest]/[feature:$spock_feature_0_2] (1 ms)</li><li>org.ldts.pacman.models.PacmanDirectionTest.[engine:spock]/[spec:org.ldts.pacman.models.PacmanDirectionTest]/[feature:$spock_feature_0_2] (0 ms)</li><li>org.ldts.pacman.models.RegularGhostTest.[engine:spock]/[spec:org.ldts.pacman.models.RegularGhostTest]/[feature:$spock_feature_0_1] (1 ms)</li><li>org.ldts.pacman.models.RegularGhostTest.[engine:spock]/[spec:org.ldts.pacman.models.RegularGhostTest]/[feature:$spock_feature_0_5] (5 ms)</li><li>org.ldts.pacman.models.RegularGhostTest.[engine:spock]/[spec:org.ldts.pacman.models.RegularGhostTest]/[feature:$spock_feature_0_9] (1 ms)</li><li>org.ldts.pacman.controllers.ArenaControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.ArenaControllerTest]/[feature:$spock_feature_0_7] (49 ms)</li><li>org.ldts.pacman.controllers.PacmanControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.PacmanControllerTest]/[feature:$spock_feature_0_8] (60 ms)</li><li>org.ldts.pacman.controllers.ArenaControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.ArenaControllerTest]/[feature:$spock_feature_0_3] (171 ms)</li><li>org.ldts.pacman.controllers.PacmanControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.PacmanControllerTest]/[feature:$spock_feature_0_4] (74 ms)</li><li>org.ldts.pacman.models.GhostDirectionTest.[engine:spock]/[spec:org.ldts.pacman.models.GhostDirectionTest]/[feature:$spock_feature_0_2] (1 ms)</li><li>org.ldts.pacman.controllers.PacmanControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.PacmanControllerTest]/[feature:$spock_feature_0_0] (72 ms)</li><li>org.ldts.pacman.models.MovableEntityTest.[engine:spock]/[spec:org.ldts.pacman.models.MovableEntityTest]/[feature:$spock_feature_0_0] (1 ms)</li>
+</ul>
+
+<br/>
+
+Report generated by <a href='http://pitest.org'>PIT</a> 1.9.11
+
+</body>
+</html>

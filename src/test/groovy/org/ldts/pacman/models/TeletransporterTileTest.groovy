@@ -5,6 +5,7 @@ import org.ldts.pacman.models.game.arena.Arena
 import org.ldts.pacman.models.game.arena.grid.TeletransporterTile
 import org.ldts.pacman.models.game.entities.MovableEntity
 import org.ldts.pacman.models.game.entities.obstacles.Wall
+import org.ldts.pacman.models.game.entities.pacman.Pacman
 import spock.lang.Specification
 
 class TeletransporterTileTest extends Specification {
@@ -41,6 +42,17 @@ class TeletransporterTileTest extends Specification {
             tile.teletransportToExitTile(entity)
         then:
             position == new Position(1, 1)
+    }
+
+    def "When putting an entity into a tile it needs to teletransport it to the exit tile"() {
+        given:
+            def exittile = new TeletransporterTile(new Position(1, 1), arena)
+            tile.setExitTile(exittile)
+            def pacman = new Pacman(new Position(4, 4), arena)
+        when:
+            tile.put(pacman)
+        then:
+            pacman.getPosition() == exittile.getPosition()
     }
 
 }

@@ -14,7 +14,7 @@ public class DefaultDuringSequenceLoader extends DuringSequenceLoader {
     }
 
     @Override
-    public List<GhostDuringStateSequence> populate(float multiplier) {
+    public List<GhostDuringStateSequence> populate() {
         return new ArrayList<>(Arrays.asList(new GhostDuringStateSequence(ScatteringState.class, 4000),
                 new GhostDuringStateSequence(ChasingState.class, 10000)));
     }

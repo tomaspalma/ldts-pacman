@@ -1,5 +1,6 @@
 package org.ldts.pacman.models
 
+import org.ldts.pacman.models.game.Position
 import org.ldts.pacman.models.game.arena.Arena
 import spock.lang.Specification
 
@@ -49,6 +50,19 @@ class ArenaTest extends Specification {
         expect:
             arena.getGameGrid().size() == arena.getHeight() - 1
             arena.getGameGrid().get(0).size() == arena.getWidth()
+    }
+
+    def "We should be able to correctly get pacman start position"() {
+        expect:
+            arena.getStartPacmanPosition() == arena.getPacman().getStartPosition()
+    }
+
+    def "It should correctly determine for itself it its bounds are being violated"() {
+        expect:
+            arena.hasItsBoundsViolatedBy(new Position(-1, 4)) == true
+            arena.hasItsBoundsViolatedBy(new Position(arena.getWidth() + 5, 4)) == true
+            arena.hasItsBoundsViolatedBy(new Position(4, -1)) == true
+            arena.hasItsBoundsViolatedBy(new Position(9, arena.getHeight()+ 1)) == true
     }
 
     def "We should be able to get the correct index of a fixed edible when we try to get a fixed edible at a certain position"() {

@@ -5,6 +5,7 @@ import org.ldts.pacman.models.game.GameActions;
 import org.ldts.pacman.models.game.Position;
 import org.ldts.pacman.models.game.arena.Arena;
 import org.ldts.pacman.models.game.entities.ghost.*;
+import org.ldts.pacman.models.game.entities.ghost.directions.GhostDirection;
 import org.ldts.pacman.models.game.entities.ghost.states.*;
 
 import java.io.IOException;
@@ -77,7 +78,8 @@ public class RegularGhostController extends Controller<Arena> {
 
         Position realNewPosition = ghost.switchTile(newPosition);
 
-        ghost.setCurrentDirectionTo(ghost.getCurrentDirection().generateNextDirectionAfterChangeTo(realNewPosition));
+        GhostDirection currentGhostDirection = (GhostDirection) ghost.getCurrentDirection();
+        ghost.setCurrentDirectionTo(currentGhostDirection.generateNextDirectionAfterChangeTo(realNewPosition));
         ghost.setPosition(realNewPosition);
 
         this.reviveDeadGhost((RegularGhost) ghost);

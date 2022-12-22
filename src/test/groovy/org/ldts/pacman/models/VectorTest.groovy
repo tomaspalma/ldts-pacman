@@ -30,4 +30,25 @@ class VectorTest extends Specification {
         expect:
             vector.hashCode() == Objects.hash(vector.getX(), vector.getY())
     }
+
+    def "It should correctly determine if its equal to itself"() {
+        expect:
+            vector.equals(vector) == true
+    }
+
+    def "It should correctly determine if its equal to another position"() {
+        expect:
+            vector.equals(new Vector(vector.getX(), vector.getY())) == true
+    }
+
+    def "It should know its not equal to another position if the position is null"() {
+        expect:
+            vector.equals(null) == false
+    }
+
+    def "It should know that if an object is not a Position it can't be equal to pos"() {
+        expect:
+            vector.equals(new Vector(5, 9)) == false
+    }
+
 }

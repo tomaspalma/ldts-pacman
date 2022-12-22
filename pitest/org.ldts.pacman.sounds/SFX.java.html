@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+
+
+<h1>SFX.java</h1>
+
+<table class="src">
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@54a056e4_1'/>
+1
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@54a056e4_1'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>package org.ldts.pacman.sounds;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@54a056e4_2'/>
+2
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@54a056e4_2'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@54a056e4_3'/>
+3
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@54a056e4_3'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import javax.sound.sampled.*;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@54a056e4_4'/>
+4
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@54a056e4_4'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.io.IOException;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@54a056e4_5'/>
+5
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@54a056e4_5'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.net.URL;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@54a056e4_6'/>
+6
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@54a056e4_6'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@54a056e4_7'/>
+7
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@54a056e4_7'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>public abstract class SFX {</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@54a056e4_8'/>
+8
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@54a056e4_8'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    protected Clip sound;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@54a056e4_9'/>
+9
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@54a056e4_9'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@54a056e4_10'/>
+10
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@54a056e4_10'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    protected SFX(String soundFile) throws LineUnavailableException, UnsupportedAudioFileException, IOException {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@54a056e4_11'/>
+11
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@54a056e4_11'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        URL resource = getClass().getClassLoader().getResource(soundFile);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@54a056e4_12'/>
+12
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@54a056e4_12'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@54a056e4_13'/>
+13
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@54a056e4_13'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        assert resource != null;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@54a056e4_14'/>
+14
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@54a056e4_14'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(resource);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@54a056e4_15'/>
+15
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@54a056e4_15'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        sound = AudioSystem.getClip();</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@54a056e4_16'/>
+16
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@54a056e4_16'>1</a>
+<span>
+1. &#60;init&#62; : removed call to javax/sound/sampled/Clip::open &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        sound.open(audioInputStream);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@54a056e4_17'/>
+17
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@54a056e4_17'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        FloatControl gainControl = (FloatControl) sound.getControl(FloatControl.Type.MASTER_GAIN);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@54a056e4_18'/>
+18
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@54a056e4_18'>1</a>
+<span>
+1. &#60;init&#62; : removed call to javax/sound/sampled/FloatControl::setValue &rarr; SURVIVED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>        gainControl.setValue(-20.0f);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@54a056e4_19'/>
+19
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@54a056e4_19'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@54a056e4_20'/>
+20
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@54a056e4_20'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@54a056e4_21'/>
+21
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@54a056e4_21'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    protected SFX(Clip sound) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@54a056e4_22'/>
+22
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@54a056e4_22'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.sound = sound;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@54a056e4_23'/>
+23
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@54a056e4_23'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@54a056e4_24'/>
+24
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@54a056e4_24'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@54a056e4_25'/>
+25
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@54a056e4_25'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public abstract void play();</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@54a056e4_26'/>
+26
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@54a056e4_26'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@54a056e4_27'/>
+27
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@54a056e4_27'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public void stop() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@54a056e4_28'/>
+28
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@54a056e4_28'>1</a>
+<span>
+1. stop : removed call to javax/sound/sampled/Clip::stop &rarr; SURVIVED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>        sound.stop();</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@54a056e4_29'/>
+29
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@54a056e4_29'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@54a056e4_30'/>
+30
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@54a056e4_30'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>}</span></pre></td></tr>
+
+
+
+<tr><td></td><td></td><td><h2>Mutations</h2></td></tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@54a056e4_16'>16</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@54a056e4_16'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>org.ldts.pacman.controllers.MenuControllersTest.[engine:spock]/[spec:org.ldts.pacman.controllers.MenuControllersTest]/[feature:$spock_feature_0_0]</span></span> removed call to javax/sound/sampled/Clip::open &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@54a056e4_18'>18</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@54a056e4_18'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>none</span></span> removed call to javax/sound/sampled/FloatControl::setValue &rarr; SURVIVED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@54a056e4_28'>28</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@54a056e4_28'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>stop<br/><b>Killed by : </b>none</span></span> removed call to javax/sound/sampled/Clip::stop &rarr; SURVIVED</p> 
+</td>
+</tr>
+
+</table>
+
+
+<h2>Active mutators</h2>
+<ul>
+<li class='mutator'>CONDITIONALS_BOUNDARY</li>
+<li class='mutator'>EMPTY_RETURNS</li>
+<li class='mutator'>FALSE_RETURNS</li>
+<li class='mutator'>INCREMENTS</li>
+<li class='mutator'>INVERT_NEGS</li>
+<li class='mutator'>MATH</li>
+<li class='mutator'>NEGATE_CONDITIONALS</li>
+<li class='mutator'>NULL_RETURNS</li>
+<li class='mutator'>PRIMITIVE_RETURNS</li>
+<li class='mutator'>TRUE_RETURNS</li>
+<li class='mutator'>VOID_METHOD_CALLS</li>
+
+</ul>
+
+<h2>Tests examined</h2>
+<ul>
+<li>org.ldts.pacman.controllers.RegularGhostControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.RegularGhostControllerTest]/[feature:$spock_feature_0_11] (94 ms)</li><li>org.ldts.pacman.controllers.RegularGhostControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.RegularGhostControllerTest]/[feature:$spock_feature_0_12] (87 ms)</li><li>org.ldts.pacman.controllers.ArenaControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.ArenaControllerTest]/[feature:$spock_feature_0_10] (1317 ms)</li><li>org.ldts.pacman.controllers.RegularGhostControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.RegularGhostControllerTest]/[feature:$spock_feature_0_7] (95 ms)</li><li>org.ldts.pacman.controllers.RegularGhostControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.RegularGhostControllerTest]/[feature:$spock_feature_0_6] (79 ms)</li><li>org.ldts.pacman.controllers.RegularGhostControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.RegularGhostControllerTest]/[feature:$spock_feature_0_9] (66 ms)</li><li>org.ldts.pacman.state.StateTest.[engine:spock]/[spec:org.ldts.pacman.state.StateTest]/[feature:$spock_feature_0_0] (322 ms)</li><li>org.ldts.pacman.controllers.RegularGhostControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.RegularGhostControllerTest]/[feature:$spock_feature_0_8] (62 ms)</li><li>org.ldts.pacman.controllers.ArenaControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.ArenaControllerTest]/[feature:$spock_feature_0_16] (76 ms)</li><li>org.ldts.pacman.controllers.ArenaControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.ArenaControllerTest]/[feature:$spock_feature_0_15] (75 ms)</li><li>org.ldts.pacman.state.RegularMenuStateTest.[engine:spock]/[spec:org.ldts.pacman.state.RegularMenuStateTest]/[feature:$spock_feature_0_1] (176 ms)</li><li>org.ldts.pacman.state.RegularMenuStateTest.[engine:spock]/[spec:org.ldts.pacman.state.RegularMenuStateTest]/[feature:$spock_feature_0_0] (99 ms)</li><li>org.ldts.pacman.controllers.ArenaControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.ArenaControllerTest]/[feature:$spock_feature_0_18] (97 ms)</li><li>org.ldts.pacman.controllers.ArenaControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.ArenaControllerTest]/[feature:$spock_feature_0_17] (105 ms)</li><li>org.ldts.pacman.controllers.ArenaControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.ArenaControllerTest]/[feature:$spock_feature_0_12] (116 ms)</li><li>org.ldts.pacman.controllers.ArenaControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.ArenaControllerTest]/[feature:$spock_feature_0_11] (194 ms)</li><li>org.ldts.pacman.controllers.ArenaControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.ArenaControllerTest]/[feature:$spock_feature_0_14] (157 ms)</li><li>org.ldts.pacman.controllers.ArenaControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.ArenaControllerTest]/[feature:$spock_feature_0_13] (189 ms)</li><li>org.ldts.pacman.controllers.RegularGhostControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.RegularGhostControllerTest]/[feature:$spock_feature_0_3] (80 ms)</li><li>org.ldts.pacman.controllers.MenuControllersTest.[engine:spock]/[spec:org.ldts.pacman.controllers.MenuControllersTest]/[feature:$spock_feature_0_0] (49 ms)</li><li>org.ldts.pacman.controllers.RegularGhostControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.RegularGhostControllerTest]/[feature:$spock_feature_0_2] (64 ms)</li><li>org.ldts.pacman.controllers.RegularGhostControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.RegularGhostControllerTest]/[feature:$spock_feature_0_5] (124 ms)</li><li>org.ldts.pacman.controllers.RegularGhostControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.RegularGhostControllerTest]/[feature:$spock_feature_0_4] (58 ms)</li><li>org.ldts.pacman.controllers.RegularGhostControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.RegularGhostControllerTest]/[feature:$spock_feature_0_1] (82 ms)</li><li>org.ldts.pacman.controllers.RegularGhostControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.RegularGhostControllerTest]/[feature:$spock_feature_0_10] (77 ms)</li><li>org.ldts.pacman.controllers.RegularGhostControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.RegularGhostControllerTest]/[feature:$spock_feature_0_0] (280 ms)</li><li>org.ldts.pacman.controllers.ArenaControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.ArenaControllerTest]/[feature:$spock_feature_0_8] (126 ms)</li><li>org.ldts.pacman.controllers.ArenaControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.ArenaControllerTest]/[feature:$spock_feature_0_9] (1143 ms)</li><li>org.ldts.pacman.controllers.ArenaControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.ArenaControllerTest]/[feature:$spock_feature_0_6] (154 ms)</li><li>org.ldts.pacman.controllers.ArenaControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.ArenaControllerTest]/[feature:$spock_feature_0_7] (49 ms)</li><li>org.ldts.pacman.controllers.PacmanControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.PacmanControllerTest]/[feature:$spock_feature_0_7] (55 ms)</li><li>org.ldts.pacman.controllers.ArenaControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.ArenaControllerTest]/[feature:$spock_feature_0_4] (99 ms)</li><li>org.ldts.pacman.controllers.PacmanControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.PacmanControllerTest]/[feature:$spock_feature_0_8] (60 ms)</li><li>org.ldts.pacman.controllers.ArenaControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.ArenaControllerTest]/[feature:$spock_feature_0_5] (119 ms)</li><li>org.ldts.pacman.controllers.ArenaControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.ArenaControllerTest]/[feature:$spock_feature_0_2] (67 ms)</li><li>org.ldts.pacman.controllers.ArenaControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.ArenaControllerTest]/[feature:$spock_feature_0_3] (171 ms)</li><li>org.ldts.pacman.controllers.PacmanControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.PacmanControllerTest]/[feature:$spock_feature_0_3] (79 ms)</li><li>org.ldts.pacman.controllers.ArenaControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.ArenaControllerTest]/[feature:$spock_feature_0_0] (680 ms)</li><li>org.ldts.pacman.controllers.ArenaControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.ArenaControllerTest]/[feature:$spock_feature_0_1] (65 ms)</li><li>org.ldts.pacman.controllers.PacmanControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.PacmanControllerTest]/[feature:$spock_feature_0_4] (74 ms)</li><li>org.ldts.pacman.models.menus.OptionsTest.[engine:spock]/[spec:org.ldts.pacman.models.menus.OptionsTest]/[feature:$spock_feature_0_1] (136 ms)</li><li>org.ldts.pacman.controllers.PacmanControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.PacmanControllerTest]/[feature:$spock_feature_0_5] (113 ms)</li><li>org.ldts.pacman.models.menus.OptionsTest.[engine:spock]/[spec:org.ldts.pacman.models.menus.OptionsTest]/[feature:$spock_feature_0_2] (426 ms)</li><li>org.ldts.pacman.controllers.PacmanControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.PacmanControllerTest]/[feature:$spock_feature_0_6] (71 ms)</li><li>org.ldts.pacman.controllers.PacmanControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.PacmanControllerTest]/[feature:$spock_feature_0_0] (72 ms)</li><li>org.ldts.pacman.controllers.PacmanControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.PacmanControllerTest]/[feature:$spock_feature_0_1] (61 ms)</li><li>org.ldts.pacman.controllers.PacmanControllerTest.[engine:spock]/[spec:org.ldts.pacman.controllers.PacmanControllerTest]/[feature:$spock_feature_0_2] (91 ms)</li>
+</ul>
+
+<br/>
+
+Report generated by <a href='http://pitest.org'>PIT</a> 1.9.11
+
+</body>
+</html>

@@ -25,8 +25,8 @@ public abstract class ArenaLevelLoader implements ArenaLoader {
     @Override
     public void load() {
         for(int i = 0; i < amountOfLevels; i++) {
-            this.arena.getLevels().add(new GameLevel(this.startSequenceLoader.populate(this.multiplier),
-                    this.duringSequenceLoader.populate(this.multiplier), this.arena.getRegularGhostsList(), new Clock(System.currentTimeMillis())));
+            this.arena.getLevels().add(new GameLevel(this.startSequenceLoader.populate(),
+                    this.duringSequenceLoader.populate(), this.arena.getRegularGhostsList(), new Clock(System.currentTimeMillis())));
         }
     }
 }

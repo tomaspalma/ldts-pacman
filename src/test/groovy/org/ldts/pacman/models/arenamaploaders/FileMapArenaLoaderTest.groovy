@@ -1,5 +1,6 @@
 package org.ldts.pacman.models.arenamaploaders
 
+import org.ldts.pacman.models.game.Position
 import org.ldts.pacman.models.game.arena.Arena
 import org.ldts.pacman.models.game.observer.PowerPelletObservable
 import org.ldts.pacman.models.game.arena.ghosthouse.GhostHouseGate
@@ -61,5 +62,6 @@ class FileMapArenaLoaderTest extends Specification {
                 }
             }
     }
+
 
 }
