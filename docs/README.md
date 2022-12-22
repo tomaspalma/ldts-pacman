@@ -351,3 +351,9 @@ individually but failing when running all the tests at the same time.
 max size when running some unit tests for said component.
 - It's very difficult to perform behaviour testing when a function from a class calls another function from the same class, although
 in some cases we were able to perform state testing.
+
+### BETTERCODE HUB
+
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055546446729969755/image.png)
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055546616616075294/image.png)
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055546788884521052/image.png)

@@ -35,6 +35,11 @@ class PacmanControllerTest extends Specification {
             pacman.getObservers().contains(arenaController)
     }
 
+    def "We should correctly be able to get the pacman controlled"() {
+        expect:
+            pacController.getPacman() == pacman
+    }
+
     def "When moving pacman depending on the right action it should set the controller wanted direction to the correct one"() {
         when:
             pacController.movePacmanAccordingTo(GameActions.ControlActions.MOVE_LEFT)

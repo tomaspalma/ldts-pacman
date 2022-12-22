@@ -36,8 +36,4 @@ public class ArenaViewer extends Viewer<Arena> {
         gui.writeToScreen(new Position(0, 0), "Score " + getModel().getScore(), TextColor.ANSI.WHITE);
         gui.writeToScreen(new Position(getModel().getWidth() - 10, 0), "Lives " + getModel().getPacman().getRemainingLives(), TextColor.ANSI.WHITE);
     }
-
-    public void delegateToViewer(GUI gui, EntityViewer viewer) throws IOException {
-        viewer.draw(gui);
-    }
 }
