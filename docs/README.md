@@ -8,7 +8,7 @@ Our group chose pacman as a game to work on. Pacman is a game created in the 198
 He's locked in a maze where he must eat power-pellets and pac-dots without being reached by the ghosts. Upon eating a power-pellet, he can also eat the ghosts that are after him.
 It is also possible to eat cherries to score more points. If the ghost touches us and the pacman hasn't eaten a power pellet, the player loses a life and the game restarts.
 In the beginning, players have 3 lives. When this number reaches zero, the game ends.
-When the player eats all pac-dots on screen, he moves on to the next level.
+When the player eats all edibles that are on the screen, he moves on to the next level.
 
 ### Authors
 - *Diogo Martins* (*up202108883*@fe.up.pt)
@@ -19,38 +19,54 @@ When the player eats all pac-dots on screen, he moves on to the next level.
 
 ### IMPLEMENTED FEATURES
 
-As this is an intermediate delivery, most of the features are yet to be implemented as a lot of the time spent until now
-was targeted more on how we would structure our game following good design patterns as this is the main goal of this project
-and this course.
-
 The basic features already implemented are:
 
-- **Drawing on the screen** - The contents of the arena are drawn on the screen
-- **Pacman movement** - Pacman should be able to move in four directions restricted by the walls of the maze.
-- **Read the map of the arena from a file** - The game should be able to have an arena whose structure is designated by
+- **Pacman movement & animation**
+ 
+Pacman is able to move in four directions guided by keyboard input from the player as well as move its mouth
+up and down.
+
+- **Read the map of the arena from a file, making it customizable**
+
+The game should be able to have an arena whose structure is designated by text in a file, which makes it 
+fairly customizable. Besides that, we also left room in our structure to in the future add other types of loaders that do not 
+simply read from a text file
+
+- **Different ghosts strategies**
+
+Each of the for ghosts has its own unique strategy when they are in chase mode or scatter mode, although they all
+share the same frigthened and dying strategy.
+
+- **Time controlled  changes on the current state of the ghosts during game execution**
+
+Each level has an internal clock that, based on the current time ellapsed, it will execute every changes on a ghost (either on a ghost
+or on all ghosts) that are defined in each state of our state machine and then it will transition to a state whose
+time to activate is not lesser than the ellapsed.
+
+- **Level changes when the user passes to the next level**
+
+Although we don't have different maps, we have different levels. Each level has timings for the ghosts to change
+their states. The more levels you advance, the lesser time the ghosts take to change state until a level limit
+where the time can't be lowered no more.
+
+- **Working menus**
+
+    - Starting menu where the user can choose to exit the game or to start playing
+    - Pause menu (*the user needs to press the ENTER key*)
+    - Game over menu where the user can choose to play again, to go back to the main menu or to leave the game
+
+- **Sounds**
+  - Menu intro music 
+  - Pacman eating 
+  - Pacman dying
+  - Frightened ghost dying
 
 We also have some tests both simple and using mocks 
 (such as [this one in EntityViewer](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/intermediate-delivery/src/test/groovy/org/ldts/pacman/viewers/EntityViewerTest.groovy)
 
 ### PLANNED FEATURES
 
-- **Ghost strategies** - Different coloured ghosts should have different approaches on how to follow pacman. Although the structure
-and the classes for each ghost and strategy are created, there are no ghosts being drawn yet.
-- **Dead-house** - When killed by pacman, ghosts should be sent to a place on the map from which they will later get back
-get out and rejoin the game.
-what's written in a file.
-
-### MOCK-UPs
-
-**Mock-up of Main Menu**
-![Main Menu Mock](https://cdn.discordapp.com/attachments/1039541372723662868/1045290904942039040/Sem_Titulo-1.jpg)
-
-**Mock-up of game action**
-![GameAction](https://cdn.discordapp.com/attachments/1039541372723662868/1045290844585984020/image.png)
-
-### Current state of gameplay
-
-![](https://cdn.discordapp.com/attachments/1019715937009672223/1045798022086410340/image.png)
+All of the planned features except better menus were implemented.
 
 ### DESIGN
 
@@ -198,11 +214,18 @@ when the power pellet notifies them.
 
 #### DATA CLASS
 
-The `PlatformSegment` class is a **Data Class**, as it contains only fields, and no behavior. This is problematic because […].
+#### FEATURE ENVY
 
-A way to improve the code would be to move the `isPlatformSegmentSolid()` method to the `PlatformSegment` class, as this logic is purely concerned with the `PlatformSegment` class.
+#### LONG CLASS
 
 ### TESTING
 
 - Screenshot of coverage report.
 - Link to mutation testing report.
+
+## Units we didn't cover and why
+
+- We didn't cover some part of the GameLevel because of clock-related methods that were passing when running
+individually but failling when running all the tests at the same time.
+- We didn't cover some parts of GUI methods because of errors we were having about heap usage to its 
+max size when running some unit tests for said component

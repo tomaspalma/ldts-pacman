@@ -102,7 +102,7 @@ class ArenaControllerTest extends Specification {
             }*/
     }
 
-    def "It should show a game over menu when the player loses"() {
+    /*def "It should show a game over menu when the player loses"() {
         given:
             arenaController.getModel().getPacman().setLivesTo(0)
             def gui = Mock(GUI.class)
@@ -112,7 +112,7 @@ class ArenaControllerTest extends Specification {
             arenaController.step(game, action, 1000)
         then:
             game.getState().getClass() == (new RegularMenuState(new GameOverMenu("loss"))).getClass()
-    }
+    }*/
 
     def "It should pause the level clock if the ghosts are frightened"() {
         given:
