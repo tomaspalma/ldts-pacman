@@ -1,6 +1,6 @@
 # Pacman - LDTS - project-l01gr01
 
-*Note on the commits:* 80,000 commits of tomaspalma are due to the upload of the pitest folder
+*Note on the commits:* 80,000 additions of tomaspalma are due to the upload of the pitest folder
 
 As it's widely known, in this game (the more popular versions as well as this project),
 you control pacman and the goal is to keep avoiding hitting ghosts when they are in a state
