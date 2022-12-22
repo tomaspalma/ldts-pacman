@@ -165,7 +165,6 @@ and the power pellet more logical because if a ghost changes when a power pellet
 to establish that relationship as one being an observer and the other one an observable that notifies the ones
 that are watching its state.
 
-
 **The Implementation**
 
 ![](https://cdn.discordapp.com/attachments/1019715937009672223/1055467717982949397/image.png)
@@ -176,7 +175,23 @@ that are watching its state.
 what it would take would be to just add another observer into the power pellet, making it respect the **Open-Closed principle**
 - One universally documented consequence is that the subscribers are notified in random order, but that doesn't look
 like a problem in the context of this program.
+- It improves scalability and ease of development as it removes the need to add specific code to the ghost controller to
+periodically use information from the arena to check if a power pellet was removed every time the game loop runs which would be
+undesirable in terms of efficiency. 
 
+### Ability for the arena controller to make changes when pacman eats or hits a ghost
+
+**The problem in context**
+
+If we delegated the work to the pacman controller to change the arena itself when it detects pacman ate an edible or hit a ghost
+we would be violating the **Single-Responsability principle** and, because of that, we wanted some way to notify the arena controller
+itself and then the arena controller changes the arena because that's his responsability, not pacman's nor pacman controllers'.
+
+**The Pattern**
+
+**The Implementation**
+
+**Consequences**
 
 ### Isolate the ability of using a gui from a specific implementation of one
 
@@ -242,30 +257,8 @@ depending on the current state we want our game to be.
 - As it is with other patterns, one of the downsides is the increase in the number of files created. However, the text of the code itself
 stays more well organized
 
-### We have to tell to more than one entity that one specific common event occurred (e.g. when a cherry is picked)
-
-**The problem in context**
-
-When a cherry is picked, a certain number of ghosts need to be notified of that event. So we need to  have a central publisher
-that informs all the ghosts that need to be notified that a cherry was picked up and that they need to change its state
-and enter the frightening stage.
-
-**The Pattern**
-
-We are thinking of implementing an observer pattern where the ghosts are the observers and the power pellets are
-publishers that notify the ghosts when they are eaten.
-
-**The implementation**
-
-There is no concrete implementation yet
-
 **Consequences**
 
-- - It improves scalability and ease of development as it removes the need to add specific code to the ghost controller to
-periodically use information from the arena to check if one was removed every time the game loop runs which would be
-undesirable in terms of efficiency. So, by having the power pellet notify the ghosts only when it is eaten, then
-we don't need the ghosts to always be checking if the power pellet was eaten, executing the respective change of state only
-when the power pellet notifies them.
 
 #### KNOWN CODE SMELLS AND REFACTORING SUGGESTIONS
 
@@ -292,7 +285,9 @@ respectively.
 
 ### MESSAGE CHAINS
 
-
+Methods need to delegate functionality to other objects which may lead to many successive requests for an object, like
+*getModel().getLevels().get(this.currentLevel).getClock()*. If corrected by hiding the delegation in a new method,
+though, it may become unclear what object is actually executing
 
 ### TESTING
 
