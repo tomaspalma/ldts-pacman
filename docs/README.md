@@ -303,17 +303,13 @@ having its own timings and phases.
 
 **The implementation**
 
-We chose to implement two state machines (*NFA's*):
+We chose to implement two state machines (*NFAs*):
 - One to control the start sequences that, in the case of the regular ghosts, will determine when each of the three ghosts
 that start inside the ghost house will leave it
 - Another to control during sequences that in the case of regular ghosts will result in a transition to a certain state
 all at the same time
 
-#### KNOWN CODE SMELLS AND REFACTORING SUGGESTIONS
-
-**Example of such a subsection**:
-
-------
+### KNOWN CODE SMELLS AND REFACTORING SUGGESTIONS
 
 #### REFUSED BEQUEST
 
@@ -332,18 +328,18 @@ necessary that the modules that manipulate and show the data envy the modules th
 Arena and ArenaController are both very large because they hold all data related to gameplay and manipulate it,
 respectively.
 
-### MESSAGE CHAINS
+#### MESSAGE CHAINS
 
 Methods need to delegate functionality to other objects which may lead to many successive requests for an object, like
 *getModel().getLevels().get(this.currentLevel).getClock()*. If corrected by hiding the delegation in a new method,
-though, it may become unclear what object is actually executing
+though, it may become unclear which object is actually executing the functionality.
 
 ### TESTING
 
 - Screenshot of coverage report.
 - Link to mutation testing report.
 
-## Units and mutants we didn't cover and why
+### Units and mutants we didn't cover and why
 
 - We didn't cover some part of the GameLevel because of clock-related methods that were passing when running
 individually but failing when running all the tests at the same time.
