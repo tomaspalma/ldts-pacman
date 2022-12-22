@@ -27,4 +27,5 @@ class StateTest extends Specification {
             state.getUserControlAction() == GameActions.ControlActions.MOVE_DOWN
 
     }
+
 }

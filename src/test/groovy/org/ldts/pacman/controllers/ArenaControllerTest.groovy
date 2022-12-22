@@ -32,6 +32,7 @@ class ArenaControllerTest extends Specification {
     private def pacman_eating_edible = Mock(SFX.class)
     private def pacman_dying_sound = Mock(SFX.class)
     private def kill_ghost_sound = Mock(SFX.class)
+    private def sounds
 
     def setup() {
         arena = new Arena(20, 20, "maps/easy.txt")
@@ -40,7 +41,8 @@ class ArenaControllerTest extends Specification {
         arenaController = new ArenaController(arena)
         arenaController.setPacmanController(pacController)
         arenaController.setRegularGhostController(regularGhostController)
-        arenaController.setSounds(new ArrayList<>(Arrays.asList(pacman_eating_edible, pacman_dying_sound, kill_ghost_sound)))
+        sounds = new ArrayList<>(Arrays.asList(pacman_eating_edible, pacman_dying_sound, kill_ghost_sound))
+        arenaController.setSounds(sounds)
         arenaController.setAreSoundsSilenced(true)
     }
 
@@ -51,6 +53,11 @@ class ArenaControllerTest extends Specification {
         expect:
             arenaController.getPacmanController().getClass() == PacmanController.class
             arenaController.getRegularGhostController().getClass() == RegularGhostController.class
+    }
+
+    def "We should be able to correctly get the sounds that this controller can play"() {
+        expect:
+            arenaController.getSounds() == sounds
     }
 
     def "We should restore the fixed edibles list the next level if the current leven has ended and do nothting if it hasn't ended yet"() {

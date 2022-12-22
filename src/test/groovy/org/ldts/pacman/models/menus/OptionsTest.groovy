@@ -32,7 +32,7 @@ class OptionsTest extends Specification {
             message == "quit"
     }
 
-    /*def "GoToMainMenuOption"() {
+    def "GoToMainMenuOption"() {
         given:
         def option = new GoToMainMenuOption("main menu")
 
@@ -45,7 +45,7 @@ class OptionsTest extends Specification {
         def message = option.getMessage()
         then:
         message == "main menu"
-    }*/
+    }
 
     def "PlayOption"() {
         given:
