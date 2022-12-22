@@ -100,20 +100,83 @@ Different strategies are implemented separately in different classes that implem
 are to tell the ghosts what to do in those situations), and these
 strategies are then stored as a dynamically-mutating attribute of the ghosts themselves.
 
-The strategies are going to be different depending on the ghost and the type of ghost
+The strategies are going to be different depending on the ghost and the type of ghost, although in regular ghosts,
+they share the same dying and frightened strategy.
+
+Each strategy has then a generate next position method that is used to move the ghosts and make them move in different ways
+because each of the method in each strategy can have a different way of determining the next position.
 
 **Implementation**
 
-![](https://cdn.discordapp.com/attachments/1019715937009672223/1045672757498757130/image.png)
-![](https://cdn.discordapp.com/attachments/1019715937009672223/1045673929169186887/image.png)
-![](https://cdn.discordapp.com/attachments/1019715937009672223/1045674997911400509/image.png)
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055454702944395284/image.png)
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055456130890997891/image.png)
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055458355180748842/image.png)
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055460461233045634/image.png)
 
 **Consequences**
 
 - Despite raising the number of classes, it brings increased scalability and ease of development,
 because we will have less code in just one place, making it easier to maintain. Also,
-it is way easier to make changes to an existing stratregy if more than one concrete class is following it, because
+it is way easier to make changes to an existing strategy if more than one concrete class is following it, because
 we would just need to change it in one place, instead of going to each class that had that strategy in order to change it.
+
+### Dynamic way to determine which type of strategy a ghost is currently using
+
+**Problem in Context**
+
+The problem is not to choose if they will use a RunAwayFrightenedStrategy or an AgressiveChaseStrategy, but rather
+whether they will be using a frightened strategy or a chasing strategy or a scatter, etc 
+
+And we wanted to determine that without a lot of switch or if-else statements.
+
+**The pattern**
+
+So, we implemented the state pattern, where each ghost has a certain state and then when it wants to move it asks the state
+to execute the method to generate the next position and then each state will execute the methods from the respective strategies
+of the ghost.
+
+
+For example, the chasing state will execute whatever the chasing strategy attribute in a ghost may be.
+
+**The Implementation**
+
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055463302563647559/image.png)
+
+**Consequences**
+
+- Removing the need for switch or if-else statements and more respect to the **Open-Closed principle**
+- As many other patterns, it generates more files, despite the code in each file becoming more organized.
+- It provides a nicer way to implement more ghost states in the future without the need to worry about increasing
+the number of lines of conditional statements that may have arisen if we were not to choose to do it this way.
+
+### Ability for the regular ghosts to change themselves when a power pellet is eaten
+
+**Problem in context**
+
+When a power pellet is eaten, the ghosts need to switch the state from whatever state they are in to the frightened state.
+
+So, we needed a clean way in order to establish this special relationship between the regular ghosts and the power pellets without making
+the code look  bad.
+
+**The Pattern**
+
+We decided to implement the observer pattern, making this part of the code about the relationship between the regular ghosts
+and the power pellet more logical because if a ghost changes when a power pellet is eaten it makes a lot of sense
+to establish that relationship as one being an observer and the other one an observable that notifies the ones
+that are watching its state.
+
+
+**The Implementation**
+
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055467717982949397/image.png)
+
+**Consequences**
+
+- It will be way more easier if we wanted to add another entity that depends on something that the power pellet does because
+what it would take would be to just add another observer into the power pellet, making it respect the **Open-Closed principle**
+- One universally documented consequence is that the subscribers are notified in random order, but that doesn't look
+like a problem in the context of this program.
+
 
 ### Isolate the ability of using a gui from a specific implementation of one
 
@@ -179,7 +242,7 @@ depending on the current state we want our game to be.
 - As it is with other patterns, one of the downsides is the increase in the number of files created. However, the text of the code itself
 stays more well organized
 
-### We have to tell to more than one entity that one specific common event occured (e.g. when a cherry is picked)
+### We have to tell to more than one entity that one specific common event occurred (e.g. when a cherry is picked)
 
 **The problem in context**
 
@@ -212,11 +275,24 @@ when the power pellet notifies them.
 
 #### REFUSED BEQUEST
 
-#### DATA CLASS
+ScatteringState and GhostHouseState don't apply any changes to the Ghost, so their applyChangesToGhost overridden method
+is empty. However, if GhostState didn't have this method we would need to have two virtually equal abstract classes, one
+with, and the other one without, that method.
 
 #### FEATURE ENVY
 
-#### LONG CLASS
+Feature envy is inherent to the use of the model-view-controller design pattern, since the controllers and the viewers
+access, almost exclusively, the data of the model. So in order to preserve the **Single-Responsibility principle** it's
+necessary that the modules that manipulate and show the data envy the modules that hold the data itself.
+
+#### LARGE CLASS
+
+Arena and ArenaController are both very large because they hold all data related to gameplay and manipulate it,
+respectively.
+
+### MESSAGE CHAINS
+
+
 
 ### TESTING
 
@@ -226,7 +302,7 @@ when the power pellet notifies them.
 ## Units and mutants we didn't cover and why
 
 - We didn't cover some part of the GameLevel because of clock-related methods that were passing when running
-individually but failling when running all the tests at the same time.
+individually but failing when running all the tests at the same time.
 - We didn't cover some parts of GUI methods because of errors we were having about heap usage to its 
 max size when running some unit tests for said component.
 - It's very difficult to perform behaviour testing when a function from a class calls another function from the same class, although
