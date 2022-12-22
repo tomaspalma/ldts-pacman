@@ -70,9 +70,14 @@ All of the planned features except better menus were implemented.
 
 ### DESIGN
 
-#### Strucuture Paradigm
+The UML for the designs were split into pieces because of the complexity of the UML because of the 
+amount of classes we ended up creating in our program. Also, more specificly zoomed in UML about the design patterns we implemented
+into our program can be found in the specific topics about them in this report.
 
-We chose to develop our pacman game using an MVC approach given in the theoretical classes. 
+### SOLID respecting design architecture
+
+We wanted a design architecture that respected SOLID principles, specially the single responsabilty one, and,
+because of that we decided to go with the MVC approcha given in the theoretical classes.
 
 - **Model**: Contains the structure of the elements that are part of our game and the definition of attributes or functions that will be used by the other two components from the MVC approach. In addition, the model will only contain information about a certain element and other functions that can be called by one or both of the other counterparts of the MVC structure.
 
@@ -84,7 +89,21 @@ Although there are many viewers, models and controllers there is one major concr
 
 The arena viewer, controller and model are the main classes of each of its MVC components. The arena viewer calls the draw functions of the viewers of the other classes, the arena controller calls the step functions of the controllers of the other classes and the arena model has information about all the other entities.
 
-![UML Of MVC](https://cdn.discordapp.com/attachments/1019715937009672223/1045676212871254088/main1.drawio1.png)
+**The implementation**
+
+***Model***
+
+Movable entities
+
+Ghost strategies and states
+
+***Controllers***
+
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055496658412113950/image.png)
+
+***Viewers***
+
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055496955431751801/image.png)
 
 ### Implement different strategies for each ghost
 
@@ -112,6 +131,7 @@ because each of the method in each strategy can have a different way of determin
 ![](https://cdn.discordapp.com/attachments/1019715937009672223/1055456130890997891/image.png)
 ![](https://cdn.discordapp.com/attachments/1019715937009672223/1055458355180748842/image.png)
 ![](https://cdn.discordapp.com/attachments/1019715937009672223/1055460461233045634/image.png)
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055490721240580116/image.png)
 
 **Consequences**
 
@@ -172,14 +192,15 @@ that are watching its state.
 **Consequences**
 
 - It will be way more easier if we wanted to add another entity that depends on something that the power pellet does because
-what it would take would be to just add another observer into the power pellet, making it respect the **Open-Closed principle**
+what it would take would be to just add another observer into the power pellet, making it respect the **open-closed principle**
 - One universally documented consequence is that the subscribers are notified in random order, but that doesn't look
 like a problem in the context of this program.
 - It improves scalability and ease of development as it removes the need to add specific code to the ghost controller to
 periodically use information from the arena to check if a power pellet was removed every time the game loop runs which would be
 undesirable in terms of efficiency. 
+- It uses more files, despite making the code itself in each file become or organized.
 
-### Ability for the arena controller to make changes when pacman eats or hits a ghost
+### Ability for the arena controller to make changes when pacman eats edibles or hits a ghost
 
 **The problem in context**
 
@@ -189,9 +210,23 @@ itself and then the arena controller changes the arena because that's his respon
 
 **The Pattern**
 
+As the example above, we also chose to implement hte observer pattern here so that the arena controller is an observer
+of pacman and as a response pre-defined to each of the possible notifications the pacman can issue to its subscribers.
+
 **The Implementation**
 
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055478083236401193/image.png)
+
+In this case the arena controller implements the pacman observer interface while pacman itself implements the
+PacmanObservable interface.
+
 **Consequences**
+
+- It will be more easier if we wanted to add another entity observing what pacman is doing than if we had a bunch of conditinals.
+- One universally documented consequence is that the subscribers are notified in random order, but that doesn't look
+  like a problem in the context of this program.
+- It removes the need for the arena controller to always be checking if pacman does anything worth noticing, letting
+the pacman controller detect that and then inform its parent controller, the arena controller.
 
 ### Isolate the ability of using a gui from a specific implementation of one
 
@@ -257,8 +292,24 @@ depending on the current state we want our game to be.
 - As it is with other patterns, one of the downsides is the increase in the number of files created. However, the text of the code itself
 stays more well organized
 
-**Consequences**
+### Ability for timing controlled ghost state switches to turn the game more dynamic
 
+Although this technically isn't a formal design pattern given in classes, it's a design matter.
+
+**The problem in context**
+
+Like the more popular versions of pacman, we anted t he ability to be able to, depending on time, 
+switch the ghosts from scatter state to chase state after some time. In the real Pacman game the ghosts
+will change their state from chase to scatter and vice versa without player interaction, just based on timing with each level
+having its own timings and phases.
+
+**The implementation**
+
+We chose to implement two state machines (*NFA's*):
+- One to control the start sequences that, in the case of the regular ghosts, will determine when each of the three ghosts
+that start inside the ghost house will leave it
+- Another to control during sequences that in the case of regular ghosts will result in a transition to a certain state
+all at the same time
 
 #### KNOWN CODE SMELLS AND REFACTORING SUGGESTIONS
 
