@@ -1,4 +1,4 @@
-package org.ldts.pacman.models;
+package org.ldts.pacman.models.game.arena.levels.sequences;
 
 import org.ldts.pacman.models.game.entities.ghost.Ghost;
 import org.ldts.pacman.models.game.entities.ghost.RegularGhost;
@@ -17,7 +17,12 @@ public class GhostDuringStateSequence<T extends GhostState> implements LevelStat
         this.timeToBeActivatedInMilliseconds = timeToBeActivatedInMilliseconds;
     }
 
-    public Class<T> ghostState() {
+    @Override
+    public long getTimeToBeActivatedInMilliseconds() {
+        return this.timeToBeActivatedInMilliseconds;
+    }
+
+    public Class<T> getGhostState() {
         return this.ghostState;
     }
 
@@ -32,8 +37,4 @@ public class GhostDuringStateSequence<T extends GhostState> implements LevelStat
         this.timeToBeActivatedInMilliseconds = timeToBeActivatedInMilliseconds;
     }
 
-    @Override
-    public long getTimeToBeActivatedInMilliseconds() {
-        return this.timeToBeActivatedInMilliseconds;
-    }
 }

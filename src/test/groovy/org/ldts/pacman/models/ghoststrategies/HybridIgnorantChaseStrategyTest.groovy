@@ -4,7 +4,7 @@ import org.ldts.pacman.models.game.Position
 import org.ldts.pacman.models.game.entities.ghost.Clyde
 import org.ldts.pacman.models.game.entities.pacman.Pacman
 import spock.lang.Specification
-import org.ldts.pacman.models.Arena
+import org.ldts.pacman.models.game.arena.Arena
 
 class HybridIgnorantChaseStrategyTest extends Specification {
     private def arena

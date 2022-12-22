@@ -36,6 +36,7 @@ public class Clock {
 
         long currentTime = this.getCurrentSystemTime();
         elapsedMilliseconds += (currentTime - this.previousTime);
+        assert elapsedMilliseconds >= 0;
         this.previousTime = currentTime;
     }
 

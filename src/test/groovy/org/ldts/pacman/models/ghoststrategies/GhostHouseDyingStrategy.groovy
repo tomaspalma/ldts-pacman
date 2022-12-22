@@ -1,7 +1,7 @@
 package org.ldts.pacman.models.ghoststrategies
 
-import org.ldts.pacman.models.Arena
-import org.ldts.pacman.models.game.GhostHouse
+import org.ldts.pacman.models.game.arena.Arena
+import org.ldts.pacman.models.game.arena.ghosthouse.GhostHouse
 import org.ldts.pacman.models.game.Position
 import org.ldts.pacman.models.game.entities.ghost.Pinky
 import spock.lang.Specification

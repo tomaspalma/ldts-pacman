@@ -6,8 +6,7 @@ import org.ldts.pacman.models.game.entities.Obstacle;
 import org.ldts.pacman.models.game.Position;
 import org.ldts.pacman.models.game.entities.fixededibles.FixedEdible;
 import org.ldts.pacman.models.game.entities.ghost.RegularGhost;
-import org.ldts.pacman.models.Arena;
-import org.ldts.pacman.models.game.entities.pacman.Pacman;
+import org.ldts.pacman.models.game.arena.Arena;
 
 import java.io.IOException;
 

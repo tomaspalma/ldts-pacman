@@ -4,7 +4,7 @@ import org.ldts.pacman.Game
 import org.ldts.pacman.controllers.menus.PauseMenuController
 import org.ldts.pacman.models.menus.PauseMenu
 import org.ldts.pacman.controllers.menus.RegularMenuController
-import org.ldts.pacman.models.GameActions
+import org.ldts.pacman.models.game.GameActions
 import org.ldts.pacman.models.menus.Menu
 import spock.lang.Specification
 

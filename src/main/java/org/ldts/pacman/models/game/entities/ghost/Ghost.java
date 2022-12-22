@@ -1,8 +1,9 @@
 package org.ldts.pacman.models.game.entities.ghost;
 
 import com.googlecode.lanterna.TextColor;
-import org.ldts.pacman.models.*;
+import org.ldts.pacman.models.game.GameActions;
 import org.ldts.pacman.models.game.Position;
+import org.ldts.pacman.models.game.arena.Arena;
 import org.ldts.pacman.models.game.entities.MovableEntity;
 import org.ldts.pacman.models.game.entities.ghost.states.GhostHouseState;
 import org.ldts.pacman.models.game.entities.ghost.states.GhostState;

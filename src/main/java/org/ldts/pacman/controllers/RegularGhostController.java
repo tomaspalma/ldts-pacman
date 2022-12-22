@@ -1,8 +1,9 @@
 package org.ldts.pacman.controllers;
 
 import org.ldts.pacman.Game;
-import org.ldts.pacman.models.*;
+import org.ldts.pacman.models.game.GameActions;
 import org.ldts.pacman.models.game.Position;
+import org.ldts.pacman.models.game.arena.Arena;
 import org.ldts.pacman.models.game.entities.ghost.*;
 import org.ldts.pacman.models.game.entities.ghost.states.*;
 
@@ -31,11 +32,6 @@ public class RegularGhostController extends Controller<Arena> {
     @Override
     public void step(Game game, GameActions.ControlActions action, long time) throws IOException, InterruptedException {
         for(RegularGhost regularGhost: regularGhostsToControl) {
-            /*if(regularGhost instanceof Clyde) {
-                System.out.println(regularGhost.getCurrentState());
-                System.out.println(regularGhost.getPreviousState());
-            }*/
-
             if(stateChangedIn(regularGhost))
                 regularGhost.getCurrentState().applyChangesToGhost();
 
@@ -50,7 +46,6 @@ public class RegularGhostController extends Controller<Arena> {
 
     private void reviveDeadGhost(RegularGhost regularGhost) {
         GhostState currentGhostState = regularGhost.getCurrentState();
-        GhostState previousGhostState = regularGhost.getPreviousState();
 
         boolean isGhostDead = currentGhostState instanceof DeadState;
 

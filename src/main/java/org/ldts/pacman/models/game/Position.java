@@ -1,8 +1,5 @@
 package org.ldts.pacman.models.game;
 
-import org.ldts.pacman.models.Arena;
-import org.ldts.pacman.models.game.arena.grid.Tile;
-
 import java.util.List;
 import java.util.Objects;
 

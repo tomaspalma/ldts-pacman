@@ -1,12 +1,10 @@
 package org.ldts.pacman.models.pacmananimations
 
-import org.ldts.pacman.models.Arena
+import org.ldts.pacman.models.game.arena.Arena
 import org.ldts.pacman.models.game.Clock
 import org.ldts.pacman.models.game.Position
 import org.ldts.pacman.models.game.entities.pacman.Pacman
 import org.ldts.pacman.models.game.entities.pacman.animations.PacmanEatingAnimation
-import org.ldts.pacman.models.game.entities.pacman.directions.PacmanDirection
-import org.ldts.pacman.models.game.entities.pacman.directions.PacmanDirectionDown
 import spock.lang.Specification
 
 class PacmanEatingTest extends Specification {

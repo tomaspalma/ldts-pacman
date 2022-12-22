@@ -1,10 +1,12 @@
 package org.ldts.pacman.controllers;
 
 import org.ldts.pacman.Game;
-import org.ldts.pacman.models.*;
 import org.ldts.pacman.models.animations.Animation;
+import org.ldts.pacman.models.game.GameActions;
 import org.ldts.pacman.models.game.Position;
+import org.ldts.pacman.models.game.arena.Arena;
 import org.ldts.pacman.models.game.arena.grid.TeletransporterTile;
+import org.ldts.pacman.models.game.entities.MovableEntityDirection;
 import org.ldts.pacman.models.game.entities.pacman.animations.PacmanAnimation;
 import org.ldts.pacman.models.game.entities.pacman.directions.*;
 import org.ldts.pacman.models.game.entities.pacman.Pacman;

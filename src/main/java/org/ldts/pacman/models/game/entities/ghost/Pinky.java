@@ -1,6 +1,6 @@
 package org.ldts.pacman.models.game.entities.ghost;
 
-import org.ldts.pacman.models.Arena;
+import org.ldts.pacman.models.game.arena.Arena;
 import org.ldts.pacman.models.game.Position;
 import org.ldts.pacman.models.game.entities.ghost.directions.GhostDirectionUp;
 import org.ldts.pacman.models.game.entities.ghost.states.GhostHouseState;

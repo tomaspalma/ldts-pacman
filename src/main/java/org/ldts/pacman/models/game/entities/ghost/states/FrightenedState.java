@@ -1,7 +1,7 @@
 package org.ldts.pacman.models.game.entities.ghost.states;
 
 import com.googlecode.lanterna.TextColor;
-import org.ldts.pacman.models.GameActions;
+import org.ldts.pacman.models.game.GameActions;
 import org.ldts.pacman.models.game.Position;
 import org.ldts.pacman.models.game.entities.ghost.Ghost;
 

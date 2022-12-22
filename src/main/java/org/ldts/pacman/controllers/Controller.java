@@ -1,7 +1,7 @@
 package org.ldts.pacman.controllers;
 
 import org.ldts.pacman.Game;
-import org.ldts.pacman.models.GameActions;
+import org.ldts.pacman.models.game.GameActions;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;

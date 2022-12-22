@@ -1,8 +1,8 @@
 package org.ldts.pacman.models.arenamaploaders
 
-import org.ldts.pacman.models.Arena
-import org.ldts.pacman.models.PowerPelletObservable
-import org.ldts.pacman.models.game.GhostHouseGate
+import org.ldts.pacman.models.game.arena.Arena
+import org.ldts.pacman.models.game.observer.PowerPelletObservable
+import org.ldts.pacman.models.game.arena.ghosthouse.GhostHouseGate
 import org.ldts.pacman.models.game.arena.grid.TeletransporterTile
 import org.ldts.pacman.models.game.arena.grid.Tile
 import org.ldts.pacman.models.game.entities.fixededibles.FixedEdible

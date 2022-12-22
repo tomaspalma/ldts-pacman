@@ -1,6 +1,7 @@
 package org.ldts.pacman.models
 
 import org.ldts.pacman.models.game.Position
+import org.ldts.pacman.models.game.arena.Arena
 import org.ldts.pacman.models.game.entities.ghost.Clyde
 import org.ldts.pacman.models.game.entities.ghost.strategies.chasing.HybridIgnorantChaseStrategy
 import org.ldts.pacman.models.game.entities.ghost.strategies.chasing.AgressiveChaseStrategy

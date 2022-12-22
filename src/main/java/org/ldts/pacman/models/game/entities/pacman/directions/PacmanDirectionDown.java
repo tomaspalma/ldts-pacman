@@ -1,6 +1,5 @@
 package org.ldts.pacman.models.game.entities.pacman.directions;
 
-import org.ldts.pacman.models.Arena;
 import org.ldts.pacman.models.game.entities.MovableEntity;
 import org.ldts.pacman.models.game.Position;
 

@@ -1,4 +1,4 @@
-package org.ldts.pacman.models;
+package org.ldts.pacman.models.game.arena.levels.sequences;
 
 import org.ldts.pacman.models.game.entities.ghost.RegularGhost;
 

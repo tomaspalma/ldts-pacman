@@ -1,6 +1,6 @@
 package org.ldts.pacman.models.game.entities.ghost.directions;
 
-import org.ldts.pacman.models.MovableEntityDirection;
+import org.ldts.pacman.models.game.entities.MovableEntityDirection;
 import org.ldts.pacman.models.game.Position;
 import org.ldts.pacman.models.game.entities.ghost.Ghost;
 

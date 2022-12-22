@@ -2,7 +2,7 @@ package org.ldts.pacman.viewers
 
 import com.googlecode.lanterna.TextColor
 import org.ldts.pacman.gui.GUI
-import org.ldts.pacman.models.Arena
+import org.ldts.pacman.models.game.arena.Arena
 import org.ldts.pacman.models.game.Position
 import org.ldts.pacman.models.game.entities.Obstacle
 import org.ldts.pacman.models.game.entities.fixededibles.FixedEdible

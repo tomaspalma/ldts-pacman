@@ -1,8 +1,9 @@
 package org.ldts.pacman.models
 
 import org.ldts.pacman.models.game.Position
+import org.ldts.pacman.models.game.arena.Arena
 import org.ldts.pacman.models.game.entities.fixededibles.PowerPellet
-
+import org.ldts.pacman.models.game.observer.EatenPowerPelletObserver
 import spock.lang.Specification
 
 class PowerPelletObservableTest extends Specification {

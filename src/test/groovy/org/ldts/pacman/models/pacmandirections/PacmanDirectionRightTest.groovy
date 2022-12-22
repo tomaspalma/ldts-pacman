@@ -1,10 +1,9 @@
 package org.ldts.pacman.models.pacmandirections
 
-import org.ldts.pacman.models.Arena
+import org.ldts.pacman.models.game.arena.Arena
 import org.ldts.pacman.models.game.Position
 import org.ldts.pacman.models.game.entities.pacman.Pacman
 import org.ldts.pacman.models.game.entities.pacman.directions.PacmanDirectionRight
-import org.ldts.pacman.models.game.entities.pacman.directions.PacmanDirectionUp
 import spock.lang.Specification
 
 class PacmanDirectionRightTest extends Specification {

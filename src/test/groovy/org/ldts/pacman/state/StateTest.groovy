@@ -2,10 +2,9 @@ package org.ldts.pacman.state
 
 import org.ldts.pacman.Game
 import org.ldts.pacman.gui.GUI
-import org.ldts.pacman.models.Arena
-import org.ldts.pacman.models.GameActions
+import org.ldts.pacman.models.game.arena.Arena
+import org.ldts.pacman.models.game.GameActions
 import org.ldts.pacman.states.ArenaState
-import org.ldts.pacman.states.State
 import spock.lang.Specification
 
 class StateTest extends Specification {

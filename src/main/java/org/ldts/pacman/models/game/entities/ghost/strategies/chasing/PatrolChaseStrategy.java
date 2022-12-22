@@ -1,7 +1,8 @@
-package org.ldts.pacman.models;
+package org.ldts.pacman.models.game.entities.ghost.strategies.chasing;
 
 import org.ldts.pacman.models.game.Position;
 import org.ldts.pacman.models.game.Vector;
+import org.ldts.pacman.models.game.arena.Arena;
 import org.ldts.pacman.models.game.entities.ghost.Blinky;
 import org.ldts.pacman.models.game.entities.ghost.Ghost;
 import org.ldts.pacman.models.game.entities.ghost.RegularGhost;

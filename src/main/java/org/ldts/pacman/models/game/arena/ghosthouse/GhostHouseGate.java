@@ -1,6 +1,7 @@
-package org.ldts.pacman.models.game;
+package org.ldts.pacman.models.game.arena.ghosthouse;
 
-import org.ldts.pacman.models.Arena;
+import org.ldts.pacman.models.game.arena.Arena;
+import org.ldts.pacman.models.game.Position;
 import org.ldts.pacman.models.game.entities.FixedEntity;
 
 public class GhostHouseGate extends FixedEntity {

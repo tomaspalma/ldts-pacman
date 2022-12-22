@@ -2,7 +2,7 @@ package org.ldts.pacman.models.game.entities;
 
 import com.googlecode.lanterna.TextColor;
 import org.ldts.pacman.models.animations.Animation;
-import org.ldts.pacman.models.Arena;
+import org.ldts.pacman.models.game.arena.Arena;
 import org.ldts.pacman.models.game.Position;
 
 import java.util.ArrayList;

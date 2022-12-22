@@ -1,7 +1,7 @@
-package org.ldts.pacman.models;
+package org.ldts.pacman.models.game.entities;
 
 import org.ldts.pacman.models.game.Position;
-import org.ldts.pacman.models.game.entities.MovableEntity;
+import org.ldts.pacman.models.game.arena.Arena;
 import org.ldts.pacman.models.game.entities.ghost.Ghost;
 import org.ldts.pacman.models.game.entities.ghost.directions.GhostDirectionDown;
 import org.ldts.pacman.models.game.entities.ghost.directions.GhostDirectionLeft;

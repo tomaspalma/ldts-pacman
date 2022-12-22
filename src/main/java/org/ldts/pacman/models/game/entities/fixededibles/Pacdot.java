@@ -1,7 +1,7 @@
 package org.ldts.pacman.models.game.entities.fixededibles;
 
 import com.googlecode.lanterna.TextColor;
-import org.ldts.pacman.models.Arena;
+import org.ldts.pacman.models.game.arena.Arena;
 import org.ldts.pacman.models.game.Position;
 
 public class Pacdot extends FixedEdible {

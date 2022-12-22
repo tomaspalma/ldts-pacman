@@ -1,8 +1,7 @@
 package org.ldts.pacman.models
 
-import org.ldts.pacman.models.game.GhostHouse
+import org.ldts.pacman.models.game.arena.ghosthouse.GhostHouse
 import org.ldts.pacman.models.game.Position
-import org.ldts.pacman.models.game.entities.ghost.states.GhostHouseState
 import spock.lang.Specification
 
 class GhostHouseTest extends Specification {

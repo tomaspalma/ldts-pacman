@@ -1,6 +1,7 @@
 package org.ldts.pacman.models
 
 import org.ldts.pacman.models.game.Position
+import org.ldts.pacman.models.game.arena.Arena
 import org.ldts.pacman.models.game.entities.ghost.Pinky
 import org.ldts.pacman.models.game.entities.ghost.directions.GhostDirectionDown
 import org.ldts.pacman.models.game.entities.ghost.directions.GhostDirectionLeft

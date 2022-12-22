@@ -1,6 +1,8 @@
-package org.ldts.pacman.models;
+package org.ldts.pacman.models.game.arena;
 
-import org.ldts.pacman.models.game.GhostHouse;
+import org.ldts.pacman.models.game.arena.levels.sequences.DefaultDuringSequenceLoader;
+import org.ldts.pacman.models.game.arena.levels.sequences.DefaultStartSequenceLoader;
+import org.ldts.pacman.models.game.arena.ghosthouse.GhostHouse;
 import org.ldts.pacman.models.game.entities.Obstacle;
 import org.ldts.pacman.models.game.Position;
 import org.ldts.pacman.models.game.arena.grid.Tile;

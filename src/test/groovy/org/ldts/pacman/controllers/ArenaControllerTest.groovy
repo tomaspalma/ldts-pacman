@@ -1,12 +1,11 @@
 package org.ldts.pacman.controllers
 
 import org.ldts.pacman.Game
-import javax.sound.*;
 import org.ldts.pacman.gui.GUI
-import org.ldts.pacman.models.Arena
-import org.ldts.pacman.models.GameActions
-import org.ldts.pacman.models.GhostDuringStateSequence
-import org.ldts.pacman.models.SpecificGhostStartSequence
+import org.ldts.pacman.models.game.arena.Arena
+import org.ldts.pacman.models.game.GameActions
+import org.ldts.pacman.models.game.arena.levels.sequences.GhostDuringStateSequence
+import org.ldts.pacman.models.game.arena.levels.sequences.SpecificGhostStartSequence
 import org.ldts.pacman.models.game.Clock
 import org.ldts.pacman.models.game.arena.levels.GameLevel
 import org.ldts.pacman.models.game.entities.fixededibles.FixedEdible
@@ -18,18 +17,11 @@ import org.ldts.pacman.models.game.entities.ghost.RegularGhost
 import org.ldts.pacman.models.game.entities.ghost.states.FrightenedState
 import org.ldts.pacman.models.game.entities.pacman.Pacman
 import org.ldts.pacman.models.game.Position
-import org.ldts.pacman.models.menus.GameOverMenu
 import org.ldts.pacman.models.menus.PauseMenu
 import org.ldts.pacman.sounds.SFX
 import org.ldts.pacman.states.ArenaState
 import org.ldts.pacman.states.menus.PauseMenuState
-import org.ldts.pacman.states.menus.RegularMenuState
 import spock.lang.Specification
-
-import javax.sound.sampled.AudioSystem
-import javax.sound.sampled.Line
-import javax.sound.sampled.LineUnavailableException
-import javax.sound.sampled.Mixer
 
 class ArenaControllerTest extends Specification {
     private def arena

@@ -2,7 +2,7 @@ package org.ldts.pacman.states;
 
 import org.ldts.pacman.controllers.ArenaController;
 import org.ldts.pacman.controllers.Controller;
-import org.ldts.pacman.models.Arena;
+import org.ldts.pacman.models.game.arena.Arena;
 import org.ldts.pacman.viewers.ArenaViewer;
 import org.ldts.pacman.viewers.Viewer;
 

@@ -2,7 +2,7 @@ package org.ldts.pacman.controllers.menus;
 
 import org.ldts.pacman.Game;
 import org.ldts.pacman.controllers.Controller;
-import org.ldts.pacman.models.GameActions;
+import org.ldts.pacman.models.game.GameActions;
 import org.ldts.pacman.models.menus.PauseMenu;
 
 import java.io.IOException;

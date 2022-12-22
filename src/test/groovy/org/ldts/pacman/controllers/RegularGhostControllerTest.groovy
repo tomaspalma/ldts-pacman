@@ -1,8 +1,8 @@
 package org.ldts.pacman.controllers
 
 import org.ldts.pacman.Game
-import org.ldts.pacman.models.Arena
-import org.ldts.pacman.models.GameActions
+import org.ldts.pacman.models.game.arena.Arena
+import org.ldts.pacman.models.game.GameActions
 import org.ldts.pacman.models.game.Position
 import org.ldts.pacman.models.game.entities.ghost.Clyde
 import org.ldts.pacman.models.game.entities.ghost.Ghost

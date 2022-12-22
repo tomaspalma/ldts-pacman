@@ -1,4 +1,4 @@
-package org.ldts.pacman.models;
+package org.ldts.pacman.models.game;
 
 public class GameActions {
 

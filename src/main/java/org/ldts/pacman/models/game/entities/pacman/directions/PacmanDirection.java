@@ -1,7 +1,7 @@
 package org.ldts.pacman.models.game.entities.pacman.directions;
 
 import org.ldts.pacman.models.game.entities.MovableEntity;
-import org.ldts.pacman.models.MovableEntityDirection;
+import org.ldts.pacman.models.game.entities.MovableEntityDirection;
 import org.ldts.pacman.models.game.Position;
 
 public abstract class PacmanDirection extends MovableEntityDirection {

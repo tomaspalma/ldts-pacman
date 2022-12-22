@@ -3,12 +3,11 @@ package org.ldts.pacman.models
 import com.googlecode.lanterna.TextColor
 import org.ldts.pacman.models.game.Clock
 import org.ldts.pacman.models.game.Position
-import org.ldts.pacman.models.game.entities.pacman.Pacman
-import org.ldts.pacman.models.game.entities.pacman.animations.PacmanAnimation
+import org.ldts.pacman.models.game.arena.Arena
 import org.ldts.pacman.models.game.entities.pacman.animations.PacmanEatingAnimation
-import org.ldts.pacman.models.game.entities.pacman.directions.PacmanDirection
 import org.ldts.pacman.models.game.entities.pacman.directions.PacmanDirectionDown
 import org.ldts.pacman.models.game.entities.pacman.directions.PacmanDirectionRight
+import org.ldts.pacman.models.game.observer.PacmanObserver
 import spock.lang.Specification
 
 class PacmanTest extends Specification {

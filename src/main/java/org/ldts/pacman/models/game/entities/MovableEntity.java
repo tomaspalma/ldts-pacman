@@ -1,7 +1,6 @@
 package org.ldts.pacman.models.game.entities;
 
-import org.ldts.pacman.models.Arena;
-import org.ldts.pacman.models.MovableEntityDirection;
+import org.ldts.pacman.models.game.arena.Arena;
 import org.ldts.pacman.models.game.Position;
 import org.ldts.pacman.models.game.arena.grid.TeletransporterTile;
 import org.ldts.pacman.models.game.arena.grid.Tile;

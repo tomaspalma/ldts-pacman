@@ -3,7 +3,7 @@ package org.ldts.pacman.states;
 import org.ldts.pacman.Game;
 import org.ldts.pacman.controllers.Controller;
 import org.ldts.pacman.gui.GUI;
-import org.ldts.pacman.models.GameActions;
+import org.ldts.pacman.models.game.GameActions;
 import org.ldts.pacman.viewers.Viewer;
 
 import java.io.IOException;

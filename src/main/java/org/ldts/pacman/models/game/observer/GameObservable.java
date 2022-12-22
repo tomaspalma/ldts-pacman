@@ -1,4 +1,4 @@
-package org.ldts.pacman.models;
+package org.ldts.pacman.models.game.observer;
 
 public interface GameObservable {
     void addObserver(GameObserver observer);

@@ -1,6 +1,6 @@
 package org.ldts.pacman.models.game.arena.loaders.map;
 
-import org.ldts.pacman.models.Arena;
+import org.ldts.pacman.models.game.arena.Arena;
 import org.ldts.pacman.models.game.entities.Obstacle;
 import org.ldts.pacman.models.game.Position;
 import org.ldts.pacman.models.game.entities.fixededibles.FixedEdible;

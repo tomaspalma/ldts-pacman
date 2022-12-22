@@ -1,6 +1,8 @@
 package org.ldts.pacman.models.game.arena.loaders.map;
 
 import org.ldts.pacman.models.game.*;
+import org.ldts.pacman.models.game.arena.ghosthouse.GhostHouse;
+import org.ldts.pacman.models.game.arena.ghosthouse.GhostHouseGate;
 import org.ldts.pacman.models.game.arena.grid.RegularTile;
 import org.ldts.pacman.models.game.arena.grid.TeletransporterTile;
 import org.ldts.pacman.models.game.entities.EmptySpace;
@@ -13,7 +15,7 @@ import org.ldts.pacman.models.game.entities.fixededibles.Pacdot;
 import org.ldts.pacman.models.game.entities.fixededibles.PowerPellet;
 import org.ldts.pacman.models.game.entities.ghost.*;
 import org.ldts.pacman.models.game.entities.pacman.Pacman;
-import org.ldts.pacman.models.Arena;
+import org.ldts.pacman.models.game.arena.Arena;
 
 import java.io.BufferedReader;
 import java.io.IOException;

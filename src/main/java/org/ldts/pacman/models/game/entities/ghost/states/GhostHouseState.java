@@ -1,6 +1,6 @@
 package org.ldts.pacman.models.game.entities.ghost.states;
 
-import org.ldts.pacman.models.GameActions;
+import org.ldts.pacman.models.game.GameActions;
 import org.ldts.pacman.models.game.Position;
 import org.ldts.pacman.models.game.entities.ghost.Ghost;
 

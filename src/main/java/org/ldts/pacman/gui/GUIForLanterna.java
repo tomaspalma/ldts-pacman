@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-import org.ldts.pacman.models.GameActions;
+import org.ldts.pacman.models.game.GameActions;
 import org.ldts.pacman.models.game.Position;
 
 public class GUIForLanterna implements GUI {

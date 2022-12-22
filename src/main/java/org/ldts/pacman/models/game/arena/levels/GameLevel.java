@@ -1,10 +1,12 @@
 package org.ldts.pacman.models.game.arena.levels;
 
-import org.ldts.pacman.models.GhostDuringStateSequence;
-import org.ldts.pacman.models.LevelStateSequence;
-import org.ldts.pacman.models.SpecificGhostStartSequence;
+import org.ldts.pacman.models.game.arena.levels.sequences.GhostDuringStateSequence;
+import org.ldts.pacman.models.game.arena.levels.sequences.LevelStateSequence;
+import org.ldts.pacman.models.game.arena.levels.sequences.SpecificGhostStartSequence;
 import org.ldts.pacman.models.game.Clock;
 import org.ldts.pacman.models.game.entities.ghost.RegularGhost;
+import org.ldts.pacman.models.game.entities.ghost.states.ChasingState;
+import org.ldts.pacman.models.game.entities.ghost.states.ScatteringState;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
@@ -75,6 +77,8 @@ public class GameLevel {
     public void step() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         this.clock.step();
 
+        System.out.println(this.otherDuringSequencesRemaining);
+
         if(this.otherStartSequencesRemaining)
             this.stepStartSequence();
         else if(this.otherDuringSequencesRemaining)
@@ -104,11 +108,23 @@ public class GameLevel {
 
     public void transformItselfIntoAnotherLevel() {
         this.restart();
-        for(GhostDuringStateSequence g: duringStateMachine) {
-            g.setTimeToBeActivatedInMilliseconds(g.getTimeToBeActivatedInMilliseconds() - (6000L * multiplier));
-        }
+
+        this.changeStartStateMachine();
+        this.changeDuringStateMachine();
+    }
+    
+    private void changeStartStateMachine() {
         for(SpecificGhostStartSequence g: startStateMachine) {
             g.setTimeToBeActivatedInMilliseconds(g.getTimeToBeActivatedInMilliseconds() - (500L * multiplier));
+        }
+    }
+    
+    private void changeDuringStateMachine() {
+        for (GhostDuringStateSequence g : duringStateMachine) {
+            if (g.getGhostState() == ChasingState.class)
+                g.setTimeToBeActivatedInMilliseconds(g.getTimeToBeActivatedInMilliseconds() - (1000L * multiplier));
+            else if(g.getGhostState() == ScatteringState.class)
+                g.setTimeToBeActivatedInMilliseconds(g.getTimeToBeActivatedInMilliseconds() + (500L * multiplier));
         }
     }
 
@@ -134,6 +150,8 @@ public class GameLevel {
 
     private void stepDuringSequence() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         GhostDuringStateSequence ghostDuringStateSequence = this.duringStateMachine.get(duringStateMachineCounter);
+
+
         if(isTimeToActivate(ghostDuringStateSequence)) {
             ghostDuringStateSequence.execute(this.ghostsList);
             this.duringStateMachineCounter = (this.duringStateMachineCounter + 1) % this.duringStateMachine.size();

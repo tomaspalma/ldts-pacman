@@ -206,11 +206,11 @@ when the power pellet notifies them.
 
 #### KNOWN CODE SMELLS AND REFACTORING SUGGESTIONS
 
-> This section should describe 3 to 5 different code smells that you have identified in your current implementation, and suggest ways in which the code could be refactored to eliminate them. Each smell and refactoring suggestions should be described in its own subsection.
-
 **Example of such a subsection**:
 
 ------
+
+#### REFUSED BEQUEST
 
 #### DATA CLASS
 
@@ -223,9 +223,11 @@ when the power pellet notifies them.
 - Screenshot of coverage report.
 - Link to mutation testing report.
 
-## Units we didn't cover and why
+## Units and mutants we didn't cover and why
 
 - We didn't cover some part of the GameLevel because of clock-related methods that were passing when running
 individually but failling when running all the tests at the same time.
 - We didn't cover some parts of GUI methods because of errors we were having about heap usage to its 
-max size when running some unit tests for said component
+max size when running some unit tests for said component.
+- It's very difficult to perform behaviour testing when a function from a class calls another function from the same class, although
+in some cases we were able to perform state testing.

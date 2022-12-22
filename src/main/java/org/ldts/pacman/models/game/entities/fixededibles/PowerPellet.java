@@ -1,11 +1,11 @@
 package org.ldts.pacman.models.game.entities.fixededibles;
 
 import com.googlecode.lanterna.TextColor;
-import org.ldts.pacman.models.Arena;
-import org.ldts.pacman.models.EatenPowerPelletObserver;
-import org.ldts.pacman.models.GameObserver;
+import org.ldts.pacman.models.game.arena.Arena;
+import org.ldts.pacman.models.game.observer.EatenPowerPelletObserver;
+import org.ldts.pacman.models.game.observer.GameObserver;
 import org.ldts.pacman.models.game.Position;
-import org.ldts.pacman.models.PowerPelletObservable;
+import org.ldts.pacman.models.game.observer.PowerPelletObservable;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,10 +1,10 @@
 package org.ldts.pacman.models.game.arena.loaders.levels;
 
-import org.ldts.pacman.models.Arena;
-import org.ldts.pacman.models.DuringSequenceLoader;
+import org.ldts.pacman.models.game.arena.Arena;
+import org.ldts.pacman.models.game.arena.levels.sequences.DuringSequenceLoader;
 import org.ldts.pacman.models.game.Clock;
 import org.ldts.pacman.models.game.arena.levels.GameLevel;
-import org.ldts.pacman.models.StartSequenceLoader;
+import org.ldts.pacman.models.game.arena.levels.sequences.StartSequenceLoader;
 import org.ldts.pacman.models.game.arena.loaders.ArenaLoader;
 
 // Isto é para os criar um nível

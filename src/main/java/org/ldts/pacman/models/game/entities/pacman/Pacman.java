@@ -1,14 +1,17 @@
 package org.ldts.pacman.models.game.entities.pacman;
 
 import com.googlecode.lanterna.TextColor;
-import org.ldts.pacman.models.*;
 import org.ldts.pacman.models.animations.Animation;
 import org.ldts.pacman.models.game.Clock;
 import org.ldts.pacman.models.game.Position;
+import org.ldts.pacman.models.game.arena.Arena;
 import org.ldts.pacman.models.game.entities.MovableEntity;
 import org.ldts.pacman.models.game.entities.pacman.animations.PacmanAnimation;
 import org.ldts.pacman.models.game.entities.pacman.animations.PacmanEatingAnimation;
 import org.ldts.pacman.models.game.entities.pacman.directions.PacmanDirectionRight;
+import org.ldts.pacman.models.game.observer.GameObserver;
+import org.ldts.pacman.models.game.observer.PacmanObservable;
+import org.ldts.pacman.models.game.observer.PacmanObserver;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,7 @@
 package org.ldts.pacman.models.menus.options;
 
 import org.ldts.pacman.Game;
-import org.ldts.pacman.models.Arena;
+import org.ldts.pacman.models.game.arena.Arena;
 import org.ldts.pacman.states.ArenaState;
 import org.ldts.pacman.states.State;
 

@@ -1,7 +1,7 @@
 package org.ldts.pacman.models.game.arena.grid;
 
-import org.ldts.pacman.models.Arena;
-import org.ldts.pacman.models.game.GhostHouseGate;
+import org.ldts.pacman.models.game.arena.Arena;
+import org.ldts.pacman.models.game.arena.ghosthouse.GhostHouseGate;
 import org.ldts.pacman.models.game.Position;
 import org.ldts.pacman.models.game.entities.EmptySpace;
 import org.ldts.pacman.models.game.entities.Entity;

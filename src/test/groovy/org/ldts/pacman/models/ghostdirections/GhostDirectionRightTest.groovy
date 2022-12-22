@@ -1,6 +1,6 @@
 package org.ldts.pacman.models.ghostdirections
 
-import org.ldts.pacman.models.Arena
+import org.ldts.pacman.models.game.arena.Arena
 import org.ldts.pacman.models.game.Position
 import org.ldts.pacman.models.game.entities.ghost.Ghost
 import org.ldts.pacman.models.game.entities.ghost.Pinky

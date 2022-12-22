@@ -1,14 +1,16 @@
 package org.ldts.pacman.models.game.entities.ghost;
 
 import com.googlecode.lanterna.TextColor;
-import org.ldts.pacman.models.*;
+import org.ldts.pacman.models.game.GameActions;
 import org.ldts.pacman.models.game.Position;
+import org.ldts.pacman.models.game.arena.Arena;
 import org.ldts.pacman.models.game.entities.ghost.states.ChasingState;
 import org.ldts.pacman.models.game.entities.ghost.states.DeadState;
 import org.ldts.pacman.models.game.entities.ghost.states.FrightenedState;
 import org.ldts.pacman.models.game.entities.ghost.states.*;
 import org.ldts.pacman.models.game.entities.ghost.strategies.dying.GhostHouseDyingStrategy;
 import org.ldts.pacman.models.game.entities.ghost.strategies.frightened.FrightenedRunAwayStrategy;
+import org.ldts.pacman.models.game.observer.EatenPowerPelletObserver;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

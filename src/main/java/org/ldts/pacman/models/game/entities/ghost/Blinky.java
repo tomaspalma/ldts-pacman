@@ -1,7 +1,7 @@
 package org.ldts.pacman.models.game.entities.ghost;
 
 import com.googlecode.lanterna.TextColor;
-import org.ldts.pacman.models.Arena;
+import org.ldts.pacman.models.game.arena.Arena;
 import org.ldts.pacman.models.game.Position;
 import org.ldts.pacman.models.game.entities.ghost.states.ScatteringState;
 import org.ldts.pacman.models.game.entities.ghost.strategies.chasing.AgressiveChaseStrategy;

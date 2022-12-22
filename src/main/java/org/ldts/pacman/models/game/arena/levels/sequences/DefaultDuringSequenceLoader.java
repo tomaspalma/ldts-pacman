@@ -1,8 +1,7 @@
-package org.ldts.pacman.models;
+package org.ldts.pacman.models.game.arena.levels.sequences;
 
 import org.ldts.pacman.models.game.entities.ghost.RegularGhost;
 import org.ldts.pacman.models.game.entities.ghost.states.ChasingState;
-import org.ldts.pacman.models.game.entities.ghost.states.GhostState;
 import org.ldts.pacman.models.game.entities.ghost.states.ScatteringState;
 
 import java.util.ArrayList;
@@ -16,7 +15,7 @@ public class DefaultDuringSequenceLoader extends DuringSequenceLoader {
 
     @Override
     public List<GhostDuringStateSequence> populate(float multiplier) {
-        return new ArrayList<>(Arrays.asList(new GhostDuringStateSequence(ScatteringState.class, 8000),
-                new GhostDuringStateSequence(ChasingState.class, 14000)));
+        return new ArrayList<>(Arrays.asList(new GhostDuringStateSequence(ScatteringState.class, 4000),
+                new GhostDuringStateSequence(ChasingState.class, 10000)));
     }
 }

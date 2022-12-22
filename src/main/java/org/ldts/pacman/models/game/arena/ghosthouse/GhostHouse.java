@@ -1,5 +1,7 @@
-package org.ldts.pacman.models.game;
+package org.ldts.pacman.models.game.arena.ghosthouse;
 
+import org.ldts.pacman.models.game.Position;
+import org.ldts.pacman.models.game.Vector;
 import org.ldts.pacman.models.game.entities.ghost.Ghost;
 
 import java.util.ArrayList;
@@ -18,7 +20,7 @@ public class GhostHouse {
         this.upperLeftPosition = upperLeftPosition;
         this.width = width;
         this.height = height;
-        
+
         this.gatePosition = new Vector(this.width / 2, 0).getPositionBasedOnSumWith(upperLeftPosition);
     }
 

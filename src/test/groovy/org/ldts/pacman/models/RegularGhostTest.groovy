@@ -1,10 +1,11 @@
 package org.ldts.pacman.models
 
 import com.googlecode.lanterna.TextColor
+import org.ldts.pacman.models.game.GameActions
 import org.ldts.pacman.models.game.Position
+import org.ldts.pacman.models.game.arena.Arena
 import org.ldts.pacman.models.game.entities.Obstacle
 import org.ldts.pacman.models.game.entities.ghost.Inky
-import org.ldts.pacman.models.game.entities.ghost.Pinky
 import org.ldts.pacman.models.game.entities.ghost.RegularGhost
 import org.ldts.pacman.models.game.entities.ghost.states.ChasingState
 import org.ldts.pacman.models.game.entities.ghost.states.DeadState
