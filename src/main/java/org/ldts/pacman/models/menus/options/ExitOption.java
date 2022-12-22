@@ -3,9 +3,7 @@ package org.ldts.pacman.models.menus.options;
 import org.ldts.pacman.Game;
 import org.ldts.pacman.states.State;
 
-import java.io.IOException;
-
-public class ExitOption extends Option {
+public class ExitOption extends MenuOption {
     public ExitOption(String message) {
         super(message);
     }

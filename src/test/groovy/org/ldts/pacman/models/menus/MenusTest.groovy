@@ -3,6 +3,7 @@ package org.ldts.pacman.models.menus
 import com.googlecode.lanterna.TextColor
 import org.codehaus.groovy.transform.tailrec.GotoRecurHereException
 import org.ldts.pacman.Game
+import org.ldts.pacman.models.game.GameActions
 import org.ldts.pacman.models.menus.options.ExitOption
 import org.ldts.pacman.models.menus.options.GoToMainMenuOption
 import org.ldts.pacman.models.menus.options.PlayOption

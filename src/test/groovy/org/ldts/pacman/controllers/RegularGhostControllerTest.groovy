@@ -155,6 +155,15 @@ class RegularGhostControllerTest extends Specification{
             regularGhostController.stateChangedIn(ghost) == true
     }
 
+    def "We need to correctly detect if a ghost didn't change state"() {
+        given:
+            def ghost = new Pinky(new Position(5,5), arena)
+            ghost.setCurrentStateTo(new GhostHouseState(ghost))
+            ghost.setCurrentStateTo(new GhostHouseState(ghost))
+        expect:
+            regularGhostController.stateChangedIn(ghost) == false
+    }
+
     def "Move ghost needs to be able to effectively make changes in both the direction and position of the ghost"() {
         given:
             def ghost = new Inky(new Position(1, 12), arena)
@@ -179,4 +188,14 @@ class RegularGhostControllerTest extends Specification{
             ghost.getPreviousState() instanceof GhostHouseState
     }
 
+    def "When putting ghosts back in initial state it should call return to original state on regular ghost"() {
+        given:
+        arena.getRegularGhostsList().clear()
+        def ghost = Mock(RegularGhost.class)
+        arena.getRegularGhostsList().add(ghost)
+        when:
+        regularGhostController.putGhostsBackInInitialState()
+        then:
+        1 * ghost.returnToOriginalState()
+    }
 }

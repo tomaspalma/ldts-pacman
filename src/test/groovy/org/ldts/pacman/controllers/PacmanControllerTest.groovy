@@ -6,6 +6,7 @@ import org.ldts.pacman.models.game.GameActions
 import org.ldts.pacman.models.game.Position
 import org.ldts.pacman.models.game.entities.fixededibles.FixedEdible
 import org.ldts.pacman.models.game.entities.ghost.Pinky
+import org.ldts.pacman.models.game.entities.ghost.RegularGhost
 import org.ldts.pacman.models.game.entities.pacman.Pacman
 import org.ldts.pacman.models.game.entities.pacman.animations.PacmanAnimation
 import org.ldts.pacman.models.game.entities.pacman.animations.PacmanEatingAnimation
@@ -139,4 +140,21 @@ class PacmanControllerTest extends Specification {
         then:
             1 * pacman.notifyObserversItAteFixedEdibleAt(pos)
     }
+
+    def "If pacman is able to move, pacman should notify notify its observers accordingly"() {
+        given:
+        def pos = new Position(5, 5)
+        def fixedEdible = Mock(FixedEdible.class)
+        def tile = arena.getGameGrid().get(pos.getY() - 1).get(pos.getX())
+        def pacman = Mock(Pacman.class)
+        pacController.setPacman(pacman)
+        tile.put(fixedEdible)
+        when:
+        pacController.tryToChangeToWantedDirection();
+        then:
+        1 * pacman.notifyObserversItAteFixedEdibleAt(_ as Position)
+    }
+
+
+
 }

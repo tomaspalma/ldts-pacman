@@ -13,6 +13,14 @@ import java.io.IOException;
 public class RegularMenuController extends Controller<Menu> {
     private IntroSound music;
 
+    public void setMusic(IntroSound music) {
+        this.music = music;
+    }
+
+    public IntroSound getMusic() {
+        return this.music;
+    }
+
     public RegularMenuController(Menu model) {
         super(model);
         try {

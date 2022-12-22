@@ -7,7 +7,7 @@ import org.ldts.pacman.states.State;
 
 import java.io.IOException;
 
-public class PlayOption extends Option {
+public class PlayOption extends MenuOption {
     public PlayOption(String message) {
         super(message);
     }

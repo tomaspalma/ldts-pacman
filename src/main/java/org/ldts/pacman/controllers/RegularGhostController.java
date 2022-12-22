@@ -104,7 +104,6 @@ public class RegularGhostController extends Controller<Arena> {
         if(onFrightenedState || onDeadState) return;
 
         if(position.equals(getModel().getPacman().getPosition())) {
-            System.out.println(ghost.getCurrentState());
             parentController.processPacmanLoseLife();
         }
     }

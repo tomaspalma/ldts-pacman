@@ -316,4 +316,9 @@ class ArenaControllerTest extends Specification {
             arena.getGeneralFixedEdibleList().size() == arena.getEatenFixedEdiblePool().size()
     }
 
+    def "We should be able to know if the sounds are silenced"() {
+        expect:
+            arenaController.areSoundsSilenced() == true
+    }
+
 }

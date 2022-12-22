@@ -5,7 +5,7 @@ import org.ldts.pacman.states.State;
 
 import java.io.IOException;
 
-public class ResumeOption extends Option {
+public class ResumeOption extends MenuOption {
     public ResumeOption(String message) {
         super(message);
     }

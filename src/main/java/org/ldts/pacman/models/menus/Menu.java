@@ -1,7 +1,7 @@
 package org.ldts.pacman.models.menus;
 
 import com.googlecode.lanterna.TextColor;
-import org.ldts.pacman.models.menus.options.Option;
+import org.ldts.pacman.models.menus.options.MenuOption;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import static java.lang.Math.abs;
 public abstract class Menu {
     protected TextColor.ANSI color;
     protected String title;
-    protected List<Option> options;
+    protected List<MenuOption> options;
     protected int currentOption;
 
     protected Menu() {
@@ -44,11 +44,11 @@ public abstract class Menu {
         return currentOption;
     }
 
-    public Option getCurrentOption() {
+    public MenuOption getCurrentOption() {
         return options.get(currentOption);
     }
 
-    public Option getOption(int i) {
+    public MenuOption getOption(int i) {
         return options.get(i);
     }
 }

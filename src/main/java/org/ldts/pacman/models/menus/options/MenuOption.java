@@ -5,10 +5,10 @@ import org.ldts.pacman.states.State;
 
 import java.io.IOException;
 
-public abstract class Option {
+public abstract class MenuOption {
     final private String message;
 
-    protected Option(String message) {
+    protected MenuOption(String message) {
         this.message = message;
     }
 

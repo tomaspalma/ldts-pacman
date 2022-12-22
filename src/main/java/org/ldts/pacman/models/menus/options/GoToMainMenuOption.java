@@ -5,7 +5,7 @@ import org.ldts.pacman.models.menus.MainMenu;
 import org.ldts.pacman.states.State;
 import org.ldts.pacman.states.menus.RegularMenuState;
 
-public class GoToMainMenuOption extends Option {
+public class GoToMainMenuOption extends MenuOption {
     public GoToMainMenuOption(String message) {
         super(message);
     }
