@@ -35,13 +35,13 @@ simply read from a text file
 - **Different ghosts strategies**
 
 Each of the for ghosts has its own unique strategy when they are in chase mode or scatter mode, although they all
-share the same frigthened and dying strategy.
+share the same frightened and dying strategy.
 
-- **Time controlled  changes on the current state of the ghosts during game execution**
+- **Time controlled changes on the current state of the ghosts during game execution**
 
-Each level has an internal clock that, based on the current time ellapsed, it will execute every changes on a ghost (either on a ghost
-or on all ghosts) that are defined in each state of our state machine and then it will transition to a state whose
-time to activate is not lesser than the ellapsed.
+Each level has an internal clock that, based on the current time elapsed, will execute every change on a ghost (either on a ghost
+or on all ghosts) that are defined in each state of our state machine, and then it will transition to a state whose
+time to activate is not lesser than the elapsed.
 
 - **Level changes when the user passes to the next level**
 
@@ -70,14 +70,14 @@ All of the planned features except better menus were implemented.
 
 ### DESIGN
 
-The UML for the designs were split into pieces because of the complexity of the UML because of the 
-amount of classes we ended up creating in our program. Also, more specificly zoomed in UML about the design patterns we implemented
+The UML class diagram for the designs was split into pieces, given of the complexity of the UML because of the 
+amount of classes we ended up creating in our program. Also, zoomed in UML about the design patterns we implemented
 into our program can be found in the specific topics about them in this report.
 
 ### SOLID respecting design architecture
 
-We wanted a design architecture that respected SOLID principles, specially the single responsabilty one, and,
-because of that we decided to go with the MVC approcha given in the theoretical classes.
+We wanted a design architecture that respected SOLID principles, especially the single responsibility one, and,
+because of that we decided to go with the MVC approach given in the theoretical classes.
 
 - **Model**: Contains the structure of the elements that are part of our game and the definition of attributes or functions that will be used by the other two components from the MVC approach. In addition, the model will only contain information about a certain element and other functions that can be called by one or both of the other counterparts of the MVC structure.
 
@@ -113,15 +113,15 @@ Ghosts should behave differently according to their colour and the game's circum
 
 Self-evidently, the pattern to be applied in this situation is the **Strategy** pattern.
 Different strategies are implemented separately in different classes that implement their respective interface depending on the type
-(Chase strategy to tell how the ghosts will behave in the chase stage of the game, as well as the scatter and frightened stragies that
+(Chase strategy to tell how the ghosts will behave in the chase stage of the game, as well as the scatter and frightened strategies that
 are to tell the ghosts what to do in those situations), and these
 strategies are then stored as a dynamically-mutating attribute of the ghosts themselves.
 
 The strategies are going to be different depending on the ghost and the type of ghost, although in regular ghosts,
 they share the same dying and frightened strategy.
 
-Each strategy has then a generate next position method that is used to move the ghosts and make them move in different ways
-because each of the method in each strategy can have a different way of determining the next position.
+Each strategy has a getNextPosition method that is used to move the ghosts in different ways
+because each implementation of the method in each strategy can have a different way of determining the next position.
 
 **Implementation**
 
@@ -142,7 +142,7 @@ we would just need to change it in one place, instead of going to each class tha
 
 **Problem in Context**
 
-The problem is not to choose if they will use a RunAwayFrightenedStrategy or an AgressiveChaseStrategy, but rather
+The problem is not to choose if they will use a RunAwayFrightenedStrategy or an AggressiveChaseStrategy, but rather
 whether they will be using a frightened strategy or a chasing strategy or a scatter, etc 
 
 And we wanted to determine that without a lot of switch or if-else statements.
@@ -189,7 +189,7 @@ that are watching its state.
 
 **Consequences**
 
-- It will be way more easier if we wanted to add another entity that depends on something that the power pellet does because
+- It would be way easier if we wanted to add another entity that depends on something that the power pellet does because
 what it would take would be to just add another observer into the power pellet, making it respect the **open-closed principle**
 - One universally documented consequence is that the subscribers are notified in random order, but that doesn't look
 like a problem in the context of this program.
@@ -203,8 +203,8 @@ undesirable in terms of efficiency.
 **The problem in context**
 
 If we delegated the work to the pacman controller to change the arena itself when it detects pacman ate an edible or hit a ghost
-we would be violating the **Single-Responsability principle** and, because of that, we wanted some way to notify the arena controller
-itself and then the arena controller changes the arena because that's his responsability, not pacman's nor pacman controllers'.
+we would be violating the **Single-Responsibility principle** and, because of that, we wanted some way to notify the arena controller
+itself and then the arena controller changes the arena because that's its responsibility, not pacman's nor pacman controller's.
 
 **The Pattern**
 
@@ -220,7 +220,7 @@ PacmanObservable interface.
 
 **Consequences**
 
-- It will be more easier if we wanted to add another entity observing what pacman is doing than if we had a bunch of conditinals.
+- It will be easier if we wanted to add another entity observing what pacman is doing than if we had a bunch of conditionals.
 - One universally documented consequence is that the subscribers are notified in random order, but that doesn't look
   like a problem in the context of this program.
 - It removes the need for the arena controller to always be checking if pacman does anything worth noticing, letting
@@ -279,9 +279,6 @@ we are in the menu or if we are in the gaming part itself)
 - [MenuState](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/intermediate-delivery/src/main/java/org/ldts/pacman/states/MenuState.java)
 - [State](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/intermediate-delivery/src/main/java/org/ldts/pacman/states/State.java)
 
-We currently only have one state because of this being an intermediate delivery. However, we decided to already follow with this pattern
-as it provides more scalability and we  are eventually going to add a menu state to the picture.
-
 **Consequences**
 
 - Instead of having a lot of conditionals in the code of the Game class in order to alter the behaviour
@@ -292,32 +289,28 @@ stays more well organized
 
 ### Ability for timing controlled ghost state switches to turn the game more dynamic
 
-Although this technically isn't a formal design pattern given in classes, it's a design matter.
+Although this technically isn't a formal design pattern taught in classes, it's a design matter.
 
 **The problem in context**
 
-Like the more popular versions of pacman, we anted t he ability to be able to, depending on time, 
+Like the more popular versions of pacman, we wanted the ability to, depending on time, 
 switch the ghosts from scatter state to chase state after some time. In the real Pacman game the ghosts
-will change their state from chase to scatter and vice versa without player interaction, just based on timing with each level
+change their state from chase to scatter and vice versa without player interaction, just based on timing, with each level
 having its own timings and phases.
 
 **The implementation**
 
-We chose to implement two state machines (*NFA's*):
+We chose to implement two state machines (*NFAs*):
 - One to control the start sequences that, in the case of the regular ghosts, will determine when each of the three ghosts
 that start inside the ghost house will leave it
 - Another to control during sequences that in the case of regular ghosts will result in a transition to a certain state
 all at the same time
 
-#### KNOWN CODE SMELLS AND REFACTORING SUGGESTIONS
-
-**Example of such a subsection**:
-
-------
+### KNOWN CODE SMELLS AND REFACTORING SUGGESTIONS
 
 #### REFUSED BEQUEST
 
-ScatteringState and GhostHouseState don't apply any changes to the Ghost, so their applyChangesToGhost overridden method
+ScatteringState and GhostHouseState don't apply any changes to the Ghost, so their implementation of the applyChangesToGhost method
 is empty. However, if GhostState didn't have this method we would need to have two virtually equal abstract classes, one
 with, and the other one without, that method.
 
@@ -332,18 +325,18 @@ necessary that the modules that manipulate and show the data envy the modules th
 Arena and ArenaController are both very large because they hold all data related to gameplay and manipulate it,
 respectively.
 
-### MESSAGE CHAINS
+#### MESSAGE CHAINS
 
 Methods need to delegate functionality to other objects which may lead to many successive requests for an object, like
 *getModel().getLevels().get(this.currentLevel).getClock()*. If corrected by hiding the delegation in a new method,
-though, it may become unclear what object is actually executing
+though, it may become unclear which object is actually executing the functionality.
 
 ### TESTING
 
 - Screenshot of coverage report.
 - Link to mutation testing report.
 
-## Units and mutants we didn't cover and why
+### Units and mutants we didn't cover and why
 
 - We didn't cover some part of the GameLevel because of clock-related methods that were passing when running
 individually but failing when running all the tests at the same time.
