@@ -1,6 +1,12 @@
 import com.googlecode.lanterna.TerminalSize
+import com.googlecode.lanterna.TextColor
+import com.googlecode.lanterna.graphics.TextGraphics
+import com.googlecode.lanterna.input.KeyType
 import com.googlecode.lanterna.screen.Screen
+import com.googlecode.lanterna.terminal.Terminal
 import org.ldts.pacman.gui.GUIForLanterna
+import org.ldts.pacman.models.game.GameActions
+import org.ldts.pacman.models.game.Position
 import spock.lang.Specification
 
 class GUIForLanternaTest extends Specification {
@@ -61,11 +67,11 @@ class GUIForLanternaTest extends Specification {
             1 * screen.clear()
     }
 
-    /*def "We should be able to invoke the correct methods in writing to screen"() {
+    def "We should be able to invoke the correct methods in writing to screen"() {
         given:
             def screen = Mock(Screen)
             def gui = new GUIForLanterna(screen)
-            def textGraphics = Mock(TextGraphics)
+            def textGraphics = Mock(TextGraphics.class)
             screen.newTextGraphics() >> textGraphics
         when:
             gui.writeToScreen(new Position(5, 5),
@@ -73,9 +79,9 @@ class GUIForLanternaTest extends Specification {
         then:
             1 * textGraphics.setForegroundColor(TextColor.ANSI.WHITE)
             1 * textGraphics.putString(_, "test")
-    }*/
+    }
 
-    /*def "Draw element function should set the foreground color and put string of draw symbol"() {
+    def "Draw element function should set the foreground color and put string of draw symbol"() {
         given:
             def screenMock = Stub(Screen.class)
             def tgraphicsMock = Mock(TextGraphics.class)
@@ -86,9 +92,9 @@ class GUIForLanternaTest extends Specification {
         then:
             1 * tgraphicsMock.setForegroundColor(TextColor.ANSI.WHITE)
             1 * tgraphicsMock.putString(0, 0, "")
-    }*/
+    }
 
-    /*def "Depending on the key the user inputs, it should return the correct game action"() {
+    def "Depending on the key the user inputs, it should return the correct game action"() {
         given:
             def terminalMock = Stub(Terminal.class)
             def keystrokeMock = Mock(com.googlecode.lanterna.input.KeyStroke.class)
@@ -99,9 +105,9 @@ class GUIForLanternaTest extends Specification {
             def result = lanternaGUI.getNextUserInput()
         then:
             result == GameActions.ControlActions.MOVE_UP
-    }*/
+    }
 
-    /*def "When receiving the down arrow key it should return the game action to move down"() {
+    def "When receiving the down arrow key it should return the game action to move down"() {
         given:
             def terminalMock = Stub(Terminal.class)
             def keystrokeMock = Mock(com.googlecode.lanterna.input.KeyStroke.class)
@@ -112,9 +118,9 @@ class GUIForLanternaTest extends Specification {
             def result = lanternaGUI.getNextUserInput()
         then:
             result == GameActions.ControlActions.MOVE_DOWN
-    }*/
+    }
 
-    /*def "When receiving the left arrow key it should return the game action to move left"() {
+    def "When receiving the left arrow key it should return the game action to move left"() {
         given:
             def terminalMock = Stub(Terminal.class)
             def keystrokeMock = Mock(com.googlecode.lanterna.input.KeyStroke.class)
@@ -125,9 +131,9 @@ class GUIForLanternaTest extends Specification {
             def result = lanternaGUI.getNextUserInput()
         then:
             result == GameActions.ControlActions.MOVE_LEFT
-    }*/
+    }
 
-    /*def "When receiving the right arrow key it should return the game action to move right"() {
+    def "When receiving the right arrow key it should return the game action to move right"() {
         given:
             def terminalMock = Stub(Terminal.class)
             def keystrokeMock = Mock(com.googlecode.lanterna.input.KeyStroke.class)
@@ -138,9 +144,9 @@ class GUIForLanternaTest extends Specification {
             def result = lanternaGUI.getNextUserInput()
         then:
             result == GameActions.ControlActions.MOVE_RIGHT
-    }*/
+    }
 
-    /*def "When receiving the ENTER key it should return the game action to select something"() {
+    def "When receiving the ENTER key it should return the game action to select something"() {
         given:
             def terminalMock = Stub(Terminal.class)
             def keystrokeMock = Mock(com.googlecode.lanterna.input.KeyStroke.class)
@@ -151,9 +157,9 @@ class GUIForLanternaTest extends Specification {
             def result = lanternaGUI.getNextUserInput()
         then:
             result == GameActions.ControlActions.SELECT
-    }*/
+    }
 
-    /*def "When receiving the ESCAPE key it should return the game action to switch to pause main menu"() {
+    def "When receiving the ESCAPE key it should return the game action to switch to pause main menu"() {
         given:
             def terminalMock = Stub(Terminal.class)
             def keystrokeMock = Mock(com.googlecode.lanterna.input.KeyStroke.class)
@@ -164,9 +170,9 @@ class GUIForLanternaTest extends Specification {
             def result = lanternaGUI.getNextUserInput()
         then:
             result == GameActions.ControlActions.SWITCH_TO_PAUSE_MENU
-    }*/
+    }
 
-     /*def "When receiving the 'q' char exit the game"() {
+     def "When receiving the 'q' char exit the game"() {
         given:
             def terminalMock = Stub(Terminal.class)
             def keystrokeMock = Mock(com.googlecode.lanterna.input.KeyStroke.class)
@@ -178,9 +184,9 @@ class GUIForLanternaTest extends Specification {
             def result = lanternaGUI.getNextUserInput()
         then:
             result == GameActions.ControlActions.EXIT
-    }*/
+    }
 
-    /*def "When receiving the a key that is not mapped it should return the game action NONE"() {
+    def "When receiving the a key that is not mapped it should return the game action NONE"() {
         given:
             def terminalMock = Stub(Terminal.class)
             def keystrokeMock = Mock(com.googlecode.lanterna.input.KeyStroke.class)
@@ -191,6 +197,5 @@ class GUIForLanternaTest extends Specification {
             def result = lanternaGUI.getNextUserInput()
         then:
             result == GameActions.ControlActions.NONE
-    }*/
-
+    }
 }

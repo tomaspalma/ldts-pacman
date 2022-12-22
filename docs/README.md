@@ -153,6 +153,8 @@ So, we implemented the state pattern, where each ghost has a certain state and t
 to execute the method to generate the next position and then each state will execute the methods from the respective strategies
 of the ghost.
 
+We also use the state of each ghost to determine what the game should do when it its pacman. Basically, each GhostState class has a method that
+returns a GameAction  and then it is verified which action it is and then we act accordingly.
 
 For example, the chasing state will execute whatever the chasing strategy attribute in a ghost may be.
 
