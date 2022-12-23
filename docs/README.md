@@ -485,7 +485,7 @@ clustered because of the code to add the {key, value} pair into it.
 Also in other files like [GUIForLanterna](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/arena/loaders/map/FileMapArenaLoader.java) there are switch statements
 to interpret each different possible game action. However, once again, we didn't find any other easy way to implement this functionality.
 
-### DUPLICATE CODE
+#### DUPLICATE CODE
 
 In the [PauseMenuController](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/controllers/menus/PauseMenuController.java) and the [RegularMenuController](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/controllers/menus/RegularMenuController.java)
 there's duplicated code because each controller has its own switch statement to see which action it receives
