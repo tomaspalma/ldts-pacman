@@ -318,6 +318,9 @@ In order to isolate the concrete implementation of the *Lanterna* Library we fol
 a buffer between the complex implementation of the Lanterna library and our game which will not use all the functionality
 of Lanterna.
 
+**Note:** We noticed we forgot to mention this pattern in the demo in the pratical class. However, it was already
+present in the intermediate delivery code and report.
+
 **The implementation**
 
 ![](https://cdn.discordapp.com/attachments/1039541372723662868/1045298116083064893/image.png)
@@ -505,27 +508,27 @@ the state of the game and the code is fairly simple.
 
 **Global**
 
-![](https://cdn.discordapp.com/attachments/1019715937009672223/1055638054863384617/image.png)
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055896771877949480/image.png)
 
 **Controllers**
 
-![](https://cdn.discordapp.com/attachments/1019715937009672223/1055638778863173752/image.png)
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055896967563194468/image.png)
 
 **GUI**
 
-![](https://cdn.discordapp.com/attachments/1019715937009672223/1055639142773571584/image.png)
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055897095564963901/image.png)
 
 **Sounds**
 
-![](https://cdn.discordapp.com/attachments/1019715937009672223/1055639331919892560/image.png)
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055897263253229640/image.png)
 
 **States**
 
-![](https://cdn.discordapp.com/attachments/1019715937009672223/1055639545569357834/image.png)
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055897431637762118/image.png)
 
 **Viewers**
 
-![](https://cdn.discordapp.com/attachments/1019715937009672223/1055639666151391403/image.png)
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055897594867499069/image.png)
 
 **Menus**
 
@@ -533,7 +536,7 @@ the state of the game and the code is fairly simple.
 
 **Game and animations**
 
-![](https://cdn.discordapp.com/attachments/1019715937009672223/1055640119677300787/image.png)
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055898098687299624/image.png)
 
 [Link to mutation report](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/pitest/index.html)
 
@@ -547,7 +550,7 @@ Screenshot below
 individually but failing when running all the tests at the same time.
 - It's very difficult to perform behaviour testing when a function from a class calls another function from the same class, although
 in some cases we were able to perform state testing.
-- Also, some tests for units that used threads.
+- Also, some tests for units that used threads and GUI methods to load a font
 
 **We also used dependency injection in order to ease the process of testing on units such as:**
 - [PacmanEatingAnimation](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/entities/pacman/animations/PacmanEatingAnimation.java)
