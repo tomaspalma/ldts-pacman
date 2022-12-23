@@ -41,8 +41,6 @@ unless you change the code.
 
 ![](https://cdn.discordapp.com/attachments/1019715937009672223/1055109291239030824/image.png)
 
-Yes, the menus are not very visually appealing.
-
 <hr>
 
 ### Gameplay
@@ -56,45 +54,5 @@ Yes, the menus are not very visually appealing.
 There is a slight pause in the middle but that's because we're trying to show that, after some time, the ghosts go to
 scatter mode and each other will start to go to their respective corners.
 
-# Features
-
-# Ghost behaviour
-
-**There are different kinds of strategies:**
-
-1) Strategy used when they are in chase mode where they can move "inteligently" and can kill pacman.
-2) Strategy used when they scatter. They can still kill pacman but they basically go to each
-of the four corners of the map and during a certain amount of time they just stay there going in circles,
-in order to give the player a break.
-3) Strategy used when they are frightened. All of them move randomly while frightened.
-4) Strategy when they die, which is basically going to the ghost house and then leave.
-
-**Every single regular ghost has a different strategy:**
-
-## Blinky 
-
-The red ghost
-
-### Chasing
-
-This ghost will always target the tile where pacman is at.
-
-So if you stop your pacman, this annoying ghost will come meet you and kindly kill you.
-
-You must do what you can to avoid and keep living.
-
-## Scattering
-
-## Clyde
-
-The orange ghost
-
-### Chasing
-
-This ghost will always target the tile where pacman is at.
-
-So if you stop your pacman, this annoying ghost will come meet you and kindly kill you.
-
-You must do what you can to avoid and keep living.
-
-## Scattering
+This project was develop by Diogo Martins (*202108883*), Rodrigo Martins (*202008868*)
+and Tomás Palma (*202108880*)
