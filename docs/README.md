@@ -63,7 +63,7 @@ where the time can't be lowered no more.
 
 ### PLANNED FEATURES
 
-All of the planned features except better menus were implemented.
+All the planned features except better menus were implemented.
 
 ### DESIGN
 
@@ -167,7 +167,7 @@ because each implementation of the method in each strategy can have a different 
 
 - [AmbushChaseStrategy](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/entities/ghost/strategies/chasing/AmbushChaseStrategy.java)
 - [HybridIgnorantChaseStrategy](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/entities/ghost/strategies/chasing/HybridIgnorantChaseStrategy.java)
-- [AgressiveChaseStrategy](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/entities/ghost/strategies/chasing/AgressiveChaseStrategy.java)
+- [AggressiveChaseStrategy](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/entities/ghost/strategies/chasing/AgressiveChaseStrategy.java)
 - [PatrolChaseStrategy](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/entities/ghost/strategies/chasing/PatrolChaseStrategy.java)
 - [RunToBottomLeftChaseStrategy](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/entities/ghost/strategies/chasing/RunToBottomLeftChaseStrategy.java)
 
@@ -199,7 +199,7 @@ to execute the method to generate the next position and then each state will exe
 of the ghost.
 
 We also use the state of each ghost to determine what the game should do when it its pacman. Basically, each GhostState class has a method that
-returns a GameAction and then it is verified which action it is and then we act accordingly.
+returns a GameAction, and then it is verified which action it is, and then we act accordingly.
 
 For example, the chasing state will execute whatever the chasing strategy attribute in a ghost may be.
 
@@ -388,9 +388,9 @@ You can see the implementation inside the code itself:
 
 **The problem in context**
 
-We wanted to create menus with modular options so that it wouldn't be too dificult to allow the user
-to cycle through them and then to select them without us needing no have more clustered code in order to do the logic. We wanted something
-more dynamic and more easibly extensible.
+We wanted to create menus with modular options so that it wouldn't be too difficult to allow the user
+to cycle through them and then to select them without the need to have more clustered code in order to do the logic. We wanted something
+more dynamic and more easily extensible.
 
 **The pattern**
 
@@ -404,17 +404,21 @@ command (it contains the MenuOptions that then have its own execute methods)
 In this case, the MenuOption and each one of them is the **Command object** since it is where
 is defined what changes will happen upon execution (in this is called select
 just for semantic reasons)
+Each MenuOption is the **Command object** since they have the implementation of what to execute
+(in this case, called *select*for purely semantic reasons).
 
-The **receiver** will be the Game that it will what in reality will perform the operation of a command.
+The **receiver** is the Game, because it performs the operation itself.
 
-The **invoker** will be the Menus that according to the keyboard inputs of the client will cycle through
-the commands and execute them when it's needed.
+The **invokers** are the Menus, that according to the keyboard inputs of the client will cycle through
+and execute the commands when needed.
+
+- [MenuOption](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/menus/options/MenuOption.java)
 
 **Consequences**
 
-- It will resppect the single responsability principle
-since the menus will only have the sole responsability of being navigated
-by and allowing the user to it because instead of knowing the exact implementation logic
+- It will respect the single responsibility principle
+since the menus will only have the sole responsibility of being navigated
+by and allowing the user to select options because, instead of knowing the exact implementation logic
 of the select method of an option, they just know that there's an option
 and that it has to call the execute method (called select in this case).
 - It also respects the **Open-Closed Principle** because it is
@@ -440,13 +444,13 @@ necessary that the modules that manipulate and show the data envy the modules th
 
 #### LARGE CLASS
 
-Arena and ArenaController are two of the most central classes in this game and are two of the most important classes in regards to gameplay.
+Arena and ArenaController are two of the most central classes in this game and are two of the most important classes regarding gameplay.
 
 **Arena** because it holds a lot of data about the map and the entities that are in it, as well
-as methdods to manipulate itself.
+as methods to manipulate itself.
 
 **ArenaController** because it is the controller of the arena and the central controller, containing
-a lot of logic to manipulate a lot features of the arena and its behaviour
+a lot of logic to manipulate a lot of features of the arena and its behaviour
 
 #### MESSAGE CHAINS
 
@@ -461,9 +465,9 @@ though, it may become unclear which object is actually executing the functionali
 In components like the [FileArenaMapLoader](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/arena/loaders/map/FileMapArenaLoader.java) there
 is a big switch statement that can easily get too big if we were to decide to add a lot more entities.
 
-However it was implemented this way because we didn't found any other easy way to do this functionality to
-read every character in the map file and then translate them into entities of the game. We could have also, instead of a switch statement,
-create a static HashMap that contained for each character a function to execute based on that character. However, it would also make the code look
+However, it was implemented this way because we didn't find any other easy way to
+read every character in the map file and then translate them into entities of the game. We could have
+created a static HashMap that contained for each character a function to execute based on that character, instead of a switch statement. However, it would also make the code look
 clustered because of the code to add the {key, value} pair into it.
 
 Also in other files like [GUIForLanterna](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/arena/loaders/map/FileMapArenaLoader.java) there are switch statements
@@ -472,14 +476,14 @@ to interpret each different possible game action. However, once again, we didn't
 ### DUPLICATE CODE
 
 In the [PauseMenuController](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/controllers/menus/PauseMenuController.java) and the [RegularMenuController](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/controllers/menus/RegularMenuController.java)
-there's duplicated code because each controller has its own swich statement to see which action it receives
+there's duplicated code because each controller has its own switch statement to see which action it receives
 and then choose if they cycle through their menu options or exit, for example. 
 
 However, the structure itself is very similar to both controllers. The only thing that changes is one or two statements
-which is one plays music and the other doesn't and we found this situation fairly hard to generalize and couple both of them.
+which is one plays music and the other doesn't, and we found this situation fairly hard to generalize and couple both of them.
 
 We could have made a controller that had some class with a method ```executeSpecialBehaviour()```. However,
-this would then fall to the refused bequest code smell because we would end up with classes that implemnet the executeSpecialBehaviour
+this would then fall to the refused bequest code smell because we would end up with classes that implement the executeSpecialBehaviour
 with no body in it, but maybe in the long term that would be better.
 
 Also, for this game there wouldn't be a need to have more than a pause menu and a regular menu that does not need to store
@@ -531,7 +535,7 @@ Screenshot below
 individually but failing when running all the tests at the same time.
 - It's very difficult to perform behaviour testing when a function from a class calls another function from the same class, although
 in some cases we were able to perform state testing.
-- Also some tests for units that used threads.
+- Also, some tests for units that used threads.
 
 **We also used dependency injection in order to ease the process of testing on units such as:**
 - [PacmanEatingAnimation](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/entities/pacman/animations/PacmanEatingAnimation.java)
@@ -539,7 +543,7 @@ We injected a Clock into the constructor in order to perform behaviour testing o
 
 **Infer / Gradle error prone**
 
-We ran gradle error prone, initially having 30 warnings but we were able to fix them all.
+We ran gradle error prone, initially having 30 warnings, but we were able to fix them all.
 
 ### BETTERCODE HUB
 
