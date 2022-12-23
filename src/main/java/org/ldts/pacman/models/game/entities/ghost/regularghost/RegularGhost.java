@@ -55,10 +55,12 @@ public abstract class RegularGhost extends Ghost implements EatenPowerPelletObse
                     }
                 }
             } catch (InterruptedException e) {
+                System.out.println("exception?");
                 throw new RuntimeException(e);
             }
         });
 
+        thread.setDaemon(true);
         thread.start();
     }
 
