@@ -60,4 +60,14 @@ class SFXTest extends Specification {
         1 * clip.setMicrosecondPosition(0)
         1 * clip.start()
     }
+
+    def "When calling the stop method, it should correctly call the stop method of its sound"() {
+        given:
+            def clip = Mock(Clip.class)
+            def sound = new PacmanMunch(clip)
+        when:
+            sound.stop()
+        then:
+            1 * clip.stop()
+    }
 }

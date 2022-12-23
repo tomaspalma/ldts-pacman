@@ -490,8 +490,9 @@ individually but failing when running all the tests at the same time.
 in some cases we were able to perform state testing.
 - Also some tests for units that used threads.
 
-We also used dependency injection in order to ease the process of testing on units such as:
-- [PacmanEatingAnimation]()
+**We also used dependency injection in order to ease the process of testing on units such as:**
+- [PacmanEatingAnimation](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/entities/pacman/animations/PacmanEatingAnimation.java)
+We injected a Clock into the constructor in order to perform behaviour testing on the internal clock of an animation.
 
 ### BETTERCODE HUB
 

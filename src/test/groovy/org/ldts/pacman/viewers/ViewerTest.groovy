@@ -22,4 +22,11 @@ class ViewerTest extends Specification {
             1 * gui.clear()
             1 * gui.refresh()
     }
+
+    def "When calling the draw function of the GUI it should call the drawEntities specific function of concrete viewer"() {
+        when:
+            viewer.draw(gui)
+        then:
+            1 * gui.drawEntity(_, _, _)
+    }
 }

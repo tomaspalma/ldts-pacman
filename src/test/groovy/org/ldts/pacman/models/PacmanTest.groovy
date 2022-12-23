@@ -32,9 +32,7 @@ class PacmanTest extends Specification {
             def pacDir = Stub(PacmanDirectionDown)
             pacDir.getDrawSymbol() >> "A"
             pacman.setCurrentDirectionTo(pacDir)
-        when:
-            pacman.openMouth()
-        then:
+        expect:
             pacman.getDrawSymbol() == "A"
     }
 
