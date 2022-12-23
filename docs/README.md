@@ -558,3 +558,11 @@ It says that, for less than 10,000 lines of code (*our case*) we should have mor
 recognized.
 
 (These screenshots were taken 22-12-2022, 15-16h00)
+
+### SELF-EVALUATION
+
+**Example**:
+
+- Diogo Martins: 36%
+- Rodrigo Martins: 27%
+- Tomás Palma: 37%
