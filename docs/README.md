@@ -539,7 +539,7 @@ the state of the game and the code is fairly simple.
 
 Screenshot below
 
-![](https://cdn.discordapp.com/attachments/1019715937009672223/1055640511509172355/image.png)
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055873944336470086/image.png)
 
 ### Units and mutants we didn't cover and why
 
