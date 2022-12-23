@@ -388,9 +388,9 @@ You can see the implementation inside the code itself:
 
 **The problem in context**
 
-We wanted to create menus with modular options so that it wouldn't be too dificult to allow the user
-to cycle through them and then to select them without us needing no have more clustered code in order to do the logic. We wanted something
-more dynamic and more easibly extensible.
+We wanted to create menus with modular options so that it wouldn't be too difficult to allow the user
+to cycle through them and then to select them without the need to have more clustered code in order to do the logic. We wanted something
+more dynamic and more easily extensible.
 
 **The pattern**
 
@@ -399,20 +399,21 @@ command (it contains the MenuOptions that then have its own execute methods)
 
 **The implementation**
 
-In this case, the MenuOption and each one of them is the **Command object** since it is where
-is defined what changes will happen upon execution (in this is called select
-just for semantic reasons)
+Each MenuOption is the **Command object** since they have the implementation of what to execute
+(in this case, called *select*for purely semantic reasons).
 
-The **receiver** will be the Game that it will what in reality will perform the operation of a command.
+The **receiver** is the Game, because it performs the operation itself.
 
-The **invoker** will be the Menus that according to the keyboard inputs of the client will cycle through
-the commands and execute them when it's needed.
+The **invokers** are the Menus, that according to the keyboard inputs of the client will cycle through
+and execute the commands when needed.
+
+- [MenuOption](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/menus/options/MenuOption.java)
 
 **Consequences**
 
-- It will resppect the single responsability principle
-since the menus will only have the sole responsability of being navigated
-by and allowing the user to it because instead of knowing the exact implementation logic
+- It will respect the single responsibility principle
+since the menus will only have the sole responsibility of being navigated
+by and allowing the user to select options because, instead of knowing the exact implementation logic
 of the select method of an option, they just know that there's an option
 and that it has to call the execute method (called select in this case).
 - It also respects the **Open-Closed Principle** because it is
