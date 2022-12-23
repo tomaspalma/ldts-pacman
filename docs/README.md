@@ -494,6 +494,10 @@ in some cases we were able to perform state testing.
 - [PacmanEatingAnimation](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/entities/pacman/animations/PacmanEatingAnimation.java)
 We injected a Clock into the constructor in order to perform behaviour testing on the internal clock of an animation.
 
+**Infer / Gradle error prone**
+
+We ran gradle error prone, initially having 30 warnings but we were able to fix them all.
+
 ### BETTERCODE HUB
 
 ![](https://cdn.discordapp.com/attachments/1019715937009672223/1055546446729969755/image.png)

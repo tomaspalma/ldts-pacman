@@ -4,6 +4,8 @@ import org.ldts.pacman.Game
 import org.ldts.pacman.models.game.arena.Arena
 import org.ldts.pacman.models.game.GameActions
 import org.ldts.pacman.models.game.Position
+import org.ldts.pacman.models.game.entities.ghost.directions.GhostDirection
+import org.ldts.pacman.models.game.entities.ghost.regularghost.Blinky
 import org.ldts.pacman.models.game.entities.ghost.regularghost.Clyde
 import org.ldts.pacman.models.game.entities.ghost.Ghost
 import org.ldts.pacman.models.game.entities.ghost.regularghost.Inky
@@ -197,5 +199,65 @@ class RegularGhostControllerTest extends Specification{
         regularGhostController.putGhostsBackInInitialState()
         then:
         1 * ghost.returnToOriginalState()
+    }
+
+    def "When moving a ghost we should set is position and its direction"() {
+        given:
+            def ghost = new Inky(new Position(8, 1), arena)
+            def ghostSpy = Spy(ghost)
+            def newPos = new Position(5, 5)
+        when:
+            regularGhostController.moveGhost(ghostSpy, newPos)
+        then:
+            1 * ghostSpy.setCurrentDirectionTo(_ as GhostDirection)
+            1 * ghostSpy.setPosition(newPos)
+    }
+
+    def "This controller should be able to reset the positions of the ghosts"() {
+        given:
+            def blinky = new Blinky(new Position(1, 9), arena)
+            def clyde = new Clyde(new Position(4, 4), arena)
+            arena.getRegularGhostsList().clear()
+            arena.getRegularGhostsList().add(blinky)
+            arena.getRegularGhostsList().add(clyde)
+            def expectedClydePos = arena.getGhostHouse().getAvailablePosition()
+            def blinkyPrevState = blinky.getPreviousState()
+            def blinkyCurState = blinky.getCurrentState()
+        when:
+            regularGhostController.resetGhostPositions()
+        then:
+            blinky.getPosition() == arena.getGhostHouse().getExitPosition()
+            clyde.getPosition() == expectedClydePos
+            clyde.getCurrentState() instanceof GhostHouseState
+            clyde.getPreviousState() instanceof GhostHouseState
+            blinky.getPreviousState() == blinkyPrevState
+            blinky.getCurrentState() == blinkyCurState
+    }
+
+    def "When moving ghost we should will need to check if there was a collision with pacman"() {
+        given:
+            def arenaControllerMock = Mock(ArenaController.class)
+            def newGhostController = new RegularGhostController(arenaControllerMock, arena)
+            def ghost = new Blinky(arena.getPacman().getPosition(), arena)
+            ghost.setCurrentStateTo(new ChasingState(ghost))
+            def posMock = Mock(Position.class)
+        when:
+            newGhostController.moveGhost(ghost, new Position(4, 4))
+        then:
+            1 * arenaControllerMock.processPacmanLoseLife()
+        and:
+            ghost.setCurrentStateTo(new FrightenedState(ghost))
+        when:
+            newGhostController.moveGhost(ghost, new Position(4, 4))
+        then:
+            0 * arenaControllerMock.processPacmanLoseLife()
+        and:
+            ghost.setPosition(arena.getPacman().getPosition())
+        and:
+            ghost.setPosition(new Position(1, 1))
+        when:
+            newGhostController.moveGhost(ghost, new Position(4, 4))
+        then:
+            0 * arenaControllerMock.processPacmanLoseLife()
     }
 }

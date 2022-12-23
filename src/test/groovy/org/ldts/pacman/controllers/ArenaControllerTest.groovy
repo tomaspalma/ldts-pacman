@@ -178,6 +178,8 @@ class ArenaControllerTest extends Specification {
         then:
             if(!arenaController.areSoundsSilenced)
                 1 * pacman_dying_sound.play()
+            else
+                0 * pacman_dying_sound.play()
 
             1 * pac.die()
     }
@@ -214,6 +216,8 @@ class ArenaControllerTest extends Specification {
             1 * regularGhostController.killGhost(ghostMock)
             if(!arenaController.areSoundsSilenced())
                 1 * kill_ghost_sound.play()
+            else
+                0 * kill_ghost_sound.play()
     }
 
     def "It should call the step function of the current level"() {
@@ -246,6 +250,8 @@ class ArenaControllerTest extends Specification {
         then:
             if(!arenaController.areSoundsSilenced())
                 1 * pacman_eating_edible.play()
+            else
+                0 * pacman_eating_edible.play()
 
             tile.containsFixedEdible() == false
     }
@@ -317,8 +323,14 @@ class ArenaControllerTest extends Specification {
     }
 
     def "We should be able to know if the sounds are silenced"() {
-        expect:
+        when:
+            arenaController.setAreSoundsSilenced(true)
+        then:
             arenaController.areSoundsSilenced() == true
+        when:
+            arenaController.setAreSoundsSilenced(false)
+        then:
+            arenaController.areSoundsSilenced() == false
     }
 
 }
