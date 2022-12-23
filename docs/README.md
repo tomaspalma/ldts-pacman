@@ -101,6 +101,10 @@ Movable Entities
 
 ![](https://cdn.discordapp.com/attachments/1019715937009672223/1055648904760270868/image.png)
 
+Animations
+
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055845760475869264/image.png)
+
 Fixed Entities and edibles
 
 ![](https://cdn.discordapp.com/attachments/1019715937009672223/1055652267375734794/image.png)
@@ -379,6 +383,43 @@ You can see the implementation inside the code itself:
 - [GhostDuringStateSequence](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/arena/levels/sequences/GhostDuringStateSequence.java)
 - [SpecificGhostStartSequence](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/arena/levels/sequences/SpecificGhostStartSequence.java)
 - [GameLevel](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/arena/levels/GameLevel.java)
+
+### Ability to execute a menu option based on an action
+
+**The problem in context**
+
+We wanted to create menus with modular options so that it wouldn't be too dificult to allow the user
+to cycle through them and then to select them without us needing no have more clustered code in order to do the logic. We wanted something
+more dynamic and more easibly extensible.
+
+**The pattern**
+
+We chose to implement the **Command Pattern** where the Menu encapsulates all the information needed to execute
+command (it contains the MenuOptions that then have its own execute methods)
+
+**The implementation**
+
+In this case, the MenuOption and each one of them is the **Command object** since it is where
+is defined what changes will happen upon execution (in this is called select
+just for semantic reasons)
+
+The **receiver** will be the Game that it will what in reality will perform the operation of a command.
+
+The **invoker** will be the Menus that according to the keyboard inputs of the client will cycle through
+the commands and execute them when it's needed.
+
+**Consequences**
+
+- It will resppect the single responsability principle
+since the menus will only have the sole responsability of being navigated
+by and allowing the user to it because instead of knowing the exact implementation logic
+of the select method of an option, they just know that there's an option
+and that it has to call the execute method (called select in this case).
+- It also respects the **Open-Closed Principle** because it is
+easy to add new options (*the commands*) if we wanted
+to create another feature on the menu.
+- It creates more files, but at the same time keeping the code fairly
+well organized.
 
 ### KNOWN CODE SMELLS AND REFACTORING SUGGESTIONS
 
