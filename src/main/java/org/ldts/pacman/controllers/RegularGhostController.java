@@ -71,8 +71,7 @@ public class RegularGhostController extends Controller<Arena> {
                 ghost.setPreviousStateTo(new GhostHouseState(ghost));
             }
 
-            ghost.setPosition(newGhostPosition);
-            ghost.switchTile(newGhostPosition);
+            ghost.setPosition(ghost.switchTile(newGhostPosition));
         }
     }
 
@@ -87,7 +86,7 @@ public class RegularGhostController extends Controller<Arena> {
                 && ghost.getCurrentState().canMoveOutsideGhostHouse());
 
         if(isOnGhostHouseAndCanLeaveIt) {
-            ghost.setPosition(getModel().getGhostHouse().getExitPosition());
+            ghost.setPosition(ghost.switchTile(getModel().getGhostHouse().getExitPosition()));
             ghost.setPreviousStateTo(ghost.getCurrentState());
             return;
         }

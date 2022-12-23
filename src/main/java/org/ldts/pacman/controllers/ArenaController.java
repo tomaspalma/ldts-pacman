@@ -93,6 +93,20 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
 
     @Override
     public void step(Game game, GameActions.ControlActions action, long time) throws IOException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, InterruptedException {
+        int count = 0;
+
+            for(List<Tile> row: getModel().getGameGrid()) {
+                for(Tile t: row) {
+                    if(t.containsGhost()) {
+                        count++;
+                    }
+                }
+            }
+
+            System.out.println(count);
+            count = 0;
+
+
         this.actIfLevelEnded();
 
         this.checkConditionsToPauseLevelClock();
@@ -131,7 +145,10 @@ public class ArenaController extends Controller<Arena> implements PacmanObserver
 
         this.restoreFixedEdibles();
         getModel().getLevels().get(0).transformItselfIntoAnotherLevel();
-        getModel().getPacman().setPosition(getModel().getPacman().getStartPosition());
+
+        Position desiredPacmanPosition = getModel().getPacman().getStartPosition();
+        Position realNextPacmanPosition = getModel().getPacman().switchTile(desiredPacmanPosition);
+        getModel().getPacman().setPosition(realNextPacmanPosition);
 
         regularGhostController.resetGhostPositions();
     }

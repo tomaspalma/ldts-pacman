@@ -8,7 +8,7 @@ import org.ldts.pacman.models.game.entities.ghost.Ghost;
 public class DeadState extends GhostState {
     public DeadState(Ghost ghost) {
         super(ghost);
-        this.canMoveOutsideGhostHouse = false;
+        this.canMoveOutsideGhostHouse = true;
     }
 
     @Override
