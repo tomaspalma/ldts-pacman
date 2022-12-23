@@ -106,7 +106,7 @@ class ArenaControllerTest extends Specification {
             arenaController.getModel().getPacman().setLivesTo(0)
             def gui = Mock(GUI.class)
             def action = GroovyMock(GameActions.ControlActions.class)
-            def game = new Game(21, 21, gui, null)
+            def game = Mock(Game.class)
         when:
             arenaController.step(game, action, 1000)
         then:

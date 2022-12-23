@@ -35,6 +35,7 @@ simply read from a text file
 - **Different ghosts strategies**
 
 Each of the for ghosts has its own unique strategy when they are in chase mode or scatter mode, although they all
+<<<<<<< HEAD
 share the same frightened and dying strategy.
 
 - **Time controlled changes on the current state of the ghosts during game execution**
@@ -42,6 +43,15 @@ share the same frightened and dying strategy.
 Each level has an internal clock that, based on the current time elapsed, will execute every change on a ghost (either on a ghost
 or on all ghosts) that are defined in each state of our state machine, and then it will transition to a state whose
 time to activate is not lesser than the elapsed.
+=======
+share the same frigthened and dying strategy.
+
+- **Time controlled  changes on the current state of the ghosts during game execution**
+
+Each level has an internal clock that, based on the current time ellapsed, it will execute every changes on a ghost (either on a ghost
+or on all ghosts) that are defined in each state of our state machine and then it will transition to a state whose
+time to activate is not lesser than the ellapsed.
+>>>>>>> fix/ghosts-not-visually-there
 
 - **Level changes when the user passes to the next level**
 
@@ -55,6 +65,10 @@ where the time can't be lowered no more.
     - Pause menu (*the user needs to press the ENTER key*)
     - Game over menu where the user can choose to play again, to go back to the main menu or to leave the game
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> fix/ghosts-not-visually-there
 - **Sounds**
   - Menu intro music 
   - Pacman eating 

@@ -122,7 +122,7 @@ class RegularGhostControllerTest extends Specification{
         when:
             regularGhostController.moveGhost(ghostMock, pos)
         then:
-            1 * ghostMock.setPosition(arenaController.getModel().getGhostHouse().getExitPosition())
+            1 * ghostMock.setPosition(_)
             1 * ghostMock.setPreviousStateTo(_)
     }
 

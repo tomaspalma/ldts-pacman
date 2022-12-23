@@ -6,6 +6,7 @@ import org.ldts.pacman.models.game.Position;
 import org.ldts.pacman.models.game.arena.Arena;
 import org.ldts.pacman.models.game.entities.ghost.*;
 import org.ldts.pacman.models.game.entities.ghost.directions.GhostDirection;
+import org.ldts.pacman.models.game.entities.ghost.regularghost.Blinky;
 import org.ldts.pacman.models.game.entities.ghost.regularghost.RegularGhost;
 import org.ldts.pacman.models.game.entities.ghost.states.*;
 
@@ -37,7 +38,7 @@ public class RegularGhostController extends Controller<Arena> {
             if(stateChangedIn(regularGhost))
                 regularGhost.getCurrentState().applyChangesToGhost();
 
-            if(numberOfSteps >= 1.3) {
+            if(numberOfSteps >= 1.1) {
                 moveGhost(regularGhost, regularGhost.getCurrentState().getNextPosition());
                 numberOfSteps = 0;
             } else {
@@ -61,6 +62,23 @@ public class RegularGhostController extends Controller<Arena> {
         return !ghost.getCurrentState().getClass().equals(ghost.getPreviousState().getClass());
     }
 
+    public void resetGhostPositions() {
+        Position newGhostPosition = null;
+        for(RegularGhost ghost: getModel().getRegularGhostsList()) {
+            if(ghost instanceof Blinky) {
+                newGhostPosition = getModel().getGhostHouse().getExitPosition();
+            } else {
+                newGhostPosition = getModel().getGhostHouse().getAvailablePosition();
+
+                getModel().getGhostHouse().getGhostHolder().add(ghost);
+                ghost.setCurrentStateTo(new GhostHouseState(ghost));
+                ghost.setPreviousStateTo(new GhostHouseState(ghost));
+            }
+
+            ghost.setPosition(ghost.switchTile(newGhostPosition));
+        }
+    }
+
     public void killGhost(Ghost ghost) {
         ghost.die();
     }
@@ -72,7 +90,7 @@ public class RegularGhostController extends Controller<Arena> {
                 && ghost.getCurrentState().canMoveOutsideGhostHouse());
 
         if(isOnGhostHouseAndCanLeaveIt) {
-            ghost.setPosition(getModel().getGhostHouse().getExitPosition());
+            ghost.setPosition(ghost.switchTile(getModel().getGhostHouse().getExitPosition()));
             ghost.setPreviousStateTo(ghost.getCurrentState());
             return;
         }
