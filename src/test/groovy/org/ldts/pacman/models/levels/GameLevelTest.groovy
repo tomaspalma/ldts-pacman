@@ -153,7 +153,7 @@ class GameLevelTest extends Specification {
     } */
 
 
-    def "We should be able to run the code accordingly if there are otherDuringStateSequencesRemaining"() {
+    /*def "We should be able to run the code accordingly if there are otherDuringStateSequencesRemaining"() {
         given:
             def levelStartSequence1 = Stub(SpecificGhostStartSequence.class)
             def levelStartSequence2 = Stub(SpecificGhostStartSequence.class)
@@ -173,10 +173,9 @@ class GameLevelTest extends Specification {
         when:
             level.step()
             level.step()
-            level.step()
         then:
             level.getStartStateMachineCounter() == level.getStartStateMachine().size()
-    }
+    }*/
 
     /*def "If there are more than one start sequence that has the same activation time they should be activated almost at the same time"() {
         given:

@@ -74,6 +74,9 @@ The UML class diagram for the designs was split into pieces, given of the comple
 amount of classes we ended up creating in our program. Also, zoomed in UML about the design patterns we implemented
 into our program can be found in the specific topics about them in this report.
 
+Some UML classes that are detailed in the design pattern sections were not presented in any other section
+of this report.
+
 ### SOLID respecting design architecture
 
 We wanted a design architecture that respected SOLID principles, especially the single responsibility one, and,
@@ -91,15 +94,27 @@ The arena viewer, controller and model are the main classes of each of its MVC c
 
 **The implementation**
 
-***Model***
+***[Model](https://github.com/FEUP-LDTS-2022/project-l01gr01/tree/master/src/main/java/org/ldts/pacman/models)***
+
+Utils
+
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055641900557807656/image.png)
+
+Movable Entities
+
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055648904760270868/image.png)
+
+Fixed Entities and edibles
+
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055652267375734794/image.png)
 
 ![](https://cdn.discordapp.com/attachments/1019715937009672223/1055528348635365456/pacman1.drawio.png)
 
-***Controllers***
+***[Controllers](https://github.com/FEUP-LDTS-2022/project-l01gr01/tree/master/src/main/java/org/ldts/pacman/controllers)***
 
 ![](https://cdn.discordapp.com/attachments/1019715937009672223/1055496658412113950/image.png)
 
-***Viewers***
+***[Viewers](https://github.com/FEUP-LDTS-2022/project-l01gr01/tree/master/src/main/java/org/ldts/pacman/viewers)***
 
 ![](https://cdn.discordapp.com/attachments/1019715937009672223/1055496955431751801/image.png)
 
@@ -125,18 +140,45 @@ because each implementation of the method in each strategy can have a different 
 
 **Implementation**
 
+- [GhostStrategy](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/entities/ghost/strategies/GhostStrategy.java)
+
 ![](https://cdn.discordapp.com/attachments/1019715937009672223/1055454702944395284/image.png)
+
+- [FrightenedStrategy](https://github.com/FEUP-LDTS-2022/project-l01gr01/tree/master/src/main/java/org/ldts/pacman/models/game/entities/ghost/strategies/frightened)
+- [ScatterStrategy](https://github.com/FEUP-LDTS-2022/project-l01gr01/tree/master/src/main/java/org/ldts/pacman/models/game/entities/ghost/strategies/scattering)
+- [DyingStrategy](https://github.com/FEUP-LDTS-2022/project-l01gr01/tree/master/src/main/java/org/ldts/pacman/models/game/entities/ghost/strategies/dying)
+- [ChasingStrategy](https://github.com/FEUP-LDTS-2022/project-l01gr01/tree/master/src/main/java/org/ldts/pacman/models/game/entities/ghost/strategies/chasing)
+
 ![](https://cdn.discordapp.com/attachments/1019715937009672223/1055456130890997891/image.png)
+
+- [FrightenedRunAwayStrategy](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/entities/ghost/strategies/frightened/FrightenedRunAwayStrategy.java)
+
 ![](https://cdn.discordapp.com/attachments/1019715937009672223/1055458355180748842/image.png)
+
+- [ScatterTopRight](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/entities/ghost/strategies/scattering/ScatterToTopRight.java)
+- [ScatterTopLeft](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/entities/ghost/strategies/scattering/ScatterToTopLeft.java)
+- [ScatterBottomLeft](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/entities/ghost/strategies/scattering/ScatterToBottomLeft.java)
+- [ScatterBottomRight](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/entities/ghost/strategies/scattering/ScatterToBottomRight.java)
+
 ![](https://cdn.discordapp.com/attachments/1019715937009672223/1055460461233045634/image.png)
+
+- [AmbushChaseStrategy](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/entities/ghost/strategies/chasing/AmbushChaseStrategy.java)
+- [HybridIgnorantChaseStrategy](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/entities/ghost/strategies/chasing/HybridIgnorantChaseStrategy.java)
+- [AgressiveChaseStrategy](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/entities/ghost/strategies/chasing/AgressiveChaseStrategy.java)
+- [PatrolChaseStrategy](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/entities/ghost/strategies/chasing/PatrolChaseStrategy.java)
+- [RunToBottomLeftChaseStrategy](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/entities/ghost/strategies/chasing/RunToBottomLeftChaseStrategy.java)
+
 ![](https://cdn.discordapp.com/attachments/1019715937009672223/1055490721240580116/image.png)
+
+- [GhostHouseDyingStrategy](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/entities/ghost/strategies/dying/GhostHouseDyingStrategy.java)
 
 **Consequences**
 
 - Despite raising the number of classes, it brings increased scalability and ease of development,
 because we will have less code in just one place, making it easier to maintain. Also,
 it is way easier to make changes to an existing strategy if more than one concrete class is following it, because
-we would just need to change it in one place, instead of going to each class that had that strategy in order to change it.
+we would just need to change it in one place, instead of going to each class that had that strategy in order to change it or 
+finding in a nested or clustered conditional where a specific strategy is.
 
 ### Dynamic way to determine which type of strategy a ghost is currently using
 
@@ -161,6 +203,16 @@ For example, the chasing state will execute whatever the chasing strategy attrib
 **The Implementation**
 
 ![](https://cdn.discordapp.com/attachments/1019715937009672223/1055463302563647559/image.png)
+
+- [GhostState](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/entities/ghost/states/GhostState.java)
+
+- [ChasingState](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/entities/ghost/states/ChasingState.java)
+
+- [FrightenedState](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/entities/ghost/states/FrightenedState.java)
+
+- [DeadState](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/entities/ghost/states/DeadState.java)
+
+- [ScatterState](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/entities/ghost/states/ScatteringState.java)
 
 **Consequences**
 
@@ -188,6 +240,14 @@ that are watching its state.
 **The Implementation**
 
 ![](https://cdn.discordapp.com/attachments/1019715937009672223/1055467717982949397/image.png)
+
+- [PowerPelletObservable](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/observer/PowerPelletObservable.java)
+
+- [EatenPowerPelletObserver](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/observer/EatenPowerPelletObserver.java)
+
+- [PowerPellet](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/entities/fixededibles/PowerPellet.java)
+
+- [RegularGhost](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/entities/ghost/RegularGhost.java)
 
 **Consequences**
 
@@ -277,6 +337,7 @@ we are in the menu or if we are in the gaming part itself)
 
 ![](https://cdn.discordapp.com/attachments/1019715937009672223/1045674367209713664/image.png)
 
+- [Pause and Regular Menus State](https://github.com/FEUP-LDTS-2022/project-l01gr01/tree/master/src/main/java/org/ldts/pacman/states/menus)
 - [ArenaState](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/intermediate-delivery/src/main/java/org/ldts/pacman/states/ArenaState.java)
 - [MenuState](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/intermediate-delivery/src/main/java/org/ldts/pacman/states/MenuState.java)
 - [State](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/intermediate-delivery/src/main/java/org/ldts/pacman/states/State.java)
@@ -308,13 +369,26 @@ that start inside the ghost house will leave it
 - Another to control during sequences that in the case of regular ghosts will result in a transition to a certain state
 all at the same time
 
+Example of a possible state machine to control the ghosts state switch when they all left at least
+one time the ghost house.
+
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055658134208790599/image.png)
+
+In the code these states are called Sequences. 
+
+You can see the implementation inside the code itself:
+- [GhostDuringStateSequence](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/arena/levels/sequences/GhostDuringStateSequence.java)
+- [SpecificGhostStartSequence](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/arena/levels/sequences/SpecificGhostStartSequence.java)
+- [GameLevel](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/arena/levels/GameLevel.java)
+
 ### KNOWN CODE SMELLS AND REFACTORING SUGGESTIONS
 
 #### REFUSED BEQUEST
 
-ScatteringState and GhostHouseState don't apply any changes to the Ghost, so their implementation of the applyChangesToGhost method
+[ScatteringState](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/entities/ghost/states/ScatteringState.java) and 
+[GhostHouseState](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/entities/ghost/states/GhostHouseState.java) don't apply any changes to the Ghost, so their implementation of the applyChangesToGhost method
 is empty. However, if GhostState didn't have this method we would need to have two virtually equal abstract classes, one
-with, and the other one without, that method.
+with, and the other one without, that method, so although this is considered a code smell, the code stays more organized this way.
 
 #### FEATURE ENVY
 
@@ -324,19 +398,90 @@ necessary that the modules that manipulate and show the data envy the modules th
 
 #### LARGE CLASS
 
-Arena and ArenaController are both very large because they hold all data related to gameplay and manipulate it,
-respectively.
+Arena and ArenaController are two of the most central classes in this game and are two of the most important classes in regards to gameplay.
+
+**Arena** because it holds a lot of data about the map and the entities that are in it, as well
+as methdods to manipulate itself.
+
+**ArenaController** because it is the controller of the arena and the central controller, containing
+a lot of logic to manipulate a lot features of the arena and its behaviour
 
 #### MESSAGE CHAINS
 
 Methods need to delegate functionality to other objects which may lead to many successive requests for an object, like
-*getModel().getLevels().get(this.currentLevel).getClock()*. If corrected by hiding the delegation in a new method,
-though, it may become unclear which object is actually executing the functionality.
+```getModel().getLevels().get(this.currentLevel).getClock()```
+
+One way to correct it is to hide this delegation. However, if corrected in that way in a new method,
+though, it may become unclear which object is actually executing the functionality and make the code even more abstract.
+
+#### SWITCH STATEMENTS
+
+In components like the [FileArenaMapLoader](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/arena/loaders/map/FileMapArenaLoader.java) there
+is a big switch statement that can easily get too big if we were to decide to add a lot more entities.
+
+However it was implemented this way because we didn't found any other easy way to do this functionality to
+read every character in the map file and then translate them into entities of the game. We could have also, instead of a switch statement,
+create a static HashMap that contained for each character a function to execute based on that character. However, it would also make the code look
+clustered because of the code to add the {key, value} pair into it.
+
+Also in other files like [GUIForLanterna](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/arena/loaders/map/FileMapArenaLoader.java) there are switch statements
+to interpret each different possible game action. However, once again, we didn't find any other easy way to implement this functionality.
+
+### DUPLICATE CODE
+
+In the [PauseMenuController](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/controllers/menus/PauseMenuController.java) and the [RegularMenuController](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/controllers/menus/RegularMenuController.java)
+there's duplicated code because each controller has its own swich statement to see which action it receives
+and then choose if they cycle through their menu options or exit, for example. 
+
+However, the structure itself is very similar to both controllers. The only thing that changes is one or two statements
+which is one plays music and the other doesn't and we found this situation fairly hard to generalize and couple both of them.
+
+We could have made a controller that had some class with a method ```executeSpecialBehaviour()```. However,
+this would then fall to the refused bequest code smell because we would end up with classes that implemnet the executeSpecialBehaviour
+with no body in it, but maybe in the long term that would be better.
+
+Also, for this game there wouldn't be a need to have more than a pause menu and a regular menu that does not need to store
+the state of the game and the code is fairly simple.
 
 ### TESTING
 
-- Screenshot of coverage report.
-- Link to mutation testing report.
+**Global**
+
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055638054863384617/image.png)
+
+**Controllers**
+
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055638778863173752/image.png)
+
+**GUI**
+
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055639142773571584/image.png)
+
+**Sounds**
+
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055639331919892560/image.png)
+
+**States**
+
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055639545569357834/image.png)
+
+**Viewers**
+
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055639666151391403/image.png)
+
+**Menus**
+
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055639900361334904/image.png)
+
+**Game and animations**
+
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055640119677300787/image.png)
+
+[Link to mutation report](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/pitest/index.html)
+
+Screenshot below
+
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055640511509172355/image.png)
 
 ### Units and mutants we didn't cover and why
 
