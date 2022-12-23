@@ -387,12 +387,20 @@ that start inside the ghost house will leave it
 - Another to control during sequences that in the case of regular ghosts will result in a transition to a certain state
 all at the same time
 
-Example of a possible state machine to control the ghosts state switch when they all left at least
-one time the ghost house.
+**Example of a possible state machine to control the ghosts state switch when they all left at least
+one time the ghost house.**
 
 ![](https://cdn.discordapp.com/attachments/1019715937009672223/1055658134208790599/image.png)
 
-In the code these states are called Sequences. 
+**Example of a state machine that it by default implemented on the start of the levels:**
+
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055901572154003566/image.png)
+
+In the code these states are called Sequences and when the level advances it changes the timings of its sequences.
+
+**Note:** It is alos possible for two or more states to be activated at the same time, although it is not
+well represented in the uml state diagram. When we process a state we see if there are other states ready
+to be applied.
 
 You can see the implementation inside the code itself:
 - [GhostDuringStateSequence](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/arena/levels/sequences/GhostDuringStateSequence.java)
@@ -552,9 +560,12 @@ individually but failing when running all the tests at the same time.
 in some cases we were able to perform state testing.
 - Also, some tests for units that used threads and GUI methods to load a font
 
-**We also used dependency injection in order to ease the process of testing on units such as:**
+**We also used dependency injection in order to ease the process of testing on units. For example:**
 - [PacmanEatingAnimation](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/entities/pacman/animations/PacmanEatingAnimation.java)
 We injected a Clock into the constructor in order to perform behaviour testing on the internal clock of an animation.
+- [State](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/states/State.java) We injected
+a controller and a viewer in the constructor in order to be easy to perform
+behaviour testing.
 
 **Infer / Gradle error prone**
 

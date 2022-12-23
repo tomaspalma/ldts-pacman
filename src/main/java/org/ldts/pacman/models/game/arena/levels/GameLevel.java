@@ -129,6 +129,7 @@ public class GameLevel {
     
     private void changeStartStateMachine() {
         for(SpecificGhostStartSequence g: startStateMachine) {
+            if(g.getTimeToBeActivatedInMilliseconds() - 500 <= 0) continue;
             g.setTimeToBeActivatedInMilliseconds(g.getTimeToBeActivatedInMilliseconds() - (500L * multiplier));
         }
     }
