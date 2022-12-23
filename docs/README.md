@@ -399,6 +399,8 @@ command (it contains the MenuOptions that then have its own execute methods)
 
 **The implementation**
 
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055850257436655667/image.png)
+
 In this case, the MenuOption and each one of them is the **Command object** since it is where
 is defined what changes will happen upon execution (in this is called select
 just for semantic reasons)
