@@ -92,6 +92,7 @@ public class RegularGhostController extends Controller<Arena> {
         if(isOnGhostHouseAndCanLeaveIt) {
             ghost.setPosition(ghost.switchTile(getModel().getGhostHouse().getExitPosition()));
             ghost.setPreviousStateTo(ghost.getCurrentState());
+            getModel().getGhostHouse().getGhostHolder().remove(ghost);
             return;
         }
 

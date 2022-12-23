@@ -119,6 +119,7 @@ class RegularGhostControllerTest extends Specification{
         given:
             def ghostMock = Mock(Ghost.class)
             def pos = Mock(Position.class)
+            arena.getGhostHouse().getGhostHolder().add(ghostMock)
             ghostMock.getPreviousState() >> new GhostHouseState(ghostMock)
             ghostMock.getCurrentState() >> new ChasingState(ghostMock)
         when:
@@ -126,6 +127,9 @@ class RegularGhostControllerTest extends Specification{
         then:
             1 * ghostMock.setPosition(_)
             1 * ghostMock.setPreviousStateTo(_)
+            for(RegularGhost g: arena.getGhostHouse().getGhostHolder()) {
+                g != ghostMock
+            }
     }
 
     def "If the ghost can move outside of the ghost house we should be able to change its position"() {
