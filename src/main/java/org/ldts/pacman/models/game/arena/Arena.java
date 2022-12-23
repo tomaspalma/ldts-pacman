@@ -13,7 +13,7 @@ import org.ldts.pacman.models.game.arena.loaders.map.FileMapArenaLoader;
 import org.ldts.pacman.models.game.arena.loaders.map.MapArenaLoader;
 import org.ldts.pacman.models.game.entities.Entity;
 import org.ldts.pacman.models.game.entities.fixededibles.FixedEdible;
-import org.ldts.pacman.models.game.entities.ghost.RegularGhost;
+import org.ldts.pacman.models.game.entities.ghost.regularghost.RegularGhost;
 import org.ldts.pacman.models.game.entities.pacman.Pacman;
 
 import java.io.IOException;

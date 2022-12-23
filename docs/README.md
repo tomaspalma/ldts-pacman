@@ -108,7 +108,9 @@ Fixed Entities and edibles
 
 ![](https://cdn.discordapp.com/attachments/1019715937009672223/1055652267375734794/image.png)
 
-![](https://cdn.discordapp.com/attachments/1019715937009672223/1055528348635365456/pacman1.drawio.png)
+Arena and levels and loaders
+
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055671902439473252/arena.png)
 
 ***[Controllers](https://github.com/FEUP-LDTS-2022/project-l01gr01/tree/master/src/main/java/org/ldts/pacman/controllers)***
 
@@ -487,8 +489,6 @@ Screenshot below
 
 - We didn't cover some part of the GameLevel because of clock-related methods that were passing when running
 individually but failing when running all the tests at the same time.
-- We didn't cover some parts of GUI methods because of errors we were having about heap usage to its 
-max size when running some unit tests for said component.
 - It's very difficult to perform behaviour testing when a function from a class calls another function from the same class, although
 in some cases we were able to perform state testing.
 - Also some tests for units that used threads.

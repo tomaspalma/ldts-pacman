@@ -5,10 +5,8 @@ import org.ldts.pacman.gui.GUI;
 import org.ldts.pacman.models.game.entities.Obstacle;
 import org.ldts.pacman.models.game.Position;
 import org.ldts.pacman.models.game.entities.fixededibles.FixedEdible;
-import org.ldts.pacman.models.game.entities.ghost.RegularGhost;
+import org.ldts.pacman.models.game.entities.ghost.regularghost.RegularGhost;
 import org.ldts.pacman.models.game.arena.Arena;
-
-import java.io.IOException;
 
 public class ArenaViewer extends Viewer<Arena> {
     public ArenaViewer(Arena arena) {

@@ -5,8 +5,7 @@ import org.ldts.pacman.models.game.arena.Arena
 import org.ldts.pacman.models.game.GameActions
 import org.ldts.pacman.models.game.Position
 import org.ldts.pacman.models.game.entities.fixededibles.FixedEdible
-import org.ldts.pacman.models.game.entities.ghost.Pinky
-import org.ldts.pacman.models.game.entities.ghost.RegularGhost
+import org.ldts.pacman.models.game.entities.ghost.regularghost.Pinky
 import org.ldts.pacman.models.game.entities.pacman.Pacman
 import org.ldts.pacman.models.game.entities.pacman.animations.PacmanAnimation
 import org.ldts.pacman.models.game.entities.pacman.animations.PacmanEatingAnimation

@@ -3,7 +3,7 @@ package org.ldts.pacman.models.ghoststates
 import org.ldts.pacman.models.game.GameActions
 import org.ldts.pacman.models.game.Position
 import org.ldts.pacman.models.game.arena.Arena
-import org.ldts.pacman.models.game.entities.ghost.Clyde
+import org.ldts.pacman.models.game.entities.ghost.regularghost.Clyde
 import spock.lang.Specification
 
 class ScatteringState extends Specification {

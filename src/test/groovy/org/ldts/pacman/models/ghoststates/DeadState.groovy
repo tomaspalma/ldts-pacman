@@ -4,9 +4,7 @@ import com.googlecode.lanterna.TextColor
 import org.ldts.pacman.models.game.GameActions
 import org.ldts.pacman.models.game.Position
 import org.ldts.pacman.models.game.arena.Arena
-import org.ldts.pacman.models.game.entities.ghost.Clyde
-import org.ldts.pacman.models.game.entities.ghost.Pinky
-import org.ldts.pacman.models.game.entities.ghost.states.DeadState
+import org.ldts.pacman.models.game.entities.ghost.regularghost.Clyde
 import spock.lang.Specification
 
 class DeadState extends Specification {

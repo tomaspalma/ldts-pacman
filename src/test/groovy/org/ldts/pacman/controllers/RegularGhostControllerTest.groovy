@@ -4,11 +4,11 @@ import org.ldts.pacman.Game
 import org.ldts.pacman.models.game.arena.Arena
 import org.ldts.pacman.models.game.GameActions
 import org.ldts.pacman.models.game.Position
-import org.ldts.pacman.models.game.entities.ghost.Clyde
+import org.ldts.pacman.models.game.entities.ghost.regularghost.Clyde
 import org.ldts.pacman.models.game.entities.ghost.Ghost
-import org.ldts.pacman.models.game.entities.ghost.Inky
-import org.ldts.pacman.models.game.entities.ghost.Pinky
-import org.ldts.pacman.models.game.entities.ghost.RegularGhost
+import org.ldts.pacman.models.game.entities.ghost.regularghost.Inky
+import org.ldts.pacman.models.game.entities.ghost.regularghost.Pinky
+import org.ldts.pacman.models.game.entities.ghost.regularghost.RegularGhost
 import org.ldts.pacman.models.game.entities.ghost.directions.GhostDirectionLeft
 import org.ldts.pacman.models.game.entities.ghost.states.ChasingState
 import org.ldts.pacman.models.game.entities.ghost.states.DeadState

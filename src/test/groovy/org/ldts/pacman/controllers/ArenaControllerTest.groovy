@@ -12,8 +12,8 @@ import org.ldts.pacman.models.game.entities.fixededibles.FixedEdible
 import org.ldts.pacman.models.game.entities.fixededibles.Pacdot
 import org.ldts.pacman.models.game.entities.fixededibles.PowerPellet
 import org.ldts.pacman.models.game.entities.ghost.Ghost
-import org.ldts.pacman.models.game.entities.ghost.Pinky
-import org.ldts.pacman.models.game.entities.ghost.RegularGhost
+import org.ldts.pacman.models.game.entities.ghost.regularghost.Pinky
+import org.ldts.pacman.models.game.entities.ghost.regularghost.RegularGhost
 import org.ldts.pacman.models.game.entities.ghost.states.FrightenedState
 import org.ldts.pacman.models.game.entities.pacman.Pacman
 import org.ldts.pacman.models.game.Position

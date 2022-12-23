@@ -1,4 +1,4 @@
-package org.ldts.pacman.models.game.entities.ghost;
+package org.ldts.pacman.models.game.entities.ghost.regularghost;
 
 import org.ldts.pacman.models.game.arena.Arena;
 import org.ldts.pacman.models.game.Position;

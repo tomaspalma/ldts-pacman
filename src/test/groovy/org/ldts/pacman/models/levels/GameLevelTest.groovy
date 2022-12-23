@@ -6,7 +6,7 @@ import org.ldts.pacman.models.game.arena.levels.sequences.LevelStateSequence
 import org.ldts.pacman.models.game.arena.levels.sequences.SpecificGhostStartSequence
 import org.ldts.pacman.models.game.Clock
 import org.ldts.pacman.models.game.arena.levels.GameLevel
-import org.ldts.pacman.models.game.entities.ghost.RegularGhost
+import org.ldts.pacman.models.game.entities.ghost.regularghost.RegularGhost
 import spock.lang.Specification
 
 class GameLevelTest extends Specification {

@@ -1,7 +1,7 @@
 package org.ldts.pacman.models.ghoststrategies
 
 import org.ldts.pacman.models.game.Position
-import org.ldts.pacman.models.game.entities.ghost.Clyde
+import org.ldts.pacman.models.game.entities.ghost.regularghost.Clyde
 import org.ldts.pacman.models.game.entities.pacman.Pacman
 import spock.lang.Specification
 import org.ldts.pacman.models.game.arena.Arena

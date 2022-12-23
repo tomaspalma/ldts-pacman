@@ -6,6 +6,7 @@ import org.ldts.pacman.models.game.Position;
 import org.ldts.pacman.models.game.arena.Arena;
 import org.ldts.pacman.models.game.entities.ghost.*;
 import org.ldts.pacman.models.game.entities.ghost.directions.GhostDirection;
+import org.ldts.pacman.models.game.entities.ghost.regularghost.RegularGhost;
 import org.ldts.pacman.models.game.entities.ghost.states.*;
 
 import java.io.IOException;

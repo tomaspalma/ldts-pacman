@@ -13,7 +13,7 @@ import org.ldts.pacman.models.game.arena.grid.Tile;
 import org.ldts.pacman.models.game.entities.fixededibles.FixedEdible;
 import org.ldts.pacman.models.game.entities.ghost.Ghost;
 import org.ldts.pacman.models.game.observer.PacmanObserver;
-import org.ldts.pacman.models.game.entities.ghost.RegularGhost;
+import org.ldts.pacman.models.game.entities.ghost.regularghost.RegularGhost;
 import org.ldts.pacman.models.game.entities.ghost.states.FrightenedState;
 import org.ldts.pacman.states.ArenaState;
 import org.ldts.pacman.states.menus.PauseMenuState;

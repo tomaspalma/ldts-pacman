@@ -8,12 +8,12 @@ import org.ldts.pacman.models.game.arena.grid.TeletransporterTile;
 import org.ldts.pacman.models.game.entities.EmptySpace;
 import org.ldts.pacman.models.game.entities.Entity;
 import org.ldts.pacman.models.game.entities.Obstacle;
+import org.ldts.pacman.models.game.entities.ghost.regularghost.*;
 import org.ldts.pacman.models.game.entities.obstacles.Wall;
 import org.ldts.pacman.models.game.entities.fixededibles.Cherry;
 import org.ldts.pacman.models.game.entities.fixededibles.FixedEdible;
 import org.ldts.pacman.models.game.entities.fixededibles.Pacdot;
 import org.ldts.pacman.models.game.entities.fixededibles.PowerPellet;
-import org.ldts.pacman.models.game.entities.ghost.*;
 import org.ldts.pacman.models.game.entities.pacman.Pacman;
 import org.ldts.pacman.models.game.arena.Arena;
 

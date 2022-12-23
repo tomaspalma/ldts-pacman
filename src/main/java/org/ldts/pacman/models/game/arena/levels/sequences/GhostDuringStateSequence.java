@@ -1,7 +1,7 @@
 package org.ldts.pacman.models.game.arena.levels.sequences;
 
 import org.ldts.pacman.models.game.entities.ghost.Ghost;
-import org.ldts.pacman.models.game.entities.ghost.RegularGhost;
+import org.ldts.pacman.models.game.entities.ghost.regularghost.RegularGhost;
 import org.ldts.pacman.models.game.entities.ghost.states.GhostState;
 
 import java.lang.reflect.InvocationTargetException;

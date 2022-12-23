@@ -1,6 +1,6 @@
 package org.ldts.pacman.models.game.arena.levels.sequences;
 
-import org.ldts.pacman.models.game.entities.ghost.RegularGhost;
+import org.ldts.pacman.models.game.entities.ghost.regularghost.RegularGhost;
 
 import java.util.ArrayList;
 import java.util.List;

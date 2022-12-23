@@ -3,7 +3,7 @@ package org.ldts.pacman.models.sequences
 import org.ldts.pacman.models.game.Position
 import org.ldts.pacman.models.game.arena.levels.sequences.SpecificGhostStartSequence
 import org.ldts.pacman.models.game.entities.ghost.Ghost
-import org.ldts.pacman.models.game.entities.ghost.Pinky
+import org.ldts.pacman.models.game.entities.ghost.regularghost.Pinky
 import org.ldts.pacman.models.game.entities.ghost.states.ChasingState
 import org.ldts.pacman.models.game.entities.ghost.states.FrightenedState
 import spock.lang.Specification
