@@ -44,6 +44,7 @@ public abstract class RegularGhost extends Ghost implements EatenPowerPelletObse
         this.currentState.transitionToState(new FrightenedState(this));
         Thread thread = new Thread(() -> {
             try {
+                arena.getLevels().get(0).getClock().pause();
                 synchronized (noOfTimesConsequentlyEaten) {noOfTimesConsequentlyEaten.getAndIncrement();}
                 Thread.sleep(5000);
                 synchronized (noOfTimesConsequentlyEaten) {
@@ -54,6 +55,7 @@ public abstract class RegularGhost extends Ghost implements EatenPowerPelletObse
                         this.currentState.transitionToState(newState);
                     }
                 }
+                arena.getLevels().get(0).getClock().unpause();
             } catch (InterruptedException e) {
                 System.out.println("exception?");
                 throw new RuntimeException(e);
