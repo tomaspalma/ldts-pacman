@@ -244,6 +244,11 @@ that are watching its state.
 
 ![](https://cdn.discordapp.com/attachments/1019715937009672223/1055864397026836530/image.png)
 
+Normally, PowerPelletObservable and EatenPowerPelletObserver would be abstract classes.
+However, that's not the case in this program because unfortunately Java does not support multiple class inheritance and, because
+PowerPellet and RegularGhost both extend FixedEntity and MovableEntity respectively, which is useful to separate the ```setPosition()``` method
+since it does not make sense for a power pellet to be able to change its position after being created.
+
 - [PowerPelletObservable](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/observer/PowerPelletObservable.java)
 
 - [EatenPowerPelletObserver](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/observer/EatenPowerPelletObserver.java)
@@ -278,10 +283,17 @@ of pacman and as a response pre-defined to each of the possible notifications th
 
 **The Implementation**
 
-![](https://cdn.discordapp.com/attachments/1019715937009672223/1055478083236401193/image.png)
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055871619035308102/image.png)
+
+There were some methods removed from the UML due to simplicity because all the methods from these classes is present
+above in the report in the model section of the more global representation of the UML of this application.
 
 In this case the arena controller implements the pacman observer interface while pacman itself implements the
-PacmanObservable interface.
+PacmanObservable interface. 
+
+These are interfaces instead of classes like the usual way that we learned in classes, because of the same problem mentioned
+in the section on the observer pattern between the power pellets and regular ghosts. Since ArenaController inherits from
+Controller and Pacman from MovableEntity, we couldn't add one more parent. Instead, we created interfaces.
 
 **Consequences**
 
