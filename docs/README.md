@@ -61,9 +61,6 @@ where the time can't be lowered no more.
   - Pacman dying
   - Frightened ghost dying
 
-We also have some tests both simple and using mocks 
-(such as [this one in EntityViewer](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/intermediate-delivery/src/test/groovy/org/ldts/pacman/viewers/EntityViewerTest.groovy)
-
 ### PLANNED FEATURES
 
 All of the planned features except better menus were implemented.
@@ -204,7 +201,7 @@ For example, the chasing state will execute whatever the chasing strategy attrib
 
 **The Implementation**
 
-![](https://cdn.discordapp.com/attachments/1019715937009672223/1055768978812837948/image.png)
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055775915554119721/image.png)
 
 - [GhostState](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/entities/ghost/states/GhostState.java)
 
@@ -493,9 +490,19 @@ individually but failing when running all the tests at the same time.
 in some cases we were able to perform state testing.
 - Also some tests for units that used threads.
 
+We also used dependency injection in order to ease the process of testing on units such as:
+- [PacmanEatingAnimation]()
+
 ### BETTERCODE HUB
 
 ![](https://cdn.discordapp.com/attachments/1019715937009672223/1055546446729969755/image.png)
 ![](https://cdn.discordapp.com/attachments/1019715937009672223/1055546616616075294/image.png)
+
+Despite having the packages separated inside the src/
+
 ![](https://cdn.discordapp.com/attachments/1019715937009672223/1055546788884521052/image.png)
+
+It says that, for less than 10,000 lines of code (*our case*) we should have more than 50%. However, the assert density is not being
+recognized.
+
 (These screenshots were taken 22-12-2022, 15-16h00)
