@@ -11,21 +11,21 @@ import spock.lang.Specification
 
 class GUIForLanternaTest extends Specification {
     private def lanternaGUI
+    private def screen
 
     def setup() {
-        lanternaGUI = new GUIForLanterna(20, 20)
+        screen = Mock(Screen)
+        lanternaGUI = new GUIForLanterna(screen)
     }
 
     def "Should be able to hide cursor of gui"() {
         when:
             lanternaGUI.hideCursor()
         then:
-            null == lanternaGUI.getScreen().getCursorPosition()
+            1 * screen.setCursorPosition(null)
     }
 
     def "We should be able to close our screen"() {
-        given:
-            def screen = Mock(Screen)
         when:
             lanternaGUI.close(screen)
         then:
@@ -33,6 +33,8 @@ class GUIForLanternaTest extends Specification {
     }
 
     def "We should be able to get the correct lanterna terminal size"() {
+        given:
+            screen.getTerminalSize() >> new TerminalSize(20, 20)
         expect:
             lanternaGUI.getTerminalSize() == new TerminalSize(20, 20)
     }
