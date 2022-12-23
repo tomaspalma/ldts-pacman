@@ -242,7 +242,7 @@ that are watching its state.
 
 **The Implementation**
 
-![](https://cdn.discordapp.com/attachments/1019715937009672223/1055467717982949397/image.png)
+![](https://cdn.discordapp.com/attachments/1019715937009672223/1055864397026836530/image.png)
 
 - [PowerPelletObservable](https://github.com/FEUP-LDTS-2022/project-l01gr01/blob/master/src/main/java/org/ldts/pacman/models/game/observer/PowerPelletObservable.java)
 
