@@ -56,3 +56,5 @@ scatter mode and each other will start to go to their respective corners.
 
 This project was develop by Diogo Martins (*202108883*), Rodrigo Martins (*202008868*)
 and Tomás Palma (*202108880*)
+
+Project Grade: 18.7 / 20
